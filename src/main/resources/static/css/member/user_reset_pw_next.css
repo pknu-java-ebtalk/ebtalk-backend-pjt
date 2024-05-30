@@ -1,0 +1,79 @@
+/* --- 비밀번호 재설정 start --- */
+/* 비밀번호 재설정 전체 */
+.reset-pw-box{
+    width: 600px;
+    height: 500px;
+    margin: 0 auto;
+    padding: 40px;
+    margin-top: 60px;
+}
+  
+/* 비밀번호 재설정 타이틀 */
+.reset-pw-title{
+    font-size: 35px;
+    text-align: center;
+    margin-bottom: 45px;
+}
+  
+/* 폼 전체 설정 */
+.reset-pw-form{
+    display: flex;
+    flex-direction: column;
+}
+  
+/* 폼 내 input 태그 설정 */
+.reset-pw{
+    font-family: 'S-CoreDream-3Light';
+    padding: 15px;
+    margin: 20px;
+  
+    border-radius: 10px;
+}
+
+.reset-pw-new-pw-check{
+    margin-bottom: 0;
+}
+  
+/* 입력란 설정 */
+.reset-pw-input{
+    font-size: 15px;
+}
+
+.info-msg-box{
+    position: relative;
+    margin-bottom: 23px;
+}
+
+.info-msg{
+    font-size: 15px;
+    
+    margin-left: 23px;
+    margin-bottom: 18px;
+
+    position: absolute;
+}
+
+.info-msg-ok{
+    color: green;
+    visibility: hidden;
+}
+
+.info-msg-no{
+    color: red;
+}
+  
+/* 확인 버튼 설정 */
+.reset-pw-btn{
+    font-family: 'S-CoreDream-3Light';
+    border: none;
+  
+    font-size: 20px;
+    color: white;
+    background-color: var(--common_blue);
+  
+    margin-bottom: 5px;
+}
+.reset-pw-btn:hover{
+    cursor: pointer;
+}
+  /* --- 비밀번호 재설정 end --- */

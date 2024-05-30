@@ -1,0 +1,29 @@
+#aside-contents-box{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.mypage-menu{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 10px;
+}
+
+.mypage-menu:hover{
+    transform: scale(1.1);   
+}
+.mypage-menu:hover .mypage-info-text{
+    border: none; 
+}
+
+.aside-icon{
+    width: 25px;
+    height: 25px;
+}
+
+.aside-text{
+    margin: 5px;
+    padding: 5px;
+}

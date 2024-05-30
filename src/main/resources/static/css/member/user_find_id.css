@@ -1,0 +1,52 @@
+/* --- 아이디 찾기 start --- */
+/* 아이디 찾기 전체 */
+.find-id-box{
+    width: 600px;
+    height: 500px;
+    margin: 0 auto;
+    padding: 40px;
+    margin-top: 60px;
+}
+  
+/* 아이디 찾기 타이틀 */
+.find-id-title{
+    font-size: 35px;
+    text-align: center;
+    margin-bottom: 45px;
+}
+  
+/* 폼 전체 설정 */
+.find-id-form{
+    display: flex;
+    flex-direction: column;
+}
+  
+/* 폼 내 input 태그 설정 */
+.find-id{
+    font-family: 'S-CoreDream-3Light';
+    padding: 15px;
+    margin: 20px;
+  
+    border-radius: 10px;
+}
+  
+/* 이름 / 전화번호 입력란 설정 */
+.find-id-input{
+    font-size: 15px;
+}
+  
+/* 확인 버튼 설정 */
+.find-id-btn{
+    font-family: 'S-CoreDream-3Light';
+    border: none;
+  
+    font-size: 20px;
+    color: white;
+    background-color: var(--common_blue);
+  
+    margin-bottom: 5px;
+}
+.find-id-btn:hover{
+    cursor: pointer;
+}
+  /* --- 로그인 end --- */

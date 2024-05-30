@@ -1,0 +1,35 @@
+#aside-contents-box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.board-side {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 10px;
+}
+
+
+.board-side:hover {
+    transform: scale(1.1);
+}
+
+.board-side:hover .aside-text {
+    border: none;
+    text-decoration: underline;
+    border-bottom: 2px solid var(--line_gray);
+    text-decoration: none;
+    
+}
+
+.notice-side-icon {
+    width: 25px;
+    height: 25px;
+}
+
+.aside-text {
+    margin: 5px;
+    padding: 5px;
+}

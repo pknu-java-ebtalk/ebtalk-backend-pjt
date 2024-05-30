@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>마이페이지 : 이비톡</title>
+    <link rel="stylesheet" href="../../css/common/common_main.css">
+    <link rel="stylesheet" href="../../css/member/user_info_change.css">
+    <link rel="stylesheet" href="../../css/member/user_mypage_aside.css">
+    <link rel="stylesheet" href="../../css/member/user_mypage_info_aside.css">
+</head>
+<body>
+    <header></header>
+    <div>
+        <aside></aside>
+        <div class="background-gray middle-gray">
+            <div class="background-white middle-white">
+                <div class="contents-box">
+                    <div class="info-box">
+                        <div class="info-title">회원정보</div>
+                        <form class="info-change-form" method="post">
+                            <div class="info-detail-box">
+                                <div class="info-detail info-profile-pic info-change-profile-pic">
+                                    <div class="info-detail-text profile-pic-text">프로필 사진</div>
+                                    <div class="profile-pic-input-box">
+                                        <div class="add-img" id="image-show">
+                                            <!-- 이미지 들어갈 부분 -->
+                                        </div>
+                                        <input class="add-img-btn" type="file" accept="image/*" onchange="">
+                                    </div>
+                                </div>
+                                <div class="info-detail profile-id">
+                                    <div class="info-detail-text id-text">아이디</div>
+                                    <div class="info-detail-input id-input">riversoso@gmail.com</div>
+                                </div>
+                                <div class="info-detail profile-pw">
+                                    <div class="info-detail-text pw-text">비밀번호</div>
+                                    <div class="info-detail-input pw-input-box">
+                                        <input class="new-pw-input input-change" name="PW" value="새 비밀번호">
+                                        <input class="new-pw-check-input input-change" name="NEWPWCHECK" value="새 비밀번호 확인">
+                                        <div class="info-msg-box">
+                                            <p class="info-msg info-msg-no">비밀번호가 일치하지 않습니다.</p>
+                                            <p class="info-msg info-msg-ok">비밀번호가 일치합니다.</p>
+                                        </div>
+                                    </div>
+                                </div>                            
+                                <div class="info-detail profile-name">
+                                    <div class="info-detail-text name-text font">이름</div>
+                                    <div class="info-detail-input name-input font">강소이</div>
+                                </div>                            
+                                <div class="info-detail profile-phone">
+                                    <div class="info-detail-text phone-text">전화번호</div>
+                                    <div class="info-detail-input phone-input">
+                                        <input class="new-phone-input input-change" name="PHONE" value="010-1234-5678">
+                                    </div>
+                                </div>                            
+                                <div class="info-detail profile-edu-type">
+                                    <div class="info-detail-text edu-type-text">교육과정</div>
+                                    <div class="info-detail-input edu-type-input">빅데이터를 이용한 JAVA 개발자</div>
+                                </div>
+                            </div>
+                            <div class="btn-box">
+                                <input class="btn change-info-btn" type="submit" value="수정 완료">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer></footer>
+    <script src="../../../static/js/common_main_header.js"></script>
+    <script src="../../../static/js/common_main_aside.js"></script>
+    <script src="../../../static/js/common_main_footer.js"></script>
+    <script src="../../../static/js/member/user_mypage_aside.js"></script>
+</body>
+</html>

@@ -1,0 +1,52 @@
+/* 비밀번호 재설정 결과 전체 */
+.sign-up-box{
+    width: 600px;
+    height: 500px;
+    margin: 0 auto;
+    padding: 40px;
+    margin-top: 60px;
+}
+
+/* 비밀번호 재설정 타이틀 */
+.sign-up-title{
+    font-size: 35px;
+    text-align: center;
+    margin-bottom: 45px;
+}
+
+/* 결과 메시지 */
+.info-msg{
+    font-size: 25px;
+
+    height: 180px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    margin-top: 60px;
+    margin-bottom: 60px;
+}
+
+/* 로그인 버튼 설정 */
+.btn-box{
+    display: flex;
+    justify-content: center;
+}
+.btn{
+    width: 560px;
+    height: 58px;
+
+    border: none;
+    border-radius: 10px;
+  
+    font-family: 'S-CoreDream-3Light';
+    font-size: 20px;
+    color: white;
+    background-color: var(--common_blue);
+  
+    margin-bottom: 5px;
+  }
+  .btn:hover{
+    cursor: pointer;
+  }

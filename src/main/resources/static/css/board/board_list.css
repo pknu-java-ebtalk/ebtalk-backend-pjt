@@ -1,0 +1,135 @@
+.back-color{
+    background-color: var(--aside_gray);
+    width: 900px;   
+    height: 500px;
+    margin-left: 75px;
+}
+
+.search-color {
+    margin-left: auto; /* 왼쪽 여백을 자동으로 설정하여 오른쪽으로 이동 */
+    margin-right: 75px; /* 오른쪽 여백 추가 */
+    margin-top: 50px; /* 위쪽 여백 추가 */
+    display: flex;
+    justify-content: flex-end; /* 요소들을 컨테이너의 끝에 정렬하여 오른쪽으로 이동 */
+    align-items: center; /* 요소를 수직으로 정렬 */
+}
+
+.board-search {
+    display: flex;
+    align-items: center;
+}
+
+.pagination {
+    display: flex;
+    align-items: center;
+}
+
+#board-write {
+    display: flex;
+    justify-content: flex-end; /* 요소를 우측으로 붙임 */
+    margin-right: 70px;
+}
+
+.write {
+    padding: 10px 20px; /* 패딩으로 크기 조절 */
+    background-color: var(--common_blue); /* 배경색 설정 */
+    color: white; /* 글자색 설정 */
+    text-align: center; /* 텍스트 가운데 정렬 */
+    text-decoration: none; /* 밑줄 제거 */
+    border: none; /* 기본 테두리 제거 */
+    border-radius: 5px; /* 모서리 둥글게 */
+    font-weight: normal; /* 글자 두께 설정 */
+    cursor: pointer; /* 마우스 커서 설정 */
+}
+    
+.write:hover {
+    background-color: var(--text_purple); /* 호버 시 배경색 변경 */
+}
+
+.selectField{
+    width: 80px;
+    height: 30px;
+}
+.textField{
+    width: 90px;
+    height: 27px;
+}
+
+.title {
+    margin-top:10px;
+    margin-left: 60px;
+    margin-right: 60px;
+    display: flex;
+    flex-direction: row;
+}
+.top-bar{
+    margin-top: 11px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+dt {
+    float: left;
+}
+
+.subject {
+    margin-left: 200px;
+}
+
+.name {
+    margin-left: 200px;
+}
+
+.created {
+    margin-left: 90px;
+}
+
+.hitCount {
+    margin-left: 90px;
+}
+
+.pagination {
+    display: flex;
+    justify-content: center; /* 가운데 정렬 */
+    margin-top: 20px; /* 위쪽에 여백 추가 */
+}
+
+.page-link {
+    margin: 0 5px; /* 좌우 여백 */
+    text-decoration: none; /* 밑줄 제거 */
+}
+
+
+/* 검색 폼 스타일 */
+.board-search form {
+    display: flex;
+    align-items: center;
+}
+
+.selectField,
+.textField,
+.btn {
+    padding: 0px 12px;
+    border-radius: 5px;
+}
+
+.btn {
+    background-color: var(--common_blue);
+    color: white;
+    border: none;
+    cursor: pointer;
+    height: 30px;
+}
+
+.page-link, .page-first, .page-last {
+    margin: 0 5px;
+    padding: 10px 15px;
+    text-decoration: none;
+}
+.page-link:hover, .page-first:hover, .page-last:hover {
+    text-decoration: underline;
+}
+
+#board-hr{
+    margin-top: 10px;
+}
