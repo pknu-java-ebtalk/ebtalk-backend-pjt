@@ -1,0 +1,112 @@
+.contents-box{
+    overflow: hidden;
+}
+
+.approve-list-box{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.approve-list-header-box{
+    display: flex;
+    gap: 407.14px;
+    margin-top: 50px;
+    margin-bottom: 13px;
+}
+
+.approve-list-title{
+    font-size: 35px;
+}
+
+.approve-list-watting-count{
+    height: 30px;
+    font-size: 15px;
+    font-weight: 300;
+    line-height: 73px;
+}
+
+.watting-count{
+    font-weight: 900;
+}
+
+.approve-list-table{
+    border-collapse: collapse;
+}
+
+.approve-list-table-headers{
+    border-bottom: 1px solid var(--line_gray);
+    border-collapse: collapse;
+}
+
+.table-header{
+    padding-left: 21.5px;
+}
+
+.approve-list-table-datas-box{
+    width: 833px;
+    height: 504px;
+    overflow-y: scroll;
+}
+
+.approve-list-table-datas-box::-webkit-scrollbar{
+    width: 10px;
+}
+
+.approve-list-table-datas-box::-webkit-scrollbar-thumb{
+    border-radius: 18px;
+    background: var(--line_gray);
+}
+
+th, td{
+   text-align: center; 
+   padding: 13px 20px;
+   white-space:nowrap;
+}
+
+.approve-list-table-data > .table-data{
+    overflow-x: scroll;
+    overflow-y: hidden;
+}
+
+.approve-list-table-data > .table-data::-webkit-scrollbar{
+    display: none;
+}
+
+.table-name{
+    width: 100px;
+    max-width: 100px;
+}
+
+.table-id{
+    width: 212.75px;
+    max-width: 212.75px;
+}
+
+.table-phone{
+    width: 125px;
+    max-width: 125px;
+}
+
+.table-edu-type{
+    width: 65px;
+    max-width: 65px;
+}
+
+.table-approve-status{
+    width: 90.25px;
+    max-width: 90.25px;
+}
+
+.btn{
+    font-size: 15px;
+    padding: 4px 7px;
+    background-color: var(--common_blue);
+    color: white;
+    border: none;
+    border-radius: 3px;
+}
+
+.btn:hover{
+    cursor: pointer;
+}

@@ -1,0 +1,57 @@
+/* 아이디 찾기 조회 결과 전체 */
+.find-id-box{
+    width: 600px;
+    height: 500px;
+    margin: 0 auto;
+    padding: 40px;
+    margin-top: 60px;
+}
+  
+/* 아이디 찾기 타이틀 */
+.find-id-title{
+    font-size: 35px;
+    text-align: center;
+    margin-bottom: 45px;
+}
+
+/* 조회 결과 메시지 */
+.found{
+    font-size: 25px;
+
+    height: 180px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    margin-top: 60px;
+    margin-bottom: 60px;
+}
+
+/* 조회한 아이디 */
+.found-id{
+    font-size: 30px;
+    color: red;
+}
+
+/* 버튼 전체 */
+.btn-box{
+    display: flex;
+    justify-content: center;
+    gap: 7px;
+}
+.btn{
+    font-family: 'S-CoreDream-3Light';
+    font-size: 20px;
+
+    width: 278px;
+    height: 58px;
+
+    color: white;
+    background-color: var(--common_blue);
+
+    border-radius: 10px;
+}
+.btn:hover{
+    cursor: pointer;
+}

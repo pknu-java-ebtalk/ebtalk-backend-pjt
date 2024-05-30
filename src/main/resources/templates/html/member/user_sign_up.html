@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>회원가입 : 이비톡</title>
+    <link rel="stylesheet" href="../../css/common/common_member.css">
+    <link rel="stylesheet" href="../../css/member/user_sign_up.css">
+</head>
+<body>
+    <header></header>
+    <div>
+        <div class="background-gray middle-gray">
+            <div class="background-white middle-white">
+                <div class="contents-box">
+                    <div class="sign-up-box">
+                        <p class="sign-up-title">회원가입</p>
+                        <form class="sign-up-form" method="post" action="#" id="resetPwForm">
+                            <input class="sign-up-id sign-up-input sign-up" type="email" name="ID" placeholder="아이디">
+                            <div class="pw-input-box">
+                                <input class="sign-up-pw sign-up-input sign-up" type="password" name="PW" placeholder="비밀번호">
+                                <input class="sign-up-pw-check sign-up-input sign-up" type="password" name="PWCHECK" placeholder="비밀번호 확인">
+                                <div class="info-msg-box">
+                                    <p class="info-msg info-msg-no">비밀번호가 일치하지 않습니다.</p>
+                                    <p class="info-msg info-msg-ok">비밀번호가 일치합니다.</p>
+                                </div>
+                            </div>
+                            <input class="sign-up-name sign-up-input sign-up" type="text" name="NAME" placeholder="이름">
+                            <input class="sign-up-phone sign-up-input sign-up" type="tel" name="PHONE" placeholder="전화번호">
+                            <select class="edu-type-box" name="EDU_NO">
+                                <option class="edu-type" value="">교육과정 선택</option>
+                                <option class="edu-type" value="1">빅데이터를 활용한 JAVA 개발자</option>
+                                <option class="edu-type" value="2">빅데이터 기반 AI 전문가</option>
+                                <option class="edu-type" value="3">윈도우 플랫폼 기반 IoT 시스템 개발자</option>
+                            </select>
+                            <input class="sign-up-btn sign-up" type="submit" value="확인">
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer></footer>
+    <script src="../../../static/js/common_member_header.js"></script>
+    <script src="../../../static/js/common_main_footer.js"></script>
+</body> 
+</html>

@@ -1,0 +1,124 @@
+/* 스터디 등록페이지 너비, 길이 설정 */
+.study-regist-list-box{
+  width: 600px;
+  height: 600px;
+  margin: 0 auto;
+  margin-top: 25px;
+}
+
+/* 스터디 모집 크기 설정 */
+.study-text-p {
+  font-size: 30px;
+  margin-bottom: 20px;
+}
+
+/* input, textarea 태그 내 font설정 */
+select, option{
+  font-family: 'S-CoreDream-3Light';
+  /* margin-left: 10px; */
+}
+
+ul.study-ul{
+  list-style: circle;
+}
+
+.study-li{
+  float: left;
+}
+
+.study-filter{
+  display: block;
+  height: 55px;
+  line-height: 55px;
+  /* border-bottom: 1px solid #D9D9D9; */
+}
+
+.study-li{
+  padding-right: 15px;
+}
+
+.study-filter-select{
+  float: right;
+  padding-right: 8px;
+  
+}
+
+select {
+  width: 70px;
+  height: 25px;
+  text-align: center;
+  -webkit-appearance: none;  /* 네이티브 외형 감추기 */
+  -moz-appearance: none;
+  appearance: none;
+  border-radius: 5px;
+  border: 1.5px solid #d9d9d9;
+}
+
+select:focus{
+  outline: none;
+  border: 2px solid #d9d9d9;
+}
+
+.study-content-li{
+  /* margin-top: 20px; */
+  border-top: 1px solid #D9D9D9;
+}
+
+.study-content-li > .study-title  {
+  margin: 15px 0;
+  margin-top: 20px;
+}
+
+.study-status{
+  border: 1px solid #7A86B1;
+  background: #7A86B1;
+  padding: 20px;
+  color: #fff;
+  padding: 5px 10px;
+  border-radius: 15px;
+}
+
+.study-content > p {
+  width: 600px;
+  white-space:nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.study-info{
+  /* margin: 20px 0; */
+  margin-top: 25px;
+  display: flex;
+  gap: 310px;
+  margin-bottom: 15px;
+}
+
+.study-like > ul > li{
+  float: left;
+  margin-left: 15px;
+}
+
+/* 버튼 설정 START */
+div.study-btn-box {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  margin-top: 30px;
+  /* width: 500px; */
+  /* text-align: center; */
+  float: right;
+}
+
+.study-btn {
+  width: 100px;
+  color: #fff;
+  padding: 5px;
+  border: none;
+  border-radius: 10px;
+  background: #00063F;
+}
+
+.study-btn:hover{
+  cursor: pointer;
+}
+/* 버튼 설정 END */

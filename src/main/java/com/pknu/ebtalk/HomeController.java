@@ -7,12 +7,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 public class HomeController {
     @GetMapping(value={"", "/"})
-    @ResponseBody
     public String home() {
         System.out.println("[HomeController] home()");
 
-        return "home";
+        String nextPage = "/html/study/study_register";
+
+        return nextPage;
 
     }
-
 }

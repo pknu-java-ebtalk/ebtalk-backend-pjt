@@ -1,0 +1,47 @@
+/* 비밀번호 재설정 결과 전체 */
+.reset-pw-box{
+    width: 600px;
+    height: 500px;
+    margin: 0 auto;
+    padding: 40px;
+    margin-top: 60px;
+}
+  
+/* 비밀번호 재설정 타이틀 */
+.reset-pw-title{
+    font-size: 35px;
+    text-align: center;
+    margin-bottom: 45px;
+}
+
+/* 조회 결과 메시지 */
+.not-found{
+    font-size: 25px;
+
+    height: 270px;
+
+    text-align: center;
+    line-height: 220px;
+}
+
+/* 버튼 전체 */
+.btn{
+    font-family: 'S-CoreDream-3Light';
+    font-size: 20px;
+
+    width: 295px;
+    height: 58px;
+
+    color: white;
+    background-color: var(--common_blue);
+
+    border-radius: 10px;
+}
+.btn:hover{
+    cursor: pointer;
+}
+
+/* 로그인 버튼 */
+.sign-in-btn{
+    margin-left: 5px;
+}

@@ -1,0 +1,74 @@
+#wrap{
+  width: 800px;
+  height: 600px;
+  margin: 0 auto;
+  margin-top: 25px;
+}
+
+/* 스터디 모집 크기 설정 */
+.study-management-filter {
+  font-size: 20px;
+  margin-bottom: 30px;
+}
+
+.study-filter-span > a:hover{
+  color: #000;
+ }
+
+ .study-filter-span > a{
+  margin-right: 15px;
+  color: #dadada;
+}
+
+.study-application-box {
+  width: 100%;
+}
+
+/* table은 margin 적용이 안되기 떄문에 border 속성을 이용하여 간격 띄워주기 */
+table {
+  table-layout: fixed;
+  width: 100%;
+  border-collapse: collapse;
+  /* border-spacing: 0 20px; */
+  display: flex;
+  justify-content: space-between;
+}
+
+table tbody tr {
+  /* width: 500px; */
+  height: 50px;
+  border-bottom: 1px solid var(--back_gray);
+}
+
+th {
+  text-align: left;
+  /* font-weight: 900;  */
+  font-size: 1.1em;
+
+}
+
+td:nth-of-type(1),
+td:nth-of-type(2),
+td:nth-of-type(3) {
+  padding-right:80px;
+}
+
+th:first-of-type,
+th:last-of-type {
+  text-align: center;
+}
+
+table tbody tr td:first-of-type {
+  max-width: 350px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+td > a.approve_yn {
+  padding: 5px 5px;
+  border: 1px solid var(--back_gray);
+  border-radius: 10px;
+  background-color: var(--back_gray);
+  color: #fff;
+}

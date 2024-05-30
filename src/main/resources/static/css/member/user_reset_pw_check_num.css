@@ -1,0 +1,75 @@
+/* --- 비밀번호 재설정 - 인증번호 start --- */
+/* 아이디 찾기 전체 */
+.reset-pw-box{
+    width: 600px;
+    height: 500px;
+    margin: 0 auto;
+    padding: 40px;
+    margin-top: 90px;
+}
+  
+/* 비밀번호 재설정 타이틀 */
+.reset-pw-title{
+    font-size: 35px;
+    text-align: center;
+    margin-bottom: 75px;
+}
+  
+/* 폼 전체 설정 */
+.reset-pw-form{
+    display: flex;
+    flex-direction: column;
+}
+  
+/* 폼 내 input 태그 설정 */
+.input{
+    font-family: 'S-CoreDream-3Light';
+    padding: 15px;
+    margin: 20px;
+    margin-bottom: 0;
+  
+    border-radius: 10px;
+}
+
+.info-msg-box{
+    font-size: 15px;
+    display: flex;
+    margin-left: 23px;
+    margin-right: 23px;
+    margin-bottom: 50px;
+}
+
+.info-msg{
+    width: 50%;
+}
+
+.num-check{
+    color: red;
+}
+
+.remain-time{
+    display: flex;
+    justify-content: flex-end;
+}
+
+/* 버튼 */
+.btn-box{
+    display: flex;
+    justify-content: center;
+    gap: 7px;
+}
+.btn{
+    font-family: 'S-CoreDream-3Light';
+    font-size: 20px;
+
+    width: 278px;
+    height: 58px;
+
+    color: white;
+    background-color: var(--common_blue);
+
+    border-radius: 10px;
+}
+.btn:hover{
+    cursor: pointer;
+}

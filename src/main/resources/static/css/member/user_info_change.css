@@ -1,0 +1,155 @@
+.contents-box{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.info-box{
+    width: 900px;
+    height: 600px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.info-title{
+    font-size: 35px;
+    margin-bottom: 15px;
+}
+
+.info-detail{
+    display: flex;
+    font-size: 16px;
+    align-items: center;
+
+    border-bottom: 2px solid var(--line_gray);
+}
+
+.info-detail-text{
+    width: 200px;
+    text-align: center;
+    padding: 10px;
+
+    border-right: 2px solid var(--line_gray);
+}
+
+.info-detail-input{
+    margin: 5px;
+    padding: 10px;
+    padding-left: 30px;
+}
+
+.info-profile-pic{
+    border-top: 2px solid var(--line_gray);
+}
+
+.profile-pic-text{
+    border: none;
+}
+
+.profile-pic-input-box{
+    border-left: 2px solid var(--line_gray);
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.info-profile-pic-input{
+    width: 150px;
+}
+
+.add-img{
+    border-radius: 150px;
+    width: 120px;
+    height: 120px;
+    background-color: var(--text_gray);
+    margin-top: 5px;
+    margin-left: 35px;
+    margin-bottom: 10px;
+}
+
+.add-img-btn{
+    margin-left: 35px;
+    margin-bottom: 5px;
+}
+
+.profile-pic-input{
+    width: 150px;
+
+    padding: 0;
+    padding-left: 30px;
+}
+
+.input-change{
+    width: 270px;
+    height: 40px;
+
+    border: none;
+    border-bottom: 1.5px solid var(--line_gray);
+}
+
+.input-change:focus{
+    outline: none;
+    border-bottom: 1.5px solid black;
+}
+
+.pw-text{
+    height: 96px;
+    line-height: 96px;
+}
+
+.new-pw-input{
+    margin-bottom: 6px;
+}
+
+.pw-input-box{
+    display: flex;
+    flex-direction: column;
+    margin-top: 12px;
+    margin-bottom: 15px;
+}
+
+.info-msg-box{
+    position: relative;
+}
+
+.info-msg{
+    font-size: 10px;
+    
+    margin-left: 3px;
+    position: absolute;
+}
+
+.info-msg-ok{
+    color: green;
+}
+
+.info-msg-no{
+    color: red;
+    visibility: hidden;
+}
+
+.btn-box{
+    display: flex;
+    justify-content: flex-end;
+    gap: 4px;
+}
+
+.btn{
+    color: white;
+    background-color: var(--common_blue);
+
+    border: none;
+    border-radius: 10px;
+
+    height: 40px;
+
+    margin-top: 7px;
+    padding: 10px;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.btn:hover{
+    cursor: pointer;
+}

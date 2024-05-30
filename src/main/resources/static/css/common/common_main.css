@@ -1,0 +1,262 @@
+/* --- 기본 설정 start--- */
+/* 많이 사용하는 색 지정 */
+:root{
+  --common_blue: #182663;   /* 남색 */
+  --back_gray: #EBEBEB;     /* 배경 회색 */
+  --aside_gray: #f8f8f8;     /* 프로필 회색 */
+  --text_purple: #7A86B1;    /* 글자 회보라색 */
+  --line_gray: #DADADA;      /* 테두리 회색 */
+  --text_gray: #A6A6A6;      /* 글자 회색 */
+}
+
+/* 이비톡 로고 글씨체 */
+@font-face {
+  font-family: 'yg-jalnan';
+  src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_four@1.2/JalnanOTF00.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+/* 이비톡 로고 제외 글씨체 */
+@font-face {
+  font-family: 'S-CoreDream-3Light';
+  src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-3Light.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+*{
+  margin: 0;
+  padding: 0;
+  
+  list-style: none;
+  text-decoration: none;
+  color: black;
+}
+
+html, body{
+  width: 100%;
+  height: 100%;
+}
+
+.font{
+  font-family: 'S-CoreDream-3Light';
+}
+/* --- 기본 설정 end--- */
+
+
+/* --- 배경 설정 start --- */
+body{
+  background-color: var(--common_blue);
+  min-width: 1550px;
+  min-height: 850px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.background-gray{
+  background-color: var(--back_gray);
+  width: 1550px; 
+
+  display: flex;
+  justify-content: center;
+}
+
+.background-white{
+  background-color: white;
+  width: 1400px;
+  font-family: 'S-CoreDream-3Light';
+  font-weight: 900; 
+}
+
+.header-gray{
+  height: 140px;
+
+  border-radius: 10px 10px 0 0;
+}
+
+.header-white{
+  height: 100px;
+
+  margin-top: 40px;
+
+  display: flex;
+  align-content: flex-end;
+}
+
+.logo-a{
+  width: 350px;
+  background-color: var(--aside_gray);
+}
+
+aside{
+  float: left;
+}
+
+#aside-contents-box{
+  width: 100%;
+  height: 465px;
+}
+
+.aside-gray{
+  display: flex;
+  justify-content: flex-end;
+  width: 425px;
+  height: 715px;
+}
+
+.aside-back-gray{
+  background-color: var(--aside_gray);
+  width: 350px;
+
+  position: relative;
+}
+
+.middle-gray{
+  display: flex;
+  justify-content: flex-start;
+  width: 1125px;
+  height: 715px;
+}
+
+.middle-white{
+  width: 1050px;
+  height: 715px;
+}
+
+.footer-gray{
+  height: 40px;
+  border-radius: 0 0 10px 10px;
+}
+/* --- 배경 설정 end --- */
+
+
+/* --- logo start --- */
+/* logo 전체 */
+.logo{
+  display: flex;
+  margin-top: 30px;
+  margin-left: 60px;
+  margin-right: 0;
+  max-width: 100%;
+}
+
+/* logo 사진 */
+.logo-pic{
+  width: 50px;
+  margin-left: 30px;
+  margin-right: 7px;
+}
+
+/* logo 타이틀 */
+.logo-text{
+  font-family: 'yg-jalnan';
+  font-size: 30px;
+
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100px;
+}
+/* --- logo end --- */
+
+
+/* --- navbar start --- */
+/* navbar 전체 */
+.navbar{
+  display: flex;
+  align-items: center;
+
+  width: 1050px;
+  height: 100%;
+
+  border-bottom: 3px solid var(--line_gray);
+}
+
+/* navbar 메뉴 */
+.navbar-menu{
+  display: flex;
+  margin-right: auto;
+  margin-left: 50px;
+}
+.navbar-menu  a{
+  color: var(--text_purple);
+  font-weight: 700;
+  padding: 8px 40px;
+  font-size: 20px;
+}
+.navbar-menu  a:hover {
+  color: white;
+  background-color: var(--common_blue);
+
+  padding: 8px 60px;
+}
+
+/* navbar 아이콘 */
+.navbar-icons{
+  margin-right: 50px;
+}
+.navbar-icons  img{
+  width: 40px;
+  float: left;
+  margin-left: 15px;
+}
+.navbar-icons  img:hover{
+  transform: scale(1.1);
+}
+/* - navbar end - */
+/* --- navbar end --- */
+
+
+/* --- aside start --- */
+/* - profile start - */
+/* profile 전체 */
+.profile{
+  display: flex;
+  flex-direction: column;
+}
+
+/* profile 사진 */
+.profile-pic{
+  width: 120px;
+
+  margin: 0 auto;
+  margin-top: 35px;
+}
+
+/* profile 이름 */
+.profile-name{
+  font-size: 23px;
+  font-family: 'yg-jalnan';
+  margin: 0 auto;
+}
+/* - profile end - */
+
+/* - log-out 버튼 start */
+.log-out{
+  position: absolute;
+  left: 38.5%;
+  bottom: 40px;
+}
+
+.log-out:hover{
+  transform: scale(1.1);
+}
+
+.log-out-text{
+  color: var(--text_purple);
+}
+/* - log-out 버튼 end */
+/* --- aside end --- */
+
+
+/* --- 컨텐츠 박스 기본 설정 --- */
+.contents-box{
+  width: 100%;
+  height: 100%;
+
+  border-top: 1px solid var(--line_gray);
+}
