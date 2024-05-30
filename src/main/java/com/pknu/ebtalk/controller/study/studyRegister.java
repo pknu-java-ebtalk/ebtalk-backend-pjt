@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class studyRegister {
 
         @GetMapping(value={ "/studyRegister"})
-        @ResponseBody
         public String studyRegister() {
             System.out.println("[HomeController] studyRegister()");
 
