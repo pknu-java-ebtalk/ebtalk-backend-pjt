@@ -188,11 +188,29 @@ aside{
   padding: 8px 40px;
   font-size: 20px;
 }
-.navbar-menu  a:hover {
+/* .navbar-menu  a:hover {
   color: white;
   background-color: var(--common_blue);
 
   padding: 8px 60px;
+} */
+
+.navbar li{
+  position: relative;
+}
+
+.navbar a:hover::before{
+  content: '';
+  position: absolute;
+
+  width: 11px;
+  height: 11px;
+  left: 26px;
+  bottom: 20px;
+
+  border-radius: 10px;
+  background-color: var(--common_blue);
+  /* background-color: red; */
 }
 
 /* navbar 아이콘 */
