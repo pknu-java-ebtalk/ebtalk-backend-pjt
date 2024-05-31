@@ -3,7 +3,7 @@
     overflow-y: scroll;
 }
 .sign-up-form::-webkit-scrollbar{
-    width: 20px;
+    width: 10px;
 }
 .sign-up-form::-webkit-scrollbar-thumb{
     border-radius: 18px;
