@@ -1,4 +1,4 @@
 package com.pknu.ebtalk.mappers.member.admin;
 
-public interface test {
+public interface IAdminMemberMapper {
 }
