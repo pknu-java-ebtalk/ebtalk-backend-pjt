@@ -9,5 +9,4 @@ public class EbtalkBackendPjtApplication {
     public static void main(String[] args) {
         SpringApplication.run(EbtalkBackendPjtApplication.class, args);
     }
-
 }

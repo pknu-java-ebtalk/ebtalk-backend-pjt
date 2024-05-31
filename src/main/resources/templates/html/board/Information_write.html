@@ -13,41 +13,49 @@
 </head>
 
 <body>
-    <header></header>
-    <div>
-        <aside></aside>
-        <div class="background-gray middle-gray">
-            <div class="background-white middle-white">
-                <div class="contents-box">
-                    <div class="title-write">글쓰기</div>
-                    <div class="back-color">
-                        <div class="title">
-                            <p class="write-title">제목</p>
-                            <hr id="line">
-                            <p><input class="write-title1" type="text" placeholder="제목을 입력하세요"></p>
-                        </div>
-                        <hr id="line">
-                        <div class="write-content">
-                            <textarea class="write-content" placeholder="내용을 입력하세요"></textarea>
-                        </div>
-                        <div class="attached-file">
-                            <tr>
-                                <td>
-                                    <input type="file" name="file" id="file">
-                                </td>
-                            </tr>
-                        </div>
-
+<header></header>
+<div>
+    <aside></aside>
+    <div class="background-gray middle-gray">
+        <div class="background-white middle-white">
+            <div class="contents-box">
+                <div class="title-top">
+                    <p class="title-write ">게시판 등록</p>
+                    <div class="write-s-open-id">
+                        <select name="searchKey" class="write-select font" >
+                            <option value="walk-Information">일자리 정보</option>
+                            <option value="certificate-Information">자격증 정보</option>
+                            <option value="completion-Information">수료생 게시판</option>
+                        </select>
                     </div>
-                    <div class="pagination">
-                        <a href="Information_view.html" class="write">등록</a>
-                        <a href="Information_board.html" class="cancel">취소</a>
+                </div>
+                <div class="back-color">
+                    <div class="title">
+                        <p class="write-title">제목</p>
+                        <p><input class="write-title-box font" type="text" placeholder="제목을 입력하세요"></p>
                     </div>
+                    <div class="write-content-textTitle">내용</div>
+                    <div class="write-content ">
+                            <textarea class="write-content-textBox font"
+                                      placeholder="내용을 입력하세요."></textarea>
+                    </div>
+                    <div class="attached-file">
+                        <tr>
+                            <td>
+                                <input type="file" name="file" id="file" class="font">
+                            </td>
+                        </tr>
+                    </div>
+                </div>
+                <div class="pagination">
+                    <a href="Information_view.html" class="write font">등록</a>
+                    <a href="Information_board.html" class="cancel font">취소</a>
                 </div>
             </div>
         </div>
     </div>
-    <footer></footer>
+</div>
+<footer></footer>
     <script src="/js/common_main_header.js"></script>
     <script src="/js/common_main_aside.js"></script>
     <script src="/js/common_main_footer.js"></script>
