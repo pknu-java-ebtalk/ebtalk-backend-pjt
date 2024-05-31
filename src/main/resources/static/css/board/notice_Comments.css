@@ -1,0 +1,131 @@
+.board_view {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    border-top: 1px solid var(--aside_gray);
+    justify-content: center;
+}
+
+.eyes {
+    width: 17px;
+}
+
+.title {
+    width: 100%;
+    margin-top: 80px;
+    text-align: center;
+    line-height: 30px;
+    margin-bottom: 10px;
+    font-size: 18px;
+    border-bottom: 1px solid black;
+    padding-bottom: 15px;
+}
+
+.title img {
+    vertical-align: middle;
+    margin-right: 8px;
+    margin-left: 80px;
+}
+
+#view-title {
+    margin-right: 80px;
+    font-size: 20px;
+}
+
+#view-name {
+    margin-right: 80px;
+}
+
+#view-name, #view-date, #view-img{
+    font-size: 15px;
+}
+
+.cont {
+    width: 500px;
+    height: 400px;
+    margin: 20px;
+    text-align: left;
+    line-height:26px;
+    font-weight: 100;
+}
+
+.comments-section {
+    width: 300px;
+    margin: 20px;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+#comments-list {
+    margin-bottom: 20px;
+}
+
+.comment {
+    padding: 5px;
+    border-bottom: 1px solid var(--line_gray);
+    font-size: small;
+}
+
+#comment-form {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+#comment-form textarea {
+    width: 100%;
+    height: 20px;
+    border: 1px solid var(--line_gray);
+    border-radius: 4px;
+    resize: none;
+    border-radius: 5px 0px 0px 5px;
+    text-align: center;
+}
+#comment-form textarea:focus {
+    outline: none;
+}
+
+#comment-form button {
+    padding: 2px;
+    background-color: var(--common_blue);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    border-radius: 0px 5px 5px 0px;
+}
+#comment-form button:hover{
+    background-color:var(--text_purple);
+}
+
+#comments-list {
+    font-size: 8px;
+    font-weight: 2;
+}
+
+.bt_wrap {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 20px;
+    width: 100%;
+}
+
+.bt_wrap a {
+    padding: 10px 20px;
+    background-color: var(--common_blue);
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    border: none;
+    border-radius: 5px;
+    font-weight: normal;
+    margin-right: 20px;
+}
+
+.bt_wrap a.edit {
+    margin-right: 95px;
+}
+
+.bt_wrap a:hover {
+    background-color: var(--text_purple);
+}

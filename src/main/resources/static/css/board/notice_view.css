@@ -1,73 +1,65 @@
-.board_view {
-    width: 100%;
-    border-top: 1px solid var(--aside_gray) 
-}
+/* notice_view.css */
 
-.board_view .title {
-    padding: 20px 15px;
-}
-
-.eyes{
-    width: 20px;
-    height: 20px;
-}
-#eyes-line{
-    width: 820px;
-    margin: 0 120px; /* line의 좌우 여백 조정 */
-}
-
+/* 제목 섹션 */
 .title {
     margin-top: 80px;
-    text-align: center; /* 내용을 가운데 정렬 */
-    line-height: 30px; /* 한 줄에 텍스트와 이미지를 모두 표시하기 위한 줄 높이 */
-}
-
-
-.title img {
-    vertical-align: middle; /* 이미지를 수직으로 가운데 정렬 */
-    margin-right: 8px; /* 이미지 오른쪽 여백 추가 */
-    margin-left: 100px; /* 제목과 작성자 사이 간격 조정 */
+    text-align: center;
+    border-bottom: 1px solid black;
+    padding-bottom: 15px;
 }
 
 #view-title {
-    margin-right: 100px; /* 제목과 작성자 사이 간격 조정 */
+    margin-right: 100px;
+    font-size: 20px;
 }
 
 #view-name {
-    margin-right: 100px; /* 작성자와 작성일 사이 간격 조정 */
+    margin-right: 100px;
 }
 
-.cont{
+.title img {
+    vertical-align: middle;
+    margin-right: 8px;
+    margin-left: 100px;
+}
+
+/* 내용 섹션 */
+.cont {
     width: 800px;
     height: 400px;
-}
-.board_view {
-    text-align: center; /* 내용을 가운데 정렬 */
-}
-
-.cont {
+    line-height: 25px;
     margin-top: 20px;
-    display: inline-block; /* 가로로 나열되며 줄의 길이에 상관없이 중앙 정렬됨 */
-    text-align: left; 
+    display: inline-block;
+    text-align: left;
+    font-weight: 100;
+    margin-left: 125px;
 }
 
+/* 조회수 아이콘 */
+.eyes {
+    width: 20px;
+    height: 20px;
+}
+
+/* 버튼 섹션 */
 .bt_wrap {
     display: flex;
-    justify-content: flex-end; /* 요소를 우측으로 붙임 */
+    justify-content: flex-end;
     margin-top: 20px;
 }
 
 .bt_wrap a {
-    padding: 10px 20px; /* 네모난 상자 안에 글자를 넣기 위한 패딩 */
-    background-color: var(--common_blue); /* 배경색 */
-    border-radius: 5px; /* 모서리 둥글게 */
-    text-decoration: none; /* 링크 밑줄 제거 */
-    color: white; /* 글자색 */
-    font-weight: bold; /* 글자 두께 조정 */
+    padding: 10px 20px;
+    background-color: var(--common_blue);
+    border-radius: 5px;
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
     margin-right: 20px;
 }
+
 .bt_wrap a.edit {
-    margin-right:120px;
+    margin-right: 120px;
 }
 
 .bt_wrap a:hover {

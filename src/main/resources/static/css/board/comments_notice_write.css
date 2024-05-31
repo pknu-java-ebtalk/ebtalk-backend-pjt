@@ -1,4 +1,4 @@
-/* notice_write.css */
+/* comments_notice_write.css */
 
 /* 전체 배경 */
 .back-color {
@@ -17,6 +17,31 @@
 
 .title-write {
     font-size: 25px;
+}
+
+/* 게시판 선택 및 익명 체크박스 */
+.write-s-open-id {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-top: 40px;
+    gap: 50px;
+}
+
+.write-select {
+    height: 40px;
+    width: 130px;
+    border: 3px solid rgba(184, 184, 184, 0.212);
+    border-radius: 5px;
+    font-size: 15px;
+}
+
+.not-open-id {
+    font-size: 0.8em;
+}
+
+.open-id label {
+    margin-left: 20px;
 }
 
 /* 제목 입력란 */
@@ -90,31 +115,11 @@
     border-radius: 5px;
 }
 
-/* 게시판 선택 */
-.write-s-open-id {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    margin-top: 40px;
-    gap: 50px;
-}
-
-.write-select {
-    height: 40px;
-    width: 130px;
-    border: 3px solid rgba(184, 184, 184, 0.212);
-    border-radius: 5px;
-    font-size: 15px;
-}
-
 /* 버튼 */
 .pagination {
-    display: flex;
-    justify-content: right;
-    margin-top: 10px;
-    width: 70%;
     float: right;
     margin-right: 120px;
+    justify-content: right;
 }
 
 .write {
@@ -138,15 +143,6 @@
     border-radius: 5px;
     font-weight: normal;
     cursor: pointer;
-    margin-left: 20px;
-}
-
-/* ID 라벨 */
-.not-open-id {
-    font-size: 0.8em;
-}
-
-.open-id label {
     margin-left: 20px;
 }
 
