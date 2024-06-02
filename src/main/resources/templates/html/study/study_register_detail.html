@@ -8,6 +8,10 @@
     <link rel="stylesheet" href="/css/study/study_register_detail.css" >
     <link rel="stylesheet" href="/css/study/study_aside.css">
     <!-- ⭐본인 css 링크 작성⭐ -->
+    <script crossOrigin="anonymous"
+            integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM=" src="https://code.jquery.com/jquery-3.7.0.js"></script>
+    <script src="https://kit.fontawesome.com/011513753c.js" crossorigin="anonymous"></script>
+    <script th:replace="~{/html/study/study_register_detail_js.html::js}"></script>
 </head>
 <body>
     <header></header>
@@ -18,59 +22,70 @@
                 <div class="contents-box">
                     <!-- ⭐여기에 코드 작성⭐ -->
                     <div class="study-regist-detail-box">
-                        <div class="study-text">
-                          <p class="study-text-p">스터디 모집</p>
+                        <form method="get" id="study_delete_form">
+<!--                            <input type="hidden" name="_method" value="delete">-->
+                            <div class="study-text">
+                            <div class="study-text-div">
+                                <p class="study-text-p">스터디 모집</p>
+                            </div>
+                            <div class="study-cancel-icon">
+<!--                                <button type="submit" onclick="check_delete_btn_confirm();">-->
+<!--                                    <i class="fa-solid fa-delete-left"></i>-->
+<!--                                    <a th:href="@{/study/study_delete_confirm(no=${studyDto.no})}" onclick="check_delete_btn_confirm();">-->
+                                <a th:href="@{/study/study_delete_confirm(no=${studyDto.no})}" onclick="return confirm('정말 삭제하시겠습니까?');">
+
+                                <i class="fa-solid fa-delete-left"></i>
+
+                                </a>
+<!--                                </button>-->
+
+                            </div>
                         </div>
-                        <form method="" action="">
+<!--                        <form method="" action="">-->
                           <div class="board-box">
                             <div class="title-box study-detail-box">
                               <span class="title span-first">제목 </span>
-                              <span class="title-value value">[Front-End] 스터디 모집합니다.</span>
+                              <span class="title-value value" th:text="${studyDto.title}"></span>
                             </div>
                             <div class="date-box study-detail-box">
                               <span class="date span-first">기간 </span>
-                              <span class="date-value-1 value">2024-05-01</span>
+                              <span class="date-value-1 value" th:text="${studyDto.started_at}"></span>
                               <span>~</span>
-                              <span class="date-value-2 value">2024-06-15</span>
+                              <span class="date-value-2 value" th:text="${studyDto.finished_at}"></span>
                             </div>
                             <div class="count-box study-detail-box">
                               <span class="count span-first">정원 </span>
-                              <span class="count-value value">5</span>
+                              <span class="count-value value" th:text="${studyDto.count}"></span>
                               <span class="value">명</span>
                             </div>
                             <div class="content-box study-detail-box">
                                   <div class="content span-first">
                                     내용
                                   </div>
-                                  <div class="content-value value">
-                                    스터디 주제 : 모던 리액트 Deep Dive, TWIL (This Week I Learned)  <br>
-                                      예상 스터디 일정(횟수) : 2달(주 1회씩 8번) <br>
-                                      예상 커리큘럼 간략히 :
-                                      매주 읽고 싶은 챕터를 함께 정하고 한 주간 책을 읽고 내가 배운내용, "TWIL"을 노션 등에 정리합니다.<br>
-                                      스터디 날에는 게더타운(온라인)에 모여서 각자 한 주간 읽고 정리한 내용을 가지고 3분간 발표 + 7분간 서로 질의를 합니다. <br>
-                                      스터디 주제 : 모던 리액트 Deep Dive, TWIL (This Week I Learned)  <br><br>
-                                      예상 스터디 일정(횟수) : 2달(주 1회씩 8번) <br>
-                                      예상 커리큘럼 간략히 :
-                                      매주 읽고 싶은 챕터를 함께 정하고 한 주간 책을 읽고 내가 배운내용, "TWIL"을 노션 등에 정리합니다.<br>
-                                      스터디 날에는 게더타운(온라인)에 모여서 각자 한 주간 읽고 정리한 내용을 가지고 3분간 발표 + 7분간 서로 질의를 합니다. <br>
-                                      스터디 주제 : 모던 리액트 Deep Dive, TWIL (This Week I Learned)  <br><br>
-                                      예상 스터디 일정(횟수) : 2달(주 1회씩 8번) <br>
-                                      예상 커리큘럼 간략히 :
-                                      매주 읽고 싶은 챕터를 함께 정하고 한 주간 책을 읽고 내가 배운내용, "TWIL"을 노션 등에 정리합니다.<br>
-                                      스터디 날에는 게더타운(온라인)에 모여서 각자 한 주간 읽고 정리한 내용을 가지고 3분간 발표 + 7분간 서로 질의를 합니다. <br>
-                                      스터디 주제 : 모던 리액트 Deep Dive, TWIL (This Week I Learned)  <br>
-                                      예상 스터디 일정(횟수) : 2달(주 1회씩 8번) <br>
-                                      예상 커리큘럼 간략히 :
-                                      매주 읽고 싶은 챕터를 함께 정하고 한 주간 책을 읽고 내가 배운내용, "TWIL"을 노션 등에 정리합니다.<br>
-                                      스터디 날에는 게더타운(온라인)에 모여서 각자 한 주간 읽고 정리한 내용을 가지고 3분간 발표 + 7분간 서로 질의를 합니다. <br>
+                                  <div class="content-value value" th:text="${studyDto.content}">
 
                                   </div>
                             </div>
                           </div>
-                          <div class="study-btn-box">
-                            <input class="study-regist-btn study-regist-input study-btn" type="submit" value="신청">
-                            <input class="study-cancel-btn study-regist-input study-btn" type="submit" value="목록">
-                          </div>
+                            <div class="study-btn-box">
+                                <a class="study-regist-btn study-regist-input study-btn" th:href="@{/study/study_modify_form(no=${studyDto.no})}">수정</a>
+                                <a class="study-cancel-btn study-regist-input study-btn" th:href="@{/study/study_list}">목록</a>
+                            </div>
+
+<!--                            <th:block th:if="${studyDto.user_id == session.loginedUserDto.id}">-->
+<!--                                <div class="study-btn-box">-->
+<!--                                    <a class="study-regist-btn study-regist-input study-btn" th:href="@{/study/study_modify_form(no=${studyDto.no})}">수정</a>-->
+<!--                                    <a class="study-cancel-btn study-regist-input study-btn">목록</a>-->
+<!--                                </div>-->
+<!--                            </th:block>-->
+
+<!--                            <th:block th:if="${studyDto.user_id != session.loginedUserDto.id}">-->
+<!--                                <div class="study-btn-box">-->
+<!--                                    <a class="study-regist-btn study-regist-input study-btn" th:href="@{/study/study_modify_form(no=${studyDto.no})}">신청</a>-->
+<!--                                    <a class="study-cancel-btn study-regist-input study-btn">목록</a>-->
+<!--                                </div>-->
+<!--                            </th:block>-->
+
                         </form>
                       </div>
                 </div>
