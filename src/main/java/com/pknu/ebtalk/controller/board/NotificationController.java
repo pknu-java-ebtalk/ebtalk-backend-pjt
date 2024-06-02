@@ -9,14 +9,34 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Log4j2
 @Controller
 @RequiredArgsConstructor
-@RequestMapping("/notification")
+@RequestMapping("/notification")        //공지사항 게시판 form
 public class NotificationController {
 
-    @GetMapping(value = {"/board_register_form"})
-    public String boardRegister(){
+    @GetMapping(value = {"/notification_board_form"})
+    public String notificationBoard(){
         log.info("[NotificationController] notificationController()");
 
-        String nextPage = "/html/board/board";
-        return nextPage;
+        String notificationBoard = "/html/board/board";
+        return notificationBoard;
+    }
+
+    @GetMapping(value = {"/notification_write_form"})
+    public String notificationWrite(){
+
+        String notificationWritePage = "/html/board/board_write";
+        return notificationWritePage;
+    }
+
+    @GetMapping(value = {"/notification_view_form"})
+    public String notificationView(){
+
+        String notificationViewPage = "/html/board/board_view";
+        return notificationViewPage;
+    }
+
+    @GetMapping(value = {"/notification_edit_form"})
+    public String notificationEdit(){
+        String notificationEditPage = "/html/board/board_edit";
+        return notificationEditPage;
     }
 }
