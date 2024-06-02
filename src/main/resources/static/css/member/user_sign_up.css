@@ -57,6 +57,7 @@
 /* 입력란 설정 */
 .sign-up-input{
     font-size: 15px;
+    border: 1px solid var(--line_gray);
 }
 
 .pw-input-box{
@@ -89,6 +90,7 @@
 
 .info-msg-no{
     color: red;
+    visibility: visible;
 }
 
 .edu-type-box{
