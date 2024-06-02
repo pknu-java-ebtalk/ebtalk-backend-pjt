@@ -1,4 +1,4 @@
-/* notice_write.css */
+/* information_notice_write.css */
 
 /* 전체 배경 */
 .back-color {
@@ -109,12 +109,9 @@
 
 /* 버튼 */
 .pagination {
-    display: flex;
-    justify-content: right;
-    margin-top: 10px;
-    width: 70%;
     float: right;
     margin-right: 120px;
+    justify-content: right;
 }
 
 .write {
