@@ -7,6 +7,9 @@
     <link rel="stylesheet" href="/css/common/common_main.css">
     <link rel="stylesheet" href="/css/study/study_register.css" >
     <link rel="stylesheet" href="/css/study/study_aside.css">
+    <script crossOrigin="anonymous"
+            integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM=" src="https://code.jquery.com/jquery-3.7.0.js"></script>
+    <script th:replace="~{/html/study/study_register_js.html::js}"></script>
 </head>
 <body>
     <header></header>
@@ -20,11 +23,11 @@
                         <div class="study-text">
                           <p class="study-text-p">스터디 모집</p>
                         </div>
-                        <form method="post" th:action="@{/study/study_register_confirm}">
-                          <table>
+                        <form method="post" th:action="@{/study/study_register_confirm}" name="study_regist_form">
+                            <table>
                             <tr>
                               <td><span class="title">제목: </span></td>
-                              <td><input class="study-regist-title study-regist-input" type="text" name="title" placeholder="제목을 입력하세요."></td>
+                              <td><input class="study-regist-title study-regist-input" type="text" id="title" name="title" placeholder="제목을 입력하세요."></td>
                             </tr>
                             <tr>
                               <td><span class="date">기간: </span></td>
@@ -32,16 +35,16 @@
                             </tr>
                             <tr>
                               <td><span class="count">정원: </span></td>
-                              <td><input class="study-regist-count study-regist-input" type="number" name="count" min="2" />명</td>
+                              <td><input class="study-regist-count study-regist-input" type="number" id="count" name="count" min="2" />명</td>
                             </tr>
                             <tr>
                               <td class="content-td"><span class="content">내용: </span></td>
-                              <td><textarea class="study-regist-content" placeholder="내용을 입력하세요." name="content" rows="15" cols="62"></textarea></td>
+                              <td><textarea class="study-regist-content" placeholder="내용을 입력하세요." id="content" name="content" rows="15" cols="62"></textarea></td>
                             </tr>
                           </table>
                           <div class="study-btn-box">
-                            <input class="study-regist-btn study-regist-input study-btn" type="submit" value="등록">
-                            <input class="study-cancel-btn study-regist-input study-btn" type="reset" value="취소">
+                            <input class="study-regist-btn study-regist-input study-btn" type="button" onclick="check_input_box_by_null();" value="등록">
+                            <input class="study-cancel-btn study-regist-input study-btn" type="button" onclick="history.back()" value="취소">
                           </div>
                         </form>
                       </div>
@@ -50,14 +53,6 @@
         </div>
     </div>
     <footer></footer>
-    <script>
-        document.getElementById('started_at').addEventListener('change', function() {
-            var startDate = this.value;
-            var endDateInput = document.getElementById('finished_at');
-            endDateInput.min = startDate;
-
-        });
-    </script>s
     <script src="/js/common_main_header.js"></script>
     <script src="/js/common_main_aside.js"></script>
     <script src="/js/common_main_footer.js"></script>
