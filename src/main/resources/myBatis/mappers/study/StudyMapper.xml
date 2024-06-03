@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTO Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!--스터디 모집 등록-->
+<mapper namespace="com.pknu.ebtalk.mappers.study.IStudyMapper">
+    <insert id="insertStudyRegistInfo" parameterType="com.pknu.ebtalk.dto.study.StudyDto">
+        INSERT INTO
+            study(user_id, title, started_at, finished_at, count, content, views, created_at)
+        VALUES
+            (
+                #{user_id},
+                #{title},
+                #{started_at},
+                #{finished_at},
+                #{count},
+                #{content},
+                #{views},
+                now()
+            )
+    </insert>
+</mapper>
