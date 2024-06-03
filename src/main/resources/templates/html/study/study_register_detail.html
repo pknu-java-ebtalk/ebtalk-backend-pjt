@@ -23,25 +23,16 @@
                     <!-- ⭐여기에 코드 작성⭐ -->
                     <div class="study-regist-detail-box">
                         <form method="get" id="study_delete_form">
-<!--                            <input type="hidden" name="_method" value="delete">-->
                             <div class="study-text">
                             <div class="study-text-div">
                                 <p class="study-text-p">스터디 모집</p>
                             </div>
                             <div class="study-cancel-icon">
-<!--                                <button type="submit" onclick="check_delete_btn_confirm();">-->
-<!--                                    <i class="fa-solid fa-delete-left"></i>-->
-<!--                                    <a th:href="@{/study/study_delete_confirm(no=${studyDto.no})}" onclick="check_delete_btn_confirm();">-->
                                 <a th:href="@{/study/study_delete_confirm(no=${studyDto.no})}" onclick="return confirm('정말 삭제하시겠습니까?');">
-
                                 <i class="fa-solid fa-delete-left"></i>
-
                                 </a>
-<!--                                </button>-->
-
                             </div>
                         </div>
-<!--                        <form method="" action="">-->
                           <div class="board-box">
                             <div class="title-box study-detail-box">
                               <span class="title span-first">제목 </span>

@@ -23,208 +23,43 @@
                         <span class="study-filter-span"><a href="#">신청목록</a></span>
                       </div>
                       <div class="study-room-box">
-
+                        <th:block th:each="studyDto : ${studyDtos}">
                         <div class="study-in-progress-box">
                           <a class="study-room-a" href="#" >
                           <div class="title study-box">
-                            <p class="title-p">[Front-End] 스터디 모집</p>
+                            <p class="title-p" th:text="${studyDto.title}"></p>
                           </div>
                           <div class="date-box study-box">
                             <div class="date-title">
                               <span>기간: </span>
                             </div>
-                            <div class="start-date">
-                              <span>2024-05-01</span>
+                            <div class="start-date" th:text="${studyDto.started_at}">
+                              <span></span>
                             </div>
                             <span>~</span>
-                            <div class="end-date">
-                              <span>2024-06-15</span>
+                            <div class="end-date" th:text="${studyDto.finished_at}">
+                              <span></span>
                             </div>
                           </div>
                           <div class="count-box study-box">
                             <div class="count-title">
                               <span>인원: </span>
                             </div>
-                            <div class="progress-count">
+                            <div class="progress-count" th:text="${studyDto.count_member}">
                               <span>2</span>
                             </div>
                             <span>/</span>
-                            <div class="total-count">
-                              <span>6</span>
+                            <div class="total-count" th:text="${studyDto.count}">
+                              <span></span>
                             </div>
                           </div>
                         </a>
                         </div>
-  
-                        <div class="study-in-progress-box">
-                          <a class="study-room-a" href="#" >
-                          <div class="title study-box">
-                            <p class="title-p">[Front-End] 스터디 모집</p>
-                          </div>
-                          <div class="date-box study-box">
-                            <div class="date-title">
-                              <span>기간: </span>
-                            </div>
-                            <div class="start-date">
-                              <span>2024-05-01</span>
-                            </div>
-                            <span>~</span>
-                            <div class="end-date">
-                              <span>2024-06-15</span>
-                            </div>
-                          </div>
-                          <div class="count-box study-box">
-                            <div class="count-title">
-                              <span>인원: </span>
-                            </div>
-                            <div class="progress-count">
-                              <span>2</span>
-                            </div>
-                            <span>/</span>
-                            <div class="total-count">
-                              <span>6</span>
-                            </div>
-                          </div>
-                        </a>
-                        </div>
-
-
-                        <div class="study-in-progress-box">
-                          <a class="study-room-a" href="#" >
-                          <div class="title study-box">
-                            <p class="title-p">[Front-End] 스터디 모집</p>
-                          </div>
-                          <div class="date-box study-box">
-                            <div class="date-title">
-                              <span>기간: </span>
-                            </div>
-                            <div class="start-date">
-                              <span>2024-05-01</span>
-                            </div>
-                            <span>~</span>
-                            <div class="end-date">
-                              <span>2024-06-15</span>
-                            </div>
-                          </div>
-                          <div class="count-box study-box">
-                            <div class="count-title">
-                              <span>인원: </span>
-                            </div>
-                            <div class="progress-count">
-                              <span>2</span>
-                            </div>
-                            <span>/</span>
-                            <div class="total-count">
-                              <span>6</span>
-                            </div>
-                          </div>
-                        </a>
-                        </div>
-                        
-                        <div class="study-in-progress-box">
-                          <a class="study-room-a" href="#" >
-                          <div class="title study-box">
-                            <p class="title-p">[Front-End] 스터디 모집</p>
-                          </div>
-                          <div class="date-box study-box">
-                            <div class="date-title">
-                              <span>기간: </span>
-                            </div>
-                            <div class="start-date">
-                              <span>2024-05-01</span>
-                            </div>
-                            <span>~</span>
-                            <div class="end-date">
-                              <span>2024-06-15</span>
-                            </div>
-                          </div>
-                          <div class="count-box study-box">
-                            <div class="count-title">
-                              <span>인원: </span>
-                            </div>
-                            <div class="progress-count">
-                              <span>2</span>
-                            </div>
-                            <span>/</span>
-                            <div class="total-count">
-                              <span>6</span>
-                            </div>
-                          </div>
-                        </a>
-                        </div>
-
-                        <div class="study-in-progress-box">
-                          <a class="study-room-a" href="#" >
-                          <div class="title study-box">
-                            <p class="title-p">[Front-End] 스터디 모집</p>
-                          </div>
-                          <div class="date-box study-box">
-                            <div class="date-title">
-                              <span>기간: </span>
-                            </div>
-                            <div class="start-date">
-                              <span>2024-05-01</span>
-                            </div>
-                            <span>~</span>
-                            <div class="end-date">
-                              <span>2024-06-15</span>
-                            </div>
-                          </div>
-                          <div class="count-box study-box">
-                            <div class="count-title">
-                              <span>인원: </span>
-                            </div>
-                            <div class="progress-count">
-                              <span>2</span>
-                            </div>
-                            <span>/</span>
-                            <div class="total-count">
-                              <span>6</span>
-                            </div>
-                          </div>
-                        </a>
-                        </div>
-
-                        <div class="study-in-progress-box">
-                          <a class="study-room-a" href="#" >
-                          <div class="title study-box">
-                            <p class="title-p">[Front-End] 스터디 모집</p>
-                          </div>
-                          <div class="date-box study-box">
-                            <div class="date-title">
-                              <span>기간: </span>
-                            </div>
-                            <div class="start-date">
-                              <span>2024-05-01</span>
-                            </div>
-                            <span>~</span>
-                            <div class="end-date">
-                              <span>2024-06-15</span>
-                            </div>
-                          </div>
-                          <div class="count-box study-box">
-                            <div class="count-title">
-                              <span>인원: </span>
-                            </div>
-                            <div class="progress-count">
-                              <span>2</span>
-                            </div>
-                            <span>/</span>
-                            <div class="total-count">
-                              <span>6</span>
-                            </div>
-                          </div>
-                        </a>
-                        </div>
-
-
+                        </th:block>
                       </div>
                       
-
-
-                      
                     </div>
-                </div>  
+                </div>
             </div>
         </div>
     </div>
