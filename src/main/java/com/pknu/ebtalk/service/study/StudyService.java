@@ -96,8 +96,7 @@ public class StudyService implements IStudyService{
         
         if(result > 0) {
             log.info("삭제완료");
-//            iStudyMapper.deleteStudyMateByNo(no);
-
+            
         } else {
             log.info("삭제실패");
 

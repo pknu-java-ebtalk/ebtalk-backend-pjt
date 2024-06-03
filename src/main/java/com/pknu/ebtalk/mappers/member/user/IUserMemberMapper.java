@@ -5,6 +5,9 @@ import org.apache.ibatis.annotations.Mapper;
 
 @Mapper
 public interface IUserMemberMapper {
+    // 아이디 중복 체크
+    public int selectMemberSignUpIdCheck(String id);
+
     // 회원가입
     public int insertMemberSignUp(UserMemberDto userMemberDto);
 }
