@@ -6,7 +6,6 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Log4j2
@@ -22,6 +21,8 @@ public class StudyService implements IStudyService{
     @Override
     public StudyDto insertStudyConfirm(StudyDto studyDto) {
         log.info("[StudyService] insertStudyConfirm()");
+
+        // UserMemberDto loginedUserDto = (UserMemberDto) session.getAttribute("loginedUserDto");
 
         int result = iStudyMapper.insertStudyRegistInfo(studyDto);
 
@@ -51,7 +52,7 @@ public class StudyService implements IStudyService{
         log.info("[StudyService] selectStudyInfoByNo()");
 
         return iStudyMapper.selectStudyInfoByNo(no);
-        
+
     }
 
     @Override
@@ -59,7 +60,7 @@ public class StudyService implements IStudyService{
         log.info("[StudyService] updateStudyConfirm()");
 
         int result = iStudyMapper.updateStudyInfo(studyDto);
-        
+
         if(result > 0) {
             log.info("성공");
             studyDto = iStudyMapper.selectStudyInfoByNo(studyDto.getNo());
@@ -78,12 +79,10 @@ public class StudyService implements IStudyService{
     public List<StudyDto> selectStudyAllList() {
         log.info("[StudyService] selectStudyAllList()");
 
-//        List<StudyDto> studyDtos = iStudyMapper.selectStudyAllList();
-
         List<StudyDto> studyCountMembers = iStudyMapper.selectStudyCountMembers();
 
         return studyCountMembers;
-        
+
     }
 
     /*
@@ -94,14 +93,34 @@ public class StudyService implements IStudyService{
         log.info("[StudyService] deleteStudyConfirm()");
 
         int result = iStudyMapper.deleteStudyInfoByNo(no);
-        
+
         if(result > 0) {
             log.info("삭제완료");
-            
+//            iStudyMapper.deleteStudyMateByNo(no);
+
         } else {
             log.info("삭제실패");
 
         }
 
     }
+
+    /*
+     * 스터디 관리 페이지 - 진행중인 스터디 리스트
+     */
+    @Override
+    public List<StudyDto> selectStudyInProgressByUId(StudyDto studyDto) {
+        log.info("[StudyService] selectStudyInProgressByUId()");
+
+        List<StudyDto> studyDtos = iStudyMapper.selectStudyInProgressByUid(studyDto);
+
+        return studyDtos;
+
+    }
+
+    /*
+     * 스터디 관리 페이지 - 신청목록
+     */
+
+
 }

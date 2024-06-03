@@ -18,4 +18,7 @@ public interface IStudyService {
     List<StudyDto> selectStudyAllList();
 
     void deleteStudyConfirm(int no);
+
+    // 스터디 관리 페이지 - 진행중인 스터디 리스트
+    List<StudyDto> selectStudyInProgressByUId(StudyDto studyDto);
 }

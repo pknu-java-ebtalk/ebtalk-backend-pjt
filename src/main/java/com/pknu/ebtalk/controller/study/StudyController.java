@@ -8,6 +8,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @Log4j2
 @Controller
 @RequiredArgsConstructor
@@ -23,9 +25,7 @@ public class StudyController {
     public String studyRegisterForm() {
         log.info("[StudyController] studyRegister()");
 
-        String nextPage = "/html/study/study_register";
-
-        return nextPage;
+        return "/html/study/study_register";
 
     }
 
@@ -117,5 +117,27 @@ public class StudyController {
         return "redirect:/study/study_list";
 
     }
+
+    /*
+     * 스터디 관리 페이지 - 진행중인 스터디 리스트
+     */
+    @GetMapping(value = {"/study_in_progress_list"})
+    public String showStudyInProgressList(Model model){
+        log.info("[StudyController] showStudyInProgressList()");
+
+        StudyDto studyDto = new StudyDto();
+        studyDto.setUser_id("eunji123");
+
+//        List<StudyDto> studyDtos =
+
+        model.addAttribute("studyDtos", studyService.selectStudyInProgressByUId(studyDto));
+
+        return "/html/study/study_in_progress";
+    }
+
+    /*
+     * 스터디 관리 페이지 - 스터디 신청 목록
+     */
+
 
 }
