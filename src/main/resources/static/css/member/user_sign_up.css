@@ -3,7 +3,7 @@
     overflow-y: scroll;
 }
 .sign-up-form::-webkit-scrollbar{
-    width: 20px;
+    width: 10px;
 }
 .sign-up-form::-webkit-scrollbar-thumb{
     border-radius: 18px;
@@ -35,15 +35,8 @@
     display: flex;
     flex-direction: column;
 
-    /* overflow-x: none;
-    overflow-y: scroll; */
-
     height: 450px;
 }
-
-/* .sign-up-form::-webkit-scrollbar{
-    display: none;
-} */
 
 /* 폼 내 input 태그 설정 */
 .sign-up{
@@ -57,6 +50,32 @@
 /* 입력란 설정 */
 .sign-up-input{
     font-size: 15px;
+    border: 1px solid var(--line_gray);
+}
+
+.sign-up-id{
+    margin-bottom: 0;
+}
+
+#info-msg-box{
+    position: relative;
+}
+
+#id-check-msg{
+    border-color: red;
+    color: red;
+
+    font-size: 15px;
+
+    margin-left: 23px;
+    margin-bottom: 21px;
+    visibility: hidden;
+
+    position: absolute;
+}
+
+.field-error-id{
+    position: absolute;
 }
 
 .pw-input-box{
@@ -89,6 +108,7 @@
 
 .info-msg-no{
     color: red;
+    visibility: visible;
 }
 
 .edu-type-box{

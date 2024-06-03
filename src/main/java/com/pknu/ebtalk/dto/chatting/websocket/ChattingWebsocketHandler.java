@@ -68,7 +68,7 @@ public class ChattingWebsocketHandler extends TextWebSocketHandler {
             // 회원의 정보를 나타내는 loginMember도 가지고 있음
 
             // 로그인된 회원 정보 중 회원 번호 얻어오기
-            int loginID = Integer.parseInt(((ChatRoomUserDTO)s.getAttributes().get("ID")).getUSER_ID());
+            String loginID = (((ChatRoomUserDTO)s.getAttributes().get("ID")).getUSER_ID());
             logger.debug("loginID : " + loginID);
 
             // 로그인 상태인 회원 중 TO_ID(수신자 아이디)가 일치하는 회원에게 메시지 전달

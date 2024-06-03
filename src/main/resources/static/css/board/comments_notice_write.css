@@ -1,0 +1,154 @@
+/* comments_notice_write.css */
+
+/* 전체 배경 */
+.back-color {
+    max-width: 900px;
+    height: 400px;
+    margin-left: 75px;
+    border-radius: 10px;
+}
+
+/* 게시판 등록 제목 */
+.title-top {
+    margin-top: 50px;
+    margin-left: 120px;
+    font-size: 20px;
+}
+
+.title-write {
+    font-size: 25px;
+}
+
+/* 게시판 선택 및 익명 체크박스 */
+.write-s-open-id {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-top: 40px;
+    gap: 50px;
+}
+
+.write-select {
+    height: 40px;
+    width: 130px;
+    border: 3px solid rgba(184, 184, 184, 0.212);
+    border-radius: 5px;
+    font-size: 15px;
+}
+
+.not-open-id {
+    font-size: 0.8em;
+}
+
+.open-id label {
+    margin-left: 20px;
+}
+
+/* 제목 입력란 */
+.title {
+    margin-left: 47px;
+    margin-bottom: 30px;
+}
+
+.write-title {
+    font-size: 20px;
+    margin-top: 28px;
+    text-align: center;
+    width: 50px;
+    margin-right: 10px;
+}
+
+.write-title-box {
+    margin-top: 5px;
+    border: 3px solid rgba(184, 184, 184, 0.212);
+    width: 800px;
+    height: 40px;
+    font-size: 15px;
+    padding: 5px;
+    box-sizing: border-box;
+    border-radius: 10px;
+}
+
+/* 내용 입력란 */
+.write-content-textTitle {
+    font-size: 20px;
+    margin-left: 50px;
+    margin-bottom: 10px;
+}
+
+.write-content {
+    display: flex;
+    justify-content: center;
+}
+
+.write-content-textBox {
+    resize: none;
+    text-align: left;
+    border: 3px solid rgba(184, 184, 184, 0.212);
+    font-size: 15px;
+    resize: none;
+    text-align: left;
+    line-height: normal;
+    width: 100%;
+    max-width: 800px;
+    height: 200px;
+    border-radius: 10px;
+    font-weight: 500;
+}
+
+.write-content-textBox::-webkit-scrollbar{
+    width: 10px;
+}
+.write-content-textBox::-webkit-scrollbar-thumb{
+    border-radius: 18px;
+    background-color: var(--line_gray)
+}
+.write-content-textBox::-webkit-scrollbar-track{
+    background: white;
+}
+
+/* 파일 첨부 */
+.attached-file {
+    width: 300px;
+    margin-top: 30px;
+    margin-left: 45px;
+    border-radius: 5px;
+}
+
+/* 버튼 */
+.pagination {
+    float: right;
+    margin-right: 120px;
+    justify-content: right;
+}
+
+.write {
+    padding: 10px 20px;
+    background-color: var(--common_blue);
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    border: none;
+    border-radius: 5px;
+    font-weight: normal;
+}
+
+.cancel {
+    padding: 10px 20px;
+    background-color: var(--common_blue);
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    border: none;
+    border-radius: 5px;
+    font-weight: normal;
+    cursor: pointer;
+    margin-left: 20px;
+}
+
+/* 포커스 스타일링 */
+.write-title-box:focus,
+.write-content-textBox:focus,
+.write-select:focus {
+    outline: none;
+}

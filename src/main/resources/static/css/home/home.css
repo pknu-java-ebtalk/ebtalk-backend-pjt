@@ -1,0 +1,159 @@
+.contents-box{
+  display: flex;
+  justify-content: center;
+}
+
+/* main 페이지 너비, 길이 설정 */
+.home-box{
+  width: 700px;
+  height: 100%;
+  margin: 0 auto;
+  /* margin-top: 25px; */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* 공지페이지 너비, 높이 설정
+ * height 이상으로 넘어가면 hidden    
+*/
+.notice-box {
+  background: var(--aside_gray);
+  width: 660px;
+  max-width: 660px;
+  height: 280px;
+  max-height: 280px;
+  border-radius: 15px;
+  padding: 20px;
+  overflow: hidden;
+
+}
+
+.title-box > p {
+  font-size: 1.5em;
+  color: #7A86B1;
+  margin-bottom: 5px;
+}
+
+/* 게시글 한줄씩 column으로 정렬 */
+.board-box {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 100%;
+  height: 23px;
+  max-height: 23px;
+}
+
+.board-box-li:hover{
+  font-weight: 900;
+}
+
+.board-box-li{
+  display: flex;
+  flex-direction: row;
+  padding: 10px 0;
+  border-top: 1px solid var(--line_gray);
+  font-weight: 550;
+  height: 23.1px;
+}
+
+/* 공지 - 게시글 첫줄과 마지막 줄 안 뜨게 하기 위함 */
+.first{
+  /* background-color: red; */
+  border: none;
+}
+
+/* 한 게시물의 카테고리, 제목, 날짜, 조회수 너비 지정 */
+.board-width-2 > p {
+  width: 350px;
+  white-space:nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.board-width-1{
+  width: 60px;
+  max-width: 60px;
+}
+
+.board-width-2{
+  width: 430px;
+  max-width: 430px;
+}
+
+.board-width-3{
+  width: 120px;
+  max-width: 120px;
+}
+
+.count{
+  display: flex;
+  width: 50px;
+  max-width: 50px;
+}
+
+/* 날짜와 조회수 색 주기 */
+.date > p, 
+.count > p,
+.count > p > i{
+  color: var(--text_gray);
+}
+
+/* main-box-low */
+.main-box-row{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 15px;
+  margin-top: 20px;
+  width: 100%;
+  height: 300px;
+}
+
+.main-box-1{
+  border-radius: 15px;
+  width: 300px;
+  height: 250px;
+  background: var(--aside_gray);
+}
+
+.main-box-row-sub{
+  padding: 20px;
+  margin: 0 auto;
+  
+}
+
+.title-box-content{
+  font-weight: 550;
+}
+
+.title-box-content > a:hover{
+  font-weight: 900;
+}
+
+.title-box-content{
+  width: 100%;
+  height: 210px;
+  max-height: 210px;
+  margin: 0 auto;
+  overflow: hidden;
+}
+
+.info-title{
+  padding: 10px 0;
+  width: 300px;
+  max-width: 300px;
+  border-top: 1px solid var(--line_gray);
+}
+
+
+.info-title > p{
+  white-space:nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.first{
+  border: none;
+}

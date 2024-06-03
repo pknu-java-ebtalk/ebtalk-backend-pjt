@@ -10,7 +10,7 @@ public class HomeController {
     public String home() {
         System.out.println("[HomeController] home()");
 
-        String nextPage = "/html/study/study_register";
+        String nextPage = "/html/home/home";
 
         return nextPage;
 

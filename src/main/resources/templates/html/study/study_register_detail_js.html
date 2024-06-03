@@ -1,0 +1,36 @@
+<script th:fragment="js" th:inline="javascript" type="text/javascript">
+    $(document).ready(function () {
+        console.log("DOCUMENT WILL BE RAEDY TO EBTALK");
+
+        // 이벤트 핸들러 초기화
+        init_events();
+
+    })
+
+    /*
+     * init_events() START
+     */
+    function init_events() {
+        console.log("init_events() CALLED!!");
+
+    }
+
+    /*
+     * check_delete_btn_confirm() START
+     */
+    function check_delete_btn_confirm(){
+        var form = document.study_delete_form;
+
+        if(confirm("정말 삭제하시겠습니까?") == true) {
+            document.form.submit();
+        } else {
+            location.replace("/study/study_list");
+            return false;
+        }
+
+
+    }
+    /*
+     * check_delete_btn_confirm() END
+     */
+</script>
