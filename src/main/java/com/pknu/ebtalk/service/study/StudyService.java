@@ -20,8 +20,6 @@ public class StudyService implements IStudyService{
     public void insertStudyConfirm(StudyDto studyDto) {
         log.info("[StudyService] insertStudyConfirm()");
 
-        // UserMemberDto loginedUserDto = (UserMemberDto) session.getAttribute("loginedUserDto");
-
         int result = iStudyMapper.insertStudyRegistInfo(studyDto);
         if(result > 0) {
             log.info("성공");
