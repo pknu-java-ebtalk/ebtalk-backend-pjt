@@ -1,0 +1,38 @@
+<script th:fragment="js" th:inline="javascript" type="text/javascript">
+    $(document).ready(function () {
+        console.log("DOCUMENT WILL BE RAEDY TO EBTALK");
+
+        // 이벤트 핸들러 초기화
+        init_events();
+
+    })
+
+    /*
+     * init_events() START
+     */
+    function init_events() {
+        console.log("init_events() CALLED!!");
+
+    }
+
+    /*
+     * ajax_show_memoir_list() START
+     */
+    function ajax_show_memoir_list() {
+        console.log("show_memoir_list() CALLED!!");
+
+        $.ajax({
+            url : `/studyroom/memoir_list?study_no=${study_no}`,             // url: controller에 있는 주소
+            type : 'get',
+            data : {
+                "idx":idx
+            },
+            success: boardList,
+            errer : function (e) {
+                alert(e);
+            }
+        });
+
+    }
+
+</script>

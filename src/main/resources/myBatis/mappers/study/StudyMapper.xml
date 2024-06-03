@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTO Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<!--스터디 모집 등록-->
+
 <mapper namespace="com.pknu.ebtalk.mappers.study.IStudyMapper">
-    <insert id="insertStudyRegistInfo" parameterType="com.pknu.ebtalk.dto.study.StudyDto">
+    <!--스터디 모집 등록-->
+    <insert id="insertStudyRegistInfo" parameterType="com.pknu.ebtalk.dto.study.StudyDto" useGeneratedKeys="true" keyProperty="no">
         INSERT INTO
             study(user_id, title, started_at, finished_at, count, content, views, created_at)
         VALUES
@@ -18,4 +19,61 @@
                 now()
             )
     </insert>
+
+    <insert id="registStudyMate" parameterType="com.pknu.ebtalk.dto.study.StudyDto">
+        INSERT INTO
+            study_mate
+        VALUES
+            (
+             #{no},
+             #{user_id}
+            )
+    </insert>
+
+    <select id="selectStudyInfoByNo" parameterType="Integer" resultType="com.pknu.ebtalk.dto.study.StudyDto">
+        SELECT
+            `no`, user_id, title, started_at, finished_at, `count`, content, views, created_at
+        FROM
+            study
+        WHERE
+            no = #{no}
+    </select>
+
+    <!--  스터디 모집글 수정  -->
+    <update id="updateStudyInfo" parameterType="com.pknu.ebtalk.dto.study.StudyDto">
+        UPDATE study
+        SET
+            title = #{title},
+            started_at = #{started_at},
+            finished_at = #{finished_at},
+            count = #{count},
+            content = #{content}
+        WHERE
+            no = #{no}
+    </update>
+
+    <!--  스터디 모집 리스트  -->
+<!--    <select id="selectStudyAllList" resultType="com.pknu.ebtalk.dto.study.StudyDto">-->
+<!--        SELECT-->
+<!--            *-->
+<!--        FROM-->
+<!--            study-->
+<!--        ORDER BY-->
+<!--            CREATED_AT DESC-->
+<!--    </select>-->
+
+    <select id="selectStudyCountMembers" resultType="com.pknu.ebtalk.dto.study.StudyDto">
+        select a.no, a.user_id, a.title, a.started_at, a.finished_at, a.count, a.content, a.VIEWS, cast(a.CREATED_AT as date) as created_at, count_member, cast(now() as date) as cur_date
+        FROM study a
+        LEFT JOIN (SELECT study_no , count(study_no) AS count_member FROM study_mate GROUP BY study_no) AS b
+        ON a.no = b.study_no
+        ORDER BY
+            CREATED_AT DESC
+    </select>
+
+    <!--  스터디 모집글 삭제  -->
+    <delete id="deleteStudyInfoByNo" parameterType="Integer">
+        delete from study
+        where no = #{no}
+    </delete>
 </mapper>
