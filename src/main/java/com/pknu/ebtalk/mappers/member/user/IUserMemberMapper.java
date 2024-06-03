@@ -10,4 +10,7 @@ public interface IUserMemberMapper {
 
     // 회원가입
     public int insertMemberSignUp(UserMemberDto userMemberDto);
+
+    // 로그인
+    public String selectMemberSignIn(String id, String pw);
 }

@@ -121,7 +121,6 @@
                         success: function (data){   // data: checking_sign_up_id에서 넘겨준 값
                             if(data > 0){
                                 if(id !== ''){
-                                    // alert("중복된 아이디입니다.");
                                     $('.sign-up-id').css('borderColor', 'red');
                                     $('#id-check-msg').css('visibility', 'visible');
                                     $('.field-error-id').css('visibility', 'hidden');
@@ -131,6 +130,7 @@
                             }else{
                                 if(id !== '') {
                                     $('#id-check-msg').css('visibility', 'hidden');
+                                    $('.sign-up-id').css('borderColor', 'var(--line_gray)');
                                 }
                             }
                         }
