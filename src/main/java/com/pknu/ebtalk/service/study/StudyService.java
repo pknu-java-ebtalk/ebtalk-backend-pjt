@@ -23,8 +23,6 @@ public class StudyService implements IStudyService{
     public StudyDto insertStudyConfirm(StudyDto studyDto) {
         log.info("[StudyService] insertStudyConfirm()");
 
-        // UserMemberDto loginedUserDto = (UserMemberDto) session.getAttribute("loginedUserDto");
-
         int result = iStudyMapper.insertStudyRegistInfo(studyDto);
 
         // insertStudyRegistInfo(studyDto)에서 가져온 no 값 변수에 담기

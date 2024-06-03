@@ -6,6 +6,9 @@
     <title>회원가입 : 이비톡</title>
     <link rel="stylesheet" href="/css/common/common_member.css">
     <link rel="stylesheet" href="/css/member/user_sign_up.css">
+    <!--  JQuery CDN을 이용한 로드  -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
 </head>
 <style>
     .field-error{
@@ -29,8 +32,11 @@
                     <div class="sign-up-box">
                         <p class="sign-up-title">회원가입</p>
                         <form role="form" class="sign-up-form" method="post" action="/member/sign_up_confirm" id="resetPwForm" th:object="${userMemberDto}">
-                            <input th:field="*{id}" class="sign-up-id sign-up-input sign-up form-control" type="email" name="id" placeholder="아이디" th:errorclass="field-error">
-                            <p class="field-error field-error-p" th:errors="*{id}"></p>
+                            <input th:field="*{id}" class="sign-up-id sign-up-input sign-up form-control" type="email" name="id" placeholder="아이디" th:errorclass="field-error" id="sign-up-id">
+                            <div class="info-msg-box" id="info-msg-box">
+                                <p id="id-check-msg">중복된 아이디입니다.</p>
+                                <p class="field-error field-error-p field-error-id" th:errors="*{id}"></p>
+                            </div>
                             <div class="pw-input-box">
                                 <input th:field="*{pw}" class="sign-up-pw sign-up-input sign-up form-control" type="password" name="pw" placeholder="비밀번호" th:errorclass="field-error">
                                 <p class="field-error field-error-p" th:errors="*{pw}"></p>
@@ -99,9 +105,39 @@
                             error_msg.remove();
                         }
                     }
+                });
+            });
+
+            $(function (){
+                // 아이디 중복체크
+                $('#sign-up-id').blur(function (){
+                    let id = $('#sign-up-id').val();
+                    $.ajax({
+                        type: "POST",
+                        url: "/member/checking_sign_up_id",
+                        data: {
+                            "id": id
+                        },
+                        success: function (data){   // data: checking_sign_up_id에서 넘겨준 값
+                            if(data > 0){
+                                if(id !== ''){
+                                    // alert("중복된 아이디입니다.");
+                                    $('.sign-up-id').css('borderColor', 'red');
+                                    $('#id-check-msg').css('visibility', 'visible');
+                                    $('.field-error-id').css('visibility', 'hidden');
+                                    // $('#sign-up-id').val('');
+                                    $('#sign-up-id').focus();
+                                }
+                            }else{
+                                if(id !== '') {
+                                    $('#id-check-msg').css('visibility', 'hidden');
+                                }
+                            }
+                        }
+                    })
                 })
             })
-        })
+        });
     </script>
 </body>
 </html>
