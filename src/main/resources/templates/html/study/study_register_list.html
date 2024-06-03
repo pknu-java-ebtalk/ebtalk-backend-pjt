@@ -37,54 +37,54 @@
                             </select>
                         </div>
                     </div>
-                    <div class="list-box">
-                        <ul class="study-content-ul">
-                            <th:block th:each="studyDto : ${studyDtos}">
-                                <a th:href="@{/study/study_detail(no=${studyDto.no})}">
-                                    <li class="study-content-li first">
-                                        <div class="study-title">
-                                            <th:block th:if="${studyDto.finished_at} < ${studyDto.cur_date} or ${studyDto.count} <= ${studyDto.count_member}">
-                                                <span class="study-status finish">종료</span>
-                                            </th:block>
-                                            <th:block th:if="${studyDto.finished_at} >= ${studyDto.cur_date} and ${studyDto.count} > ${studyDto.count_member}">
-                                                <span class="study-status">모집중</span>
-                                            </th:block>
-                                            <span th:text="${studyDto.title}"></span>
-                                        </div>
-                                        <div class="study-content">
-                                            <p  th:text="${studyDto.content}"></p>
-                                        </div>
-                                        <div class="study-info">
-                                            <div class="study-writer-date">
-                                                <span class="span-color" th:text="${studyDto.user_id}"></span>
-                                                <span class="span-color">·</span>
-                                                <span class="span-color" th:text="${studyDto.created_at}"></span>
+                        <div class="list-box">
+                            <ul class="study-content-ul">
+                                <th:block th:each="studyDto : ${studyDtos}">
+                                    <a th:href="@{/study/study_detail(no=${studyDto.no})}">
+                                        <li class="study-content-li first">
+                                            <div class="study-title">
+                                                <th:block th:if="${studyDto.finished_at} < ${studyDto.cur_date} or ${studyDto.count} <= ${studyDto.count_member}">
+                                                    <span class="study-status finish">종료</span>
+                                                </th:block>
+                                                <th:block th:if="${studyDto.finished_at} >= ${studyDto.cur_date} and ${studyDto.count} > ${studyDto.count_member}">
+                                                    <span class="study-status">모집중</span>
+                                                </th:block>
+                                                <span th:text="${studyDto.title}"></span>
                                             </div>
-                                            <div class="study-like">
-                                                <ul>
-                                                    <li class="li-wid">
-                                                        <i class="fa-regular fa-heart" style="width: 15px;"></i>
-                                                        <span class="span-color">555</span>
-                                                    </li>
-                                                    <li class="li-wid">
-                                                        <i class="fa-regular fa-eye" style="width: 15px;"></i>
-                                                        <span class="span-color">555</span>
-                                                    </li>
-                                                    <li class="li-wid">
-                                                        <i class="fa-regular fa-comment" style="width: 15px;"></i>
-                                                        <span class="span-color">555</span>
-                                                    </li>
-                                                </ul>
+                                            <div class="study-content">
+                                                <p  th:text="${studyDto.content}"></p>
                                             </div>
-                                        </div>
-                                    </li>
-                                </a>
-                            </th:block>
-                        </ul>
-                    </div>
-                    <div class="study-btn-box">
-                        <a class="study-regist-btn study-regist-input study-btn" th:href="@{/study/study_register_form}">글쓰기</a>
-                    </div>
+                                            <div class="study-info">
+                                                <div class="study-writer-date">
+                                                    <span class="span-color" th:text="${studyDto.user_id}"></span>
+                                                    <span class="span-color">·</span>
+                                                    <span class="span-color" th:text="${studyDto.created_at}"></span>
+                                                </div>
+                                                <div class="study-like">
+                                                    <ul>
+                                                        <li class="li-wid">
+                                                            <i class="fa-regular fa-heart" style="width: 15px;"></i>
+                                                            <span class="span-color">555</span>
+                                                        </li>
+                                                        <li class="li-wid">
+                                                            <i class="fa-regular fa-eye" style="width: 15px;"></i>
+                                                            <span class="span-color">555</span>
+                                                        </li>
+                                                        <li class="li-wid">
+                                                            <i class="fa-regular fa-comment" style="width: 15px;"></i>
+                                                            <span class="span-color">555</span>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    </a>
+                                </th:block>
+                            </ul>
+                        </div>
+                        <div class="study-btn-box">
+                            <a class="study-regist-btn study-regist-input study-btn" th:href="@{/study/study_register_form}">글쓰기</a>
+                        </div>
                 </div>
             </div>
         </div>
@@ -94,6 +94,5 @@
 <script src="/js/common_main_header.js"></script>
 <script src="/js/common_main_aside.js"></script>
 <script src="/js/common_main_footer.js"></script>
-<script src="/js/study/study_aside.js"></script>
 </body>
 </html>

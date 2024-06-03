@@ -117,7 +117,7 @@ public class StudyController {
         return "redirect:/study/study_list";
 
     }
-
+    
     /*
      * 스터디 관리 페이지 - 진행중인 스터디 리스트
      */
@@ -138,6 +138,18 @@ public class StudyController {
     /*
      * 스터디 관리 페이지 - 스터디 신청 목록
      */
+    @GetMapping(value = {"/study_application_list"})
+    public String showStudyApplicationList(Model model){
+        log.info("[StudyController] showStudyApplicationList()");
+
+        StudyDto studyDto = new StudyDto();
+        studyDto.setUser_id("eunji123");
+
+        studyService.selectStudyApplicationListById(studyDto);
+
+        return "/html/study/study_application_list";
+
+    }
 
 
 }

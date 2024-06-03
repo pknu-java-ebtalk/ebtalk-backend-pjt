@@ -52,7 +52,7 @@ public class StudyService implements IStudyService{
         log.info("[StudyService] selectStudyInfoByNo()");
 
         return iStudyMapper.selectStudyInfoByNo(no);
-
+        
     }
 
     @Override
@@ -60,7 +60,7 @@ public class StudyService implements IStudyService{
         log.info("[StudyService] updateStudyConfirm()");
 
         int result = iStudyMapper.updateStudyInfo(studyDto);
-
+        
         if(result > 0) {
             log.info("성공");
             studyDto = iStudyMapper.selectStudyInfoByNo(studyDto.getNo());
@@ -82,7 +82,7 @@ public class StudyService implements IStudyService{
         List<StudyDto> studyCountMembers = iStudyMapper.selectStudyCountMembers();
 
         return studyCountMembers;
-
+        
     }
 
     /*
@@ -93,11 +93,10 @@ public class StudyService implements IStudyService{
         log.info("[StudyService] deleteStudyConfirm()");
 
         int result = iStudyMapper.deleteStudyInfoByNo(no);
-
+        
         if(result > 0) {
             log.info("삭제완료");
-//            iStudyMapper.deleteStudyMateByNo(no);
-
+            
         } else {
             log.info("삭제실패");
 
@@ -121,6 +120,16 @@ public class StudyService implements IStudyService{
     /*
      * 스터디 관리 페이지 - 신청목록
      */
+    @Override
+    public void selectStudyApplicationListById(StudyDto studyDto) {
+        log.info("[StudyService] selectStudyApplicationListById()");
+
+
+
+    }
+
+
+
 
 
 }

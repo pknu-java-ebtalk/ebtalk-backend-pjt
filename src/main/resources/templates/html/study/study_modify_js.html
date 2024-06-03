@@ -1,0 +1,65 @@
+<script th:fragment="js" th:inline="javascript" type="text/javascript">
+    $(document).ready(function () {
+        console.log("DOCUMENT WILL BE RAEDY TO EBTALK");
+
+        // 이벤트 핸들러 초기화
+        init_events();
+
+    })
+
+    /*
+     * init_events() START
+     */
+    function init_events() {
+        console.log("init_events() CALLED!!");
+
+        set_limit_finished_date();
+
+    }
+
+    /*
+     * set_limit_finished_date() START
+     */
+    function set_limit_finished_date(){
+        console.log("set_limit_finished_date() CALLED!!");
+        document.getElementById('started_at').addEventListener('change', function() {
+            var startDate = this.value;
+            var endDateInput = document.getElementById('finished_at');
+            endDateInput.min = startDate;
+
+        });
+    }
+    /*
+     * set_limit_finished_date() END
+     */
+
+    /*
+     * check_input_box_by_null() START
+     */
+    function check_input_box_by_null(){
+        // study_register form name을 form 변수에 담기
+        var form = document.study_modify_form;
+        if(form.title.value == '') {
+            alert('제목을 입력해주세요.')
+            form.title.focus();
+        } else if(form.started_at.value == '') {
+            alert('시작일을 지정해주세요.')
+            form.started_at.focus();
+        } else if(form.finished_at.value == '') {
+            alert('마감일을 지정해주세요.')
+            form.finished_at.focus();
+        } else if(form.count.value == '') {
+            alert('모집인원 수를 지정해주세요.')
+            form.finished_at.focus();
+        } else if(form.content.value == '') {
+            alert('내용을 입력해주세요.')
+            form.finished_at.focus();
+        } else {
+            form.submit();
+
+        }
+    }
+    /*
+     * check_input_box_by_null() END
+     */
+</script>

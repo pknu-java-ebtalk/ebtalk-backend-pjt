@@ -25,9 +25,9 @@
             study_mate
         VALUES
             (
-                #{no},
-                #{user_id},
-                'Y'
+             #{no},
+             #{user_id},
+            'Y'
             )
     </insert>
 
@@ -59,10 +59,10 @@
             a.no, a.user_id, a.title, a.started_at, a.finished_at, a.count, a.content, a.VIEWS, cast(a.CREATED_AT as date) as created_at, count_member, cast(now() as date) as cur_date
         FROM
             study a
-                LEFT JOIN
-            (SELECT study_no , count(study_no) AS count_member FROM study_mate GROUP BY study_no) AS b
-            ON
-                a.no = b.study_no
+        LEFT JOIN
+                (SELECT study_no , count(study_no) AS count_member FROM study_mate GROUP BY study_no) AS b
+        ON
+            a.no = b.study_no
         ORDER BY
             CREATED_AT DESC
     </select>
@@ -70,7 +70,7 @@
     <!--  스터디 모집글 삭제  -->
     <delete id="deleteStudyInfoByNo" parameterType="Integer">
         DELETE FROM
-            study
+                   study
         WHERE
             no = #{no}
     </delete>
@@ -82,13 +82,13 @@
             *
         FROM
             study a
-                JOIN
+        JOIN
             (SELECT study_no , count(study_no) AS count_member, approve_yn AS approve_member FROM study_mate where approve_yn ='Y' GROUP BY study_no) AS b
-            ON
+        ON
                 a.no = b.study_no
         WHERE
             a.user_id = #{user_id}
-          AND
+        AND
             a.finished_at > now();
     </select>
 </mapper>

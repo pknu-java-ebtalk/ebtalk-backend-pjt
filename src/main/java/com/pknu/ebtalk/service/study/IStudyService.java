@@ -21,4 +21,7 @@ public interface IStudyService {
 
     // 스터디 관리 페이지 - 진행중인 스터디 리스트
     List<StudyDto> selectStudyInProgressByUId(StudyDto studyDto);
+
+    // 스터디 관리 페이지 - 신청목록
+    void selectStudyApplicationListById(StudyDto studyDto);
 }
