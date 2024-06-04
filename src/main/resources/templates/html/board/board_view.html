@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html lang="ko">
-
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,40 +11,25 @@
 </head>
 
 <body>
-<header></header>
+<header>
+    <th:block th:replace="~{html/fragments/common_main_header :: header-main}"></th:block>
+</header>
 <div>
-    <aside></aside>
+    <aside>
+        <th:block th:replace="~{html/fragments/common_main_aside :: aside}"></th:block>
+    </aside>
     <div class="background-gray middle-gray">
         <div class="background-white middle-white">
             <div class="contents-box">
                 <div class="board_view font">
                     <div class="title">
-                        <span id="view-title">[전체]출석률 80%가 얼마남지 않았습니다.</span>
-                        <span id="view-name">장경호</span>
-<<<<<<< HEAD
-                        <span id="view-date">2024-05-28</span> 
-                        <span><img class="eyes" src="/img/board/눈.png">300</span>
-=======
-                        <span id="view-date">2024-05-28</span>
+                        <span id="view-title" th:text="${boardDto.title}"></span>
+                        <span id="view-name" th:text="${boardDto.user_id}"></span>
+                        <span id="view-date" th:text="${boardDto.created_at}"></span>
                         <span><img class="eyes" src="../../img/board/눈.png">300</span>
->>>>>>> origin/dev
                     </div>
                     <div class="cont font">
-                        글내용 들어가는 부분
-                        글내용 들어가는 부분
-                        글내용 들어가는 부분
-                        글내용 들어가는 부분
-                        글내용 들어가는 부분
-                        글내용 들어가는 부분
-                        글내용 들어가는 부분
-                        글내용 들어가는 부분
-                        글내용 들어가는 부분
-                        글내용 들어가는 부분
-                        글내용 들어가는 부분
-                        글내용 들어가는 부분
-                        글내용 들어가는 부분
-                        글내용 들어가는 부분
-
+                        <span id="view-content" th:text="${boardDto.content}"></span>
                     </div>
                     <div class="bt_wrap">
                         <a href="board.html" class="on">목록</a>
@@ -56,10 +40,12 @@
         </div>
     </div>
 </div>
-<footer></footer>
-<script src="/js/common_main_header.js"></script>
-<script src="/js/common_main_aside.js"></script>
-<script src="/js/common_main_footer.js"></script>
+<footer>
+    <th:block th:replace="~{html/fragments/common_main_footer :: footer}"></th:block>
+</footer>
+<!--<script src="/js/common_main_header.js"></script>-->
+<!--<script src="/js/common_main_aside.js"></script>-->
+<!--<script src="/js/common_main_footer.js"></script>-->
 <script src="/js/board/board_side.js"></script>
 <!-- ⭐aside에 내용 추가 시 여기에 js 파일 추가⭐ -->
 </body>

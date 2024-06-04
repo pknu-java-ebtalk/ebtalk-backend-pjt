@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,7 +8,9 @@
     <link rel="stylesheet" href="/css/member/user_find_id_not_found.css">
 </head>
 <body>
-    <header></header>
+    <header>
+        <th:block th:replace="~{html/fragments/common_member_header :: header-member}"></th:block>
+    </header>
     <div>
         <div class="background-gray middle-gray">
             <div class="background-white middle-white">
@@ -25,8 +27,10 @@
             </div>
         </div>
     </div>
-    <footer></footer>
-    <script src="/js/common_member_header.js"></script>
-    <script src="/js/common_main_footer.js"></script>
+    <footer>
+        <th:block th:replace="~{html/fragments/common_main_footer :: footer}"></th:block>
+    </footer>
+<!--    <script src="/js/common_member_header.js"></script>-->
+<!--    <script src="/js/common_main_footer.js"></script>-->
 </body> 
 </html>

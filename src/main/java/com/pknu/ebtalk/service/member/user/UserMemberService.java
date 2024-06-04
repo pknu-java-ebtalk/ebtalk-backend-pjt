@@ -3,12 +3,11 @@ package com.pknu.ebtalk.service.member.user;
 import com.pknu.ebtalk.config.MemberConfig;
 import com.pknu.ebtalk.dto.member.UserMemberDto;
 import com.pknu.ebtalk.mappers.member.user.IUserMemberMapper;
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.RequestMapping;
 
 // 제대로 데이터 들어갔는지 결과 확인
 @Log4j2
@@ -18,12 +17,20 @@ public class UserMemberService implements IUserMemberService {
 
     private final IUserMemberMapper iUserMemberMapper;
     private final MemberConfig memberConfig;
+    
+    // 회원가입 - 아이디 중복 체크
+    @Override
+    public int selectUserSignInIdConfirm(String id){
+        return  iUserMemberMapper.selectMemberSignUpIdCheck(id);
+    }
 
-//    @Override
-//    public int selectIdCheck(String id)throws Exception{
-//        return iUserMemberMapper.selectMemberSignUpIdCheck(id);
-//    }
+    // 회원가입 - 비밀번호 확인
+    @Override
+    public boolean insertUserSignUpPwConfirm(UserMemberDto userMemberDto){
+        return userMemberDto.getPw().equals(userMemberDto.getPw_check());
+    }
 
+    // 회원가입 정보 DB에 넣음
     @Override
     public void insertUserSignUpConfirm(UserMemberDto userMemberDto) {
         log.info("[UserMemberService] insertMemberSignUp()");
@@ -39,4 +46,32 @@ public class UserMemberService implements IUserMemberService {
             log.info("실패");
         }
     }
+
+    // 로그인
+    // 마이페이지 - 비밀번호 확인
+    // 회원탈퇴 - 비밀번호 확인
+    @Override
+    public boolean selectUserSignIn(UserMemberDto userMemberDto) {
+        log.info("[UserMemberService] selectMemberSignIn()");
+
+        String id = userMemberDto.getId();
+        String pw = userMemberDto.getPw();
+
+        userMemberDto.setSign_in_pw_check(iUserMemberMapper.selectMemberSignIn(id, pw));
+
+        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+
+        if(userMemberDto.getSign_in_pw_check() == null || !passwordEncoder.matches(pw, userMemberDto.getSign_in_pw_check())){
+            return false;
+        }
+
+        return true;
+    }
+
+   @Override
+   public UserMemberDto selectUserInfo(String id) {
+        log.info("[UserMemberService] selectUserInfo()");
+
+        return iUserMemberMapper.selectUserInfo(id);
+   }
 }

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
@@ -11,9 +11,13 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous"></head>
     <link rel="stylesheet" href="/css/common/common_main.css">
     <body>
-    <header></header>
+    <header>
+        <th:block th:replace="~{html/fragments/common_main_header :: header-main}"></th:block>
+    </header>
     <div>
-        <aside></aside>
+        <aside>
+            <th:block th:replace="~{html/fragments/common_main_aside :: aside}"></th:block>
+        </aside>
         <div class="background-gray middle-gray">
             <div class="background-white middle-white">
                 <div class="contents-box">
@@ -48,10 +52,12 @@
             </div>
         </div>
     </div>
-    <footer></footer>
-    <script src="/js/common_main_header.js"></script>
-    <script src="/js/common_main_aside.js"></script>
-    <script src="/js/common_main_footer.js"></script>
+    <footer>
+        <th:block th:replace="~{html/fragments/common_main_footer :: footer}"></th:block>
+    </footer>
+<!--    <script src="/js/common_main_header.js"></script>-->
+<!--    <script src="/js/common_main_aside.js"></script>-->
+<!--    <script src="/js/common_main_footer.js"></script>-->
     <script src="/js/study/study_room_aside.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 </body>

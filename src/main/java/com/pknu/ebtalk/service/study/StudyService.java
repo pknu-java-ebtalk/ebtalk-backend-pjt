@@ -6,7 +6,9 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Log4j2
 @Service
@@ -121,15 +123,43 @@ public class StudyService implements IStudyService{
      * 스터디 관리 페이지 - 신청목록
      */
     @Override
-    public void selectStudyApplicationListById(StudyDto studyDto) {
+    public List<StudyDto> selectStudyApplicationListById(StudyDto studyDto) {
         log.info("[StudyService] selectStudyApplicationListById()");
 
+        List<StudyDto> studyDtos = iStudyMapper.selectStudyApplicationListByUId(studyDto);
+
+        return studyDtos;
 
 
     }
 
+    /*
+     * 스터디 관리 페이지 - 스터디 신청 승인 처리
+     */
+    @Override
+    public Map<String, Object> updateStudyApplicationListById(StudyDto studyDto) {
+        log.info("[StudyService] updateStudyApplicationListById()");
+
+        Map<String, Object> map = new HashMap<>();
+
+        String user_id = studyDto.getUser_id();
+        String approve_yn = studyDto.getApprove_yn();
 
 
 
+        // approve_yn 값 업데이트 하기 위한 mapper
+        int result = iStudyMapper.updateStudyApplicationListById(user_id);
+
+        if(result > 0)
+            approve_yn = iStudyMapper.selectStudyApproveYnByUid(user_id);
+        log.info(approve_yn);
+        log.info(user_id);
+
+        map.put("result", approve_yn);
+
+        return map;
+
+
+    }
 
 }

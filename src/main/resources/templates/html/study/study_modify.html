@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,56 +9,62 @@
     <link rel="stylesheet" href="/css/study/study_aside.css">
     <script crossOrigin="anonymous"
             integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM=" src="https://code.jquery.com/jquery-3.7.0.js"></script>
-    <script th:replace="~{/html/study/study_modify_js.html::js}"></script>
+    <script th:replace="~{/html/study/study_register_js.html::js}"></script>
 </head>
 <body>
-<header></header>
-<div>
-    <aside></aside>
-    <div class="background-gray middle-gray">
-        <div class="background-white middle-white">
-            <div class="contents-box">
-                <!-- ⭐여기에 코드 작성⭐ -->
-                <div class="study-regist-box">
-                    <div class="study-text">
-                        <p class="study-text-p">스터디 모집</p>
-                    </div>
-                    <form method="post" th:action="@{/study/study_modify_confirm}" name="study_modify_form">
-                        <input type="hidden" name="_method" value="PUT">
-                        <input type="hidden" name="no" id="no" th:value="${studyDto.no}">
-                        <table>
+    <header>
+        <th:block th:replace="~{html/fragments/common_main_header :: header-main}"></th:block>
+    </header>
+    <div>
+        <aside>
+            <th:block th:replace="~{html/fragments/common_main_aside :: aside}"></th:block>
+        </aside>
+        <div class="background-gray middle-gray">
+            <div class="background-white middle-white">
+                <div class="contents-box">
+                    <!-- ⭐여기에 코드 작성⭐ -->
+                    <div class="study-regist-box">
+                        <div class="study-text">
+                          <p class="study-text-p">스터디 모집</p>
+                        </div>
+                        <form method="post" th:action="@{/study/study_modify_confirm}">
+                            <input type="hidden" name="_method" value="PUT">
+                            <input type="hidden" name="no" id="no" th:value="${studyDto.no}">
+                            <table>
                             <tr>
-                                <td><span class="title">제목: </span></td>
-                                <td><input class="study-regist-title study-regist-input" type="text" name="title" th:value="${studyDto.title}" placeholder="제목을 입력하세요.">
-                                </td>
+                              <td><span class="title">제목: </span></td>
+                              <td><input class="study-regist-title study-regist-input" type="text" name="title" th:value="${studyDto.title}" placeholder="제목을 입력하세요.">
+                              </td>
                             </tr>
                             <tr>
-                                <td><span class="date">기간: </span></td>
-                                <td><input class="study-regist-start study-regist-input" type="date" name="started_at" th:value="${studyDto.started_at}"/> ~ <input class="study-regist-end study-regist-input" type="date" name="finished_at" th:value="${studyDto.finished_at}" /></td>
+                              <td><span class="date">기간: </span></td>
+                              <td><input class="study-regist-start study-regist-input" type="date" name="started_at" th:value="${studyDto.started_at}"/> ~ <input class="study-regist-end study-regist-input" type="date" name="finished_at" th:value="${studyDto.finished_at}" /></td>
                             </tr>
                             <tr>
-                                <td><span class="count">정원: </span></td>
-                                <td><input class="study-regist-count study-regist-input" type="number" name="count" th:value="${studyDto.count}" />명</td>
+                              <td><span class="count">정원: </span></td>
+                              <td><input class="study-regist-count study-regist-input" type="number" name="count" th:value="${studyDto.count}" />명</td>
                             </tr>
                             <tr>
-                                <td class="content-td"><span class="content">내용: </span></td>
-                                <td><textarea class="study-regist-content" placeholder="내용을 입력하세요." name="content" rows="15" cols="62" th:text="${studyDto.content}"></textarea></td>
+                              <td class="content-td"><span class="content">내용: </span></td>
+                              <td><textarea class="study-regist-content" placeholder="내용을 입력하세요." name="content" rows="15" cols="62" th:text="${studyDto.content}"></textarea></td>
                             </tr>
-                        </table>
-                        <div class="study-btn-box">
-                            <input class="study-regist-btn study-regist-input study-btn" type="button" onclick="check_input_box_by_null();" value="확인">
+                          </table>
+                          <div class="study-btn-box">
+                            <input class="study-regist-btn study-regist-input study-btn" type="submit" value="확인">
                             <input class="study-cancel-btn study-regist-input study-btn" type="button" onclick="history.back()" value="취소">
-                        </div>g
-                    </form>
+                          </div>
+                        </form>
+                      </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
-<footer></footer>
-<script src="/js/common_main_header.js"></script>
-<script src="/js/common_main_aside.js"></script>
-<script src="/js/common_main_footer.js"></script>
-<script src="/js/study/study_aside.js"></script>
+    <footer>
+        <th:block th:replace="~{html/fragments/common_main_footer :: footer}"></th:block>
+    </footer>
+<!--    <script src="/js/common_main_header.js"></script>-->
+<!--    <script src="/js/common_main_aside.js"></script>-->
+<!--    <script src="/js/common_main_footer.js"></script>-->
+    <script src="/js/study/study_aside.js"></script>
 </body>
 </html>
