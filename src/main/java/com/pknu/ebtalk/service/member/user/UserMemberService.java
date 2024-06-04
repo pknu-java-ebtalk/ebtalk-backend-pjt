@@ -30,14 +30,18 @@ public class UserMemberService implements IUserMemberService {
         return userMemberDto.getPw().equals(userMemberDto.getPw_check());
     }
 
+    // 비밀번호 암호화
+    @Override
+    public String encodingPw(String pw){
+        return memberConfig.passwordEncoder().encode(pw);
+    }
+
     // 회원가입 정보 DB에 넣음
     @Override
     public void insertUserSignUpConfirm(UserMemberDto userMemberDto) {
         log.info("[UserMemberService] insertMemberSignUp()");
 
-        // pw 암호화
-        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-        userMemberDto.setPw(memberConfig.passwordEncoder().encode((userMemberDto.getPw())));
+        userMemberDto.setPw(encodingPw(userMemberDto.getPw()));
 
         int result = iUserMemberMapper.insertMemberSignUp(userMemberDto);
         if (result > 0) {
@@ -68,10 +72,43 @@ public class UserMemberService implements IUserMemberService {
         return true;
     }
 
+   // 마이페이지 - 내 정보 확인
    @Override
    public UserMemberDto selectUserInfo(String id) {
         log.info("[UserMemberService] selectUserInfo()");
 
         return iUserMemberMapper.selectUserInfo(id);
    }
+
+    // 마이페이지 - 프로필 사진 수정
+    @Override
+    public boolean updateUserInfoProfileImg(UserMemberDto userMemberDto) {
+        log.info("[UserMemberService] updateInfoProfileImg()");
+
+        int result = iUserMemberMapper.updateUserInfoProfileImg(userMemberDto);
+
+        return result > 0;
+    }
+    
+    // 마이페이지 - 비밀번호 수정
+    @Override
+    public boolean updateUserInfoPw(UserMemberDto userMemberDto) {
+        log.info("[UserMemberService] updateInfoPw()");
+
+        userMemberDto.setPw(encodingPw(userMemberDto.getPw()));
+
+        int result = iUserMemberMapper.updateUserInfoPw(userMemberDto);
+
+        return result > 0;
+    }
+
+    // 마이페이지 - 전화번호 수정
+    @Override
+    public boolean updateUserInfoPhone(UserMemberDto userMemberDto) {
+        log.info("[UserMemberService] updateInfoPhone()");
+
+        int result = iUserMemberMapper.updateUserInfoPhone(userMemberDto);
+
+        return result > 0;
+    }
 }

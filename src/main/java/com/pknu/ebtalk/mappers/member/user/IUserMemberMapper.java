@@ -16,4 +16,13 @@ public interface IUserMemberMapper {
 
     // 마이페이지 정보 읽어오기
     UserMemberDto selectUserInfo(String id);
+
+    // 마이페이지 - 정보 수정(pw)
+    int updateUserInfoPw(UserMemberDto userMemberDto);
+
+    // 마이페이지 - 정보 수정(phone)
+    int updateUserInfoPhone(UserMemberDto userMemberDto);
+
+    // 마이페이지 - 정보 수정(profile_img)
+    int updateUserInfoProfileImg(UserMemberDto userMemberDto);
 }
