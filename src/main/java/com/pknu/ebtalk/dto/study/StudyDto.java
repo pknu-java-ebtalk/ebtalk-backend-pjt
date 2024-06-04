@@ -21,4 +21,5 @@ public class StudyDto {
     private String cur_date;
     private String count_member;
 
+    private String approve_yn;
 }
