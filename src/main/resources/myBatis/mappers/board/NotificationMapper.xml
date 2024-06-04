@@ -18,6 +18,8 @@
             )
     </insert>
 
+<!--    게시글 리스트         -->
+
 <!--    게시글 등록      -->
     <select id="selectNotificationInfoByNo" parameterType="Integer" resultType="com.pknu.ebtalk.dto.board.BoardDto">
         SELECT * FROM board
@@ -25,7 +27,7 @@
     </select>
 
 <!--    게시글 수정   -->
-    <update id="updateBoardInfo" parameterType="com.pknu.ebtalk.dto.board.BoardDto">
+    <update id="updateNotificationInfo" parameterType="com.pknu.ebtalk.dto.board.BoardDto">
             UPDATE board
             SET
                 title = #{title},
@@ -35,10 +37,18 @@
     </update>
 
 <!--    게시글 삭제    -->
-    <delete id="deleteBoardInfoByNo" parameterType="Integer">
+    <delete id="deleteNotificationInfoByNo" parameterType="Integer">
         DELETE FROM
                     board
         WHERE
             no = #{no}
     </delete>
+    
+<!--    게시글 리스트    -->
+    <select id="selectBoardAllList" resultType="com.pknu.ebtalk.dto.board.BoardDto" >
+    SELECT * FROM board;
+ </select>
+    <update id="updateHits" parameterType="Integer">
+        UPDATE board SET views=views+1 WHERE no=#{no}
+    </update>
 </mapper>

@@ -6,10 +6,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 @Log4j2
 @Controller
@@ -20,9 +17,11 @@ public class NotificationController {
 
     
 //    게시글 리스트
-    @GetMapping(value = {"/notification_board_form"})
-    public String notificationBoard() {
+    @GetMapping(value = {"/notification_board_list"})
+    public String notificationBoard(Model model) {
         log.info("[NotificationController] notificationController()");
+
+        model.addAttribute("boardDtos", notificationService.selectNotificationAllLits());
 
         String notificationBoard = "/html/board/board";
         return notificationBoard;
@@ -53,14 +52,15 @@ public class NotificationController {
 
     
 //    게시글 보기
-    @GetMapping(value = {"/notification_view_form"})
-    public String notificationView() {
+@GetMapping("/notification_view_form")
+public String notificationViewForm(@RequestParam("no") int no, Model model) {
+        log.info("[NotificationController] notificationViewForm()");
 
-        String notificationViewPage = "/html/board/board_view";
-        return notificationViewPage;
-    }
+        model.addAttribute("boardDto",notificationService.findBoardByNo(no));
 
-    
+        return "/html/board/board_view";
+}
+
 //    게시글 수정
     @GetMapping(value = {"/notification_edit_form"})
     public String notificationEdit(@RequestParam int no, Model model) {
@@ -71,5 +71,25 @@ public class NotificationController {
 
         String notificationEditPage = "/html/board/board_edit";
         return notificationEditPage;
+    }
+
+    @PutMapping(value = {"/notification_edit_confirm"})
+    public String notificationEditConfirm(Model model, BoardDto boardDto) {
+        log.info("[NotificationController] notificationEditConfirm()" );
+        log.info(boardDto.getNo());
+
+        boardDto = notificationService.updateBoardInfo(boardDto);
+
+        model.addAttribute("boardDto", boardDto);
+        return "/html/board/board_view";
+    }
+
+//   게시글 삭제
+    @GetMapping(value = {"/notification_delete_confirm"})
+    public String notificationDeleteConfirm(@RequestParam int no) {
+        log.info("[NotificationController] notificationDeleteConfirm()" );
+
+        notificationService.deleteBoardConfirm(no);
+        return "redirect:/notification/notification_board_list";
     }
 }

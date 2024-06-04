@@ -65,3 +65,10 @@
 .bt_wrap a:hover {
     background-color: var(--text_purple);
 }
+
+.on{
+    font-size: 18px;
+}
+.edit{
+    font-size: 18px;
+}

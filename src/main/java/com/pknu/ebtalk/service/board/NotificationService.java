@@ -7,6 +7,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 
 @Service
 @RequiredArgsConstructor
@@ -51,7 +53,9 @@ public class NotificationService implements INotificationService{
         }
         return boardDto;
     }
-    
+
+
+//    게시글 삭제
     @Override 
     public void deleteBoardConfirm(int no){
         log.info("[NotificationService] deleteBoardConfirm");
@@ -63,5 +67,25 @@ public class NotificationService implements INotificationService{
         } else{
             log.info("삭제 실패");
         }
+    }
+
+//    전체 게시글
+    @Override
+    public List<BoardDto> selectNotificationAllLits() {
+        log.info("[NotificationService] selectNotificationAllLits");
+
+        List<BoardDto> boardList = notificationMappers.selectBoardAllList();
+        return boardList;
+    }
+
+//    게시글 보기
+    @Override
+    public BoardDto findBoardByNo(int no) {
+        log.info("[NotificationService] findBoardByNo");
+
+        BoardDto boardDto = notificationMappers.selectNotificationInfoByNo(no);
+        notificationMappers.updateHits(no);
+
+        return boardDto;
     }
 }
