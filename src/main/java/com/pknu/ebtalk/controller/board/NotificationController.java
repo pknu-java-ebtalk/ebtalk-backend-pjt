@@ -66,7 +66,7 @@ public class NotificationController {
     public String notificationEdit(@RequestParam int no, Model model) {
         log.info("[NotificationController] notificationEditForm()" );
 
-        BoardDto boardDto = NotificationService.selectNotificationInfoByNo(no);
+        BoardDto boardDto = notificationService.selectNotificationInfoByNo(no);
         model.addAttribute("boardDto", boardDto);
 
         String notificationEditPage = "/html/board/board_edit";
