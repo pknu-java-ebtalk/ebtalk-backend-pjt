@@ -21,41 +21,38 @@
     </aside>
     <div class="background-gray middle-gray">
         <div class="background-white middle-white">
-            <div class="contents-box">
-                <div class="title-top">
-                    <p class="title-write ">게시판 등록</p>
-                    <div class="write-s-open-id">
-                        <select name="searchKey" class="write-select font" >
-                            <option value="Announcement">전체 공지</option>
-                            <option value="java-Announcement">JAVA 공지</option>
-                            <option value="ai-Announcement">AI 공지</option>
-                            <option value="iot-Announcement">IOT 게시판</option>
-                        </select>
+            <form th:action="@{/notification/notification_write_confirm}" method="POST" enctype="multipart/form-data">
+                <div class="contents-box">
+                    <div class="title-top">
+                        <p class="title-write ">게시판 등록</p>
+                        <div class="write-s-open-id">
+                            <select name="searchKey" class="write-select font">
+                                <option value="Announcement">전체 공지</option>
+                                <option value="java-Announcement">JAVA 공지</option>
+                                <option value="ai-Announcement">AI 공지</option>
+                                <option value="iot-Announcement">IOT 게시판</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="back-color">
+                        <div class="title">
+                            <p class="write-title">제목</p>
+                            <input name="title" class="write-title-box font" type="text" placeholder="제목을 입력하세요">
+                        </div>
+                        <div class="write-content-textTitle">내용</div>
+                        <div class="write-content">
+                            <textarea name="content" class="write-content-textBox font" placeholder="내용을 입력하여 주세요."></textarea>
+                        </div>
+                        <div class="attached-file">
+                            <input type="file" name="file" id="file" class="font">
+                        </div>
+                        <div class="pagination">
+                            <button type="submit" class="write font">등록</button>
+                            <a href="board.html" class="cancel font">취소</a>
+                        </div>
                     </div>
                 </div>
-                <div class="back-color">
-                    <div class="title">
-                        <p class="write-title">제목</p>
-                        <p><input class="write-title-box font" type="text" placeholder="제목을 입력하세요"></p>
-                    </div>
-                    <div class="write-content-textTitle">내용</div>
-                    <div class="write-content ">
-                            <textarea class="write-content-textBox font"
-                                      placeholder="내용을 입력하여 주세요."></textarea>
-                    </div>
-                    <div class="attached-file">
-                        <tr>
-                            <td>
-                                <input type="file" name="file" id="file" class="font">
-                            </td>
-                        </tr>
-                    </div>
-                </div>
-                <div class="pagination">
-                    <a href="board_view.html" class="write font">등록</a>
-                    <a href="board.html" class="cancel font">취소</a>
-                </div>
-            </div>
+            </form>
         </div>
     </div>
 </div>
