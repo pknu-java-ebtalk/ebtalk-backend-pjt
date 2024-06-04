@@ -1,4 +1,6 @@
-<div class="background-gray aside-gray">
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<div class="background-gray aside-gray" th:fragment="aside">
     <div class="background-back-gray aside-back-gray">
         <!-- 프로필 부분 -->
         <div class="profile">
@@ -12,7 +14,7 @@
         </div>
         <!-- 로그아웃 버튼 -->
         <div class="log-out">
-            <a href="#" class="log-out-text">Log out</a>
+            <a th:href="@{/member/log_out}" class="log-out-text">Log out</a>
         </div>
-    </div>  
+    </div>
 </div>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTO Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 회원가입 -->
+<mapper namespace="com.pknu.ebtalk.mappers.member.user.IUserMemberMapper">
+    <select id="selectUserInfo" parameterType="string" resultType="com.pknu.ebtalk.dto.member.UserMemberDto">
+        select
+            u.profile_img, u.id, u.pw, u.name, u.phone, e.type
+        from
+            user as u
+        left join
+            edu_course as e
+        on
+            u.edu_no = e.no
+        where
+            u.id = #{id}
+    </select>
+</mapper>

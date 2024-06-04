@@ -57,6 +57,11 @@ body{
   align-items: center;
 }
 
+body > div:first-child{
+  display: flex;
+  flex-direction: row;
+}
+
 .background-gray{
   background-color: var(--back_gray);
   width: 1550px; 

@@ -1,27 +1,31 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>로그인 : 이비톡</title>
     <link rel="stylesheet" href="/css/member/user_sign_in.css">
     <link rel="stylesheet" href="/css/common/common_member.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 <body>
-    <header></header>
+    <header>
+        <th:block th:replace="~{html/fragments/common_member_header :: header-member}"></th:block>
+    </header>
     <div>
         <div class="background-gray middle-gray">
             <div class="background-white middle-white">
                 <div class="contents-box">
                     <div class="sign-in-box">
                         <p class="sign-in-title">로그인</p>
-                        <form class="sign-in-form" method="post" action="#" id="signInForm">
-                            <input class="sign-in-id sign-in-input sign-in" type="email" name="ID" placeholder="아이디">
-                            <input class="sign-in-pw sign-in-input sign-in" type="password" name="PW" placeholder="비밀번호">
+                        <form class="sign-in-form" method="post" action="/member/sign_in_check" id="signInForm">
+                            <input class="sign-in-id sign-in-input sign-in" type="email" name="id" placeholder="아이디">
+                            <input class="sign-in-pw sign-in-input sign-in" type="password" name="pw" placeholder="비밀번호">
+                            <p class="info-msg">아이디 또는 비밀번호를 잘못 입력하셨습니다.</p>
                             <input class="sign-in-btn sign-in" type="submit" value="로그인">
                         </form>
                         <div class="sign-in-option">
-                            <a href="../member/user_find_id.html">아이디 찾기</a>
+                            <a href="#">아이디 찾기</a>
                             <a href="#">비밀번호 재설정</a>
                             <a href="#">회원가입</a>
                         </div>
@@ -30,8 +34,34 @@
             </div>
         </div>
     </div>
-    <footer></footer>
-    <script src="/js/common_member_header.js"></script>
-    <script src="/js/common_main_footer.js"></script>
+    <footer>
+        <th:block th:replace="~{html/fragments/common_main_footer :: footer}"></th:block>
+    </footer>
+<!--    <script src="/js/common_member_header.js"></script>-->
+<!--    <script src="/js/common_main_footer.js"></script>-->
+    <script>
+        $(document).ready(function (){
+            $("#signInForm").submit(function (event){
+                event.preventDefault();
+                let formData = $(this).serialize();
+
+                $.ajax({
+                    type: "POST",
+                    url: "/member/sign_in_check",
+                    data: formData,
+                    success: function (data){
+                        if(data === "n"){
+                            $('.info-msg').css('visibility', 'visible');
+                        }else if(data === "y"){
+                            window.location.href = "/";
+                        }
+                    },
+                    error: function (){
+                        alert("로그인 중 문제가 발생했습니다. 다시 시도해주세요.");
+                    }
+                })
+            })
+        })
+    </script>
 </body>
 </html>
