@@ -21,21 +21,23 @@
     <div class="background-gray middle-gray">
         <div class="background-white middle-white">
             <div class="contents-box">
-                <div class="board_view font">
-                    <div class="title">
-                        <span id="view-title" th:text="${boardDto.title}"></span>
-                        <span id="view-name" th:text="${boardDto.user_id}"></span>
-                        <span id="view-date" th:text="${boardDto.created_at}"></span>
-                        <span><img class="eyes" src="../../img/board/눈.png">300</span>
+                <form action="" method="get">
+                    <div class="board_view font">
+                        <div class="title">
+                            <span id="view-title" th:text="${boardDto.title}"></span>
+                            <span id="view-name" th:text="${boardDto.user_id}"></span>
+                            <span id="view-date" th:text="${boardDto.created_at}"></span>
+                            <span><img class="eyes" src="../../img/board/눈.png">300</span>
+                        </div>
+                        <div class="cont font">
+                            <span id="view-content" th:text="${boardDto.content}"></span>
+                        </div>
+                        <div class="bt_wrap">
+                            <a href="board.html" class="on">목록</a>
+                            <a th:href="@{/notification/notification_edit_form(no=${boardDto.no})}" class="edit">수정</a>
+                        </div>
                     </div>
-                    <div class="cont font">
-                        <span id="view-content" th:text="${boardDto.content}"></span>
-                    </div>
-                    <div class="bt_wrap">
-                        <a href="board.html" class="on">목록</a>
-                        <a href="board_edit.html" class="edit">수정</a>
-                    </div>
-                </div>
+                </form>
             </div>
         </div>
     </div>

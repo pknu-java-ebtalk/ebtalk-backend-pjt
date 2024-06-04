@@ -7,6 +7,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 
 @Service
 @RequiredArgsConstructor
@@ -51,7 +53,19 @@ public class NotificationService implements INotificationService{
         }
         return boardDto;
     }
+
+//    게시글 리스트
+    @Override
+    public List<BoardDto> selectboardAllList(){
+        log.info("[BoardService] selectboardAllList()");
+
+        List<BoardDto> boardCountList = notificationMappers.selectBoardCountInfo();
+
+        return boardCountList;
+    }
     
+    
+//    게시글 삭제
     @Override 
     public void deleteBoardConfirm(int no){
         log.info("[NotificationService] deleteBoardConfirm");
