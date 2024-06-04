@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,9 +10,13 @@
     <link rel="stylesheet" href="/css/member/user_mypage_info_aside.css">
 </head>
 <body>
-    <header></header>
+    <header>
+        <th:block th:replace="~{html/fragments/common_main_header :: header-main}"></th:block>
+    </header>
     <div>
-        <aside></aside>
+        <aside>
+            <th:block th:replace="~{html/fragments/common_main_aside :: aside}"></th:block>
+        </aside>
         <div class="background-gray middle-gray">
             <div class="background-white middle-white">
                 <div class="contents-box">
@@ -21,11 +25,11 @@
                         <div class="info-detail-box">
                             <div class="info-detail info-profile-pic">
                                 <div class="info-detail-text profile-pic-text">프로필 사진</div>
-                                <div class="profile-pic-input-box"><img class="info-detail-input profile-pic-input" src="/img/profile.png"></img></div>
+                                <div class="profile-pic-input-box"><img class="info-detail-input profile-pic-input" th:src="${ userMemberDto.getProfile_img() == null ? '/img/profile.png' : userMemberDto.getProfile_img()}"></img></div>
                             </div>
                             <div class="info-detail profile-id">
                                 <div class="info-detail-text id-text">아이디</div>
-                                <div class="info-detail-input id-input">riversoso@gmail.com</div>
+                                <div class="info-detail-input id-input" th:text="${userMemberDto.getId()}"></div>
                             </div>
                             <div class="info-detail profile-pw">
                                 <div class="info-detail-text pw-text">비밀번호</div>
@@ -33,19 +37,19 @@
                             </div>                            
                             <div class="info-detail profile-name">
                                 <div class="info-detail-text name-text font">이름</div>
-                                <div class="info-detail-input name-input font">강소이</div>
+                                <div class="info-detail-input name-input font" th:text="${userMemberDto.getName()}"></div>
                             </div>                            
                             <div class="info-detail profile-phone">
                                 <div class="info-detail-text phone-text">전화번호</div>
-                                <div class="info-detail-input phone-input">010-1234-5678</div>
+                                <div class="info-detail-input phone-input" th:text="${userMemberDto.getPhone()}"></div>
                             </div>                            
                             <div class="info-detail profile-edu-type">
                                 <div class="info-detail-text edu-type-text">교육과정</div>
-                                <div class="info-detail-input edu-type-input">빅데이터를 이용한 JAVA 개발자</div>
+                                <div class="info-detail-input edu-type-input" th:text="${userMemberDto.getType()}"></div>
                             </div>
                         </div>
                         <div class="btn-box">
-                            <button class="change-info-btn btn font" type="button" onclick="location.href='user_info_change.html'">회원정보 수정</button>
+                            <button class="change-info-btn btn font" type="button">회원정보 수정</button>
                             <button class="del-account-btn btn font" type="button">회원탈퇴</button>
                         </div>
                     </div>
@@ -53,10 +57,9 @@
             </div>
         </div>
     </div>
-    <footer></footer>
-    <script src="/js/common_main_header.js"></script>
-    <script src="/js/common_main_aside.js"></script>
-    <script src="/js/common_main_footer.js"></script>
+    <footer>
+        <th:block th:replace="~{html/fragments/common_main_footer :: footer}"></th:block>
+    </footer>
     <script src="/js/member/user_mypage_aside.js"></script>
 </body>
 </html>

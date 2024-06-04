@@ -15,9 +15,13 @@
 </head>
 
 <body>
-<header></header>
+<header>
+    <th:block th:replace="~{html/fragments/common_main_header :: header-main}"></th:block>
+</header>
 <div>
-    <aside></aside>
+    <aside>
+        <th:block th:replace="~{html/fragments/common_main_aside :: aside}"></th:block>
+    </aside>
     <div class="background-gray middle-gray">
         <div class="background-white middle-white">
             <div class="contents-box">
@@ -69,15 +73,13 @@
             </div>
         </div>
     </div>
-<<<<<<< HEAD
-    <footer></footer>
-=======
 </div>
-<footer></footer>
->>>>>>> origin/dev
-    <script src="/js/common_main_header.js"></script>
-    <script src="/js/common_main_aside.js"></script>
-    <script src="/js/common_main_footer.js"></script>
+<footer>
+    <th:block th:replace="~{html/fragments/common_main_footer :: footer}"></th:block>
+</footer>
+<!--    <script src="/js/common_main_header.js"></script>-->
+<!--    <script src="/js/common_main_aside.js"></script>-->
+<!--    <script src="/js/common_main_footer.js"></script>-->
     <script src="/js/board/board_side.js"></script>
     <!-- ⭐aside에 내용 추가 시 여기에 js 파일 추가⭐ -->
 </body>

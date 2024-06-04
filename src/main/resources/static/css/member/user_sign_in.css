@@ -35,6 +35,20 @@
   font-size: 15px;
 }
 
+.sign-in-pw{
+  margin-bottom: 0;
+}
+
+.info-msg{
+  color: red;
+
+  font-size: 15px;
+
+  margin-left: 23px;
+  margin-bottom: 10px;
+  visibility: hidden;
+}
+
 /* 로그인 버튼 설정 */
 .sign-in-btn{
   border: none;
