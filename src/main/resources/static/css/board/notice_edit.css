@@ -46,7 +46,7 @@
 .cont {
     width: 800px;
     height: 400px;
-    line-height: 25px;
+    margin: auto;
     margin-top: 20px;
     display: inline-block;
     text-align: left;
@@ -81,6 +81,7 @@
     display: flex;
     justify-content: flex-end;
     margin-top: 20px;
+    width: 950px;
 }
 
 .bt_wrap a {
@@ -99,4 +100,19 @@
 
 .bt_wrap a:hover {
     background-color: var(--text_purple);
+}
+
+.on{
+    padding: 10px 20px;
+    background-color: var(--common_blue);
+    border-radius: 5px;
+    text-decoration: none;
+    color: white;
+    margin-right: 20px;
+    font-size: 18px;
+    border: none;
+}
+.on:hover{
+    background-color: var(--text_purple);
+    outline: none;
 }
