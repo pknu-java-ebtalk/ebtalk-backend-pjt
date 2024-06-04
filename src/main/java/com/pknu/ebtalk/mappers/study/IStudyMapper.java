@@ -36,7 +36,15 @@ public interface IStudyMapper {
     List<StudyDto> selectStudyInProgressByUid(StudyDto studyDto);
 
     // 스터디 승인여부  유효성 검사
-    List<StudyDto> selectStudyApproveYnByUid(StudyDto studyDto);
+    String selectStudyApproveYnByUid(String user_id);
 
+    /*
+     * 스터디 관리 페이지 - 신청목록 리스트
+     */
+    List<StudyDto> selectStudyApplicationListByUId(StudyDto studyDto);
 
+    /*
+     * 스터디 관리 페이지 - 스터디 신청 승인 처리
+     */
+    int updateStudyApplicationListById(String user_id);
 }

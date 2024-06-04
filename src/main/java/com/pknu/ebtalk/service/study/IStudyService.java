@@ -3,6 +3,7 @@ package com.pknu.ebtalk.service.study;
 import com.pknu.ebtalk.dto.study.StudyDto;
 
 import java.util.List;
+import java.util.Map;
 
 
 public interface IStudyService {
@@ -23,5 +24,8 @@ public interface IStudyService {
     List<StudyDto> selectStudyInProgressByUId(StudyDto studyDto);
 
     // 스터디 관리 페이지 - 신청목록
-    void selectStudyApplicationListById(StudyDto studyDto);
+    List<StudyDto> selectStudyApplicationListById(StudyDto studyDto);
+
+    // 스터디 관리 페이지 - 신청목록 승인처리
+    Map<String, Object> updateStudyApplicationListById(StudyDto studyDto);
 }

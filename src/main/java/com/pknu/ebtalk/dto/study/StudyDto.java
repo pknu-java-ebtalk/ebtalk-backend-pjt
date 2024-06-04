@@ -22,4 +22,7 @@ public class StudyDto {
     private String count_member;
 
     private String approve_yn;
+
+    private String name;
+    private int edu_no;
 }
