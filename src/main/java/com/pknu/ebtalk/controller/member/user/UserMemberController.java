@@ -2,6 +2,7 @@ package com.pknu.ebtalk.controller.member.user;
 
 import com.pknu.ebtalk.dto.member.UserMemberDto;
 import com.pknu.ebtalk.service.member.user.UserMemberService;
+import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -59,13 +60,59 @@ public class UserMemberController {
 
     // 로그인 정보 체크
     @PostMapping("/sign_in_check")
-    public String userSignInCheck(UserMemberDto userMemberDto, @RequestParam("id") String id, @RequestParam("pw") String pw) {
-        log.info("[UserMemberController] userSignIn()");
+    public @ResponseBody String userSignInCheck(HttpSession session, UserMemberDto userMemberDto, @RequestParam("id") String id, @RequestParam("pw") String pw) {
+        log.info("[UserMemberController] userSignInCheck()");
 
         if(!userMemberService.selectUserSignIn(userMemberDto)){
-            return "/html/member/user_sign_in";
+            return "n";
         }
 
-        return "/html/home/home";
+        session.setAttribute("id", id);
+
+        return "y";
+    }
+
+    // 로그아웃
+    @GetMapping("/log_out")
+    public String userLogOut(HttpSession session) {
+        log.info("[UserMemberController] userLogOut()");
+
+        // 세션 삭제
+        session.invalidate();
+
+        return "redirect:/member/sign_in";
+    }
+
+    // 마이페이지 - 비밀번호 입력
+    @GetMapping("/mypage_pw_input")
+    public String userMyPage() {
+        log.info("[UserMemberController] userMyPage()");
+
+        return "/html/member/user_info_pw_check";
+    }
+
+    // 마이페이지 - 비밀번호 확인
+    @PostMapping("/mypage_pw_check")
+    public String userMyPageCheck(HttpSession session, UserMemberDto userMemberDto, Model model) {
+        log.info("[UserMemberController] userMyPageCheck()");
+
+        userMemberDto.setId(String.valueOf(session.getAttribute("id")));
+
+        if(!userMemberService.selectUserSignIn(userMemberDto)){
+            model.addAttribute("error", true);
+            return "/html/member/user_info_pw_check";
+        }
+
+        return "redirect:/member/mypage";
+    }
+
+    // 마이페이지 - 내 정보 확인
+    @GetMapping("/mypage")
+    public String userMyPage(Model model, HttpSession session) {
+        log.info("[UserMemberController] userMyPage()");
+
+        UserMemberDto userMemberDto = userMemberService.selectUserInfo(String.valueOf(session.getAttribute("id")));
+        model.addAttribute("userMemberDto", userMemberDto);
+        return "/html/member/user_info_view";
     }
 }

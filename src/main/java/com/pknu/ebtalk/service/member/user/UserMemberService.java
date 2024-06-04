@@ -3,6 +3,7 @@ package com.pknu.ebtalk.service.member.user;
 import com.pknu.ebtalk.config.MemberConfig;
 import com.pknu.ebtalk.dto.member.UserMemberDto;
 import com.pknu.ebtalk.mappers.member.user.IUserMemberMapper;
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -47,6 +48,8 @@ public class UserMemberService implements IUserMemberService {
     }
 
     // 로그인
+    // 마이페이지 - 비밀번호 확인
+    // 회원탈퇴 - 비밀번호 확인
     @Override
     public boolean selectUserSignIn(UserMemberDto userMemberDto) {
         log.info("[UserMemberService] selectMemberSignIn()");
@@ -56,16 +59,19 @@ public class UserMemberService implements IUserMemberService {
 
         userMemberDto.setSign_in_pw_check(iUserMemberMapper.selectMemberSignIn(id, pw));
 
-        if(userMemberDto.getSign_in_pw_check() == null){
-            return false;
-        }
-
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
-        if(!passwordEncoder.matches(pw, userMemberDto.getSign_in_pw_check())){
+        if(userMemberDto.getSign_in_pw_check() == null || !passwordEncoder.matches(pw, userMemberDto.getSign_in_pw_check())){
             return false;
         }
 
         return true;
     }
+
+   @Override
+   public UserMemberDto selectUserInfo(String id) {
+        log.info("[UserMemberService] selectUserInfo()");
+
+        return iUserMemberMapper.selectUserInfo(id);
+   }
 }

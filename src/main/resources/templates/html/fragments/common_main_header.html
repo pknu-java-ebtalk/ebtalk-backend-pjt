@@ -1,6 +1,8 @@
-<div class="background-gray header-gray">
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<div class="background-gray header-gray" th:fragment="header-main">
     <div class="background-white header-white">
-        <a href="#" class="logo-a"><div class="logo">
+        <a th:href="@{/}" class="logo-a"><div class="logo">
             <!-- 로고 사진 -->
             <img class="logo-pic" src="../../img/icon.png">
             <!-- 로고 타이틀(이비톡) -->
@@ -17,7 +19,7 @@
             <!-- 메뉴바 > 아이콘 -->
             <ul class="navbar-icons">
                 <a href="#" alt="채팅" class="icon"><img src="../../img/메신저2.png"></a>
-                <a href="#" alt="마이페이지" class="icon"><img src="../../img/profile.png"></a>
+                <a th:href="@{/member/mypage_pw_input}" alt="마이페이지" class="icon"><img src="../../img/profile.png"></a>
             </ul>
         </nav>
     </div>
