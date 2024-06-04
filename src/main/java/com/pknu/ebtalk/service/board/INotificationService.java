@@ -13,7 +13,10 @@ public interface INotificationService {
     BoardDto updateBoardInfo(BoardDto boardDto);
 
     //    게시글 리스트
-    List<BoardDto> selectboardAllList();
 
     void deleteBoardConfirm(int no);
+
+    List<BoardDto> selectNotificationAllLits();
+
+    BoardDto findBoardByNo(int no);
 }

@@ -18,5 +18,7 @@ public interface INotificationMapper {
     int deleteNotificationInfoByNo(int no);
 
 //    게시글 리스트
-    List<BoardDto> selectBoardCountInfo();
+    List<BoardDto> selectBoardAllList();
+
+    void updateHits(int no);
 }

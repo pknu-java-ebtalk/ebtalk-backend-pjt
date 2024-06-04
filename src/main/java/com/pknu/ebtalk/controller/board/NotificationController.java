@@ -17,11 +17,11 @@ public class NotificationController {
 
     
 //    게시글 리스트
-    @GetMapping(value = {"/notification_board_form"})
+    @GetMapping(value = {"/notification_board_list"})
     public String notificationBoard(Model model) {
         log.info("[NotificationController] notificationController()");
 
-//        model.addAttribute("boardDto", notificationService.selectNotification);
+        model.addAttribute("boardDtos", notificationService.selectNotificationAllLits());
 
         String notificationBoard = "/html/board/board";
         return notificationBoard;
@@ -52,14 +52,15 @@ public class NotificationController {
 
     
 //    게시글 보기
-    @GetMapping(value = {"/notification_view_form"})
-    public String notificationView() {
+@GetMapping("/notification_view_form")
+public String notificationViewForm(@RequestParam("no") int no, Model model) {
+        log.info("[NotificationController] notificationViewForm()");
 
-        String notificationViewPage = "/html/board/board_view";
-        return notificationViewPage;
-    }
+        model.addAttribute("boardDto",notificationService.findBoardByNo(no));
 
-    
+        return "/html/board/board_view";
+}
+
 //    게시글 수정
     @GetMapping(value = {"/notification_edit_form"})
     public String notificationEdit(@RequestParam int no, Model model) {
@@ -89,6 +90,6 @@ public class NotificationController {
         log.info("[NotificationController] notificationDeleteConfirm()" );
 
         notificationService.deleteBoardConfirm(no);
-        return "/html/board/board";
+        return "redirect:/notification/notification_board_list";
     }
 }

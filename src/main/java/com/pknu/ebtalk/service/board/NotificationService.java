@@ -54,17 +54,7 @@ public class NotificationService implements INotificationService{
         return boardDto;
     }
 
-//    게시글 리스트
-    @Override
-    public List<BoardDto> selectboardAllList(){
-        log.info("[BoardService] selectboardAllList()");
 
-        List<BoardDto> boardCountList = notificationMappers.selectBoardCountInfo();
-
-        return boardCountList;
-    }
-    
-    
 //    게시글 삭제
     @Override 
     public void deleteBoardConfirm(int no){
@@ -77,5 +67,25 @@ public class NotificationService implements INotificationService{
         } else{
             log.info("삭제 실패");
         }
+    }
+
+//    전체 게시글
+    @Override
+    public List<BoardDto> selectNotificationAllLits() {
+        log.info("[NotificationService] selectNotificationAllLits");
+
+        List<BoardDto> boardList = notificationMappers.selectBoardAllList();
+        return boardList;
+    }
+
+//    게시글 보기
+    @Override
+    public BoardDto findBoardByNo(int no) {
+        log.info("[NotificationService] findBoardByNo");
+
+        BoardDto boardDto = notificationMappers.selectNotificationInfoByNo(no);
+        notificationMappers.updateHits(no);
+
+        return boardDto;
     }
 }
