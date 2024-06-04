@@ -11,64 +11,104 @@
   margin-bottom: 30px;
 }
 
-.study-filter-span > a:hover{
+.study-filter-span > a:hover,
+.study-filter-span:last-of-type > a{
   color: #000;
- }
+}
 
- .study-filter-span > a{
+.study-filter-span > a{
   margin-right: 15px;
   color: #dadada;
 }
 
-.study-application-box {
-  width: 100%;
+/* 리스트 너비, 높이 및 스크롤 지정 */
+.board-list{
+  margin: 0 auto;
+  width: 750px;
+  height: 500px;
+  min-height: 500px;
+  overflow: hidden;
+  overflow-y: scroll;
+
 }
 
-/* table은 margin 적용이 안되기 떄문에 border 속성을 이용하여 간격 띄워주기 */
-table {
-  table-layout: fixed;
-  width: 100%;
-  border-collapse: collapse;
-  /* border-spacing: 0 20px; */
+.board-list::-webkit-scrollbar{
+  display: block;
+  width: 15px;
+}
+
+.board-list::-webkit-scrollbar-thumb {
+  background: #ebebeb; /* 스크롤바 막대 색상 */
+  border: none; /* 스크롤바 막대 테두리 설정  */
+  border-radius: 12px 12px 12px 12px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color:#a0a0a5;
+  border: none;
+}
+
+/* 말머리 높이 및 중앙정렬 */
+.top-box{
   display: flex;
-  justify-content: space-between;
-}
-
-table tbody tr {
-  /* width: 500px; */
   height: 50px;
-  border-bottom: 1px solid var(--back_gray);
-}
-
-th {
-  text-align: left;
-  /* font-weight: 900;  */
-  font-size: 1.1em;
-
-}
-
-td:nth-of-type(1),
-td:nth-of-type(2),
-td:nth-of-type(3) {
-  padding-right:80px;
-}
-
-th:first-of-type,
-th:last-of-type {
+  width: 700px;
+  max-width: 700px;
   text-align: center;
+  align-items: center;
+  font-size: 1.1em;
 }
 
-table tbody tr td:first-of-type {
+/* 말머리 너비 지정 */
+.title{
+  width: 330px;
   max-width: 350px;
+  white-space:nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  white-space: nowrap;
 }
 
-td > a.approve_yn {
-  padding: 5px 5px;
-  border: 1px solid var(--back_gray);
+.writer,
+.class,
+.approve-yn{
+  width: 120px;
+  max-width: 120px;
+  white-space:nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+
+/* 출력 내용 박스 높이 및 너비 지정 */
+.bottom-box{
+  min-height: 400px;
+  width: 700px;
+
+}
+
+/*  출력 내용 박스 행 너비, 높이 및 중앙정렬 */
+.bottom{
+  display: flex;
+  height: 45px;
+  width: 700px;
+  text-align: center;
+  align-items: center;
+  border-top: 1px solid var(--line_gray);
+}
+
+/* 버튼 스타일 적용 */
+.approve-yn-bottom{
+  border: none;
   border-radius: 10px;
   background-color: var(--back_gray);
+  padding: 7px 0;
+}
+
+.approve-yn-y {
+  background-color: var(--text_purple);
+  border: none;
+}
+
+.approve-yn-bottom > a {
   color: #fff;
 }

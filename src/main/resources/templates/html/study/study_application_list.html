@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<html lang="ko">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,6 +8,9 @@
     <!-- ⭐본인 css 링크 작성⭐ -->
     <link rel="stylesheet" href="/css/study/study_application_list.css">
     <link rel="stylesheet" href="/css/study/study_aside.css">
+    <script crossOrigin="anonymous"
+            integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM=" src="https://code.jquery.com/jquery-3.7.0.js"></script>
+    <script th:replace="~{/html/study/study_application_list_js.html::js}"></script>
 </head>
 <body>
     <header>
@@ -17,86 +20,64 @@
         <aside>
             <th:block th:replace="~{html/fragments/common_main_aside :: aside}"></th:block>
         </aside>
-        <div class="background-gray middle-gray">
-            <div class="background-white middle-white">
-                <div class="contents-box">
-                    <!-- ⭐여기에 코드 작성⭐ -->
-                    <div id="wrap">
-                        <div class="study-management-filter">
-                            <span class="study-filter-span"><a href="#">진행중</a></span>
-                            <span class="study-filter-span"><a href="#">신청목록</a></span>
+    <div class="background-gray middle-gray">
+        <div class="background-white middle-white">
+            <div class="contents-box">
+                <!-- ⭐여기에 코드 작성⭐ -->
+                <div id="wrap">
+                    <div class="study-management-filter">
+                        <span class="study-filter-span"><a href="#">진행중</a></span>
+                        <span class="study-filter-span"><a href="#">신청목록</a></span>
+                    </div>
+                    <div class="board-list">
+                        <!-- 말머리 -->
+                        <div class="top-box">
+                            <div class="title" >제목</div>
+                            <div class="writer">신청자</div>
+                            <div class="class">분반</div>
+                            <div class="approve-yn">상태</div>
                         </div>
-                        <div class="study-application-box">
-                            <table>
-                                    <tr>
-                                        <th class="title-th">제목</th>
-                                        <th>신청자</th>
-                                        <th>분반</th>
-                                        <th>상태</th>
-                                    </tr>
-                                    <tr>
-                                        <td><a href="#">[Front-End] 스터디 모집[Front-End] 스터디 모집[Front-End] 스터디 모집[Front-End] 스터디 모집집[Front-End] 스터디 모집</a></td>
-                                        <td>한성쥐</td>
-                                        <td>JAVA</td>
-                                        <td><a class="approve_yn" href="#">승인대기</a></td>
-                                    </tr>
-                                    <tr>
-                                        <td><a href="#">[Front-End] 스터디 모집[Front-End] 스터디 모집[Front-End] 스터디 모집[Front-End] 스터디 모집집[Front-End] 스터디 모집</a></td>
-                                        <td>한성쥐</td>
-                                        <td>JAVA</td>
-                                        <td><a class="approve_yn" href="#">승인대기</a></td>
-                                    </tr>
-                                    <tr>
-                                        <td><a href="#">[Front-End] 스터디 모집[Front-End] 스터디 모집[Front-End] 스터디 모집[Front-End] 스터디 모집집[Front-End] 스터디 모집</a></td>
-                                        <td>한성쥐</td>
-                                        <td>JAVA</td>
-                                        <td><a class="approve_yn" href="#">승인대기</a></td>
-                                    </tr>
-                                    <tr>
-                                        <td><a href="#">[Front-End] 스터디 모집[Front-End] 스터디 모집[Front-End] 스터디 모집[Front-End] 스터디 모집집[Front-End] 스터디 모집</a></td>
-                                        <td>한성쥐</td>
-                                        <td>JAVA</td>
-                                        <td><a class="approve_yn" href="#">승인대기</a></td>
-                                    </tr>
-                                    <tr>
-                                        <td><a href="#">[Front-End] 스터디 모집[Front-End] 스터디 모집[Front-End] 스터디 모집[Front-End] 스터디 모집집[Front-End] 스터디 모집</a></td>
-                                        <td>한성쥐</td>
-                                        <td>JAVA</td>
-                                        <td><a class="approve_yn" href="#">승인대기</a></td>
-                                    </tr>
-                                    <tr>
-                                        <td><a href="#">[Front-End] 스터디 모집[Front-End] 스터디 모집[Front-End] 스터디 모집[Front-End] 스터디 모집집[Front-End] 스터디 모집</a></td>
-                                        <td>한성쥐</td>
-                                        <td>JAVA</td>
-                                        <td><a class="approve_yn" href="#">승인대기</a></td>
-                                    </tr>
-                                    <tr>
-                                        <td><a href="#">[Front-End] 스터디 모집[Front-End] 스터디 모집[Front-End] 스터디 모집[Front-End] 스터디 모집집[Front-End] 스터디 모집</a></td>
-                                        <td>한성쥐</td>
-                                        <td>JAVA</td>
-                                        <td><a class="approve_yn" href="#">승인대기</a></td>
-                                    </tr>
-                                    <tr>
-                                        <td><a href="#">[Front-End] 스터디 모집[Front-End] 스터디 모집[Front-End] 스터디 모집[Front-End] 스터디 모집집[Front-End] 스터디 모집</a></td>
-                                        <td>한성쥐</td>
-                                        <td>JAVA</td>
-                                        <td><a class="approve_yn" href="#">승인대기</a></td>
-                                    </tr>
-
-                            </table>
-
+                        <!-- 출력되는 부분 -->
+                        <div class="bottom-box">
+                            <th:block th:each="studyDto : ${studyDtos}">
+                                <div class="bottom" th:id="${studyDto.user_id}" th:data-no="${studyDto.user_id}">
+                                    <a th:href="@{/study/study_detail(no=${studyDto.no})}"><div class="title title-bottom" th:text="${studyDto.title}"></div></a>
+                                    <div class="writer writer-bottom" th:text="${studyDto.name}"></div>
+                                    <div class="class class-bottom" >
+                                        <th:block th:if="${studyDto.edu_no}==1">
+                                            JAVA
+                                        </th:block>
+                                        <th:block th:if="${studyDto.edu_no}==2">
+                                            AI
+                                        </th:block>
+                                        <th:block th:if="${studyDto.edu_no}==3">
+                                            IOT
+                                        </th:block>
+                                        <th:block th:if="${studyDto.edu_no}==0">
+                                            선택안함
+                                        </th:block>
+                                    </div>
+                                    <div class="approve-yn approve-yn-bottom approve-yn-n" th:if="${studyDto.approve_yn == 'N'}">
+                                        <a class="approval" href="#">승인대기</a>
+                                    </div>
+                                    <div class="approve-yn approve-yn-bottom approve-yn-y" th:if="${studyDto.approve_yn == 'Y'}">
+                                        <a class="approval" href="#">승인완료</a>
+                                    </div>
+                                </div>
+                            </th:block>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+</div>
     <footer>
         <th:block th:replace="~{html/fragments/common_main_footer :: footer}"></th:block>
     </footer>
-<!--    <script src="/js/common_main_header.js"></script>-->
-<!--    <script src="/js/common_main_aside.js"></script>-->
-<!--    <script src="/js/common_main_footer.js"></script>-->
+    <!--    <script src="/js/common_main_header.js"></script>-->
+    <!--    <script src="/js/common_main_aside.js"></script>-->
+    <!--    <script src="/js/common_main_footer.js"></script>-->
     <script src="/js/study/study_aside.js"></script>
 </body>
 </html>

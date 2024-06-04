@@ -91,4 +91,43 @@
         AND
             a.finished_at > now();
     </select>
+
+    <!--  스터디 관리 페이지 - 신청목록 리스트  -->
+    <select id="selectStudyApplicationListByUId" parameterType="com.pknu.ebtalk.dto.study.StudyDto" resultType="com.pknu.ebtalk.dto.study.StudyDto">
+        SELECT
+            sm.user_id,
+            s.`no`,
+            s.title,
+            sm.approve_yn,
+            u.`name` as `name`,
+            u.edu_no
+        FROM
+            STUDY_MATE sm
+                JOIN STUDY s
+                    ON sm.study_no = s.`no`
+                JOIN `user` u
+                    ON u.id = sm.user_id
+        WHERE
+          u.edu_no IS NOT NULL
+    </select>
+
+    <!--  스터디 관리 페이지 - 신청목록 승인처리  -->
+    <update id="updateStudyApplicationListById" parameterType="com.pknu.ebtalk.dto.study.StudyDto">
+        UPDATE study_mate
+            SET approve_yn = CASE
+                                WHEN approve_yn = 'N' THEN 'Y'
+                                WHEN approve_yn = 'Y' THEN 'N'
+                                END
+        WHERE
+            user_id = #{user_id}
+    </update>
+
+    <select id="selectStudyApproveYnByUid" parameterType="com.pknu.ebtalk.dto.study.StudyDto">
+        select
+            approve_yn
+        from
+            study_mate
+        where
+            user_id = #{user_id}
+    </select>
 </mapper>

@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @Log4j2
 @Controller
@@ -128,8 +129,6 @@ public class StudyController {
         StudyDto studyDto = new StudyDto();
         studyDto.setUser_id("eunji123");
 
-//        List<StudyDto> studyDtos =
-
         model.addAttribute("studyDtos", studyService.selectStudyInProgressByUId(studyDto));
 
         return "/html/study/study_in_progress";
@@ -145,9 +144,29 @@ public class StudyController {
         StudyDto studyDto = new StudyDto();
         studyDto.setUser_id("eunji123");
 
-        studyService.selectStudyApplicationListById(studyDto);
+        List<StudyDto> studyDtos = studyService.selectStudyApplicationListById(studyDto);
+
+        model.addAttribute("studyDtos", studyDtos);
 
         return "/html/study/study_application_list";
+
+    }
+
+    /*
+     * 스터디 관리 페이지 - 스터디 신청 승인 처리
+     */
+    @PostMapping(value = {"/study_application_list_confirm"})
+    @ResponseBody
+    public Map<String, Object> studyApplicationListConfirm(StudyDto studyDto){
+        log.info("[StudyController] studyApplicationListConfirm()");
+        studyDto.setUser_id("bbb");
+
+        log.info(studyDto.getUser_id());
+
+        Map<String, Object> map = studyService.updateStudyApplicationListById(studyDto);
+
+
+        return map;
 
     }
 
