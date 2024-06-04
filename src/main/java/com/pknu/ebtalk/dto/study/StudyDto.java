@@ -1,5 +1,6 @@
 package com.pknu.ebtalk.dto.study;
 
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
@@ -16,4 +17,12 @@ public class StudyDto {
     private String content;
     private int views;
     private String created_at;
+
+    private String cur_date;
+    private String count_member;
+
+    private String approve_yn;
+
+    private String name;
+    private int edu_no;
 }

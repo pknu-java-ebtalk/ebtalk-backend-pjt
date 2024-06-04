@@ -21,7 +21,24 @@ input {
 /* 스터디 모집 크기 설정 */
 .study-text-p {
   font-size: 30px;
+}
+
+.study-text{
+  width: 570px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
   margin-bottom: 30px;
+  justify-content: space-between;
+}
+
+.fa-solid{
+  font-size: 1.5em;
+  color: var(--line_gray);
+}
+
+.fa-solid:hover{
+  color: black;
 }
 
 /* 제목, 기간, 정원, 내용 제목과 내용 수평 margin 설정 */
@@ -33,6 +50,7 @@ input {
 }
 
 .content-value{
+  min-height: 300px;
   padding: 20px;
   border: 1px solid var(--aside_gray);
   /* border-radius: 10px; */
@@ -56,6 +74,7 @@ input {
 }
 
 .study-regist-detail-box::-webkit-scrollbar{
+  width: 10px;
   display: block;
 }
 
@@ -104,6 +123,8 @@ div.study-btn-box {
   border: none;
   border-radius: 10px;
   background: #00063F;
+  font-size: 0.9em;
+  font-weight: 500;
 }
 
 .study-btn:hover{

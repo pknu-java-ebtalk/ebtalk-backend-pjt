@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTO Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 로그인 - 계정 비교 -->
+<mapper namespace="com.pknu.ebtalk.mappers.member.user.IUserMemberMapper">
+    <select id="selectMemberSignIn" parameterType="com.pknu.ebtalk.dto.member.UserMemberDto" resultType="String">
+        select
+            pw
+        from
+            user
+        where
+            id = #{id}
+    </select>
+</mapper>

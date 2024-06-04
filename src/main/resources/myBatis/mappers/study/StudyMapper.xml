@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTO Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<!--스터디 모집 등록-->
+
 <mapper namespace="com.pknu.ebtalk.mappers.study.IStudyMapper">
-    <insert id="insertStudyRegistInfo" parameterType="com.pknu.ebtalk.dto.study.StudyDto">
+    <!--스터디 모집 등록-->
+    <insert id="insertStudyRegistInfo" parameterType="com.pknu.ebtalk.dto.study.StudyDto" useGeneratedKeys="true" keyProperty="no">
         INSERT INTO
             study(user_id, title, started_at, finished_at, count, content, views, created_at)
         VALUES
@@ -18,4 +19,115 @@
                 now()
             )
     </insert>
+
+    <insert id="registStudyMate" parameterType="com.pknu.ebtalk.dto.study.StudyDto">
+        INSERT INTO
+            study_mate
+        VALUES
+            (
+             #{no},
+             #{user_id},
+            'Y'
+            )
+    </insert>
+
+    <select id="selectStudyInfoByNo" parameterType="Integer" resultType="com.pknu.ebtalk.dto.study.StudyDto">
+        SELECT
+            `no`, user_id, title, started_at, finished_at, `count`, content, views, created_at
+        FROM
+            study
+        WHERE
+            no = #{no}
+    </select>
+
+    <!--  스터디 모집글 수정  -->
+    <update id="updateStudyInfo" parameterType="com.pknu.ebtalk.dto.study.StudyDto">
+        UPDATE study
+        SET
+            title = #{title},
+            started_at = #{started_at},
+            finished_at = #{finished_at},
+            count = #{count},
+            content = #{content}
+        WHERE
+            no = #{no}
+    </update>
+
+    <!--  스터디 모집 리스트  -->
+    <select id="selectStudyCountMembers" resultType="com.pknu.ebtalk.dto.study.StudyDto">
+        SELECT
+            a.no, a.user_id, a.title, a.started_at, a.finished_at, a.count, a.content, a.VIEWS, cast(a.CREATED_AT as date) as created_at, count_member, cast(now() as date) as cur_date
+        FROM
+            study a
+        LEFT JOIN
+                (SELECT study_no , count(study_no) AS count_member FROM study_mate GROUP BY study_no) AS b
+        ON
+            a.no = b.study_no
+        ORDER BY
+            CREATED_AT DESC
+    </select>
+
+    <!--  스터디 모집글 삭제  -->
+    <delete id="deleteStudyInfoByNo" parameterType="Integer">
+        DELETE FROM
+                   study
+        WHERE
+            no = #{no}
+    </delete>
+
+
+    <!--  스터디 관리 페이지 - 진행중인 스터디 리스트  -->
+    <select id="selectStudyInProgressByUid" parameterType="com.pknu.ebtalk.dto.study.StudyDto" resultType="com.pknu.ebtalk.dto.study.StudyDto">
+        SELECT
+            *
+        FROM
+            study a
+        JOIN
+            (SELECT study_no , count(study_no) AS count_member, approve_yn AS approve_member FROM study_mate where approve_yn ='Y' GROUP BY study_no) AS b
+        ON
+                a.no = b.study_no
+        WHERE
+            a.user_id = #{user_id}
+        AND
+            a.finished_at > now();
+    </select>
+
+    <!--  스터디 관리 페이지 - 신청목록 리스트  -->
+    <select id="selectStudyApplicationListByUId" parameterType="com.pknu.ebtalk.dto.study.StudyDto" resultType="com.pknu.ebtalk.dto.study.StudyDto">
+        SELECT
+            sm.user_id,
+            s.`no`,
+            s.title,
+            sm.approve_yn,
+            u.`name` as `name`,
+            u.edu_no
+        FROM
+            STUDY_MATE sm
+                JOIN STUDY s
+                    ON sm.study_no = s.`no`
+                JOIN `user` u
+                    ON u.id = sm.user_id
+        WHERE
+          u.edu_no IS NOT NULL
+    </select>
+
+    <!--  스터디 관리 페이지 - 신청목록 승인처리  -->
+    <update id="updateStudyApplicationListById" parameterType="com.pknu.ebtalk.dto.study.StudyDto">
+        UPDATE study_mate
+            SET approve_yn = CASE
+                                WHEN approve_yn = 'N' THEN 'Y'
+                                WHEN approve_yn = 'Y' THEN 'N'
+                                END
+        WHERE
+            user_id = #{user_id}
+    </update>
+
+    <select id="selectStudyApproveYnByUid" parameterType="com.pknu.ebtalk.dto.study.StudyDto">
+        select
+            approve_yn
+        from
+            study_mate
+        where
+            user_id = #{user_id}
+    </select>
 </mapper>

@@ -1,38 +1,67 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>회원가입 : 이비톡</title>
     <link rel="stylesheet" href="/css/common/common_member.css">
     <link rel="stylesheet" href="/css/member/user_sign_up.css">
+<<<<<<< HEAD
+=======
+    <!--  JQuery CDN을 이용한 로드  -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+>>>>>>> origin/dev
 </head>
+</head>
+<style>
+    .field-error{
+        border-color: red;
+        color: red;
+        margin-bottom: 0;
+    }
+    .field-error-p{
+        font-size: 15px;
+
+        margin-left: 23px;
+        margin-bottom: 18px;
+    }
+</style>
 <body>
-    <header></header>
+    <header>
+        <th:block th:replace="~{html/fragments/common_member_header :: header-member}"></th:block>
+    </header>
     <div>
         <div class="background-gray middle-gray">
             <div class="background-white middle-white">
                 <div class="contents-box">
                     <div class="sign-up-box">
                         <p class="sign-up-title">회원가입</p>
-                        <form class="sign-up-form" method="post" th:action="@{/member/sign_up_confirm}" id="resetPwForm">
-                            <input class="sign-up-id sign-up-input sign-up" type="email" name="id" placeholder="아이디">
+                        <form role="form" class="sign-up-form" method="post" action="/member/sign_up_confirm" id="resetPwForm" th:object="${userMemberDto}">
+                            <input th:field="*{id}" class="sign-up-id sign-up-input sign-up form-control" type="email" name="id" placeholder="아이디" th:errorclass="field-error" id="sign-up-id">
+                            <div class="info-msg-box" id="info-msg-box">
+                                <p id="id-check-msg">중복된 아이디입니다.</p>
+                                <p class="field-error field-error-p field-error-id" th:errors="*{id}"></p>
+                            </div>
                             <div class="pw-input-box">
-                                <input class="sign-up-pw sign-up-input sign-up" type="password" name="pw" placeholder="비밀번호">
-                                <input class="sign-up-pw-check sign-up-input sign-up" type="password" name="pw_check" placeholder="비밀번호 확인">
+                                <input th:field="*{pw}" class="sign-up-pw sign-up-input sign-up form-control" type="password" name="pw" placeholder="비밀번호" th:errorclass="field-error">
+                                <p class="field-error field-error-p" th:errors="*{pw}"></p>
+                                <input th:field="*{pw_check}" class="sign-up-pw-check sign-up-input sign-up form-control" type="password" name="pw_check" placeholder="비밀번호 확인" th:errorclass="field-error">
                                 <div class="info-msg-box">
                                     <p class="info-msg info-msg-no">비밀번호가 일치하지 않습니다.</p>
                                     <p class="info-msg info-msg-ok">비밀번호가 일치합니다.</p>
                                 </div>
                             </div>
-                            <input class="sign-up-name sign-up-input sign-up" type="text" name="name" placeholder="이름">
-                            <input class="sign-up-phone sign-up-input sign-up" type="tel" name="phone" placeholder="전화번호">
-                            <select class="edu-type-box" name="edu_no">
-                                <option class="edu-type" value="">교육과정 선택</option>
+                            <input th:field="*{name}" class="sign-up-name sign-up-input sign-up form-control" type="text" name="name" placeholder="이름" th:errorclass="field-error">
+                            <p class="field-error field-error-p" th:errors="*{name}"></p>
+                            <input th:field="*{phone}" class="sign-up-phone sign-up-input sign-up form-control" type="tel" pattern="010\d{8}" name="phone" placeholder="전화번호" th:errorclass="field-error">
+                            <p class="field-error field-error-p" th:errors="*{phone}"></p>
+                            <select th:field="*{edu_no}" class="edu-type-box form-control" name="edu_no" th:errorclass="field-error">
+                                <option class="edu-type" value="0">교육과정 선택</option>
                                 <option class="edu-type" value="1">빅데이터를 활용한 JAVA 개발자</option>
                                 <option class="edu-type" value="2">빅데이터 기반 AI 전문가</option>
                                 <option class="edu-type" value="3">윈도우 플랫폼 기반 IoT 시스템 개발자</option>
                             </select>
+                            <p class="field-error field-error-p" th:errors="*{edu_no}"></p>
                             <input class="sign-up-btn sign-up" type="submit" value="확인">
                         </form>
                     </div>
@@ -40,8 +69,85 @@
             </div>
         </div>
     </div>
-    <footer></footer>
+    <footer>
+        <th:block th:replace="~{html/fragments/common_main_footer :: footer}"></th:block>
+    </footer>
     <script src="/js/common_member_header.js"></script>
     <script src="/js/common_main_footer.js"></script>
+<<<<<<< HEAD
 </body> 
+=======
+    <script>
+        // DOM이 완전히 로드된 후에 코드 실행
+        document.addEventListener('DOMContentLoaded', function (){
+            // 비밀번호와 비밀번호 확인 입력란 선택
+            const pw = document.getElementById('pw');
+            const pw_check = document.getElementById('pw_check');
+
+            // info-msg 선택
+            const info_msg_no = document.querySelector('.info-msg-no');
+            const info_msg_ok = document.querySelector('.info-msg-ok');
+
+            [pw, pw_check].forEach(function (input){
+                input.addEventListener('input', function (){
+                    if(pw.value === pw_check.value && pw.value != "" && pw_check.value != ""){
+                        event.preventDefault();
+                        info_msg_no.style.visibility = 'hidden';
+                        info_msg_ok.style.visibility = 'visible';
+                    } else if(pw !== ""){
+                        info_msg_ok.style.visibility = 'hidden';
+                        info_msg_no.style.visibility = 'visible';
+                    } else {
+                        info_msg_ok.style.visibility = 'hidden';
+                        info_msg_no.style.visibility = 'hidden';
+                    }
+                })
+            })
+
+            const sign_up_inputs = document.querySelectorAll('.sign-up-input');
+
+            sign_up_inputs.forEach(function (input){
+                input.addEventListener('input', function (){
+                    if(input.value.trim() !== ""){
+                        input.classList.remove('field-error');
+                        const error_msg = input.nextElementSibling;
+                        if(error_msg && error_msg.classList.contains('field-error-p')){
+                            error_msg.remove();
+                        }
+                    }
+                });
+            });
+
+            $(function (){
+                // 아이디 중복체크
+                $('#sign-up-id').blur(function (){
+                    let id = $('#sign-up-id').val();
+                    $.ajax({
+                        type: "POST",
+                        url: "/member/checking_sign_up_id",
+                        data: {
+                            "id": id
+                        },
+                        success: function (data){   // data: checking_sign_up_id에서 넘겨준 값
+                            if(data > 0){
+                                if(id !== ''){
+                                    $('.sign-up-id').css('borderColor', 'red');
+                                    $('#id-check-msg').css('visibility', 'visible');
+                                    $('.field-error-id').css('visibility', 'hidden');
+                                    $('#sign-up-id').focus();
+                                }
+                            }else{
+                                if(id !== '') {
+                                    $('#id-check-msg').css('visibility', 'hidden');
+                                    $('.sign-up-id').css('borderColor', 'var(--line_gray)');
+                                }
+                            }
+                        }
+                    })
+                })
+            })
+        });
+    </script>
+</body>
+>>>>>>> origin/dev
 </html>
