@@ -122,6 +122,7 @@
 
 .info-msg-ok{
     color: green;
+    visibility: hidden;
 }
 
 .info-msg-no{

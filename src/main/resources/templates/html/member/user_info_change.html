@@ -8,6 +8,8 @@
     <link rel="stylesheet" href="/css/member/user_info_change.css">
     <link rel="stylesheet" href="/css/member/user_mypage_aside.css">
     <link rel="stylesheet" href="/css/member/user_mypage_info_aside.css">
+    <!--  JQuery CDN을 이용한 로드  -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 <body>
     <header>
@@ -22,7 +24,7 @@
                 <div class="contents-box">
                     <div class="info-box">
                         <div class="info-title">회원정보</div>
-                        <form class="info-change-form" method="post">
+                        <form class="info-change-form" method="post" action="/member/mypage_info_change_submit">
                             <div class="info-detail-box">
                                 <div class="info-detail info-profile-pic info-change-profile-pic">
                                     <div class="info-detail-text profile-pic-text">프로필 사진</div>
@@ -30,37 +32,37 @@
                                         <div class="add-img" id="image-show">
                                             <!-- 이미지 들어갈 부분 -->
                                         </div>
-                                        <input class="add-img-btn" type="file" accept="image/*" onchange="">
+                                        <input class="add-img-btn" type="file" accept="image/*" onchange="" name="profile_img">
                                     </div>
                                 </div>
                                 <div class="info-detail profile-id">
                                     <div class="info-detail-text id-text">아이디</div>
-                                    <div class="info-detail-input id-input">riversoso@gmail.com</div>
+                                    <div class="info-detail-input id-input" th:text="${userMemberDto.getId()}"></div>
                                 </div>
                                 <div class="info-detail profile-pw">
                                     <div class="info-detail-text pw-text">비밀번호</div>
                                     <div class="info-detail-input pw-input-box">
-                                        <input class="new-pw-input input-change" name="PW" value="새 비밀번호">
-                                        <input class="new-pw-check-input input-change" name="NEWPWCHECK" value="새 비밀번호 확인">
+                                        <input class="new-pw-input input-change" id="pw" name="pw" placeholder="새 비밀번호" type="password">
+                                        <input class="new-pw-check-input input-change" id="pw_check" name="pw_check" placeholder="새 비밀번호 확인" type="password">
                                         <div class="info-msg-box">
                                             <p class="info-msg info-msg-no">비밀번호가 일치하지 않습니다.</p>
                                             <p class="info-msg info-msg-ok">비밀번호가 일치합니다.</p>
                                         </div>
                                     </div>
-                                </div>                            
+                                </div>
                                 <div class="info-detail profile-name">
                                     <div class="info-detail-text name-text font">이름</div>
-                                    <div class="info-detail-input name-input font">강소이</div>
-                                </div>                            
+                                    <div class="info-detail-input name-input font" th:text="${userMemberDto.getName()}"></div>
+                                </div>
                                 <div class="info-detail profile-phone">
                                     <div class="info-detail-text phone-text">전화번호</div>
                                     <div class="info-detail-input phone-input">
-                                        <input class="new-phone-input input-change" name="PHONE" value="010-1234-5678">
+                                        <input class="new-phone-input input-change" name="phone" th:placeholder="${userMemberDto.getPhone()}" pattern="010\d{8}">
                                     </div>
-                                </div>                            
+                                </div>
                                 <div class="info-detail profile-edu-type">
                                     <div class="info-detail-text edu-type-text">교육과정</div>
-                                    <div class="info-detail-input edu-type-input">빅데이터를 이용한 JAVA 개발자</div>
+                                    <div class="info-detail-input edu-type-input" th:text="${userMemberDto.getType()}"></div>
                                 </div>
                             </div>
                             <div class="btn-box">
@@ -75,9 +77,34 @@
     <footer>
         <th:block th:replace="~{html/fragments/common_main_footer :: footer}"></th:block>
     </footer>
-<!--    <script src="/js/common_main_header.js"></script>-->
-<!--    <script src="/js/common_main_aside.js"></script>-->
-<!--    <script src="/js/common_main_footer.js"></script>-->
     <script src="/js/member/user_mypage_aside.js"></script>
+    <script>
+        // DOM이 완전히 로드된 후에 코드 실행
+        document.addEventListener('DOMContentLoaded', function () {
+            // 비밀번호와 비밀번호 확인 입력란 선택
+            const pw = document.getElementById('pw');
+            const pw_check = document.getElementById('pw_check');
+
+            // info-msg 선택
+            const info_msg_no = document.querySelector('.info-msg-no');
+            const info_msg_ok = document.querySelector('.info-msg-ok');
+
+            [pw, pw_check].forEach(function (input) {
+                input.addEventListener('input', function () {
+                    if (pw.value === pw_check.value && pw.value != "" && pw_check.value != "") {
+                        event.preventDefault();
+                        info_msg_no.style.visibility = 'hidden';
+                        info_msg_ok.style.visibility = 'visible';
+                    } else if (pw !== "") {
+                        info_msg_ok.style.visibility = 'hidden';
+                        info_msg_no.style.visibility = 'visible';
+                    } else {
+                        info_msg_ok.style.visibility = 'hidden';
+                        info_msg_no.style.visibility = 'hidden';
+                    }
+                })
+            })
+        })
+    </script>
 </body>
 </html>

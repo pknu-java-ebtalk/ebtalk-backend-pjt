@@ -6,8 +6,12 @@ import com.pknu.ebtalk.mappers.member.user.IUserMemberMapper;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.IOException;
 
 // 제대로 데이터 들어갔는지 결과 확인
 @Log4j2
@@ -30,14 +34,18 @@ public class UserMemberService implements IUserMemberService {
         return userMemberDto.getPw().equals(userMemberDto.getPw_check());
     }
 
+    // 비밀번호 암호화
+    @Override
+    public String encodingPw(String pw){
+        return memberConfig.passwordEncoder().encode(pw);
+    }
+
     // 회원가입 정보 DB에 넣음
     @Override
     public void insertUserSignUpConfirm(UserMemberDto userMemberDto) {
         log.info("[UserMemberService] insertMemberSignUp()");
 
-        // pw 암호화
-        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-        userMemberDto.setPw(memberConfig.passwordEncoder().encode((userMemberDto.getPw())));
+        userMemberDto.setPw(encodingPw(userMemberDto.getPw()));
 
         int result = iUserMemberMapper.insertMemberSignUp(userMemberDto);
         if (result > 0) {
@@ -57,7 +65,7 @@ public class UserMemberService implements IUserMemberService {
         String id = userMemberDto.getId();
         String pw = userMemberDto.getPw();
 
-        userMemberDto.setSign_in_pw_check(iUserMemberMapper.selectMemberSignIn(id, pw));
+        userMemberDto.setSign_in_pw_check(iUserMemberMapper.selectMemberSignIn(id));
 
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
@@ -67,11 +75,67 @@ public class UserMemberService implements IUserMemberService {
 
         return true;
     }
+    
+    // 로그인 - 탈퇴, 승인여부 확인
+    @Override
+    public String selectUserSignInCondition(String id){
+        log.info("[UserMemberService] selectMemberSignIn()");
 
+        UserMemberDto userMemberDto = iUserMemberMapper.selectMemberSignInCondition(id);
+
+        String approve_yn = userMemberDto.getApprove_yn();
+        String delete_yn = userMemberDto.getDelete_yn();
+
+        if(delete_yn.equals("y")){  // 탈퇴한 계정일 경우
+            return "d";
+        } else if(approve_yn.equals("n")){  // 승인되지 않은 계정일 경우
+            return "w";
+        }
+
+        return "y";
+    }
+
+   // 마이페이지 - 내 정보 확인
    @Override
    public UserMemberDto selectUserInfo(String id) {
         log.info("[UserMemberService] selectUserInfo()");
 
         return iUserMemberMapper.selectUserInfo(id);
    }
+
+    // 마이페이지 - 프로필 사진 수정
+    @Override
+    public boolean updateUserInfoProfileImg(UserMemberDto userMemberDto) {
+        log.info("[UserMemberService] updateInfoProfileImg()");
+
+        return iUserMemberMapper.updateUserInfoProfileImg(userMemberDto) > 0;
+    }
+    
+    // 마이페이지 - 비밀번호 수정
+    @Override
+    public boolean updateUserInfoPw(UserMemberDto userMemberDto) {
+        log.info("[UserMemberService] updateInfoPw()");
+
+        userMemberDto.setPw(encodingPw(userMemberDto.getPw()));
+
+        return iUserMemberMapper.updateUserInfoPw(userMemberDto) > 0;
+    }
+
+    // 마이페이지 - 전화번호 수정
+    @Override
+    public boolean updateUserInfoPhone(UserMemberDto userMemberDto) {
+        log.info("[UserMemberService] updateInfoPhone()");
+
+        return iUserMemberMapper.updateUserInfoPhone(userMemberDto) > 0;
+    }
+
+    // 마이페이지 - 회원탈퇴
+    @Override
+    public boolean updateUserAccountDel(UserMemberDto userMemberDto){
+        log.info("[UserMemberService] updateUserAccountDel()");
+
+        String id = userMemberDto.getId();
+
+        return iUserMemberMapper.updateUserAccountDel(id) > 0;
+    }
 }

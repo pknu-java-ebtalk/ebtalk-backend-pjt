@@ -1,6 +1,7 @@
 package com.pknu.ebtalk.controller.member.user;
 
 import com.pknu.ebtalk.dto.member.UserMemberDto;
+import com.pknu.ebtalk.service.member.user.IUserMemberService;
 import com.pknu.ebtalk.service.member.user.UserMemberService;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
@@ -51,7 +52,7 @@ public class UserMemberController {
     }
 
     // 로그인 페이지
-    @GetMapping("/sign_in")
+    @GetMapping(value = {"/sign_in", "/", ""})
     public String userSignIn() {
         log.info("[UserMemberController] userSignIn()");
 
@@ -60,7 +61,7 @@ public class UserMemberController {
 
     // 로그인 정보 체크
     @PostMapping("/sign_in_check")
-    public @ResponseBody String userSignInCheck(HttpSession session, UserMemberDto userMemberDto, @RequestParam("id") String id, @RequestParam("pw") String pw) {
+    public @ResponseBody String userSignInCheck(HttpSession session, UserMemberDto userMemberDto, @RequestParam("id") String id) {
         log.info("[UserMemberController] userSignInCheck()");
 
         if(!userMemberService.selectUserSignIn(userMemberDto)){
@@ -69,7 +70,7 @@ public class UserMemberController {
 
         session.setAttribute("id", id);
 
-        return "y";
+        return userMemberService.selectUserSignInCondition(userMemberDto.getId());
     }
 
     // 로그아웃
@@ -85,8 +86,12 @@ public class UserMemberController {
 
     // 마이페이지 - 비밀번호 입력
     @GetMapping("/mypage_pw_input")
-    public String userMyPage() {
+    public String userMyPage(HttpSession session) {
         log.info("[UserMemberController] userMyPage()");
+
+        if(session.getAttribute("id") == null){
+            return "redirect:/member/sign_in";
+        }
 
         return "/html/member/user_info_pw_check";
     }
@@ -111,8 +116,85 @@ public class UserMemberController {
     public String userMyPage(Model model, HttpSession session) {
         log.info("[UserMemberController] userMyPage()");
 
+        if(session.getAttribute("id") == null){
+            return "redirect:/member/sign_in";
+        }
+
         UserMemberDto userMemberDto = userMemberService.selectUserInfo(String.valueOf(session.getAttribute("id")));
         model.addAttribute("userMemberDto", userMemberDto);
         return "/html/member/user_info_view";
+    }
+    
+    // 마이페이지 - 내 정보 수정
+    @GetMapping("/mypage_change")
+    public String userMyPageChange(Model model, HttpSession session) {
+        log.info("[UserMemberController] userMyPageChange()");
+
+        if(session.getAttribute("id") == null){
+            return "redirect:/member/sign_in";
+        }
+
+        UserMemberDto userMemberDto = userMemberService.selectUserInfo(String.valueOf(session.getAttribute("id")));
+        model.addAttribute("userMemberDto", userMemberDto);
+        return "/html/member/user_info_change";
+    }
+
+    // 마이페이지 - 내 정보 수정 제출
+    @PostMapping("/mypage_info_change_submit")
+    public String userMyPageChangeSubmit(Model model, HttpSession session, @ModelAttribute UserMemberDto userMemberDto) {
+        log.info("[UserMemberController] userMyPageChangeSubmit()");
+
+        if (session.getAttribute("id") == null) {
+            return "redirect:/member/sign_in";
+        }
+
+        userMemberDto.setId(String.valueOf(session.getAttribute("id")));
+
+        if (!userMemberDto.getProfile_img().isEmpty()) {
+            System.out.println(userMemberService.updateUserInfoProfileImg(userMemberDto));
+        }
+
+        if (!userMemberDto.getPw().isEmpty() && userMemberService.insertUserSignUpPwConfirm(userMemberDto)) {
+            System.out.println(userMemberService.updateUserInfoPw(userMemberDto));
+        }
+
+        if (!userMemberDto.getPhone().isEmpty()) {
+            System.out.println(userMemberService.updateUserInfoPhone(userMemberDto));
+        }
+
+        return "redirect:/member/mypage";
+    }
+
+    // 마이페이지 - 회원탈퇴
+    @GetMapping("/mypage_account_del")
+    public String userMyPageAccountDel(HttpSession session) {
+        log.info("[UserMemberController] userMyPageAccountDel()");
+
+        if(session.getAttribute("id") == null){
+            return "redirect:/member/sign_in";
+        }
+
+        return "/html/member/user_info_del_account";
+    }
+
+    // 마이페이지 - 회원탈퇴 비밀번호 확인
+    @PostMapping("/mypage_account_del_pw_check")
+    public String userMyPageAccountDelPwCheck(HttpSession session, UserMemberDto userMemberDto, Model model) {
+        log.info("[UserMemberController] userMyPageAccountDelPwCheck()");
+
+        if(session.getAttribute("id") == null){
+            return "redirect:/member/sign_in";
+        }
+
+        userMemberDto.setId(String.valueOf(session.getAttribute("id")));
+
+        if(!userMemberService.selectUserSignIn(userMemberDto)){
+            model.addAttribute("error", true);
+            return "/html/member/user_info_del_account";
+        }
+
+        userMemberService.updateUserAccountDel(userMemberDto);
+
+        return "/html/member/user_info_del_account_result";
     }
 }

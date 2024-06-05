@@ -16,11 +16,18 @@
 
 .pw-input{
     font-size: 15px;
-    margin-bottom: 10px;
+    margin-bottom: 0;
 
     width: 500px;
 
     border-radius: 10px;
+}
+
+.info-msg{
+    color: red;
+    font-size: 15px;
+
+    margin-left: 23px;
 }
 
 .warning-msg-box{

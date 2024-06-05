@@ -22,7 +22,7 @@
             <div class="background-white middle-white">
                 <div class="contents-box">
                     <form class="pw-input-form" method="post" action="/member/mypage_pw_check" id="infoPwCheckForm">
-                        <div class="pw-input-box">
+                git        <div class="pw-input-box">
                             <input class="pw-input font" type="password" name="pw" placeholder="비밀번호">
                             <p class="info-msg" th:style="${error} ? 'visibility: visible' : 'visibility: hidden'">올바른 비밀번호가 아닙니다.</p>
                         </div>
@@ -36,8 +36,5 @@
         <th:block th:replace="~{html/fragments/common_main_footer :: footer}"></th:block>
     </footer>
     <script src="/js/member/user_mypage_aside.js"></script>
-    <script>
-
-    </script>
 </body>
 </html>
