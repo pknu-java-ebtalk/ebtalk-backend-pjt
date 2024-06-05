@@ -18,6 +18,9 @@ public interface IUserMemberMapper {
     // 로그인 - 승인, 탈퇴여부 확인
     UserMemberDto selectMemberSignInCondition(String id);
 
+    // 로그인 - 세션 셋팅
+    UserMemberDto selectUserSession(String id);
+
     // 세션 확인
     String checkSession(HttpSession session);
 

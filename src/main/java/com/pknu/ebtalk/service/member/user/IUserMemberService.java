@@ -25,6 +25,9 @@ public interface IUserMemberService {
     
     // 로그인 - 승인, 탈퇴여부 확인
     String selectUserSignInCondition(String id);
+    
+    // 로그인 - 세션 셋팅
+    UserMemberDto selectUserSession(String id);
 
     // 마이페이지 - 내 정보 가져오기
     UserMemberDto selectUserInfo(String id);

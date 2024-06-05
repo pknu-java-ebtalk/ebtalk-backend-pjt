@@ -47,10 +47,20 @@
             id = #{id}
     </select>
 
+    <!-- 로그인 - 세션 셋팅 -->
+    <select id="selectUserSession" parameterType="String" resultType="com.pknu.ebtalk.dto.member.UserMemberDto">
+        select
+            id, edu_no, name
+        from
+            user
+        where
+            id = #{id}
+    </select>
+
     <!-- 마이페이지 - 내 정보 불러오기  -->
     <select id="selectUserInfo" parameterType="string" resultType="com.pknu.ebtalk.dto.member.UserMemberDto">
         select
-            u.profile_img, u.id, u.name, u.phone, e.type
+            u.profile_img, u.id, u.edu_no,u.name, u.phone, e.type
         from
             user as u
         left join

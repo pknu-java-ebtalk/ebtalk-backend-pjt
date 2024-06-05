@@ -68,7 +68,9 @@ public class UserMemberController {
             return "n";
         }
 
-        session.setAttribute("id", id);
+        UserMemberDto user = userMemberService.selectUserSession(id);
+
+        session.setAttribute("loginedUserMemberDto", user);
 
         return userMemberService.selectUserSignInCondition(userMemberDto.getId());
     }

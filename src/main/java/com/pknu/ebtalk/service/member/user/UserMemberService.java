@@ -95,6 +95,13 @@ public class UserMemberService implements IUserMemberService {
         return "y";
     }
 
+   // 로그인 - 세션 셋팅
+   @Override
+   public UserMemberDto selectUserSession(String id){
+        log.info("[UserMemberService] selectMemberSignIn()");
+        return iUserMemberMapper.selectUserSession(id);
+   }
+
    // 마이페이지 - 내 정보 확인
    @Override
    public UserMemberDto selectUserInfo(String id) {
