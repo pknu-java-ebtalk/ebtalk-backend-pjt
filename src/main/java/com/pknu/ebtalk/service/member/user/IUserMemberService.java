@@ -3,6 +3,9 @@ package com.pknu.ebtalk.service.member.user;
 import com.pknu.ebtalk.dto.member.UserMemberDto;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.IOException;
 
 public interface IUserMemberService {
     // 회원가입
@@ -19,6 +22,9 @@ public interface IUserMemberService {
 
     // 로그인
     boolean selectUserSignIn(UserMemberDto userMemberDto);
+    
+    // 로그인 - 승인, 탈퇴여부 확인
+    String selectUserSignInCondition(String id);
 
     // 마이페이지 - 내 정보 가져오기
     UserMemberDto selectUserInfo(String id);
@@ -32,4 +38,6 @@ public interface IUserMemberService {
     // 마이페이지 - 정보 수정(전화번호)
     boolean updateUserInfoPhone(UserMemberDto userMemberDto);
 
+    // 마이페이지 - 회원탈퇴
+    boolean updateUserAccountDel(UserMemberDto userMemberDto);
 }

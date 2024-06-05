@@ -28,9 +28,19 @@
     </select>
 
     <!-- 로그인 - 계정 비교 -->
-    <select id="selectMemberSignIn" parameterType="com.pknu.ebtalk.dto.member.UserMemberDto" resultType="String">
+    <select id="selectMemberSignIn" parameterType="String" resultType="String">
         select
             pw
+        from
+            user
+        where
+            id = #{id}
+    </select>
+
+    <!-- 로그인 - 승인, 탈퇴여부 확인 -->
+    <select id="selectMemberSignInCondition" parameterType="String" resultType="com.pknu.ebtalk.dto.member.UserMemberDto">
+        select
+            approve_yn, delete_yn
         from
             user
         where
@@ -43,10 +53,10 @@
             u.profile_img, u.id, u.name, u.phone, e.type
         from
             user as u
-                left join
+        left join
             edu_course as e
-            on
-                u.edu_no = e.no
+        on
+            u.edu_no = e.no
         where
             u.id = #{id}
     </select>
@@ -77,6 +87,16 @@
             user
         set
             phone = #{phone}
+        where
+            id = #{id}
+    </update>
+
+    <!-- 마이페이지 - 회원탈퇴 -->
+    <update id="updateUserAccountDel" parameterType="String">
+        update
+            user
+        set
+            delete_yn = 'y'
         where
             id = #{id}
     </update>

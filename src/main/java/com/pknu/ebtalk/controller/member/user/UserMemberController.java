@@ -70,7 +70,7 @@ public class UserMemberController {
 
         session.setAttribute("id", id);
 
-        return "y";
+        return userMemberService.selectUserSignInCondition(userMemberDto.getId());
     }
 
     // 로그아웃
@@ -141,8 +141,46 @@ public class UserMemberController {
 
     // 마이페이지 - 내 정보 수정 제출
     @PostMapping("/mypage_info_change_submit")
-    public String userMyPageChangeSubmit(Model model, HttpSession session, @ModelAttribute UserMemberDto userMemberDto){
+    public String userMyPageChangeSubmit(Model model, HttpSession session, @ModelAttribute UserMemberDto userMemberDto) {
         log.info("[UserMemberController] userMyPageChangeSubmit()");
+
+        if (session.getAttribute("id") == null) {
+            return "redirect:/member/sign_in";
+        }
+
+        userMemberDto.setId(String.valueOf(session.getAttribute("id")));
+
+        if (!userMemberDto.getProfile_img().isEmpty()) {
+            System.out.println(userMemberService.updateUserInfoProfileImg(userMemberDto));
+        }
+
+        if (!userMemberDto.getPw().isEmpty() && userMemberService.insertUserSignUpPwConfirm(userMemberDto)) {
+            System.out.println(userMemberService.updateUserInfoPw(userMemberDto));
+        }
+
+        if (!userMemberDto.getPhone().isEmpty()) {
+            System.out.println(userMemberService.updateUserInfoPhone(userMemberDto));
+        }
+
+        return "redirect:/member/mypage";
+    }
+
+    // 마이페이지 - 회원탈퇴
+    @GetMapping("/mypage_account_del")
+    public String userMyPageAccountDel(HttpSession session) {
+        log.info("[UserMemberController] userMyPageAccountDel()");
+
+        if(session.getAttribute("id") == null){
+            return "redirect:/member/sign_in";
+        }
+
+        return "/html/member/user_info_del_account";
+    }
+
+    // 마이페이지 - 회원탈퇴 비밀번호 확인
+    @PostMapping("/mypage_account_del_pw_check")
+    public String userMyPageAccountDelPwCheck(HttpSession session, UserMemberDto userMemberDto, Model model) {
+        log.info("[UserMemberController] userMyPageAccountDelPwCheck()");
 
         if(session.getAttribute("id") == null){
             return "redirect:/member/sign_in";
@@ -150,18 +188,13 @@ public class UserMemberController {
 
         userMemberDto.setId(String.valueOf(session.getAttribute("id")));
 
-        if(!userMemberDto.getProfile_img().isEmpty()){
-            System.out.println(userMemberService.updateUserInfoProfileImg(userMemberDto));
+        if(!userMemberService.selectUserSignIn(userMemberDto)){
+            model.addAttribute("error", true);
+            return "/html/member/user_info_del_account";
         }
 
-        if(!userMemberDto.getPw().isEmpty() && userMemberService.insertUserSignUpPwConfirm(userMemberDto)){
-            System.out.println(userMemberService.updateUserInfoPw(userMemberDto));
-        }
+        userMemberService.updateUserAccountDel(userMemberDto);
 
-        if(!userMemberDto.getPhone().isEmpty()){
-            System.out.println(userMemberService.updateUserInfoPhone(userMemberDto));
-        }
-
-        return "redirect:/member/mypage";
+        return "/html/member/user_info_del_account_result";
     }
 }

@@ -52,6 +52,10 @@
                             $('.info-msg').css('visibility', 'visible');
                         }else if(data === "y"){
                             window.location.href = "/";
+                        }else if(data === "w"){
+                            alert("승인 대기 중인 아이디입니다. 관리자에게 문의주세요.");
+                        }else if(data === "d"){
+                            alert("탈퇴한 계정입니다.");
                         }
                     },
                     error: function (){
