@@ -40,7 +40,7 @@
     <!-- 로그인 - 승인, 탈퇴여부 확인 -->
     <select id="selectMemberSignInCondition" parameterType="String" resultType="com.pknu.ebtalk.dto.member.UserMemberDto">
         select
-            approve_yn, delete_yn
+            approve_yn, delete_yn, admin_yn
         from
             user
         where
