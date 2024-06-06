@@ -29,7 +29,7 @@
                       <div class="study-room-box">
                         <th:block th:each="studyDto : ${studyDtos}">
                         <div class="study-in-progress-box">
-                          <a class="study-room-a" href="#" >
+                          <a class="study-room-a" th:href="@{/studyroom(no=${studyDto.no})}" >
                           <div class="title study-box">
                             <p class="title-p" th:text="${studyDto.title}"></p>
                           </div>

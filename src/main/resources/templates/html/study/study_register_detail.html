@@ -12,6 +12,7 @@
             integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM=" src="https://code.jquery.com/jquery-3.7.0.js"></script>
     <script src="https://kit.fontawesome.com/011513753c.js" crossorigin="anonymous"></script>
     <script th:replace="~{/html/study/study_register_detail_js.html::js}"></script>
+    <script th:replace="~{/html/study/study_approve_js.html::js}"></script>
 </head>
 <body>
     <header>
@@ -40,6 +41,7 @@
                         </div>
                           <div class="board-box">
                             <div class="title-box study-detail-box">
+                                <input type="hidden" id="count_member" th:value="${studyDto.count_member}">
                               <span class="title span-first">제목 </span>
                               <span class="title-value value" th:text="${studyDto.title}"></span>
                             </div>
@@ -51,20 +53,21 @@
                             </div>
                             <div class="count-box study-detail-box">
                               <span class="count span-first">정원 </span>
-                              <span class="count-value value" th:text="${studyDto.count}"></span>
+                              <span class="count-value value" id="count" th:text="${studyDto.count}"></span>
                               <span class="value">명</span>
                             </div>
                             <div class="content-box study-detail-box">
                                   <div class="content span-first">
                                     내용
                                   </div>
-                                  <div class="content-value value" th:text="${studyDto.content}">
+                                  <div class="content-value value" style="white-space:pre;" th:text="${studyDto.content}">
 
                                   </div>
                             </div>
                           </div>
                             <div class="study-btn-box">
-                                <a class="study-regist-btn study-regist-input study-btn" th:href="@{/study/study_modify_form(no=${studyDto.no})}">수정</a>
+                                <a class="study-regist-btn study-regist-input study-btn" th:dto="${studyDto}" th:href="@{/study/study_modify_form(no=${studyDto.no})}">수정</a>
+                                <a id="appr_btn" class="study-regist-btn study-regist-input study-btn" th:no="${studyDto.no}"  th:onclick="check_approval(this.getAttribute('no'))">신청</a>
                                 <a class="study-cancel-btn study-regist-input study-btn" th:href="@{/study/study_list}">목록</a>
                             </div>
 
@@ -77,7 +80,7 @@
 
 <!--                            <th:block th:if="${studyDto.user_id != session.loginedUserDto.id}">-->
 <!--                                <div class="study-btn-box">-->
-<!--                                    <a class="study-regist-btn study-regist-input study-btn" th:href="@{/study/study_approvate_form(no=${studyDto.user_id})}">신청</a>-->
+<!--                                    <a class="study-regist-btn study-regist-input study-btn" th:href="@{/study/study_approval(no=${studyDto.user_id})}">신청</a>-->
 <!--                                    <a class="study-cancel-btn study-regist-input study-btn">목록</a>-->
 <!--                                </div>-->
 <!--                            </th:block>-->
