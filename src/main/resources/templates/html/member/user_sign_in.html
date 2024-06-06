@@ -27,7 +27,7 @@
                         <div class="sign-in-option">
                             <a href="#">아이디 찾기</a>
                             <a href="#">비밀번호 재설정</a>
-                            <a href="#">회원가입</a>
+                            <a th:href="@{/member/sign_up}">회원가입</a>
                         </div>
                     </div>
                 </div>
@@ -37,8 +37,6 @@
     <footer>
         <th:block th:replace="~{html/fragments/common_main_footer :: footer}"></th:block>
     </footer>
-<!--    <script src="/js/common_member_header.js"></script>-->
-<!--    <script src="/js/common_main_footer.js"></script>-->
     <script>
         $(document).ready(function (){
             $("#signInForm").submit(function (event){
@@ -54,6 +52,10 @@
                             $('.info-msg').css('visibility', 'visible');
                         }else if(data === "y"){
                             window.location.href = "/";
+                        }else if(data === "w"){
+                            alert("승인 대기 중인 아이디입니다. 관리자에게 문의주세요.");
+                        }else if(data === "d"){
+                            alert("탈퇴한 계정입니다.");
                         }
                     },
                     error: function (){

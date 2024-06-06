@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTO Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.pknu.ebtalk.mappers.member.user.IUserMemberMapper">
+    <!-- 회원가입 -->
+    <insert id="insertMemberSignUp" parameterType="com.pknu.ebtalk.dto.member.UserMemberDto">
+        insert into
+            user(id, edu_no, pw, phone, name, created_at)
+        values
+            (
+             #{id},
+             #{edu_no},
+             #{pw},
+             #{phone},
+             #{name},
+             now()
+            )
+    </insert>
+
+    <!-- 회원가입 - 아이디 중복 체크 -->
+    <select id="selectMemberSignUpIdCheck" parameterType="com.pknu.ebtalk.dto.member.UserMemberDto">
+        select
+            count(*)
+        from
+            user
+        where
+            id = #{id}
+    </select>
+
+    <!-- 로그인 - 계정 비교 -->
+    <select id="selectMemberSignIn" parameterType="String" resultType="String">
+        select
+            pw
+        from
+            user
+        where
+            id = #{id}
+    </select>
+
+    <!-- 로그인 - 승인, 탈퇴여부 확인 -->
+    <select id="selectMemberSignInCondition" parameterType="String" resultType="com.pknu.ebtalk.dto.member.UserMemberDto">
+        select
+            approve_yn, delete_yn
+        from
+            user
+        where
+            id = #{id}
+    </select>
+
+    <!-- 로그인 - 세션 셋팅 -->
+    <select id="selectUserSession" parameterType="String" resultType="com.pknu.ebtalk.dto.member.UserMemberDto">
+        select
+            id, edu_no, name
+        from
+            user
+        where
+            id = #{id}
+    </select>
+
+    <!-- 마이페이지 - 내 정보 불러오기  -->
+    <select id="selectUserInfo" parameterType="string" resultType="com.pknu.ebtalk.dto.member.UserMemberDto">
+        select
+            u.profile_img, u.id, u.edu_no,u.name, u.phone, e.type
+        from
+            user as u
+        left join
+            edu_course as e
+        on
+            u.edu_no = e.no
+        where
+            u.id = #{id}
+    </select>
+
+    <!-- 마이페이지 - 정보 수정(프로필 사진) -->
+    <update id="updateUserInfoProfileImg" parameterType="com.pknu.ebtalk.dto.member.UserMemberDto">
+        update
+            user
+        set
+            profile_img = #{profile_img}
+        where
+            id = #{id}
+    </update>
+
+    <!-- 마이페이지 - 정보 수정(비밀번호) -->
+    <update id="updateUserInfoPw" parameterType="com.pknu.ebtalk.dto.member.UserMemberDto">
+        update
+            user
+        set
+            pw = #{pw}
+        where
+            id = #{id}
+    </update>
+
+    <!-- 마이페이지 - 정보 수정(전화번호) -->
+    <update id="updateUserInfoPhone" parameterType="com.pknu.ebtalk.dto.member.UserMemberDto">
+        update
+            user
+        set
+            phone = #{phone}
+        where
+            id = #{id}
+    </update>
+
+    <!-- 마이페이지 - 회원탈퇴 -->
+    <update id="updateUserAccountDel" parameterType="String">
+        update
+            user
+        set
+            delete_yn = 'y'
+        where
+            id = #{id}
+    </update>
+</mapper>

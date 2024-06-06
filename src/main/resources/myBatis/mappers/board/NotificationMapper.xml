@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTO Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.pknu.ebtalk.mappers.board.INotificationMapper">
+
+    <insert id="insertNotificationInfo" parameterType="com.pknu.ebtalk.dto.board.BoardDto"
+            useGeneratedKeys="true" keyProperty="no">
+        insert into
+            board(user_id, b_category_no, title, content, views, created_at)
+        values
+            (
+                #{user_id},
+                1,
+                #{title},
+                #{content},
+                #{views},
+                now()
+            )
+    </insert>
+
+<!--    게시글 리스트         -->
+
+<!--    게시글 등록      -->
+    <select id="selectNotificationInfoByNo" parameterType="Integer" resultType="com.pknu.ebtalk.dto.board.BoardDto">
+        SELECT * FROM board
+        WHERE no = #{no};
+    </select>
+
+<!--    게시글 수정   -->
+    <update id="updateNotificationInfo" parameterType="com.pknu.ebtalk.dto.board.BoardDto">
+            UPDATE board
+            SET
+                title = #{title},
+                content = #{content}
+            WHERE
+                no = #{no}
+    </update>
+
+<!--    게시글 삭제    -->
+    <delete id="deleteNotificationInfoByNo" parameterType="Integer">
+        DELETE FROM
+                    board
+        WHERE
+            no = #{no}
+    </delete>
+    
+<!--    게시글 리스트    -->
+    <select id="selectBoardAllList" resultType="com.pknu.ebtalk.dto.board.BoardDto" >
+    SELECT * FROM board;
+ </select>
+    <update id="updateHits" parameterType="Integer">
+        UPDATE board SET views=views+1 WHERE no=#{no}
+    </update>
+</mapper>

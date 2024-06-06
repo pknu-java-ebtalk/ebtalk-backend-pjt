@@ -3,11 +3,9 @@ package com.pknu.ebtalk.dto.member;
 import com.pknu.ebtalk.service.member.user.PwConfirmCheck;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.hibernate.validator.constraints.Range;
+import org.springframework.beans.factory.annotation.Value;
 
 @Getter
 @Setter
@@ -35,6 +33,7 @@ public class UserMemberDto {
     @NotBlank(message = "이름을 입력해주세요.")
     private String name;        // 이름(사용자)
 
+    private String profile_img_path; // 프로필 사진 경로(사용자)
     private String profile_img; // 프로필 사진(사용자)
 
     private String approve_yn;  // 승인 여부(사용자)
