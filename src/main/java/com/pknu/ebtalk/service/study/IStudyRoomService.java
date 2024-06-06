@@ -10,5 +10,8 @@ public interface IStudyRoomService {
     List<StudyRoomDto> selectStudyRoomAllList(int study_no);
 
     // 스터디룸 글 등록
-    void insertStudyRoomConfirm(StudyRoomDto studyRoomDto);
+    int insertStudyRoomConfirm(StudyRoomDto studyRoomDto);
+
+    // 스터디룸 수정
+    String updateStudyRoomConfirm(StudyRoomDto studyRoomDto);
 }
