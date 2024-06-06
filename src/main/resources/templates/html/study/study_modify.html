@@ -27,7 +27,7 @@
                         <div class="study-text">
                           <p class="study-text-p">스터디 모집</p>
                         </div>
-                        <form method="post" th:action="@{/study/study_modify_confirm}">
+                        <form method="post" th:action="@{/study/study_modify_confirm}" name="study_modify_form">
                             <input type="hidden" name="_method" value="PUT">
                             <input type="hidden" name="no" id="no" th:value="${studyDto.no}">
                             <table>

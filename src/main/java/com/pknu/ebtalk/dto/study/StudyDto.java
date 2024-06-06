@@ -19,7 +19,7 @@ public class StudyDto {
     private String created_at;
 
     private String cur_date;
-    private String count_member;
+    private int count_member;
 
     private String approve_yn;
 

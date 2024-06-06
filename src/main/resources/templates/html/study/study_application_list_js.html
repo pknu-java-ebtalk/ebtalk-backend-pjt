@@ -35,11 +35,11 @@
     function ajax_approval_confirm(user_id) {
         console.log('ajax_approval_confirm() CALLED!!');
 
-        let formData = new FormData();
-        formData.append('user_id', user_id);
+        // let formData = new FormData();
+        // formData.append('user_id', user_id);
 
         $.ajax({
-            url: '/study/study_application_list_confirm',
+            url: `/study/study_application_list_confirm?user_id=${user_id}`,
             method: 'POST',
             processData: false,
             contentType: false,
@@ -54,11 +54,13 @@
                     $("#" + user_id + ' div.approve-yn-bottom a.approval').text("승인완료");
                     $("#" + user_id + ' div.approve-yn-bottom')
                         .css('background-color', '#7A86B1');
+
                 }
             },
             error: function (data) {
                 console.log('AJAX ERROR - ajax_approval_confirm()');
                 alert('문제가 발생했습니다. 다시 시도해주세요.');
+
             }
         });
 

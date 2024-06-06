@@ -7,11 +7,12 @@ import lombok.Setter;
 @Setter
 public class StudyRoomDto {
     private int no;
-    private int STUDY_NO;
+    private int study_no;
     private String user_id;
     private String content;
     private String created_at;
 
-    private int M_CATEGORY_NO;
+    private int m_category_no;
     private String type;
+    private String name;
 };
