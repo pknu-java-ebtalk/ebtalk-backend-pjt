@@ -13,7 +13,6 @@
     function init_events() {
         console.log("init_events() CALLED!!");
 
-
         let study_no = $(".study-room-box").parent().attr('no');
         console.log("m_category_no");
         // 리스트 조회
@@ -26,24 +25,153 @@
             let m_category_no = $(this).data("m_category_no");
             console.log("m_category_no: " + m_category_no);
 
-            ajax_register_memoir(study_no, m_category_no);
+            register_memoir();
 
         });
         // 등록 확인
         $(document).on("click", "#register_btn", function (e) {
             console.log("#register_btn CLICK HANDLER!!");
 
-            ajax_register_confirm_memoir(study_no, m_category_no);
+            let m_category_no = $('#well_btn').data("m_category_no");
+            let content = $('#content').val();
+
+            ajax_register_confirm_memoir(study_no, m_category_no, content);
 
         });
 
+        // 수정
+        $(document).on("click", "#modify_btn", function (e) {
+            console.log("#modify_btn CLICK HANDLER!!");
+
+            let well_no = $('#well_no').val();
+            let well_content = $('#well_content').text();
+
+            modify_memoir(well_no, well_content);
+
+
+        });
+
+        // 수정 확인
+        $(document).on("click", "#modify_ok_btn", function (e) {
+            let well_no = $('#well_no_modify').val();
+            let well_content = $('#well_content_modify').val();
+
+            ajax_modify_confirm_memoir(study_no, well_no, well_content);
+
+        })
+
     }
+
+    /*
+     * register_memoir() START
+     */
+    function register_memoir() {
+        console.log("ajax_register_memoir()");
+
+        // let appendTag = '<div class="study-room-document" id="went_well">';
+
+        // let className = $(this).data("m_category_no");
+
+        let appendTag = '<div class="study-room-document regist-study-room-box" id="went_well">';
+        appendTag += '<div class="study-room-doc-2 remove-regist-memoir-form">';
+        appendTag += '<textarea name="content" id="content"></textarea>';
+        appendTag += '</div>';
+
+        appendTag += '<div class="study-room-doc-3 remove-regist-memoir-form">';
+        appendTag += '<div class="study-room-doc-btn">';
+        appendTag += '<input class="check-btn btn font" id="register_btn" type="submit" value="확인"/>';
+        appendTag += '<input class="check-btn btn font" id="cancel_btn" type="button" onclick="cancel_regist_memoir();" value="취소"/>';
+        appendTag += '</div>';
+        appendTag += '</div>';
+        appendTag += '</div>';
+
+        $(".study-room-container").append(appendTag);
+
+        $("#plus_btn").hide();
+
+        $(".show-study-room-box").hide();
+
+        $(".regist-study-room-box").css(
+            {
+                "width": "220px", "height": "280px",
+                "border": "1px solid #fff", "background": "#fff",
+                "border-radius": "10px"
+            }
+        );
+
+        $(".study-room-doc-2").css({
+            "height": "260px",
+            "max-height": "260px",
+            "width": "220px"
+        });
+    }
+    /*
+    * register_memoir() END
+     */
+
+    /*
+     * ajax_register_confirm_memoir() START
+     */
+    function ajax_register_confirm_memoir(study_no, m_category_no, content) {
+
+        let formData = new FormData();
+        formData.append("study_no", study_no);
+        formData.append("m_category_no" ,m_category_no);
+        formData.append("content", content);
+
+        console.log(study_no);
+        console.log(m_category_no);
+        console.log(content);
+
+        $.ajax({
+            url: `/studyroom/study_register_confirm`,
+            method: 'POST',
+            processData: false,
+            contentType: false,
+            data:formData,
+            success: function (data) {
+                console.log('ajax_register_confirm_memoir');
+                console.log(data);
+
+                $(".regist-study-room-box").hide();
+
+                ajax_show_memoir_list(study_no);
+
+            },
+            error: function () {
+                console.log('AJAX ERROR - ajax_register_confirm_memoir()');
+                alert('문제가 발생했습니다. 다시 시도해주세요.');
+            }
+        });
+
+    }
+    /*
+     * ajax_register_confirm_memoir() END
+     */
+
+    /*
+     * cancel_regist_memoir() START
+     */
+    function cancel_regist_memoir() {
+        console.log("remove_regist_memoir()");
+
+        // $(".remove-regist-memoir-form").remove();
+        $(document).on("click", "#cancel_btn", function (e) {
+            console.log("#cancel_btn CLICK HANDLER!!");
+
+            location.reload();
+
+        });
+    }
+    /*
+     * cancel_regist_memoir() END
+     */
 
     /*
      * ajax_show_memoir_list() START
      */
     function ajax_show_memoir_list(study_no) {
-        console.log("show_memoir_list() CALLED!!");
+        console.log("ajax_show_memoir_list() CALLED!!");
 
         $.ajax({
             url: `/studyroom/memoir_list?study_no=${study_no}`,
@@ -54,29 +182,33 @@
                 console.log('ajax_alert_approval');
                 console.log(data);
 
-                let studyRoomDtos = data.studyRoomDtos;
+                let studyRoomDtos = data;
 
-                for (let i = 0; i < data.length; i++) {
+                for (let i = 0; i < studyRoomDtos.length; i++) {
                     if(studyRoomDtos[i].m_category_no === 1) {
-                        let appendTag = '<div class="study-room-doc-1">';
-                        appendTag += '<div class="name"><span class="doc-span doc-font" >' + studyRoomDtos[i].name + '</span></div>';
+                        let appendTag = '<div class="study-room-document show-study-room-box" data-m_category_no="1" id="went_well">'
+                        appendTag += '<input name="no" id="well_no" type="hidden" value =' + studyRoomDtos[i].no + '>';
+                        appendTag += '<div class="study-room-doc-1">';
+                        appendTag += '<div class="name"><span id="well_name" class="doc-span doc-font" >' + studyRoomDtos[i].name + '</span></div>';
                         appendTag += '<div class="date">';
                         appendTag += '<p class="doc-font">' + studyRoomDtos[i].created_at + '</p>';
                         appendTag += '</div>';
                         appendTag += '</div>';
 
                         appendTag += '<div class="study-room-doc-2">';
-                        appendTag += '<p>' + studyRoomDtos[i].content + '</p>'
+                        appendTag += '<p id="well_content" >' + studyRoomDtos[i].content + '</p>'
                         appendTag += '</div>';
 
                         appendTag += '<div class="study-room-doc-3">';
                         appendTag += '<div class="study-room-doc-btn">';
-                        appendTag += '<span class="doc-span"><a class="doc-font" th:href="@{/studyroom/study_modify_confirm(no=${' + studyRoomDtos[i].no + '})}">수정</a></span>';
+                        appendTag += '<span class="doc-span"><a class="doc-font" id="modify_btn" th:href="@{/studyroom/study_modify_confirm(no=${' + studyRoomDtos[i].no + '})}">수정</a></span>';
                         appendTag += '<span class="doc-span"><a class="doc-font" th:href="@{/studyroom/study_delete_confirm(no=${' + studyRoomDtos[i].no + '})}">삭제</a></span>';
                         appendTag += '</div>';
                         appendTag += '</div>';
+                        appendTag += '</div>';
 
-                        $("#went_well").append(appendTag);
+                        $(".study-room-container").append(appendTag);
+                        $("#plus_btn").show();
 
                     } else if(studyRoomDtos[i].m_category_no === 2) {
 
@@ -88,7 +220,7 @@
                         appendTag += '</div>';
 
                         appendTag += '<div class="study-room-doc-2">';
-                        appendTag += '<p>프로젝트관리~~~~~</p>'
+                        appendTag += '<p style="white-space:pre;">프로젝트관리~~~~~</p>'
                         appendTag += '</div>';
 
                         appendTag += '<div class="study-room-doc-3">';
@@ -120,6 +252,7 @@
                         appendTag += '</div>';
 
                         $("#to_improve").append(appendTag);
+
                     }
                 }
             },
@@ -134,37 +267,22 @@
      * ajax_show_memoir_list() END
      */
 
-    function remove_regist_memoir() {
-        console.log("remove_regist_memoir()");
-
-        // $(".remove-regist-memoir-form").remove();
-        $(document).on("click", "#cancel_btn", function (e) {
-            console.log("#cancel_btn CLICK HANDLER!!");
-
-            location.reload();
-
-        });
-    }
-
     /*
-     * ajax_register_memoir() START
+     * modify_memoir() START
      */
-    function ajax_register_memoir(study_no, m_category_no) {
-        console.log("ajax_register_memoir()");
+    function modify_memoir(well_no, well_content) {
+        console.log("modify_memoir() CALLED!!");
 
-        // let appendTag = '<div class="study-room-document" id="went_well">';
-
-        // let className = $(this).data("m_category_no");
-
-        let appendTag = '<div class="study-room-document" id="went_well">';
+        let appendTag = '<div class="study-room-document regist-study-room-box" id="went_well">';
+        appendTag += '<input type="hidden" id="well_no_modify" value=' + well_no + '>';
         appendTag += '<div class="study-room-doc-2 remove-regist-memoir-form">';
-        appendTag += '<textarea name="content"></textarea>';
+        appendTag += '<textarea name="content" id="well_content_modify">' + well_content + '</textarea>';
         appendTag += '</div>';
 
         appendTag += '<div class="study-room-doc-3 remove-regist-memoir-form">';
         appendTag += '<div class="study-room-doc-btn">';
-        appendTag += '<input class="check-btn btn font" id="register_btn" type="submit" value="확인"/>';
-        appendTag += '<input class="check-btn btn font" id="cancel_btn" type="button" onclick="remove_regist_memoir();" value="취소"/>';
+        appendTag += '<input class="check-btn btn font" id="modify_ok_btn" type="submit" value="확인"/>';
+        appendTag += '<input class="check-btn btn font" id="cancel_btn" type="button" onclick="cancel_regist_memoir();" value="취소"/>';
         appendTag += '</div>';
         appendTag += '</div>';
         appendTag += '</div>';
@@ -172,45 +290,65 @@
         $(".study-room-container").append(appendTag);
 
         $("#plus_btn").hide();
-        $("#well_btn").hide();
 
-        $("#went_well").css(
+        $(".show-study-room-box").hide();
+
+        $(".regist-study-room-box").css(
             {
-                 "width": "220px", "height": "280px",
+                "width": "220px", "height": "280px",
                 "border": "1px solid #fff", "background": "#fff",
                 "border-radius": "10px"
             }
         );
+
+        $(".study-room-doc-2").css({
+            "height": "260px",
+            "max-height": "260px",
+            "width": "220px"
+        });
+
     }
     /*
-    * ajax_register_memoir() END
+     * modify_memoir() END
      */
 
     /*
-     * ajax_register_memoir() START
+     * ajax_modify_confirm_memoir() START
      */
-    function ajax_register_confirm_memoir() {
+    function ajax_modify_confirm_memoir(study_no, well_no, well_content) {
+        console.log("ajax_modify_confirm_memoir() CALLED!!");
+
+        let formData = new FormData();
+        formData.append("well_no", well_no);
+        formData.append("well_content" ,well_content);
+
+        console.log(well_no);
+        console.log(well_content);
+
         $.ajax({
-            url: `/studyroom/study_register_confirm?study_no=${study_no}&&m_category_no=${m_category_no}`,
-            method: 'GET',
+            url: `/studyroom/study_modify_confirm`,
+            method: 'PUT',
             processData: false,
             contentType: false,
+            data:formData,
             success: function (data) {
-                console.log('ajax_alert_approval');
+                console.log('AJAX SUCCESS - ajax_modify_confirm_memoir');
                 console.log(data);
+
+                $(".regist-study-room-box").hide();
 
                 ajax_show_memoir_list(study_no);
 
             },
             error: function () {
-                console.log('AJAX ERROR - ajax_alert_approval()');
+                console.log('AJAX ERROR - ajax_register_confirm_memoir()');
                 alert('문제가 발생했습니다. 다시 시도해주세요.');
             }
         });
-
     }
     /*
-     * ajax_register_memoir() END
+     * ajax_modify_confirm_memoir() START
      */
+
 
 </script>

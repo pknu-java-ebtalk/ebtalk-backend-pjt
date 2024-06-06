@@ -16,7 +16,8 @@
             study_no = #{study_no}
     </select>
 
-    <insert id="insertStudyRoomRegistInfo" parameterType="hashmap">
+    <!--  스터디룸 글 등록  -->
+    <insert id="insertStudyRoomRegistInfo" parameterType="com.pknu.ebtalk.dto.study.StudyRoomDto">
         insert into
             memoir(m_category_no, study_no, user_id, content, created_at)
         values
@@ -29,4 +30,15 @@
             )
 
     </insert>
+    <!--  스터디룸 글 수정  -->
+    <update id="updateStudyRoomInfo" parameterType="com.pknu.ebtalk.dto.study.StudyRoomDto">
+        UPDATE
+            memoir
+        SET
+            content = #{content}
+        WHERE
+            no = #{no}
+        AND
+            user_id = #{user_id}
+    </update>
 </mapper>

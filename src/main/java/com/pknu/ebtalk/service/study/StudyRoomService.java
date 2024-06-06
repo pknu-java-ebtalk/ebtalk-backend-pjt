@@ -32,12 +32,28 @@ public class StudyRoomService implements IStudyRoomService {
      * 스터디룸 글 등록
      */
     @Override
-    public void insertStudyRoomConfirm(StudyRoomDto studyRoomDto) {
+    public int insertStudyRoomConfirm(StudyRoomDto studyRoomDto) {
         log.info("[StudyRoomService] insertStudyRoomConfirm()");
         
         // 세션
 
-        iStudyRoomMapper.insertStudyRoomRegistInfo(studyRoomDto);
+        return iStudyRoomMapper.insertStudyRoomRegistInfo(studyRoomDto);
+        
+    }
+
+    /*
+     * 스터디룸 수정
+     */
+    @Override
+    public String updateStudyRoomConfirm(StudyRoomDto studyRoomDto) {
+        log.info("[StudyRoomService] updateStudyRoomConfirm()");
+
+        int result = iStudyRoomMapper.updateStudyRoomInfo(studyRoomDto);
+        if(result > 0){
+            return  "수정이 완료되었습니다.";
+
+        }
+        return "수정에 실패하였습니다. 다시 시도해주세요.";
         
     }
 }

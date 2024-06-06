@@ -68,9 +68,15 @@
 }
 
 .study-room-doc-2{
-  min-height: 50%;
-  max-height: 50%;
+  height: 50px;
+  max-height: 260px;
+  width: 220px;
   overflow-y: scroll;
+}
+
+.study-room-doc-2{
+  margin-left: 4.5px;
+  font-family: 'S-CoreDream-3Light';
 }
 
 .study-room-doc-2::-webkit-scrollbar{
@@ -79,6 +85,7 @@
 
 .doc-font {
   color: rgba(0, 0, 0, 0.438);
+  margin-left: 5px;
 }
 
 a.doc-font:hover {
@@ -131,14 +138,15 @@ textarea{
   width: 90%;
   height: 280px;
   line-height: 20px;
+  resize: none;
 }
 
-.study-room-doc-2{
-  height: 260px;
-  max-height: 260px;
-  width: 220px;
-  /*overflow-y: scroll;*/
-}
+/*.study-room-doc-2{*/
+/*  height: 260px;*/
+/*  max-height: 260px;*/
+/*  width: 220px;*/
+/*  !*overflow-y: scroll;*!*/
+/*}*/
 
 .study-room-doc-3{
   width: 210px;
