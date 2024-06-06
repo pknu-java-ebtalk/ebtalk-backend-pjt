@@ -87,18 +87,22 @@
 
     <!--  스터디 신청  -->
     <select id="selectStudyCount" parameterType="com.pknu.ebtalk.dto.study.StudyDto" resultType="com.pknu.ebtalk.dto.study.StudyDto">
-        select no, count,
+        select
+            no, count, count_member
+        from
+            study s
+        join
             (select
-                count(study_no)
+                study_no,
+                count(study_no) as count_member
             from
                 study_mate
             where
                 study_no = #{no}
             and
-                approve_yn = 'Y'
-            group by
-                study_no) as count_member
-        from study
+                approve_yn = 'Y')as sm
+        on
+            s.no = sm.study_no;
     </select>
 
     <select id="selectStudyMateUserId" parameterType="com.pknu.ebtalk.dto.study.StudyDto" resultType="Integer">
