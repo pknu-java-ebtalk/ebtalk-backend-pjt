@@ -17,6 +17,7 @@
 .study-room-box {
   width: 250px;
   height: 550px;
+  max-height: 550px;
   border: 1px solid var(--aside_gray);
   background: var(--aside_gray);
   border-radius: 20px;
@@ -24,6 +25,8 @@
   font-weight: 550;
   display: inline-block;
   margin-right: 10px;
+  overflow: hidden;
+  overflow-y: scroll;
 }
 
 .study-room-category{
@@ -65,6 +68,7 @@
 }
 
 .study-room-doc-2{
+  min-height: 50%;
   max-height: 50%;
   overflow-y: scroll;
 }
@@ -90,6 +94,7 @@ a.doc-font:hover {
   border-radius: 15px;
   text-align: center;
   line-height: 10px;
+  margin-top: 10px;
 }
 
 button {
@@ -99,4 +104,79 @@ button {
   border-radius: 60px;
   color: #fff;
   cursor: pointer;
+}
+
+/*등록 박스*/
+/*.study-room-document{*/
+/*  padding: 10px;*/
+/*  width: 220px;*/
+/*  height: 300px;*/
+/*  border: 1px solid #fff;*/
+/*  background: #fff;*/
+/*  border-radius: 10px;*/
+/*  margin: 20px 0;*/
+/*}*/
+
+/*.study-room-document > div{*/
+/*  margin-bottom: 5px;*/
+/*}*/
+
+textarea{
+  font-family: 'S-CoreDream-3Light';
+  border: none;
+  background-color: var(--aside_gray);
+  padding: 10px;
+  resize: none;
+  font-size: 0.85em;
+  width: 90%;
+  height: 280px;
+  line-height: 20px;
+}
+
+.study-room-doc-2{
+  height: 260px;
+  max-height: 260px;
+  width: 220px;
+  /*overflow-y: scroll;*/
+}
+
+.study-room-doc-3{
+  width: 210px;
+}
+
+/*.study-room-doc-2::-webkit-scrollbar{*/
+/*  display: block;*/
+/*}*/
+
+textarea:focus{
+  outline: none;
+}
+
+textarea::-webkit-scrollbar{
+  display: block;
+}
+
+
+.btn{
+  font-family: 'S-CoreDream-3Light';
+  color: rgba(0, 0, 0, 0.438);
+  border: none;
+  background: #fff;
+  margin-top: 5px;
+}
+
+#register_btn{
+  margin-right: 10px;
+}
+
+.btn:hover{
+  color: #000;
+}
+
+.study-room-doc-btn{
+  float: right;
+}
+
+.container{
+  width: 220px;
 }
