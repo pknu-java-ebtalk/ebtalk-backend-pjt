@@ -4,6 +4,8 @@ import com.pknu.ebtalk.dto.member.UserMemberDto;
 import jakarta.servlet.http.HttpSession;
 import org.apache.ibatis.annotations.Mapper;
 
+import java.util.HashMap;
+
 @Mapper
 public interface IUserMemberMapper {
     // 아이디 중복 체크
@@ -18,11 +20,11 @@ public interface IUserMemberMapper {
     // 로그인 - 승인, 탈퇴여부 확인
     UserMemberDto selectMemberSignInCondition(String id);
 
-    // 로그인 - 세션 셋팅
+    // 로그인 - 세션 셋팅(이름, 교육과정)
     UserMemberDto selectUserSession(String id);
 
-    // 세션 확인
-    String checkSession(HttpSession session);
+    // 로그인 - 아이디 찾기
+    String selectUserFindId(HashMap<String, String> params);
 
     // 마이페이지 정보 읽어오기
     UserMemberDto selectUserInfo(String id);
