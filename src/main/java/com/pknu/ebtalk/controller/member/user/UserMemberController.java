@@ -12,6 +12,8 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
+
 @Log4j2
 @Controller
 @RequiredArgsConstructor
@@ -73,6 +75,44 @@ public class UserMemberController {
         session.setAttribute("loginUser", loginUser);
 
         return userMemberService.selectUserSignInCondition(id);
+    }
+
+    // 로그인 - 아이디 찾기 페이지 이동
+    @GetMapping("sign_in_find_id")
+    public String signInFindId() {
+        log.info("[UserMemberController] signInFindId()");
+
+        return "/html/member/user_find_id";
+    }
+
+    // 로그인 - 아이디 찾기
+    @PostMapping("/sign_in_find_id_result")
+    public String signInFindIdResult(@RequestParam("name") String name, @RequestParam("phone") String phone, Model model) {
+        log.info("[UserMemberController] signInFindIdResult()");
+
+        HashMap<String, String> params = new HashMap<>();
+
+        params.put("name", name);
+        params.put("phone", phone);
+
+        String id = userMemberService.selectUserFindId(params);
+
+        if(id == null){
+            return "/html/member/user_find_id_not_found";
+        }
+
+        model.addAttribute("id", id);
+        model.addAttribute("name", name);
+
+        return "/html/member/user_find_id_found";
+    }
+
+    // 로그인 - 비밀번호 재설정
+    @GetMapping("sign_in_reset_pw")
+    public String signInChangePw(){
+        log.info("[UserMemberController] signInResetPw()");
+
+        return "/html/member/user_reset_pw";
     }
 
     // 로그아웃

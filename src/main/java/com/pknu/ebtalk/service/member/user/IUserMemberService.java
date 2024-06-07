@@ -6,6 +6,7 @@ import jakarta.servlet.http.HttpSession;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.HashMap;
 
 public interface IUserMemberService {
     // 회원가입
@@ -28,6 +29,9 @@ public interface IUserMemberService {
     
     // 로그인 - 세션 셋팅
     UserMemberDto selectUserSession(String id);
+
+    // 로그인 - 아이디 찾기
+    String selectUserFindId(HashMap<String, String> params);
 
     // 마이페이지 - 내 정보 가져오기
     UserMemberDto selectUserInfo(String id);

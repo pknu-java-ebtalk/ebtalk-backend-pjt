@@ -57,6 +57,16 @@
             id = #{id}
     </select>
 
+    <!-- 로그인 - 아이디 찾기 -->
+    <select id="selectUserFindId" parameterType="HashMap" resultType="String">
+        select
+            id
+        from
+            user
+        where
+            name = #{name} and phone = #{phone}
+    </select>
+
     <!-- 마이페이지 - 내 정보 불러오기  -->
     <select id="selectUserInfo" parameterType="string" resultType="com.pknu.ebtalk.dto.member.UserMemberDto">
         select

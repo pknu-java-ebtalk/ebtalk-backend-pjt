@@ -24,7 +24,7 @@
                                 회원가입 요청 리스트
                             </p>
                             <p class="approve-list-header approve-list-watting-count">
-                                승인 대기 <span class="watting-count">01</span>명
+                                승인 대기 <span class="watting-count" th:text="${#numbers.formatInteger(count, 2)}"></span>명
                             </p>
                         </div>
                         <div class="approve-list-contents-box">
@@ -39,114 +39,26 @@
                             </table>
                             <div class="approve-list-table-datas-box">
                                 <table class="approve-list-table-datas">
-                                    <tr class="approve-list-table-data">
-                                        <td class="table-data table-name">이은지</td>
-                                        <td class="table-data table-id">eunji@gmail.com</td>
-                                        <td class="table-data table-phone">010-1234-5678</td>
-                                        <td class="table-data table-edu-type">JAVA</td>
-                                        <td class="table-data table-approve-status">
-                                            <button type="button" class="btn approve-btn font">승인</button>
-                                            <button type="button" class="btn reject-btn font">반려</button>
+                                    <tr class="approve-list-table-data" th:each="user : ${wattingUserList}">
+                                        <td class="table-data table-name" th:text="${user.name}"></td>
+                                        <td class="table-data table-id" th:text="${user.id}"></td>
+                                        <td class="table-data table-phone" th:text="${user.phone}"></td>
+                                        <td class="table-data table-edu-type">
+                                            <span th:switch="${user.edu_no}">
+                                                <span th:case="1">JAVA</span>
+                                                <span th:case="2">AI</span>
+                                                <span th:case="3">IoT</span>
+                                            </span>
                                         </td>
-                                    </tr>
-                                    <tr class="approve-list-table-data">
-                                        <td class="table-data table-name">하늘보리</td>
-                                        <td class="table-data table-id">eunji@gmail.com</td>
-                                        <td class="table-data table-phone">010-1234-5678</td>
-                                        <td class="table-data table-edu-type">JAVA</td>
                                         <td class="table-data table-approve-status">
-                                            <button type="button" class="btn approve-btn font">승인</button>
-                                            <button type="button" class="btn reject-btn font">반려</button>
-                                        </td>
-                                    </tr>
-                                    <tr class="approve-list-table-data">
-                                        <td class="table-data table-name">이은지</td>
-                                        <td class="table-data table-id">eunji@gmail.com</td>
-                                        <td class="table-data table-phone">010-1234-5678</td>
-                                        <td class="table-data table-edu-type">JAVA</td>
-                                        <td class="table-data table-approve-status">
-                                            <button type="button" class="btn approve-btn font">승인</button>
-                                            <button type="button" class="btn reject-btn font">반려</button>
-                                        </td>
-                                    </tr>
-                                    <tr class="approve-list-table-data">
-                                        <td class="table-data table-name">이은지</td>
-                                        <td class="table-data table-id">eunji@gmail.com</td>
-                                        <td class="table-data table-phone">010-1234-5678</td>
-                                        <td class="table-data table-edu-type">JAVA</td>
-                                        <td class="table-data table-approve-status">
-                                            <button type="button" class="btn approve-btn font">승인</button>
-                                            <button type="button" class="btn reject-btn font">반려</button>
-                                        </td>
-                                    </tr>
-                                    <tr class="approve-list-table-data">
-                                        <td class="table-data table-name">이은지</td>
-                                        <td class="table-data table-id">eunji@gmail.com</td>
-                                        <td class="table-data table-phone">010-1234-5678</td>
-                                        <td class="table-data table-edu-type">JAVA</td>
-                                        <td class="table-data table-approve-status">
-                                            <button type="button" class="btn approve-btn font">승인</button>
-                                            <button type="button" class="btn reject-btn font">반려</button>
-                                        </td>
-                                    </tr>
-                                    <tr class="approve-list-table-data">
-                                        <td class="table-data table-name">이은지</td>
-                                        <td class="table-data table-id">eunji@gmail.com</td>
-                                        <td class="table-data table-phone">010-1234-5678</td>
-                                        <td class="table-data table-edu-type">JAVA</td>
-                                        <td class="table-data table-approve-status">
-                                            <button type="button" class="btn approve-btn font">승인</button>
-                                            <button type="button" class="btn reject-btn font">반려</button>
-                                        </td>
-                                    </tr>
-                                    <tr class="approve-list-table-data">
-                                        <td class="table-data table-name">이은지</td>
-                                        <td class="table-data table-id">eunji@gmail.com</td>
-                                        <td class="table-data table-phone">010-1234-5678</td>
-                                        <td class="table-data table-edu-type">JAVA</td>
-                                        <td class="table-data table-approve-status">
-                                            <button type="button" class="btn approve-btn font">승인</button>
-                                            <button type="button" class="btn reject-btn font">반려</button>
-                                        </td>
-                                    </tr>
-                                    <tr class="approve-list-table-data">
-                                        <td class="table-data table-name">이은지</td>
-                                        <td class="table-data table-id">eunji@gmail.com</td>
-                                        <td class="table-data table-phone">010-1234-5678</td>
-                                        <td class="table-data table-edu-type">JAVA</td>
-                                        <td class="table-data table-approve-status">
-                                            <button type="button" class="btn approve-btn font">승인</button>
-                                            <button type="button" class="btn reject-btn font">반려</button>
-                                        </td>
-                                    </tr>
-                                    <tr class="approve-list-table-data">
-                                        <td class="table-data table-name">이은지</td>
-                                        <td class="table-data table-id">eunji@gmail.com</td>
-                                        <td class="table-data table-phone">010-1234-5678</td>
-                                        <td class="table-data table-edu-type">AI</td>
-                                        <td class="table-data table-approve-status">
-                                            <button type="button" class="btn approve-btn font">승인</button>
-                                            <button type="button" class="btn reject-btn font">반려</button>
-                                        </td>
-                                    </tr>
-                                    <tr class="approve-list-table-data">
-                                        <td class="table-data table-name">이은지</td>
-                                        <td class="table-data table-id">eunji@gmail.com</td>
-                                        <td class="table-data table-phone">010-1234-5678</td>
-                                        <td class="table-data table-edu-type">IoT</td>
-                                        <td class="table-data table-approve-status">
-                                            <button type="button" class="btn approve-btn font">승인</button>
-                                            <button type="button" class="btn reject-btn font">반려</button>
-                                        </td>
-                                    </tr>
-                                    <tr class="approve-list-table-data">
-                                        <td class="table-data table-name">이은지</td>
-                                        <td class="table-data table-id">eunji@gmail.com</td>
-                                        <td class="table-data table-phone">010-1234-5678</td>
-                                        <td class="table-data table-edu-type">JAVA</td>
-                                        <td class="table-data table-approve-status">
-                                            <button type="button" class="btn approve-btn font">승인</button>
-                                            <button type="button" class="btn reject-btn font">반려</button>
+                                            <form th:action="@{/admin/approve_list_approve}" method="post" style="display:inline;">
+                                                <input type="hidden" name="id" th:value="${user.id}" />
+                                                <button type="submit" class="btn approve-btn font">승인</button>
+                                            </form>
+                                            <form th:action="@{/admin/approve_list_refuse}" method="post" style="display:inline;">
+                                                <input type="hidden" name="id" th:value="${user.id}" />
+                                                <button type="submit" class="btn reject-btn font">반려</button>
+                                            </form>
                                         </td>
                                     </tr>
                                 </table>
@@ -160,9 +72,5 @@
     <footer>
         <th:block th:replace="~{html/fragments/common_main_footer :: footer}"></th:block>
     </footer>
-<!--    <script src="/js/common_main_header.js"></script>-->
-<!--    <script src="/js/common_main_aside.js"></script>-->
-<!--    <script src="/js/common_main_footer.js"></script>-->
-    <!-- ⭐aside에 내용 추가 시 여기에 js 파일 추가⭐ -->
 </body>
 </html>
