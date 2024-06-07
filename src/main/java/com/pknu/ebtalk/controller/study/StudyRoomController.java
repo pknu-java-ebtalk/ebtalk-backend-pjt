@@ -25,7 +25,7 @@ public class StudyRoomController {
     public String studyRoomForm(@RequestParam int no, Model model) {
         log.info("[StudyRoomController] studyRoomForm()");
 
-        model.addAttribute("no", no);
+        model.addAttribute("study_no", no);
 
         return "/html/study/study_room";
     }
@@ -42,7 +42,7 @@ public class StudyRoomController {
 //        UserMemberDto userMemberDto =  (UserMemberDto) session.getAttribute("id");
 //        studyRoomDto.setUser_id(userMemberDto.getId());
 
-        studyRoomDto.setUser_id("eunji123");
+        studyRoomDto.setUser_id("user1@gmail.com");
 
          return studyRoomService.insertStudyRoomConfirm(studyRoomDto);
 
@@ -68,11 +68,25 @@ public class StudyRoomController {
     public String studyRoomModifyConfirm(StudyRoomDto studyRoomDto, HttpSession session) {
         log.info("[StudyRoomController] studyRoomModifyConfirm()");
 
-        studyRoomDto.setUser_id("eunji123");
+        studyRoomDto.setUser_id("user1@gmail.com");
         log.info(studyRoomDto.getContent());
         log.info(studyRoomDto.getNo());
 
         return studyRoomService.updateStudyRoomConfirm(studyRoomDto);
+
+    }
+
+    /*
+     * 스터디룸 삭제
+     */
+    @ResponseBody
+    @DeleteMapping(value = {"/study_delete_confirm"})
+    public int studyRoomDeleteConfirm(StudyRoomDto studyRoomDto, HttpSession session) {
+        log.info("[StudyRoomController] studyRoomDeleteConfirm()");
+
+        studyRoomDto.setUser_id("user1@gmail.com");
+
+        return studyRoomService.deleteStudyRoomConfirm(studyRoomDto);
 
     }
 }

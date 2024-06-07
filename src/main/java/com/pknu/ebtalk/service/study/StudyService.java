@@ -128,7 +128,7 @@ public class StudyService implements IStudyService{
         // UserMemberDto loginedUserDto = (UserMemberDto) session.getAttribute("loginedUserDto");
 
         Map<String, String> msgData = new HashMap<>();
-        String user_id = "x";
+        String user_id = "user1@gmail.com";
 
         StudyDto studyDto = new StudyDto();
         studyDto.setUser_id(user_id);
