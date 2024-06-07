@@ -6,9 +6,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @Log4j2
 @Service
@@ -54,6 +52,17 @@ public class StudyRoomService implements IStudyRoomService {
 
         }
         return "수정에 실패하였습니다. 다시 시도해주세요.";
+        
+    }
+
+    /*
+     * 스터디룸 삭제
+     */
+    @Override
+    public int deleteStudyRoomConfirm(StudyRoomDto studyRoomDto) {
+        log.info("[StudyRoomService] deleteStudyRoomConfirm()");
+
+        return iStudyRoomMapper.deleteStudyRoomConfirm(studyRoomDto);
         
     }
 }

@@ -41,4 +41,14 @@
         AND
             user_id = #{user_id}
     </update>
+
+    <!--  스터디룸 삭제  -->
+    <delete id="deleteStudyRoomConfirm" parameterType="com.pknu.ebtalk.dto.study.StudyRoomDto" >
+        DELETE FROM
+                   memoir
+        WHERE
+            no = #{no}
+        AND
+            user_id = #{user_id}
+    </delete>
 </mapper>
