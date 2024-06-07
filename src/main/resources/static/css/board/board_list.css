@@ -117,19 +117,44 @@ dt {
 
 .page-link,
 .page-first,
-.page-last {
-    margin: 0 5px;
+.page-last,
+.page-prev,
+.page-next {
+    margin: 0 10px; /* 각 버튼 사이에 10px의 간격을 추가합니다 */
     padding: 10px 15px;
     text-decoration: none;
+    font-size: 16px; /* 모든 화살표의 크기를 동일하게 설정합니다 */
 }
 
 .page-link:hover,
 .page-first:hover,
-.page-last:hover {
+.page-last:hover,
+.page-prev:hover,
+.page-next:hover {
     text-decoration: underline;
 }
-/* 전체 테이블 스타일 */
 
+.pagination a {
+    text-decoration: none;
+}
+
+.pagination a:first-child {
+    margin-left: 0;
+}
+
+.pagination a:last-child {
+    margin-right: 0;
+}
+/* 페이지네이션 버튼 간격 조정 */
+.pagination a {
+    margin: 0 5px;
+}
+
+.pagination a span {
+    padding: 5px;
+}
+
+/* 전체 테이블 스타일 */
 .board_list th, .board_list td {
     padding: 8px;
 }
