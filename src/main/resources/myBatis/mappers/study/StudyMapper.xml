@@ -82,11 +82,13 @@
     </select>
 
     <!--  스터디 모집글 삭제  -->
-    <delete id="deleteStudyInfoByNo" parameterType="Integer">
+    <delete id="deleteStudyInfoByNo" parameterType="com.pknu.ebtalk.dto.study.StudyDto">
         DELETE FROM
                    study
         WHERE
             no = #{no}
+        and
+            user_id = #{user_id}
     </delete>
 
     <!--  스터디 신청  -->

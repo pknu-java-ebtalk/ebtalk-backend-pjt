@@ -6,12 +6,9 @@ import com.pknu.ebtalk.service.study.StudyService;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
-import org.apache.catalina.User;
-import org.springframework.boot.web.servlet.server.Session;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
 import java.util.Map;
@@ -36,10 +33,14 @@ public class StudyController {
     }
 
     @PostMapping(value = {"/study_register_confirm"})
-    public String studyRegisterConfirm(StudyDto studyDto, Model model) {
+    public String studyRegisterConfirm(StudyDto studyDto, Model model, HttpSession session) {
         log.info("[StudyController] studyRegisterConfirm()");
 
-        studyDto.setUser_id("user1@gmail.com");
+        // 세션 연결
+        UserMemberDto loginedUserDto = (UserMemberDto) session.getAttribute("loginUser");
+        log.info("[StudyController] loginedUserDto: {}", loginedUserDto);
+
+        studyDto.setUser_id(loginedUserDto.getId());
 
         log.info(studyDto.getContent());
 
@@ -78,8 +79,9 @@ public class StudyController {
         log.info("[StudyController] studyModifyConfirm()");
         log.info(studyDto.getNo());
 
-//        UserMemberDto userMemberDto = (UserMemberDto) session.getAttribute("");
-
+        // 세션 연결
+        UserMemberDto loginedUserDto = (UserMemberDto) session.getAttribute("loginUser");
+        studyDto.setUser_id(loginedUserDto.getId());
 
         studyDto = studyService.updateStudyConfirm(studyDto);
 
@@ -122,10 +124,16 @@ public class StudyController {
      * 스터디 모집글 삭제
      */
     @GetMapping(value = {"/study_delete_confirm"})
-    public String delelteStudyConfirm(@RequestParam int no){
+    public String delelteStudyConfirm(@RequestParam int no, HttpSession session){
         log.info("[StudyController] deleteStudyConfirm()");
 
-        studyService.deleteStudyConfirm(no);
+        // 세션 연결
+        UserMemberDto loginedUserDto = (UserMemberDto) session.getAttribute("loginUser");
+        StudyDto studyDto = new StudyDto();
+        studyDto.setUser_id(loginedUserDto.getId());
+        studyDto.setNo(no);
+
+        studyService.deleteStudyConfirm(studyDto);
 
         return "redirect:/study/study_list";
 
@@ -136,14 +144,17 @@ public class StudyController {
      */
     @ResponseBody
     @GetMapping(value = {"/study_approval"})
-    public Map<String, String> studyApproval(@RequestParam int no, Model model){
+    public Map<String, String> studyApproval(@RequestParam int no, Model model, HttpSession session){
         log.info("[StudyController] studyApproval()");
         log.info(no);
 
-//        studyDto.setNo(no);
-//        studyService.insertStudyApproval(user_id, no);
+        // 세션 연결
+        UserMemberDto loginedUserDto = (UserMemberDto) session.getAttribute("loginUser");
+        StudyDto studyDto = new StudyDto();
+        studyDto.setUser_id(loginedUserDto.getId());
+        studyDto.setNo(no);
 
-        return studyService.insertStudyApproval(no);
+        return studyService.insertStudyApproval(studyDto);
 
     }
     
@@ -151,11 +162,13 @@ public class StudyController {
      * 스터디 관리 페이지 - 진행중인 스터디 리스트
      */
     @GetMapping(value = {"/study_in_progress_list"})
-    public String showStudyInProgressList(Model model){
+    public String showStudyInProgressList(Model model, HttpSession session){
         log.info("[StudyController] showStudyInProgressList()");
 
+        // 세션 연결
+        UserMemberDto loginedUserDto = (UserMemberDto) session.getAttribute("loginUser");
         StudyDto studyDto = new StudyDto();
-        studyDto.setUser_id("user1@gmail.com");
+        studyDto.setUser_id(loginedUserDto.getId());
 
         model.addAttribute("studyDtos", studyService.selectStudyInProgressByUId(studyDto));
 
@@ -169,13 +182,9 @@ public class StudyController {
     public String showStudyApplicationList(Model model, HttpSession session){
         log.info("[StudyController] showStudyApplicationList()");
 
-        // 로그인 세션 가져오기
-//        StudyDto studyDto = new StudyDto();
-//        studyDto.setUser_id("eunji123");
-//        UserMemberDto userMemberDto = (UserMemberDto) session.getAttribute("");
-//        String user_id = userMemberDto.getId();
-        String user_id = "user1@gmail.com";
-
+        // 세션 연결
+        UserMemberDto loginedUserDto = (UserMemberDto) session.getAttribute("loginUser");
+        String user_id = loginedUserDto.getId();
 
         List<StudyDto> studyDtos = studyService.selectStudyApplicationListById(user_id);
 

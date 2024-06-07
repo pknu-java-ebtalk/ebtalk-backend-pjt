@@ -1,5 +1,6 @@
 package com.pknu.ebtalk.controller.study;
 
+import com.pknu.ebtalk.dto.member.UserMemberDto;
 import com.pknu.ebtalk.dto.study.StudyRoomDto;
 import com.pknu.ebtalk.service.study.StudyRoomService;
 import jakarta.servlet.http.HttpSession;
@@ -39,10 +40,9 @@ public class StudyRoomController {
         log.info("[StudyRoomController] studyRoomRegisterConfirm()");
 
         // 세션에서 로그인한 사용자 들고오기
-//        UserMemberDto userMemberDto =  (UserMemberDto) session.getAttribute("id");
-//        studyRoomDto.setUser_id(userMemberDto.getId());
-
-        studyRoomDto.setUser_id("user1@gmail.com");
+        // 세션 연결
+        UserMemberDto loginedUserDto = (UserMemberDto) session.getAttribute("loginUser");
+        studyRoomDto.setUser_id(loginedUserDto.getId());
 
          return studyRoomService.insertStudyRoomConfirm(studyRoomDto);
 
@@ -68,7 +68,10 @@ public class StudyRoomController {
     public String studyRoomModifyConfirm(StudyRoomDto studyRoomDto, HttpSession session) {
         log.info("[StudyRoomController] studyRoomModifyConfirm()");
 
-        studyRoomDto.setUser_id("user1@gmail.com");
+        // 세션에서 로그인한 사용자 들고오기
+        UserMemberDto loginedUserDto = (UserMemberDto) session.getAttribute("loginUser");
+        studyRoomDto.setUser_id(loginedUserDto.getId());
+
         log.info(studyRoomDto.getContent());
         log.info(studyRoomDto.getNo());
 
@@ -84,7 +87,8 @@ public class StudyRoomController {
     public int studyRoomDeleteConfirm(StudyRoomDto studyRoomDto, HttpSession session) {
         log.info("[StudyRoomController] studyRoomDeleteConfirm()");
 
-        studyRoomDto.setUser_id("user1@gmail.com");
+        UserMemberDto loginedUserDto = (UserMemberDto) session.getAttribute("loginUser");
+        studyRoomDto.setUser_id(loginedUserDto.getId());
 
         return studyRoomService.deleteStudyRoomConfirm(studyRoomDto);
 

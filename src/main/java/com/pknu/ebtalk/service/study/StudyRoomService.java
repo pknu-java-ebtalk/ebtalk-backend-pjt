@@ -32,8 +32,6 @@ public class StudyRoomService implements IStudyRoomService {
     @Override
     public int insertStudyRoomConfirm(StudyRoomDto studyRoomDto) {
         log.info("[StudyRoomService] insertStudyRoomConfirm()");
-        
-        // 세션
 
         return iStudyRoomMapper.insertStudyRoomRegistInfo(studyRoomDto);
         
