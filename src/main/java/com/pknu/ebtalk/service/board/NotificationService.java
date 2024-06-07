@@ -1,5 +1,6 @@
 package com.pknu.ebtalk.service.board;
 
+import com.pknu.ebtalk.vo.PaginationVo;
 import com.pknu.ebtalk.dto.board.BoardDto;
 import com.pknu.ebtalk.mappers.board.INotificationMapper;
 import lombok.RequiredArgsConstructor;
@@ -9,29 +10,28 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-
 @Service
 @RequiredArgsConstructor
-public class NotificationService implements INotificationService{
+public class NotificationService implements INotificationService {
     private static final Logger log = LoggerFactory.getLogger(NotificationService.class);
     private final INotificationMapper notificationMappers;
 
-//게시글 등록
+    // 게시글 등록
     @Override
     public BoardDto insertNotificationInfo(BoardDto boardDto) {
-        int result = notificationMappers.insertNotificationInfo(boardDto);      //DB에 게시글 정보 저장 
-//        값이 db에 insert가 되야 1이상의 값이 반환됨
+        int result = notificationMappers.insertNotificationInfo(boardDto);      //DB에 게시글 정보 저장
+        // 값이 db에 insert가 되야 1이상의 값이 반환됨
 
         if (result > 0) {
             int no = boardDto.getNo();  // dto에 있는 no 불러옴
-//            int 타입의 no라는 변수에 Dto에 있는 no를 저장해준다
+            // int 타입의 no라는 변수에 Dto에 있는 no를 저장해준다
             boardDto = notificationMappers.selectNotificationInfoByNo(no);
-//            mapper.XMl 파일에서 select 한 정보 값들을 boardDto 에 담아준다
+            // mapper.XML 파일에서 select 한 정보 값들을 boardDto 에 담아준다
         }
         return boardDto;
     }
 
-    //  게시글 수정
+    // 게시글 수정
     @Override
     public BoardDto selectNotificationInfoByNo(int no) {
         log.info("[NotificationService] selectNotificationInfoByNo");
@@ -54,22 +54,21 @@ public class NotificationService implements INotificationService{
         return boardDto;
     }
 
-
-//    게시글 삭제
-    @Override 
-    public void deleteBoardConfirm(int no){
+    // 게시글 삭제
+    @Override
+    public void deleteBoardConfirm(int no) {
         log.info("[NotificationService] deleteBoardConfirm");
-        
+
         int result = notificationMappers.deleteNotificationInfoByNo(no);
-        
+
         if (result > 0) {
             log.info("삭제 성공");
-        } else{
+        } else {
             log.info("삭제 실패");
         }
     }
 
-//    전체 게시글
+    // 전체 게시글
     @Override
     public List<BoardDto> selectNotificationAllLits() {
         log.info("[NotificationService] selectNotificationAllLits");
@@ -78,7 +77,7 @@ public class NotificationService implements INotificationService{
         return boardList;
     }
 
-//    게시글 보기
+    // 게시글 보기
     @Override
     public BoardDto findBoardByNo(int no) {
         log.info("[NotificationService] findBoardByNo");
@@ -87,5 +86,17 @@ public class NotificationService implements INotificationService{
         notificationMappers.updateHits(no);
 
         return boardDto;
+    }
+
+    
+    // 페이징 기능구현
+    @Override
+    public int countNotifications() {
+        return this.notificationMappers.getCount();
+    }
+
+    @Override
+    public List<BoardDto> selectNotificationListPaged(PaginationVo paginationVo) {
+        return this.notificationMappers.getListPage(paginationVo);
     }
 }
