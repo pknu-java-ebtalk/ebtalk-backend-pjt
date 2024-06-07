@@ -85,11 +85,14 @@ public class UserMemberService implements IUserMemberService {
 
         String approve_yn = userMemberDto.getApprove_yn();
         String delete_yn = userMemberDto.getDelete_yn();
+        String admin_yn = userMemberDto.getAdmin_yn();
 
         if(delete_yn.equals("y")){  // 탈퇴한 계정일 경우
             return "d";
         } else if(approve_yn.equals("n")){  // 승인되지 않은 계정일 경우
             return "w";
+        } else if(admin_yn.equals("y")){    // 관리자인 경우
+            return "a";
         }
 
         return "y";

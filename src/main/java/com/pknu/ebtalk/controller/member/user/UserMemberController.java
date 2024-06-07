@@ -68,11 +68,11 @@ public class UserMemberController {
             return "n";
         }
 
-        UserMemberDto user = userMemberService.selectUserSession(id);
+        UserMemberDto loginUser = userMemberService.selectUserSession(id);
 
-        session.setAttribute("loginedUserMemberDto", user);
+        session.setAttribute("loginUser", loginUser);
 
-        return userMemberService.selectUserSignInCondition(userMemberDto.getId());
+        return userMemberService.selectUserSignInCondition(id);
     }
 
     // 로그아웃
@@ -91,7 +91,7 @@ public class UserMemberController {
     public String userMyPage(HttpSession session) {
         log.info("[UserMemberController] userMyPage()");
 
-        if(session.getAttribute("id") == null){
+        if(session.getAttribute("loginUser") == null){
             return "redirect:/member/sign_in";
         }
 
@@ -103,7 +103,7 @@ public class UserMemberController {
     public String userMyPageCheck(HttpSession session, UserMemberDto userMemberDto, Model model) {
         log.info("[UserMemberController] userMyPageCheck()");
 
-        userMemberDto.setId(String.valueOf(session.getAttribute("id")));
+        userMemberDto.setId(((UserMemberDto)session.getAttribute("loginUser")).getId());
 
         if(!userMemberService.selectUserSignIn(userMemberDto)){
             model.addAttribute("error", true);
@@ -118,11 +118,11 @@ public class UserMemberController {
     public String userMyPage(Model model, HttpSession session) {
         log.info("[UserMemberController] userMyPage()");
 
-        if(session.getAttribute("id") == null){
+        if(session.getAttribute("loginUser") == null){
             return "redirect:/member/sign_in";
         }
 
-        UserMemberDto userMemberDto = userMemberService.selectUserInfo(String.valueOf(session.getAttribute("id")));
+        UserMemberDto userMemberDto = userMemberService.selectUserInfo(((UserMemberDto)session.getAttribute("loginUser")).getId());
         model.addAttribute("userMemberDto", userMemberDto);
         return "/html/member/user_info_view";
     }
@@ -132,11 +132,11 @@ public class UserMemberController {
     public String userMyPageChange(Model model, HttpSession session) {
         log.info("[UserMemberController] userMyPageChange()");
 
-        if(session.getAttribute("id") == null){
+        if(session.getAttribute("loginUser") == null){
             return "redirect:/member/sign_in";
         }
 
-        UserMemberDto userMemberDto = userMemberService.selectUserInfo(String.valueOf(session.getAttribute("id")));
+        UserMemberDto userMemberDto = userMemberService.selectUserInfo(((UserMemberDto)session.getAttribute("loginUser")).getId());
         model.addAttribute("userMemberDto", userMemberDto);
         return "/html/member/user_info_change";
     }
@@ -146,11 +146,11 @@ public class UserMemberController {
     public String userMyPageChangeSubmit(Model model, HttpSession session, @ModelAttribute UserMemberDto userMemberDto) {
         log.info("[UserMemberController] userMyPageChangeSubmit()");
 
-        if (session.getAttribute("id") == null) {
+        if(session.getAttribute("loginUser") == null){
             return "redirect:/member/sign_in";
         }
 
-        userMemberDto.setId(String.valueOf(session.getAttribute("id")));
+        userMemberDto.setId(((UserMemberDto)session.getAttribute("loginUser")).getId());
 
         if (!userMemberDto.getProfile_img().isEmpty()) {
             System.out.println(userMemberService.updateUserInfoProfileImg(userMemberDto));
@@ -172,7 +172,7 @@ public class UserMemberController {
     public String userMyPageAccountDel(HttpSession session) {
         log.info("[UserMemberController] userMyPageAccountDel()");
 
-        if(session.getAttribute("id") == null){
+        if(session.getAttribute("loginUser") == null){
             return "redirect:/member/sign_in";
         }
 
@@ -184,11 +184,11 @@ public class UserMemberController {
     public String userMyPageAccountDelPwCheck(HttpSession session, UserMemberDto userMemberDto, Model model) {
         log.info("[UserMemberController] userMyPageAccountDelPwCheck()");
 
-        if(session.getAttribute("id") == null){
+        if(session.getAttribute("loginUser") == null){
             return "redirect:/member/sign_in";
         }
 
-        userMemberDto.setId(String.valueOf(session.getAttribute("id")));
+        userMemberDto.setId(((UserMemberDto)session.getAttribute("loginUser")).getId());
 
         if(!userMemberService.selectUserSignIn(userMemberDto)){
             model.addAttribute("error", true);
