@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.HashMap;
 
 // 제대로 데이터 들어갔는지 결과 확인
 @Log4j2
@@ -102,7 +103,16 @@ public class UserMemberService implements IUserMemberService {
    @Override
    public UserMemberDto selectUserSession(String id){
         log.info("[UserMemberService] selectMemberSignIn()");
+
         return iUserMemberMapper.selectUserSession(id);
+   }
+
+   // 로그인 - 아이디 찾기
+    @Override
+   public String selectUserFindId(HashMap<String, String> params){
+        log.info("[UserMemberService] selectMemberSignIn()");
+
+        return iUserMemberMapper.selectUserFindId(params);
    }
 
    // 마이페이지 - 내 정보 확인
