@@ -39,7 +39,7 @@ public class StudyController {
     public String studyRegisterConfirm(StudyDto studyDto, Model model) {
         log.info("[StudyController] studyRegisterConfirm()");
 
-        studyDto.setUser_id("kkk");
+        studyDto.setUser_id("user1@gmail.com");
 
         log.info(studyDto.getContent());
 
@@ -155,7 +155,7 @@ public class StudyController {
         log.info("[StudyController] showStudyInProgressList()");
 
         StudyDto studyDto = new StudyDto();
-        studyDto.setUser_id("kkk");
+        studyDto.setUser_id("user1@gmail.com");
 
         model.addAttribute("studyDtos", studyService.selectStudyInProgressByUId(studyDto));
 
@@ -174,7 +174,7 @@ public class StudyController {
 //        studyDto.setUser_id("eunji123");
 //        UserMemberDto userMemberDto = (UserMemberDto) session.getAttribute("");
 //        String user_id = userMemberDto.getId();
-        String user_id = "eunji123";
+        String user_id = "user1@gmail.com";
 
 
         List<StudyDto> studyDtos = studyService.selectStudyApplicationListById(user_id);

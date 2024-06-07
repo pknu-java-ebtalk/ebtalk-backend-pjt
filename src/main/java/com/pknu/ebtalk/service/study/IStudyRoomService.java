@@ -14,4 +14,7 @@ public interface IStudyRoomService {
 
     // 스터디룸 수정
     String updateStudyRoomConfirm(StudyRoomDto studyRoomDto);
+
+    // 스터디룸 삭제
+    int deleteStudyRoomConfirm(StudyRoomDto studyRoomDto);
 }

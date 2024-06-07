@@ -16,4 +16,7 @@ public interface IStudyRoomMapper {
 
     // 스터디룸 수정
     int updateStudyRoomInfo(StudyRoomDto studyRoomDto);
+
+    // 스터디룸 삭제
+    int deleteStudyRoomConfirm(StudyRoomDto studyRoomDto);
 }

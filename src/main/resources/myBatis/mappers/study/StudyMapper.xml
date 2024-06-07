@@ -66,13 +66,17 @@
     <!--  스터디 모집 리스트  -->
     <select id="selectStudyCountMembers" resultType="com.pknu.ebtalk.dto.study.StudyDto">
         SELECT
-            a.no, a.user_id, a.title, a.started_at, a.finished_at, a.count, a.content, a.VIEWS, cast(a.CREATED_AT as date) as created_at, count_member, cast(now() as date) as cur_date
+            a.no, u.name, a.title, a.started_at, a.finished_at, a.count, a.content, a.VIEWS, cast(a.CREATED_AT as date) as created_at, count_member, cast(now() as date) as cur_date
         FROM
             study a
         LEFT JOIN
                 (SELECT study_no , count(study_no) AS count_member FROM study_mate where approve_yn ='Y' GROUP BY study_no) AS b
         ON
             a.no = b.study_no
+        JOIN
+                user u
+        ON
+            a.user_id = u.id
         ORDER BY
             CREATED_AT DESC
     </select>

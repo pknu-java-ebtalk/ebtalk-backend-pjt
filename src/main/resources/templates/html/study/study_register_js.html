@@ -22,9 +22,14 @@
      */
     function set_limit_finished_date(){
         console.log("set_limit_finished_date() CALLED!!");
+        let date = new Date();
+        let curDate = date.getFullYear() + "-" + ('0'+ (date.getMonth()+1)).slice(-2) + "-" + ('0'+date.getDate()).slice(-2);
+        console.log(curDate);
         document.getElementById('started_at').addEventListener('change', function() {
-            var startDate = this.value;
-            var endDateInput = document.getElementById('finished_at');
+            let startDate = this.value;
+            document.getElementById('started_at').min=curDate;
+            console.log(startDate);
+            let endDateInput = document.getElementById('finished_at');
             endDateInput.min = startDate;
 
         });
