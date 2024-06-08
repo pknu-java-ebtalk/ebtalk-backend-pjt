@@ -27,7 +27,7 @@ public interface IStudyMapper {
     /*
      * 스터디 모집글 삭제
      */
-    int deleteStudyInfoByNo(int no);
+    int deleteStudyInfoByNo(StudyDto studyDto);
     void deleteStudyMateByNo(int no);
 
     /*

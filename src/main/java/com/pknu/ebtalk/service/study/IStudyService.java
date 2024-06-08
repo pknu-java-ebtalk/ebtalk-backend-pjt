@@ -18,7 +18,7 @@ public interface IStudyService {
     // 스터디 모집 리스트
     List<StudyDto> selectStudyAllList();
 
-    void deleteStudyConfirm(int no);
+    void deleteStudyConfirm(StudyDto studyDto);
 
     // 스터디 관리 페이지 - 진행중인 스터디 리스트
     List<StudyDto> selectStudyInProgressByUId(StudyDto studyDto);
@@ -30,5 +30,5 @@ public interface IStudyService {
     Map<String, Object> updateStudyApplicationListById(String user_id);
 
     // 스터디 모집 신청
-    Map<String, String> insertStudyApproval(int no);
+    Map<String, String> insertStudyApproval(StudyDto studyDto);
 }

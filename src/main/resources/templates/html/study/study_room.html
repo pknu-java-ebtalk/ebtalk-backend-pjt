@@ -10,7 +10,9 @@
     <link rel="stylesheet" href="/css/study/study_room_aside.css">
     <script crossOrigin="anonymous"
             integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM=" src="https://code.jquery.com/jquery-3.7.0.js"></script>
+<!--    <script th:replace="~{/html/study/study_room__to_improve_js.html::js}"></script>-->
     <script th:replace="~{/html/study/study_room_js.html::js}"></script>
+
 </head>
 <body>
     <header>
@@ -36,9 +38,6 @@
                             <div class="study-room-container">
 
                             </div>
-<!--                            <div class="study-room-document" data-m_category_no="1" id="went_well">-->
-
-<!--                            </div>-->
                             <div class="add-btn" id="plus_btn">
                                 <button id="well_btn" class="hidden-btn" data-m_category_no="1">+</button>
                             </div>
@@ -50,11 +49,11 @@
                                 <span>|</span>
                                 <span>To Improve</span>
                             </div>
-                            <div class="study-room-document" id="to_improve">
+                            <div class="study-room-container-improve">
 
-                            </div> 
-                            <div class="add-btn" >
-                                <button id="improve_btn" data-m_category_no="2">+</button>
+                            </div>
+                            <div class="add-btn add-btn-improve" id="improve_plus_btn">
+                                <button id="improve_btn" class="hidden-btn" data-m_category_no="2">+</button>
                             </div>
                         </div>
 
@@ -64,10 +63,13 @@
                                 <span>|</span>
                                 <span>To Do List</span>
                             </div>
-                            <div class="study-room-document" id="to_do_list">
+<!--                            <div class="study-room-document" id="to_do_list">-->
 
-                            </div> 
-                            <div class="add-btn" >
+<!--                            </div>-->
+                            <div class="study-room-container-todo">
+
+                            </div>
+                            <div class="add-btn add-btn-todo" >
                                 <button id="todo_btn" data-m_category_no="3">+</button>
                             </div>
                         </div>

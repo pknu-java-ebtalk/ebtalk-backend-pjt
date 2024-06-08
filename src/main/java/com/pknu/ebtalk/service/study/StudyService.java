@@ -67,10 +67,6 @@ public class StudyService implements IStudyService{
     public StudyDto updateStudyConfirm(StudyDto studyDto) {
         log.info("[StudyService] updateStudyConfirm()");
 
-        // 세션에서 가져오기
-
-        studyDto.setUser_id("eunji123");
-
         int result = iStudyMapper.updateStudyInfo(studyDto);
         
         if(result > 0) {
@@ -102,10 +98,10 @@ public class StudyService implements IStudyService{
      * 스터디 모집글 삭제
      */
     @Override
-    public void deleteStudyConfirm(int no) {
+    public void deleteStudyConfirm(StudyDto studyDto) {
         log.info("[StudyService] deleteStudyConfirm()");
 
-        int result = iStudyMapper.deleteStudyInfoByNo(no);
+        int result = iStudyMapper.deleteStudyInfoByNo(studyDto);
         
         if(result > 0) {
             log.info("삭제완료");
@@ -121,18 +117,12 @@ public class StudyService implements IStudyService{
      * 스터디 신청
      */
     @Override
-    public Map<String, String> insertStudyApproval(int no) {
+    public Map<String, String> insertStudyApproval(StudyDto studyDto) {
         log.info("[StudyService] insertStudyApproval()");
 
-        // 로그인한 유저 들고오기
-        // UserMemberDto loginedUserDto = (UserMemberDto) session.getAttribute("loginedUserDto");
+        int no = studyDto.getNo();
 
         Map<String, String> msgData = new HashMap<>();
-        String user_id = "user1@gmail.com";
-
-        StudyDto studyDto = new StudyDto();
-        studyDto.setUser_id(user_id);
-        studyDto.setNo(no);
 
         // 이미 신청한 사용자 중복 체크
         int isStudyInMember =iStudyMapper.selectStudyMateUserId(studyDto);
@@ -188,9 +178,6 @@ public class StudyService implements IStudyService{
     @Override
     public List<StudyDto> selectStudyApplicationListById(String user_id) {
         log.info("[StudyService] selectStudyApplicationListById()");
-
-        // 세션 가져오기
-        user_id = "kkk";
 
         List<StudyDto> studyDtos = iStudyMapper.selectStudyApplicationListByUId(user_id);
 
