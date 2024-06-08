@@ -6,6 +6,7 @@ import jakarta.validation.constraints.NotNull;
 import lombok.*;
 import org.hibernate.validator.constraints.Range;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.mail.javamail.JavaMailSender;
 
 @Getter
 @Setter
@@ -44,4 +45,7 @@ public class UserMemberDto {
 
     // 로그인 시 필요한 필드
     private String sign_in_pw_check;
+
+    // 이메일 인증 시 필요한 필드
+    private JavaMailSender javaMailSender;
 }
