@@ -6,10 +6,12 @@
     text-align: center;
     border-bottom: 1px solid black;
     padding-bottom: 15px;
+    display: flex;
+    justify-content: center;
 }
 
 #view-title {
-    margin-right: 100px;
+    margin-right: 180px;
     font-size: 20px;
 }
 

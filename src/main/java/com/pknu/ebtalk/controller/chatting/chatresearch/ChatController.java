@@ -23,6 +23,7 @@ class ChatController {
     private final ChattingService chattingService;
 
     // http://localhost:8090/member/sign_in
+    // http://localhost:8090/chat/ChattingResearch
     @GetMapping(value={"/ChattingResearch"})
     public String ChattingResearchGet(Model model, HttpSession session) {
         log.info("[ChatController] ChattingResearchGet()");
@@ -62,7 +63,7 @@ class ChatController {
         log.info("Searching with param: {}", param); // 로그 추가
 
         List<ChatRoomUserDto> users = chattingService.selectChatName(param);
-        log.info("isNull={}", users.isEmpty()); 
+        log.info("isNull={}", users.isEmpty());
         log.info("username={}", userName);
 
         Map<String,Object> response = new HashMap<>();
