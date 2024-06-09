@@ -64,4 +64,35 @@
     <update id="updateHits" parameterType="Integer">
         UPDATE board SET views = views + 1 WHERE no = #{no}
     </update>
+
+    <!-- 검색 쿼리 -->
+    <select id="searchNotifications" parameterType="map" resultType="com.pknu.ebtalk.dto.board.BoardDto">
+        SELECT * FROM board
+        WHERE
+        <choose>
+            <when test="searchKey == 'title'">
+                title LIKE CONCAT('%', #{keyword}, '%')
+            </when>
+            <when test="searchKey == 'user_id'">
+                user_id LIKE CONCAT('%', #{keyword}, '%')
+            </when>
+        </choose>
+        ORDER BY no DESC
+        LIMIT #{paginationVo.rowCount}
+        OFFSET #{paginationVo.offset}
+    </select>
+
+    <!-- 검색 결과의 총 개수 구하기 -->
+    <select id="countSearchNotifications" parameterType="map" resultType="int">
+        SELECT count(*) FROM board
+        WHERE
+        <choose>
+            <when test="searchKey == 'title'">
+                title LIKE CONCAT('%', #{keyword}, '%')
+            </when>
+            <when test="searchKey == 'user_id'">
+                user_id LIKE CONCAT('%', #{keyword}, '%')
+            </when>
+        </choose>
+    </select>
 </mapper>

@@ -27,4 +27,8 @@ public interface INotificationMapper {
     int getCount();
 
     List<BoardDto> getListPage(PaginationVo paginationVo);
+
+    List<BoardDto> searchNotifications(String searchKey, String keyword, com.pknu.ebtalk.vo.PaginationVo paginationVo);
+
+    int countSearchNotifications(String searchKey, String keyword);
 }
