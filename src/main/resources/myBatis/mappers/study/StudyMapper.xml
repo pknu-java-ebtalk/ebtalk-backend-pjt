@@ -133,15 +133,22 @@
     <!--  스터디 관리 페이지 - 진행중인 스터디 리스트  -->
     <select id="selectStudyInProgressByUid" parameterType="com.pknu.ebtalk.dto.study.StudyDto" resultType="com.pknu.ebtalk.dto.study.StudyDto">
         SELECT
-            *
+            a.*, b.count_member
         FROM
             study a
-        JOIN
-            (SELECT study_no , count(study_no) AS count_member, approve_yn AS approve_member FROM study_mate where approve_yn ='Y' GROUP BY study_no) AS b
+        JOIN (
+                SELECT study_no, count(study_no) AS count_member
+                FROM study_mate  where approve_yn = 'Y' GROUP BY study_no) AS b
         ON
-                a.no = b.study_no
+            a.no = b.study_no
+        JOIN
+                study_mate AS c
+        ON
+            a.no = c.study_no
         WHERE
-            a.user_id = #{user_id}
+            c.user_id = #{user_id}
+        AND
+            approve_yn = 'Y'
         AND
             a.finished_at > now();
     </select>
@@ -166,7 +173,8 @@
         AND
             sm.user_id <![CDATA[<>]]> s.user_id
         AND
-            s.user_id = #{user_id};
+            s.user_id = #{user_id}
+        ORDER BY study_no;
     </select>
 
     <!--  스터디 관리 페이지 - 신청목록 승인처리  -->
@@ -178,14 +186,18 @@
                                 END
         WHERE
             user_id = #{user_id}
+        and
+            study_no = #{no}
     </update>
 
-    <select id="selectStudyApproveYnByUid" parameterType="String">
+    <select id="selectStudyApproveYnByUid" parameterType="com.pknu.ebtalk.dto.study.StudyDto">
         select
             approve_yn
         from
             study_mate
         where
             user_id = #{user_id}
+        AND
+            study_no = #{no}
     </select>
 </mapper>

@@ -163,10 +163,10 @@ public class StudyService implements IStudyService{
      * 스터디 관리 페이지 - 진행중인 스터디 리스트
      */
     @Override
-    public List<StudyDto> selectStudyInProgressByUId(StudyDto studyDto) {
+    public List<StudyDto> selectStudyInProgressByUId(String user_id) {
         log.info("[StudyService] selectStudyInProgressByUId()");
 
-        List<StudyDto> studyDtos = iStudyMapper.selectStudyInProgressByUid(studyDto);
+        List<StudyDto> studyDtos = iStudyMapper.selectStudyInProgressByUid(user_id);
 
         return studyDtos;
 
@@ -190,7 +190,7 @@ public class StudyService implements IStudyService{
      * 스터디 관리 페이지 - 스터디 신청 승인 처리
      */
     @Override
-    public Map<String, Object> updateStudyApplicationListById(String user_id) {
+    public Map<String, Object> updateStudyApplicationListById(StudyDto studyDto) {
         log.info("[StudyService] updateStudyApplicationListById()");
 
         Map<String, Object> map = new HashMap<>();
@@ -199,12 +199,12 @@ public class StudyService implements IStudyService{
 //        String approve_yn = studyDto.getApprove_yn();
 
         // approve_yn 값 업데이트 하기 위한 mapper
-        int result = iStudyMapper.updateStudyApplicationListById(user_id);
+        int result = iStudyMapper.updateStudyApplicationListById(studyDto);
 
         if(result > 0) {
-            String approve_yn = iStudyMapper.selectStudyApproveYnByUid(user_id);
+            String approve_yn = iStudyMapper.selectStudyApproveYnByUid(studyDto);
             log.info(approve_yn);
-            log.info(user_id);
+//            log.info(user_id);
 
             map.put("result", approve_yn);
 

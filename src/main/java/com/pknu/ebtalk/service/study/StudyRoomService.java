@@ -27,6 +27,17 @@ public class StudyRoomService implements IStudyRoomService {
     }
 
     /*
+     * 스터디룸 리스트 조회 - aside 이름 조회
+     */
+    @Override
+    public List<StudyRoomDto> selectStudyRoomAllListMateName(int study_no) {
+        log.info("[StudyRoomService] selectStudyRoomAllListMateName()");
+
+        return iStudyRoomMapper.selectStudyRoomAllListMateNateByNo(study_no);
+
+    }
+
+    /*
      * 스터디룸 글 등록
      */
     @Override

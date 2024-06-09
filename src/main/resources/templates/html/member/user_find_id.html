@@ -19,7 +19,7 @@
                         <p class="find-id-title">아이디 찾기</p>
                         <form class="find-id-form" method="post" action="/member/sign_in_find_id_result" id="findIdForm">
                             <input class="find-id-name find-id-input find-id" type="text" name="name" placeholder="이름">
-                            <input class="find-id-phone find-id-input find-id" type="text" name="phone" placeholder="전화번호">
+                            <input class="find-id-phone find-id-input find-id" type="text" pattern="010\d{8}" name="phone" placeholder="전화번호">
                             <input class="find-id-btn find-id" type="submit" value="확인">
                         </form>
                     </div>

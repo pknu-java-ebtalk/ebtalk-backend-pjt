@@ -17,14 +17,14 @@
                 <div class="contents-box">
                     <div class="reset-pw-box">
                         <p class="reset-pw-title">비밀번호 재설정</p>
-                        <form class="reset-pw-form" method="post" action="#" id="resetPwForm">
-                            <input class="input" type="text" name="CHECKNUM" placeholder="인증번호">
+                        <form class="reset-pw-form" method="post" action="/member/num_check" id="resetPwForm">
+                            <input class="input" type="text" name="check_num" placeholder="인증번호">
                             <div class="info-msg-box">
-                                <p class="num-check info-msg">인증번호가 틀렸습니다.</p>
-                                <p class="remain-time info-msg">03:00</p>
+                                <p class="num-check info-msg" th:style="${error} ? 'visibility: visible' : 'visibility: hidden'">인증번호가 틀렸습니다.</p>
+                                <p class="remain-time info-msg"></p>
                             </div>
                             <div class="btn-box">
-                                <button class="check-num-resend-btn btn" type="button">인증번호 재발송</button>
+                                <button class="check-num-resend-btn btn" type="button" th:onclick="|location.href='@{/member/mail_send}'|">인증번호 재발송</button>
                                 <button class="check-btn btn" type="submit">확인</button>
                             </div>
                         </form>
@@ -36,7 +36,38 @@
     <footer>
         <th:block th:replace="~{html/fragments/common_main_footer :: footer}"></th:block>
     </footer>
-<!--    <script src="/js/common_member_header.js"></script>-->
-<!--    <script src="/js/common_main_footer.js"></script>-->
+    <script>
+        function startTimer(){
+            fetch('/member/start_timer')
+                .then(response => response.text())
+                .then(data => {
+                    console.log(data);
+                    updateRemainingTime();
+                });
+        }
+
+        function updateRemainingTime(){
+            fetch('/member/remaining_time')
+                .then(response => response.json())
+                .then(seconds => {
+                    if (seconds > 0) {
+                        let minutes = Math.floor(seconds / 60);
+                        let remainingSeconds = seconds % 60;
+                        document.querySelector('.remain-time').innerText = `${minutes}:${remainingSeconds < 10 ? '0' : ''}${remainingSeconds}`;
+                        setTimeout(updateRemainingTime, 1000);
+                    } else {
+                        document.querySelector('.remain-time').innerText = '제한 시간이 만료되었습니다.';
+                        alert("인증번호가 만료되어 재발송됩니다. 메일을 확인해주세요.");
+                        window.location.href = "/member/mail_send";
+
+                    }
+                });
+        }
+
+        // 페이지 로드 시 타이머 시작
+        document.addEventListener("DOMContentLoaded", function() {
+            startTimer();
+        });
+    </script>
 </body> 
 </html>
