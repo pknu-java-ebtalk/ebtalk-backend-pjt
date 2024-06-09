@@ -18,10 +18,12 @@ import java.util.Map;
 @Controller
 @Log4j2
 @RequiredArgsConstructor
+@RequestMapping("/chat")
 class ChatController {
     private final ChattingService chattingService;
 
     // http://localhost:8090/member/sign_in
+    // http://localhost:8090/chat/ChattingResearch
     @GetMapping(value={"/ChattingResearch"})
     public String ChattingResearchGet(Model model, HttpSession session) {
         log.info("[ChatController] ChattingResearchGet()");
@@ -30,7 +32,7 @@ class ChatController {
 
         if (userMemberDto == null) {
             log.error("No logged in user found in session");
-            return "redirect:/login"; // 로그인 페이지로 리다이렉트
+            return "redirect:/member/sign_in"; // 로그인 페이지로 리다이렉트
         }
 
         log.info("Logged in user: {}", userMemberDto);
@@ -61,7 +63,7 @@ class ChatController {
         log.info("Searching with param: {}", param); // 로그 추가
 
         List<ChatRoomUserDto> users = chattingService.selectChatName(param);
-        log.info("isNull={}", users.isEmpty()); 
+        log.info("isNull={}", users.isEmpty());
         log.info("username={}", userName);
 
         Map<String,Object> response = new HashMap<>();
@@ -82,7 +84,7 @@ class ChatController {
 
         if (userMemberDto == null) {
             log.error("No logged in user found in session");
-            return "redirect:/login"; // 로그인 페이지로 리다이렉트
+            return "redirect:/member/sign_in"; // 로그인 페이지로 리다이렉트
         }
 
 
@@ -105,7 +107,7 @@ class ChatController {
             chattingService.addChatRoomUser(chatUser);
         }
         model.addAttribute("roomId", chatRoom.getNo());
-        return "redirect:/chatRoom/" + chatRoom.getNo();
+        return "redirect:/chat/chatRoom/" + chatRoom.getNo();
     }
 
     @GetMapping(value = "/chatRoom/{roomId}")
