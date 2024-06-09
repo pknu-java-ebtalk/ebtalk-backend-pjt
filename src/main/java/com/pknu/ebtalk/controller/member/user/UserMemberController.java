@@ -176,22 +176,18 @@ public class UserMemberController {
 
         String id = String.valueOf(session.getAttribute("id"));
 
-
-
         if(pw.equals(pw_check) && pw != null){
             if(userMemberService.updateUserResetPw(id, pw)){
                 session.invalidate();
 
                 return "/html/member/user_reset_pw_result";
             }
-
         }
 
         model.addAttribute("error", true);
 
         return "/html/member/user_reset_pw_next";
     }
-
 
     // 로그아웃
     @GetMapping("/log_out")
