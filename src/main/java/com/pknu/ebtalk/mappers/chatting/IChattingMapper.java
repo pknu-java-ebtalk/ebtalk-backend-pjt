@@ -1,25 +1,22 @@
 package com.pknu.ebtalk.mappers.chatting;
 
-import com.pknu.ebtalk.dto.chatting.ChatRoomUserDTO;
-import com.pknu.ebtalk.dto.chatting.MessageDTO;
+import com.pknu.ebtalk.dto.chatting.ChatRoomDto;
+import com.pknu.ebtalk.dto.chatting.ChatRoomUserDto;
+import com.pknu.ebtalk.dto.chatting.MessageDto;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 import java.util.Map;
 
 @Mapper
 public interface IChattingMapper {
-    List<ChatRoomUserDTO> selectRoomList(int NO);
 
-    int checkChattingNo(Map<String, Integer> map);
+    List<ChatRoomUserDto> selectChatName(ChatRoomUserDto param);
 
-    int createChattingRoom(Map<String, Integer> map);
+    // 새 채팅방 생성 메서드
+    void insertChatRoom(ChatRoomDto chatRoom);
 
-    int insertMessage(MessageDTO msg);
-
-    int updateReadFlag(Map<String, Object> paramMap);
-
-    List<MessageDTO> selectMessageList(int no);
-
-    List<ChatRoomUserDTO> selectTarget(Map<String, Object> map);
+    // 채팅방에 사용자 추가
+    void insertChatRoomUser(ChatRoomUserDto chatRoomUser);
 }

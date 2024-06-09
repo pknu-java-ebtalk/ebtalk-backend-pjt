@@ -1,10 +1,9 @@
 package com.pknu.ebtalk.mappers.member.user;
 
 import com.pknu.ebtalk.dto.member.UserMemberDto;
-import jakarta.servlet.http.HttpSession;
 import org.apache.ibatis.annotations.Mapper;
-
 import java.util.HashMap;
+
 
 @Mapper
 public interface IUserMemberMapper {
