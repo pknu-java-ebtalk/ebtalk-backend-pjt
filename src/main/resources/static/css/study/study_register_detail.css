@@ -82,6 +82,7 @@ input {
 .study-regist-detail-box{
   max-width: 600px;
   overflow-y: scroll;
+  overflow-x: hidden;
 }
 
 .study-regist-detail-box::-webkit-scrollbar{
