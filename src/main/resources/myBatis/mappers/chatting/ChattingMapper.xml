@@ -3,7 +3,7 @@
 <mapper namespace="com.pknu.ebtalk.mappers.chatting.IChattingMapper">
     <!-- 이름으로 채팅 누구랑 할 건지 검색-->
     <select id="selectChatName" resultType="com.pknu.ebtalk.dto.chatting.ChatRoomUserDto" parameterType="com.pknu.ebtalk.dto.chatting.ChatRoomUserDto">
-        SELECT id, name FROM User WHERE name = #{name}
+        SELECT id, name FROM User WHERE name LIKE CONCAT('%', #{name}, '%')
     </select>
 
     <!-- 새 채팅방 생성 -->
