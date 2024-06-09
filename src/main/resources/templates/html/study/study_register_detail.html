@@ -76,7 +76,6 @@
                                         <a class="study-cancel-btn study-regist-input study-btn" th:href="@{/study/study_list}">목록</a>
                                     </div>
                                 </th:block>
-
                                 <th:block th:if="${studyDto.user_id != loginedUserDto.id}">
                                     <div class="study-btn-box">
                                         <a id="appr_btn" class="study-regist-btn study-regist-input study-btn" th:no="${studyDto.no}"  th:onclick="check_approval(this.getAttribute('no'))">신청</a>
