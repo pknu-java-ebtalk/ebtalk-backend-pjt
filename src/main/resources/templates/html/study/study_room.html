@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="/css/study/study_room_aside.css">
     <script crossOrigin="anonymous"
             integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM=" src="https://code.jquery.com/jquery-3.7.0.js"></script>
-<!--    <script th:replace="~{/html/study/study_room__to_improve_js.html::js}"></script>-->
+    <script src="https://kit.fontawesome.com/011513753c.js" crossorigin="anonymous"></script>
     <script th:replace="~{/html/study/study_room_js.html::js}"></script>
 
 </head>
@@ -20,7 +20,7 @@
     </header>
     <div>
         <aside>
-            <th:block th:replace="~{html/fragments/common_main_aside :: aside}"></th:block>
+            <th:block th:replace="~{html/fragments/common_studyroom_aside :: aside}"></th:block>
         </aside>
         <div class="background-gray middle-gray">
             <div class="background-white middle-white">
@@ -28,7 +28,13 @@
                     <!-- ⭐여기에 코드 작성⭐ -->
                     <div id="wrap" th:study_no="${study_no}">
                         <div class="study-room-logo">
-                            <span class="study-filter-span">STUDY ROOM</span>
+                            <div>
+                                <p class="study-filter-span">STUDY ROOM</p>
+                            </div>
+                            <div class="study-room-a">
+                                <a th:href="@{/study/study_in_progress_list}"><i class="fa-solid fa-door-open fa-xl"></i></a>
+                            </div>
+
                         </div>
                         <div class="study-room-box" >
                             <div class="study-room-category">
@@ -69,7 +75,7 @@
                             <div class="study-room-container-todo">
 
                             </div>
-                            <div class="add-btn add-btn-todo" >
+                            <div class="add-btn add-btn-todo" id="todo_plus_btn">
                                 <button id="todo_btn" data-m_category_no="3">+</button>
                             </div>
                         </div>

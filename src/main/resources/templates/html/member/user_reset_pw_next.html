@@ -17,9 +17,9 @@
                 <div class="contents-box">
                     <div class="reset-pw-box">
                         <p class="reset-pw-title">비밀번호 재설정</p>
-                        <form class="reset-pw-form" method="post" action="#" id="resetPwForm">
-                            <input class="reset-pw-new-pw reset-pw-input reset-pw" type="password" name="PW" placeholder="새 비밀번호">
-                            <input class="reset-pw-new-pw-check reset-pw-input reset-pw" type="password" name="NEWPWCHECK" placeholder="새 비밀번호 확인">
+                        <form class="reset-pw-form" method="post" action="/member/sign_in_change_pw" id="resetPwForm">
+                            <input class="reset-pw-new-pw reset-pw-input reset-pw" type="password" name="pw" id="pw" placeholder="새 비밀번호">
+                            <input class="reset-pw-new-pw-check reset-pw-input reset-pw" type="password" name="pw_check" id="pw_check" placeholder="새 비밀번호 확인">
                             <div class="info-msg-box">
                                 <p class="info-msg info-msg-no">비밀번호가 일치하지 않습니다.</p>
                                 <p class="info-msg info-msg-ok">비밀번호가 일치합니다.</p>
@@ -34,7 +34,37 @@
     <footer>
         <th:block th:replace="~{html/fragments/common_main_footer :: footer}"></th:block>
     </footer>
-<!--    <script src="/js/common_member_header.js"></script>-->
-<!--    <script src="/js/common_main_footer.js"></script>-->
+    <script>
+        // 비밀번호와 비밀번호 확인 입력란 선택
+        const pw = document.getElementById('pw');
+        const pw_check = document.getElementById('pw_check');
+
+        // info-msg 선택
+        const info_msg_no = document.querySelector('.info-msg-no');
+        const info_msg_ok = document.querySelector('.info-msg-ok');
+
+        [pw, pw_check].forEach(function (input){
+            input.addEventListener('input', function (){
+                if(pw.value === pw_check.value && pw.value != "" && pw_check.value != ""){
+                    event.preventDefault();
+                    info_msg_no.style.visibility = 'hidden';
+                    info_msg_ok.style.visibility = 'visible';
+                } else if(pw !== ""){
+                    info_msg_ok.style.visibility = 'hidden';
+                    info_msg_no.style.visibility = 'visible';
+                } else {
+                    info_msg_ok.style.visibility = 'hidden';
+                    info_msg_no.style.visibility = 'hidden';
+                }
+            })
+        })
+
+        const error = /*[[${error}]]*/ false;
+
+        if(error){
+            alert("비밀번호 재설정 중 문제가 생겼습니다. 다시 시도해주세요.")
+            window.location.href = "/html/member/user_sign_in";
+        }
+    </script>
 </body> 
 </html>

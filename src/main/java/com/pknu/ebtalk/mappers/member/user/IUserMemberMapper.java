@@ -1,10 +1,9 @@
 package com.pknu.ebtalk.mappers.member.user;
 
 import com.pknu.ebtalk.dto.member.UserMemberDto;
-import jakarta.servlet.http.HttpSession;
 import org.apache.ibatis.annotations.Mapper;
-
 import java.util.HashMap;
+
 
 @Mapper
 public interface IUserMemberMapper {
@@ -25,6 +24,12 @@ public interface IUserMemberMapper {
 
     // 로그인 - 아이디 찾기
     String selectUserFindId(HashMap<String, String> params);
+
+    // 로그인 - 비밀번호 재설정 - 유저 확인
+    int selectUserResetPwCheck(UserMemberDto userMemberDto);
+
+    // 로그인 - 비밀번호 재설정
+    int updateUserResetPw(HashMap<String, String> params);
 
     // 마이페이지 정보 읽어오기
     UserMemberDto selectUserInfo(String id);

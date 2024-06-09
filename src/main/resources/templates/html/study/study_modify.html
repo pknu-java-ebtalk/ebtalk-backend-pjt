@@ -10,6 +10,7 @@
     <script crossOrigin="anonymous"
             integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM=" src="https://code.jquery.com/jquery-3.7.0.js"></script>
     <script th:replace="~{/html/study/study_modify_js.html::js}"></script>
+<!--    <script th:replace="~{/html/study/study_register_js.html::js}"></script>-->
 </head>
 <body>
     <header>
@@ -17,7 +18,7 @@
     </header>
     <div>
         <aside>
-            <th:block th:replace="~{html/fragments/common_main_aside :: aside}"></th:block>
+            <th:block th:replace="~{html/fragments/common_study_aside :: aside}"></th:block>
         </aside>
         <div class="background-gray middle-gray">
             <div class="background-white middle-white">
@@ -50,7 +51,7 @@
                             </tr>
                           </table>
                           <div class="study-btn-box">
-                            <input class="study-regist-btn study-regist-input study-btn" type="submit" value="확인">
+                            <input class="study-regist-btn study-regist-input study-btn"  type="button" onclick="check_input_box_by_null();"  value="확인">
                             <input class="study-cancel-btn study-regist-input study-btn" type="button" onclick="history.back()" value="취소">
                           </div>
                         </form>
@@ -65,6 +66,5 @@
 <!--    <script src="/js/common_main_header.js"></script>-->
 <!--    <script src="/js/common_main_aside.js"></script>-->
 <!--    <script src="/js/common_main_footer.js"></script>-->
-    <script src="/js/study/study_aside.js"></script>
 </body>
 </html>
