@@ -62,7 +62,7 @@ class ChatController {
         log.info("Searching with param: {}", param); // 로그 추가
 
         List<ChatRoomUserDto> users = chattingService.selectChatName(param);
-        log.info("isNull={}", users.isEmpty()); 
+        log.info("isNull={}", users.isEmpty());
         log.info("username={}", userName);
 
         Map<String,Object> response = new HashMap<>();
