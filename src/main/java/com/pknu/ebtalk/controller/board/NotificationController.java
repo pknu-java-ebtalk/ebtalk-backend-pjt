@@ -97,4 +97,24 @@ public class NotificationController {
         notificationService.deleteBoardConfirm(no);
         return "redirect:/notification/notification_board_list";
     }
+    
+//    검색 기능
+    @GetMapping("/search")
+    public String searchNotifications(@RequestParam("searchKey") String searchKey,
+                                      @RequestParam("keyword") String keyword,
+                                      @RequestParam(value = "page", defaultValue = "1") int page,
+                                      Model model) {
+        log.info("[NotificationController] searchNotifications() - SearchKey: " + searchKey + ", Keyword: " + keyword);
+
+
+        int totalCount = notificationService.countSearchNotifications(searchKey, keyword);
+        PaginationVo paginationVo = new PaginationVo(totalCount, page);
+
+        List<BoardDto> searchResults = notificationService.searchNotifications(searchKey, keyword, paginationVo);
+
+        model.addAttribute("boardDtos", searchResults);
+        model.addAttribute("pageVo", paginationVo);
+
+        return "/html/board/board";
+    }
 }

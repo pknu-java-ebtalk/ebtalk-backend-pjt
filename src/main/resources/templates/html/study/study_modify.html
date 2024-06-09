@@ -10,6 +10,7 @@
     <script crossOrigin="anonymous"
             integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM=" src="https://code.jquery.com/jquery-3.7.0.js"></script>
     <script th:replace="~{/html/study/study_modify_js.html::js}"></script>
+<!--    <script th:replace="~{/html/study/study_register_js.html::js}"></script>-->
 </head>
 <body>
     <header>
@@ -50,7 +51,7 @@
                             </tr>
                           </table>
                           <div class="study-btn-box">
-                            <input class="study-regist-btn study-regist-input study-btn" type="submit" value="확인">
+                            <input class="study-regist-btn study-regist-input study-btn"  type="button" onclick="check_input_box_by_null();"  value="확인">
                             <input class="study-cancel-btn study-regist-input study-btn" type="button" onclick="history.back()" value="취소">
                           </div>
                         </form>

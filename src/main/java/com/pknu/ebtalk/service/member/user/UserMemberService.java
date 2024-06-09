@@ -151,7 +151,7 @@ public class UserMemberService implements IUserMemberService {
         log.info("[UserMemberService] joinEmail()");
 
         makeRandomNum(session);
-        String setFrom = "이메일";    // 보내는 이메일(내 이메일 주소)
+        String setFrom = "qo3op3@naver.com";    // 보내는 이메일(내 이메일 주소)
         String toMail = String.valueOf(session.getAttribute("id"));
         String title = "[이비톡] 비밀번호 재설정 인증 이메일입니다.";
         String content =
