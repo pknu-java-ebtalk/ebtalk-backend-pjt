@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<div class="background-gray aside-gray" th:fragment="aside-mypage">
+    <div class="background-back-gray aside-back-gray">
+        <!-- 프로필 부분 -->
+        <div class="profile">
+            <!-- 프로필 사진 -->
+            <img class="profile-pic" src="../../img/profile.png">
+            <!-- 프로필 이름 -->
+            <p class="profile-name" th:text="${session.loginUser.name}"></p>
+        </div>
+        <div id="aside-contents-box">
+            <th:block th:replace="~{html/member/user_mypage_aside :: aside-mypage-in}"></th:block>
+        </div>
+        <!-- 로그아웃 버튼 -->
+        <div class="log-out">
+            <a th:href="@{/member/log_out}" class="log-out-text">Log out</a>
+        </div>
+    </div>
+</div>

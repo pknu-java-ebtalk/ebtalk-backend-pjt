@@ -8,10 +8,12 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Controller;
+import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.Duration;
 import java.util.HashMap;
 
 @Log4j2
@@ -55,8 +57,10 @@ public class UserMemberController {
 
     // 로그인 페이지
     @GetMapping(value = {"/sign_in", "/", ""})
-    public String userSignIn() {
+    public String userSignIn(HttpSession session) {
         log.info("[UserMemberController] userSignIn()");
+
+        session.invalidate();
 
         return "/html/member/user_sign_in";
     }
@@ -72,7 +76,7 @@ public class UserMemberController {
 
         UserMemberDto loginUser = userMemberService.selectUserSession(id);
 
-        session.setAttribute("loginUser", loginUser);
+        session.setAttribute("loginUser", loginUser);   // 로그인 시 세션 생성(id, name, edu_no 저장)
 
         return userMemberService.selectUserSignInCondition(id);
     }
@@ -107,13 +111,87 @@ public class UserMemberController {
         return "/html/member/user_find_id_found";
     }
 
-    // 로그인 - 비밀번호 재설정
+    // 로그인 - 비밀번호 재설정 페이지 이동
     @GetMapping("sign_in_reset_pw")
     public String signInChangePw(){
         log.info("[UserMemberController] signInResetPw()");
 
         return "/html/member/user_reset_pw";
     }
+
+    // 로그인 - 비밀번호 재설정 - 정보 확인
+    @PostMapping("sign_in_reset_pw_check")
+    public String signInResetPwCheck(@ModelAttribute UserMemberDto userMemberDto, HttpSession session) {
+        log.info("[UserMemberController] signInResetPwCheck()");
+
+        if(!userMemberService.selectUserFindPwCheck(userMemberDto)){
+            return "/html/member/user_reset_pw_not_found";
+        }
+
+        session.setAttribute("id", userMemberDto.getId());
+
+        return "redirect:/member/mail_send";
+    }
+
+    // 로그인 - 비밀번호 재설정 - 인증번호(이메일) 전송
+    @GetMapping("/mail_send")
+    public String userMailSend(HttpSession session) {
+        log.info("[UserMemberController] mailSend()");
+
+        userMemberService.joinEmail(session);
+
+        return "/html/member/user_reset_pw_check_num";
+    }
+
+    // 로그인 - 비밀번호 재설정 - 인증번호 확인
+    @PostMapping("/num_check")
+    public String userNumCheck(@RequestParam("check_num") String check_num, HttpSession session, Model model) {
+        log.info("[UserMemberController] numCheck()");
+
+        if(check_num.equals(session.getAttribute("randomNum"))){
+            return "/html/member/user_reset_pw_next";
+        }
+
+        model.addAttribute("error", true);
+
+        return "/html/member/user_reset_pw_check_num";
+    }
+
+    // 로그인 - 비밀번호 재설정 - 인증번호 시작 시간
+    @GetMapping("/start_timer")
+    public void startTimer(HttpSession session) {
+        userMemberService.timeCalculate(session);
+    }
+
+    // 로그인 - 비밀번호 재설정 - 인증번호 만료 시간까지 남은 시간 계산
+    @GetMapping("/remaining_time")
+    public @ResponseBody long getRemainingTime(HttpSession session) {
+        return userMemberService.getRemainingTime(session);
+    }
+
+    // 로그인 - 비밀번호 재설정(최종 단계)
+    @PostMapping("sign_in_change_pw")
+    public String userChangePw(HttpSession session, @RequestParam("pw") String pw, @RequestParam("pw_check") String pw_check, Model model){
+        log.info("[UserMemberController] signInChangePw()");
+
+        String id = String.valueOf(session.getAttribute("id"));
+
+
+
+        if(pw.equals(pw_check) && pw != null){
+            if(userMemberService.updateUserResetPw(id, pw)){
+                session.invalidate();
+
+                return "/html/member/user_reset_pw_result";
+            }
+
+        }
+
+        model.addAttribute("error", true);
+
+        return "/html/member/user_reset_pw_next";
+    }
+
 
     // 로그아웃
     @GetMapping("/log_out")

@@ -1,19 +1,13 @@
 <!DOCTYPE html>
 <html lang="ko">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>common_main_test</title>
+    <title>Notification Board</title>
     <link rel="stylesheet" href="/css/common/common_main.css">
     <link rel="stylesheet" href="/css/board/notice_side.css">
     <link rel="stylesheet" href="/css/board/board_list.css">
-
-    <!-- ⭐본인 css 링크 작성⭐ -->
 </head>
-
-</head>
-
 <body>
 <header>
     <th:block th:replace="~{html/fragments/common_main_header :: header-main}"></th:block>
@@ -51,40 +45,50 @@
                         </div>
                     </div>
 
-                <div class="board_list_wrap">
-                    <div class="board_list">
-                        <table>
-                            <th:block th:each="boardDto : ${boardDtos}">
-                                <tr>
-                                    <td class="number">
-                                        <a th:href="@{/notification/notification_view_form(no=${boardDto.no})}" class="btn" th:text="${boardDto.no}"></a>
-                                    </td>
-                                    <td class="subject">
-                                        <a th:href="@{/notification/notification_view_form(no=${boardDto.no})}" class="btn" th:text="${boardDto.title}"></a>
-                                    </td>
-                                    <td class="name">
-                                        <a th:href="@{/notification/notification_view_form(no=${boardDto.no})}" class="btn" th:text="${boardDto.user_id}"></a>
-                                    </td>
-                                    <td class="created">
-                                        <a th:href="@{/notification/notification_view_form(no=${boardDto.no})}" class="btn" th:text="${boardDto.created_at}"></a>
-                                    </td>
-                                    <td class="hitCount">
-                                        <a th:href="@{/notification/notification_view_form(no=${boardDto.no})}" class="btn" th:text="${boardDto.views}"></a>
-                                    </td>
-                                </tr>
-                            </th:block>
-                        </table>
+                    <div class="board_list_wrap">
+                        <div class="board_list">
+                            <table>
+                                <th:block th:each="boardDto : ${boardDtos}">
+                                    <tr>
+                                        <td class="number">
+                                            <a th:href="@{/notification/notification_view_form(no=${boardDto.no})}" class="btn" th:text="${boardDto.no}"></a>
+                                        </td>
+                                        <td class="subject">
+                                            <a th:href="@{/notification/notification_view_form(no=${boardDto.no})}" class="btn" th:text="${boardDto.title}"></a>
+                                        </td>
+                                        <td class="name">
+                                            <a th:href="@{/notification/notification_view_form(no=${boardDto.no})}" class="btn" th:text="${boardDto.user_id}"></a>
+                                        </td>
+                                        <td class="created">
+                                            <a th:href="@{/notification/notification_view_form(no=${boardDto.no})}" class="btn" th:text="${boardDto.created_at}"></a>
+                                        </td>
+                                        <td class="hitCount">
+                                            <a th:href="@{/notification/notification_view_form(no=${boardDto.no})}" class="btn" th:text="${boardDto.views}"></a>
+                                        </td>
+                                    </tr>
+                                </th:block>
+                            </table>
+                        </div>
                     </div>
                 </div>
-                </div>
                 <div class="pagination">
-                    <a href="#" class="page-first"><<</a>
-                    <a href="#" class="page-link">1</a>
-                    <a href="#" class="page-link">2</a>
-                    <a href="#" class="page-link">3</a>
-                    <a href="#" class="page-link">4</a>
-                    <a href="#" class="page-link">5</a>
-                    <a href="#" class="page-last">>></a>
+                    <div class="pagination">
+                        <span th:if="${pageVo.startPage > 1}">
+                            <a th:href="@{'/notification/notification_board_list?page=1'}" class="page-first"><<</a>
+                        </span>
+                        <span th:if="${pageVo.isPrev}">
+                            <a th:href="@{'/notification/notification_board_list?page=' + ${pageVo.startPage - 1}}" class="page-prev"><</a>
+                        </span>
+                        <span th:each="pageNum : ${#numbers.sequence(pageVo.startPage, pageVo.endPage)}">
+                            <a class="page-link" th:href="@{'/notification/notification_board_list?page=' + ${pageNum}}" th:text="${pageNum}"></a>
+                        </span>
+                        <span th:if="${pageVo.isNext}">
+                            <a th:href="@{'/notification/notification_board_list?page=' + ${pageVo.endPage + 1}}" class="page-next">></a>
+                        </span>
+                        <span th:if="${pageVo.endPage < pageVo.totalPageCount}">
+                            <a th:href="@{'/notification/notification_board_list?page=' + ${pageVo.totalPageCount}}" class="page-last">>></a>
+                        </span>
+                    </div>
                 </div>
                 <p>
                 <div id="board-write">
@@ -98,11 +102,6 @@
 <footer>
     <th:block th:replace="~{html/fragments/common_main_footer :: footer}"></th:block>
 </footer>
-<!--    <script src="/js/common_main_header.js"></script>-->
-<!--    <script src="/js/common_main_aside.js"></script>-->
-<!--    <script src="/js/common_main_footer.js"></script>-->
-    <script src="/js/board/board_side.js"></script>
-    <!-- ⭐aside에 내용 추가 시 여기에 js 파일 추가⭐ -->
+<script src="/js/board/board_side.js"></script>
 </body>
-
 </html>
