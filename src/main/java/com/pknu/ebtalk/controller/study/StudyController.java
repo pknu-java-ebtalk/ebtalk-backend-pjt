@@ -38,18 +38,15 @@ public class StudyController {
 
         // 세션 연결
         UserMemberDto loginedUserDto = (UserMemberDto) session.getAttribute("loginUser");
-        log.info("[StudyController] loginedUserDto: {}", loginedUserDto);
-
         studyDto.setUser_id(loginedUserDto.getId());
 
-        log.info(studyDto.getContent());
-
         studyDto = studyService.insertStudyConfirm(studyDto);
+        int no = studyDto.getNo();
 
         if(studyDto.getNo() != 0){
             model.addAttribute("studyDto", studyDto);
 
-            return "/html/study/study_register_detail";
+            return "redirect:/study/study_detail?no=" + no;
 
         } else{
             return "/html/study/study_register_list";
@@ -82,13 +79,14 @@ public class StudyController {
         // 세션 연결
         UserMemberDto loginedUserDto = (UserMemberDto) session.getAttribute("loginUser");
         studyDto.setUser_id(loginedUserDto.getId());
+        int no = studyDto.getNo();
 
         studyDto = studyService.updateStudyConfirm(studyDto);
 
         if(studyDto != null) {
             model.addAttribute("studyDto", studyDto);
 
-            return "/html/study/study_register_detail";
+            return "redirect:/study/study_detail?no=" + no;
         }
 
         return "redirect:/study/study_list";
@@ -111,10 +109,14 @@ public class StudyController {
      * 스터디 모집글 상세 페이지
      */
     @GetMapping(value = {"/study_detail"})
-    public String showStudyDetail(@RequestParam int no,Model model){
+    public String showStudyDetail(@RequestParam int no,Model model, HttpSession session){
         log.info("[StudyController] showStudyDetail()");
 
+        // 세션 연결
+        UserMemberDto loginedUserDto = (UserMemberDto) session.getAttribute("loginUser");
+
         model.addAttribute("studyDto", studyService.selectStudyInfoByNo(no));
+        model.addAttribute("loginedUserDto", loginedUserDto);
 
         return "/html/study/study_register_detail";
 
@@ -144,9 +146,8 @@ public class StudyController {
      */
     @ResponseBody
     @GetMapping(value = {"/study_approval"})
-    public Map<String, String> studyApproval(@RequestParam int no, Model model, HttpSession session){
+    public Map<String, String> studyApproval(@RequestParam int no, HttpSession session){
         log.info("[StudyController] studyApproval()");
-        log.info(no);
 
         // 세션 연결
         UserMemberDto loginedUserDto = (UserMemberDto) session.getAttribute("loginUser");
@@ -167,10 +168,8 @@ public class StudyController {
 
         // 세션 연결
         UserMemberDto loginedUserDto = (UserMemberDto) session.getAttribute("loginUser");
-        StudyDto studyDto = new StudyDto();
-        studyDto.setUser_id(loginedUserDto.getId());
 
-        model.addAttribute("studyDtos", studyService.selectStudyInProgressByUId(studyDto));
+        model.addAttribute("studyDtos", studyService.selectStudyInProgressByUId(loginedUserDto.getId()));
 
         return "/html/study/study_in_progress";
     }
@@ -199,17 +198,16 @@ public class StudyController {
      */
     @PostMapping(value = {"/study_application_list_confirm"})
     @ResponseBody
-    public Map<String, Object> studyApplicationListConfirm(@RequestParam String user_id){
+    public Map<String, Object> studyApplicationListConfirm(@RequestParam String user_id, @RequestParam int study_no){
         log.info("[StudyController] studyApplicationListConfirm()");
 
-        log.info(user_id);
+        StudyDto studyDto = new StudyDto();
+        studyDto.setUser_id(user_id);
+        studyDto.setNo(study_no);
 
-        Map<String, Object> map = studyService.updateStudyApplicationListById(user_id);
-
+        Map<String, Object> map = studyService.updateStudyApplicationListById(studyDto);
 
         return map;
 
     }
-
-
 }

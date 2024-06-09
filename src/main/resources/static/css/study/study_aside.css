@@ -1,7 +1,18 @@
 #aside-contents-box{
+    width: 350px;
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.study-info-aside{
+    width: 150px;
+    /*margin: 0 auto;*/
+
+}
+
+.study-menu{
+    width: 150px;
 }
 
 .study-menu{

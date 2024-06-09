@@ -9,7 +9,6 @@ import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
 @Log4j2
@@ -39,7 +38,6 @@ public class StudyRoomController {
     public int studyRoomRegisterConfirm(StudyRoomDto studyRoomDto, HttpSession session) {
         log.info("[StudyRoomController] studyRoomRegisterConfirm()");
 
-        // 세션에서 로그인한 사용자 들고오기
         // 세션 연결
         UserMemberDto loginedUserDto = (UserMemberDto) session.getAttribute("loginUser");
         studyRoomDto.setUser_id(loginedUserDto.getId());
@@ -53,10 +51,22 @@ public class StudyRoomController {
      */
     @ResponseBody
     @GetMapping(value = {"/memoir_list"})
-    public List<StudyRoomDto> showMemoirAllList(@RequestParam int study_no, Model model) {
+    public List<StudyRoomDto> showMemoirAllList(@RequestParam int study_no) {
         log.info("[StudyRoomController] showMemoirAllList()");
 
         return studyRoomService.selectStudyRoomAllList(study_no);
+
+    }
+
+    /*
+     * 스터디룸 리스트 - aside 이름 가져오기
+     */
+    @ResponseBody
+    @GetMapping(value = {"/memoir_list_mate"})
+    public List<StudyRoomDto> showMemoirListMate(@RequestParam int study_no) {
+        log.info("[StudyRoomController] showMemoirListMate()");
+
+        return studyRoomService.selectStudyRoomAllListMateName(study_no);
 
     }
 

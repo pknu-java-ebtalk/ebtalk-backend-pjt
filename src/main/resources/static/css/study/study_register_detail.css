@@ -9,6 +9,10 @@ input {
   justify-content: center;
 }
 
+.board-box{
+  max-width: 100%;
+}
+
 /* 스터디 상세페이지 너비, 길이 설정 */
 .study-regist-detail-box{
   width: 600px;
@@ -50,11 +54,17 @@ input {
 }
 
 .content-value{
+  /*max-width: 700px;*/
   min-height: 300px;
   padding: 20px;
   border: 1px solid var(--aside_gray);
   /* border-radius: 10px; */
   background: var(--aside_gray);
+}
+
+.content-value > p{
+  width: 700px;
+  max-width: 700px;
 }
 
 .value{
@@ -70,6 +80,7 @@ input {
 
 /* content-box 스크롤 설정 */
 .study-regist-detail-box{
+  max-width: 600px;
   overflow-y: scroll;
 }
 
@@ -107,13 +118,13 @@ input {
 
 /* 버튼 설정 START */
 div.study-btn-box {
-  margin-top: 30px;
+  /*margin-top: 30px;*/
   /* width: 500px; */
   text-align: center;
   display: flex;
   justify-content: flex-end;
   gap: 10px;
-  padding-right: 20px;
+  /*padding-right: 20px;*/
 }
 
 .study-btn {

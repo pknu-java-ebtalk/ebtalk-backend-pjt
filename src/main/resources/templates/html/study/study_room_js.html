@@ -12,6 +12,8 @@
     function init_events() {
         console.log("init_events() CALLED!!");
 
+        ajax_show_memoir_mate_name();
+
         // data-no
         let study_no = $(".study-room-box").parent().attr('study_no');
         console.log("study_no: " + study_no);
@@ -208,6 +210,7 @@
 
                 $(".study-room-container, .study-room-container-improve, .study-room-container-todo").empty();
 
+                let logined_id = [[${session.loginUser.id}]];
                 let studyRoomDtos = data;
 
                 for (let i = 0; i < studyRoomDtos.length; i++) {
@@ -220,13 +223,16 @@
                     appendTag += '</div>';
                     appendTag += '</div>';
 
-                    appendTag += '<div class="study-room-doc-2">';
-                    appendTag += '<p id="well_content" class ="' + studyRoomDtos[i].no + '">' + studyRoomDtos[i].content + '</p>';
+                    appendTag += '<div class="study-room-doc-2" style="white-space:pre;">';
+                    appendTag += '<p style="white-space:pre;" id="well_content" class ="' + studyRoomDtos[i].no + '">' + studyRoomDtos[i].content + '</p>';
                     appendTag += '</div>';
                     appendTag += '<div class="study-room-doc-3">';
                     appendTag += '<div class="study-room-doc-btn">';
-                    appendTag += '<span class="doc-span"><a class="doc-font" id="modify_btn" value="UPDATE" data-modify=' + studyRoomDtos[i].no + '>수정</a></span>';
-                    appendTag += '<span class="doc-span"><a class="doc-font" id="delete_btn" value="DELETE" data-delete=' + studyRoomDtos[i].no + '>삭제</a></span>';
+                    if (logined_id === studyRoomDtos[i].user_id) {
+                        appendTag += '<span class="doc-span"><a class="doc-font" id="modify_btn" value="UPDATE" data-modify=' + studyRoomDtos[i].no + '>수정</a></span>';
+                        appendTag += '<span class="doc-span"><a class="doc-font" id="delete_btn" value="DELETE" data-delete=' + studyRoomDtos[i].no + '>삭제</a></span>';
+                    }
+
                     appendTag += '</div>';
                     appendTag += '</div>';
                     appendTag += '</div>';
@@ -371,4 +377,45 @@
     /*
      * ajax_delete_confirm_memoir() END
      */
+
+    /*
+     * ajax_show_memoir_mate_name() START
+     */
+    function ajax_show_memoir_mate_name() {
+        console.log('ajax_show_memoir_mate_name()');
+
+        let study_no = document.getElementById('wrap').getAttribute('study_no');
+        console.log("study_no: " + study_no)
+
+        $.ajax({
+            url: `/studyroom/memoir_list_mate?study_no=${study_no}`,
+            method: 'GET',
+            processData: false,
+            contentType: false,
+            success: function (data) {
+                console.log('AJAX SUCCESS - ajax_show_memoir_mate_name()');
+                console.log(data);
+
+                let mateNames = data;
+
+                for(let i = 0; i < mateNames.length; i++) {
+                    let appendTag = '<li class="study-menu study-info">';
+                    appendTag += '<i class="fa-regular fa-face-smile"></i>';
+                    appendTag += '<p class="aside-text study-info-text font">' + mateNames[i].name +'</p>'
+                    appendTag += '</li>'
+
+                    $(".scroll-ul").append(appendTag);
+                }
+
+            },
+            error: function () {
+                console.log('AJAX ERROR - ajax_show_memoir_mate_name()');
+                alert('문제가 발생했습니다. 다시 시도해주세요.');
+            }
+        });
+    }
+    /*
+     * ajax_show_memoir_mate_name() END
+     */
+
 </script>
