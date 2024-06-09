@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//Dto Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pknu.ebtalk.mappers.chatting.IChattingMapper">
+    <!-- 이름으로 채팅 누구랑 할 건지 검색-->
+    <select id="selectChatName" resultType="com.pknu.ebtalk.dto.chatting.ChatRoomUserDto" parameterType="com.pknu.ebtalk.dto.chatting.ChatRoomUserDto">
+        SELECT id, name FROM User WHERE name LIKE CONCAT('%', #{name}, '%')
+    </select>
+
+    <!-- 새 채팅방 생성 -->
+    <insert id="insertChatRoom" parameterType="com.pknu.ebtalk.dto.chatting.ChatRoomDto">
+        INSERT INTO ChatRoom (name, type, create_at)
+        VALUES (#{name}, #{type}, #{create_at})
+    </insert>
+
+    <!-- 채팅방에 사용자 추가 -->
+    <insert id="insertChatRoomUser" parameterType="com.pknu.ebtalk.dto.chatting.ChatRoomUserDto">
+        INSERT INTO ChatRoomUser (chat_room_id, id, name)
+        VALUES (#{chat_room_id}, #{id}, #{name})
+    </insert>
+
+</mapper>
