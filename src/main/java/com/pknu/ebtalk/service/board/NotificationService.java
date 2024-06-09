@@ -88,7 +88,7 @@ public class NotificationService implements INotificationService {
         return boardDto;
     }
 
-    
+
     // 페이징 기능구현
     @Override
     public int countNotifications() {
@@ -98,5 +98,17 @@ public class NotificationService implements INotificationService {
     @Override
     public List<BoardDto> selectNotificationListPaged(PaginationVo paginationVo) {
         return this.notificationMappers.getListPage(paginationVo);
+    }
+
+// 검색 기능
+    @Override
+    public List<BoardDto> searchNotifications(String searchKey, String keyword, PaginationVo paginationVo) {
+        log.info("[NotificationService] searchNotifications() - SearchKey: " + searchKey + ", Keyword: " + keyword);
+        return notificationMappers.searchNotifications(searchKey, keyword, paginationVo);
+    }
+
+    @Override
+    public int countSearchNotifications(String searchKey, String keyword) {
+        return notificationMappers.countSearchNotifications(searchKey, keyword);
     }
 }
