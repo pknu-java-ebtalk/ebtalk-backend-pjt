@@ -21,7 +21,7 @@
         <div class="background-white middle-white">
             <div class="contents-box">
                 <!-- ⭐여기에 코드 작성⭐ -->
-                <form action="//ChattingResearch" method="get">
+                <form action="/chat/ChattingResearch" method="get">
                     <div class="search-container">
                         <input type="search" id="name" name="name" placeholder="채팅할 사람의 이름을 입력하세요." class="research-text">
                         <button type="button" class="search-button" onclick="searchChatRoomUsers()"></button>
@@ -51,7 +51,7 @@
         console.log("Searching for:", searchName); // 디버깅 메시지 추가
 
         $.ajax({
-            url: '/ChattingResearchPost', // 채팅 대상자 조회 엔드포인트
+            url: '/chat/ChattingResearchPost', // 채팅 대상자 조회 엔드포인트
             method: 'POST',
             contentType: 'application/json', // JSON 형식으로 데이터 전송
             data: JSON.stringify({ name: searchName }), // 요청 본문에 데이터 포함
