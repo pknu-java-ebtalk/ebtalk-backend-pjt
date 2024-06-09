@@ -23,6 +23,7 @@ class ChatController {
     private final ChattingService chattingService;
 
     // http://localhost:8090/member/sign_in
+    // http://localhost:8090/chat/ChattingResearch
     @GetMapping(value={"/ChattingResearch"})
     public String ChattingResearchGet(Model model, HttpSession session) {
         log.info("[ChatController] ChattingResearchGet()");
