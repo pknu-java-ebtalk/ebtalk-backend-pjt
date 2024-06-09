@@ -5,6 +5,7 @@ import jakarta.servlet.http.HttpSession;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.HashMap;
+import java.util.List;
 
 @Mapper
 public interface IUserMemberMapper {
@@ -40,4 +41,7 @@ public interface IUserMemberMapper {
 
     // 마이페이지 - 회원탈퇴
     int updateUserAccountDel(String id);
+
+    // 이름으로 모든 유저 찾기
+    List<UserMemberDto> selectChatName(String name);
 }
