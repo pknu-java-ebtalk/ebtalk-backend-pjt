@@ -19,8 +19,8 @@
                         <p class="reset-pw-title">비밀번호 재설정</p>
                         <div class="not-found">조회 결과가 없습니다.</div>
                         <div class="btn-box">
-                            <button class="reset-pw-btn btn" type="button" onclick="location.href='user_reset_pw.html'">비밀번호 재설정</button>
-                            <button class="sign-in-btn btn" type="button" onclick="location.href='user_sign_in.html'">로그인</button>
+                            <button class="reset-pw-btn btn" type="button" th:onclick="|location.href='/member/sign_in_reset_pw'|">비밀번호 재설정</button>
+                            <button class="sign-in-btn btn" type="button" th:onclick="|location.href='/member/sign_in'|">로그인</button>
                         </div>
                     </div>
                 </div>
