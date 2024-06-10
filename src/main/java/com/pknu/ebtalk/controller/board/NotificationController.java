@@ -1,8 +1,10 @@
 package com.pknu.ebtalk.controller.board;
 
 import com.pknu.ebtalk.dto.board.BoardDto;
+import com.pknu.ebtalk.dto.member.UserMemberDto;
 import com.pknu.ebtalk.service.board.NotificationService;
 import com.pknu.ebtalk.vo.PaginationVo;
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Controller;
@@ -20,8 +22,12 @@ public class NotificationController {
 
     // 게시글 리스트
     @GetMapping(value = {"/notification_board_list"})
-    public String notificationBoard(Model model, @RequestParam(value = "page", defaultValue = "1") int page) {
+    public String notificationBoard(Model model, @RequestParam(value = "page", defaultValue = "1") int page, HttpSession session) {
         log.info("[NotificationController] notificationBoard() - Page: " + page);
+
+        if(session.getAttribute("loginUser") == null){
+            return "redirect:/member/sign_in";
+        }
 
         PaginationVo paginationVo = new PaginationVo(notificationService.countNotifications(), page);
 
@@ -44,10 +50,18 @@ public class NotificationController {
 
     // write html에서 등록 버튼을 눌리게 된다면 실행
     @PostMapping(value = {"/notification_write_confirm"})
-    public String notificationWriteConfirm(Model model, BoardDto boardDto) {
+    public String notificationWriteConfirm(Model model, BoardDto boardDto, HttpSession session) {
         //model은 프론트로 값을 보내는데 key , value 형태로 보냄
         // key를 통해 value 안에 값을 가져올 수 있다.
-        boardDto.setUser_id("jkh");
+
+
+        if(session.getAttribute("loginUser") == null){
+            return "redirect:/member/sign_in";
+        }
+
+        String name = ((UserMemberDto) session.getAttribute("loginUser")).getName();
+
+        boardDto.setUser_id(name);
         boardDto = notificationService.insertNotificationInfo(boardDto);
         if (boardDto.getNo() != 0) {        // 값이 있는 경우 - 타입이 int 여서 null 대신 0 을 입력한것
             model.addAttribute("boardDto", boardDto);       // 프론트로 값을 보냄
@@ -58,8 +72,12 @@ public class NotificationController {
 
     // 게시글 보기
     @GetMapping("/notification_view_form")
-    public String notificationViewForm(@RequestParam("no") int no, Model model) {
+    public String notificationViewForm(@RequestParam("no") int no, Model model, HttpSession session) {
         log.info("[NotificationController] notificationViewForm()");
+
+        if(session.getAttribute("loginUser") == null){
+            return "redirect:/member/sign_in";
+        }
 
         model.addAttribute("boardDto", notificationService.findBoardByNo(no));
 
@@ -79,9 +97,13 @@ public class NotificationController {
     }
 
     @PutMapping(value = {"/notification_edit_confirm"})
-    public String notificationEditConfirm(Model model, BoardDto boardDto) {
+    public String notificationEditConfirm(Model model, BoardDto boardDto, HttpSession session) {
         log.info("[NotificationController] notificationEditConfirm()");
         log.info(boardDto.getNo());
+
+        if(session.getAttribute("loginUser") == null){
+            return "redirect:/member/sign_in";
+        }
 
         boardDto = notificationService.updateBoardInfo(boardDto);
 
@@ -91,8 +113,12 @@ public class NotificationController {
 
     // 게시글 삭제
     @GetMapping(value = {"/notification_delete_confirm"})
-    public String notificationDeleteConfirm(@RequestParam int no) {
+    public String notificationDeleteConfirm(@RequestParam int no, HttpSession session) {
         log.info("[NotificationController] notificationDeleteConfirm()");
+
+        if(session.getAttribute("loginUser") == null){
+            return "redirect:/member/sign_in";
+        }
 
         notificationService.deleteBoardConfirm(no);
         return "redirect:/notification/notification_board_list";
@@ -103,8 +129,12 @@ public class NotificationController {
     public String searchNotifications(@RequestParam("searchKey") String searchKey,
                                       @RequestParam("keyword") String keyword,
                                       @RequestParam(value = "page", defaultValue = "1") int page,
-                                      Model model) {
+                                      Model model, HttpSession session) {
         log.info("[NotificationController] searchNotifications() - SearchKey: " + searchKey + ", Keyword: " + keyword);
+
+        if(session.getAttribute("loginUser") == null){
+            return "redirect:/member/sign_in";
+        }
 
 
         int totalCount = notificationService.countSearchNotifications(searchKey, keyword);

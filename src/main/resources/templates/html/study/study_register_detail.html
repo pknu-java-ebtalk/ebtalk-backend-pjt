@@ -33,7 +33,7 @@
                             <div class="study-text-div">
                                 <p class="study-text-p">스터디 모집</p>
                             </div>
-                                <th:block th:if="${studyDto.user_id == loginedUserDto.id}">
+                                <th:block th:if="${studyDto.user_id == session.loginUser.id}">
                                     <div class="study-cancel-icon">
                                         <a th:href="@{/study/study_delete_confirm(no=${studyDto.no})}" onclick="return confirm('정말 삭제하시겠습니까?');">
                                             <i class="fa-solid fa-delete-left"></i>
@@ -70,13 +70,14 @@
                             </div>
                           </div>
                             <div class="study-btn-box">
-                                <th:block th:if="${studyDto.user_id == loginedUserDto.id}">
+<!--                                <th:block th:if="${studyDto.user_id == loginedUserDto.id}">-->
+                                <th:block th:if="${studyDto.user_id == session.loginUser.id}">
                                     <div class="study-btn-box">
                                         <a class="study-regist-btn study-regist-input study-btn" th:dto="${studyDto}" th:href="@{/study/study_modify_form(no=${studyDto.no})}">수정</a>
                                         <a class="study-cancel-btn study-regist-input study-btn" th:href="@{/study/study_list}">목록</a>
                                     </div>
                                 </th:block>
-                                <th:block th:if="${studyDto.user_id != loginedUserDto.id}">
+                                <th:block th:if="${studyDto.user_id != session.loginUser.id}">
                                     <div class="study-btn-box">
                                         <a id="appr_btn" class="study-regist-btn study-regist-input study-btn" th:no="${studyDto.no}"  th:onclick="check_approval(this.getAttribute('no'))">신청</a>
                                         <a class="study-cancel-btn study-regist-input study-btn" th:href="@{/study/study_list}">목록</a>

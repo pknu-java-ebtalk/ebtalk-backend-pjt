@@ -20,6 +20,8 @@
             user
         where
             approve_yn = 'n'
+        order by
+            created_at
     </select>
 
     <!-- 회원 요청 승인 -->
