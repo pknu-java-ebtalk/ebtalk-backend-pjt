@@ -117,7 +117,7 @@ class ChatController {
 
         if (userMemberDto == null) {
             log.error("No logged in user found in session");
-            return "redirect:/login"; // 로그인 페이지로 리다이렉트
+            return "redirect:/member/sign_in"; // 로그인 페이지로 리다이렉트
         }
 
         model.addAttribute("roomId", roomId);

@@ -22,8 +22,13 @@ public class StudyRoomController {
      * 스터디룸 페이지
      */
     @GetMapping("")
-    public String studyRoomForm(@RequestParam int no, Model model) {
+    public String studyRoomForm(@RequestParam int no, Model model, HttpSession session) {
         log.info("[StudyRoomController] studyRoomForm()");
+
+        if(session.getAttribute("loginUser") == null){
+            return "redirect:/member/sign_in";
+        }
+
 
         model.addAttribute("study_no", no);
 
