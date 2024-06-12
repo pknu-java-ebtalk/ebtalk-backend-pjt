@@ -1,4 +1,4 @@
-package com.pknu.ebtalk.controller.chatting.chatresearch;
+package com.pknu.ebtalk.controller.chatting;
 
 import com.pknu.ebtalk.dto.chatting.ChatRoomDto;
 import com.pknu.ebtalk.dto.chatting.ChatRoomUserDto;
