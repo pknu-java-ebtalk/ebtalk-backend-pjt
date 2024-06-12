@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>common_main_test</title>
+    <title>채팅 : 이비톡</title>
     <link rel="stylesheet" href="/css/common/common_main.css">
     <link rel="stylesheet" href="/css/chatting/ChattingResearch.css">
     <!-- ⭐본인 css 링크 작성⭐ -->
@@ -23,7 +23,7 @@
                 <!-- ⭐여기에 코드 작성⭐ -->
                 <form action="/chat/ChattingResearch" method="get">
                     <div class="search-container">
-                        <input type="search" id="name" name="name" placeholder="채팅할 사람의 이름을 입력하세요." class="research-text">
+                        <input type="search" id="name" name="name" placeholder="채팅할 사람의 이름을 입력하세요." class="research-text font">
                         <button type="button" class="search-button" onclick="searchChatRoomUsers()"></button>
                     </div>
                 </form>
@@ -41,7 +41,9 @@
         </div>
     </div>
 </div>
-<footer></footer>
+<footer>
+    <th:block th:replace="~{html/fragments/common_main_footer :: footer}"></th:block>
+</footer>
 <!-- ⭐aside에 내용 추가 시 여기에 js 파일 추가⭐ -->
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>

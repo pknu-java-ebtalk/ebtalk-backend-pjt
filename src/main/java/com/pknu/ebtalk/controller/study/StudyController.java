@@ -25,8 +25,12 @@ public class StudyController {
      *  스터디 모집 등록
      */
     @GetMapping(value={ "/study_register_form"})
-    public String studyRegisterForm() {
+    public String studyRegisterForm(HttpSession session) {
         log.info("[StudyController] studyRegister()");
+
+        if(session.getAttribute("loginUser") == null){
+            return "redirect:/member/sign_in";
+        }
 
         return "/html/study/study_register";
 
@@ -35,6 +39,10 @@ public class StudyController {
     @PostMapping(value = {"/study_register_confirm"})
     public String studyRegisterConfirm(StudyDto studyDto, Model model, HttpSession session) {
         log.info("[StudyController] studyRegisterConfirm()");
+
+        if(session.getAttribute("loginUser") == null){
+            return "redirect:/member/sign_in";
+        }
 
         // 세션 연결
         UserMemberDto loginedUserDto = (UserMemberDto) session.getAttribute("loginUser");
@@ -58,16 +66,18 @@ public class StudyController {
      * 스터디 모집글 수정
      */
     @GetMapping(value = {"/study_modify_form"})
-    public String studyModifyForm(@RequestParam int no, Model model) {
+    public String studyModifyForm(@RequestParam int no, Model model, HttpSession session) {
         log.info("[StudyController] studyModifyForm()");
+
+        if(session.getAttribute("loginUser") == null){
+            return "redirect:/member/sign_in";
+        }
 
         StudyDto studyDto = studyService.selectStudyInfoByNo(no);
 
         model.addAttribute("studyDto", studyDto);
 
-        String nextPage = "/html/study/study_modify";
-
-        return nextPage;
+        return "/html/study/study_modify";
 
     }
 
@@ -75,6 +85,10 @@ public class StudyController {
     public String studyModifyConfirm(StudyDto studyDto, Model model, HttpSession session) {
         log.info("[StudyController] studyModifyConfirm()");
         log.info(studyDto.getNo());
+
+        if(session.getAttribute("loginUser") == null){
+            return "redirect:/member/sign_in";
+        }
 
         // 세션 연결
         UserMemberDto loginedUserDto = (UserMemberDto) session.getAttribute("loginUser");
@@ -97,8 +111,12 @@ public class StudyController {
      * 스터디 모집글 리스트
      */
     @GetMapping(value = {"/study_list"})
-    public String showStudyAllList(Model model){
+    public String showStudyAllList(Model model, HttpSession session){
         log.info("[StudyController] showStudyAllList()");
+
+        if(session.getAttribute("loginUser") == null){
+            return "redirect:/member/sign_in";
+        }
 
         model.addAttribute("studyDtos", studyService.selectStudyAllList());
 
@@ -112,11 +130,11 @@ public class StudyController {
     public String showStudyDetail(@RequestParam int no,Model model, HttpSession session){
         log.info("[StudyController] showStudyDetail()");
 
-        // 세션 연결
-        UserMemberDto loginedUserDto = (UserMemberDto) session.getAttribute("loginUser");
+        if(session.getAttribute("loginUser") == null){
+            return "redirect:/member/sign_in";
+        }
 
         model.addAttribute("studyDto", studyService.selectStudyInfoByNo(no));
-        model.addAttribute("loginedUserDto", loginedUserDto);
 
         return "/html/study/study_register_detail";
 
@@ -128,6 +146,10 @@ public class StudyController {
     @GetMapping(value = {"/study_delete_confirm"})
     public String delelteStudyConfirm(@RequestParam int no, HttpSession session){
         log.info("[StudyController] deleteStudyConfirm()");
+
+        if(session.getAttribute("loginUser") == null){
+            return "redirect:/member/sign_in";
+        }
 
         // 세션 연결
         UserMemberDto loginedUserDto = (UserMemberDto) session.getAttribute("loginUser");
@@ -166,6 +188,10 @@ public class StudyController {
     public String showStudyInProgressList(Model model, HttpSession session){
         log.info("[StudyController] showStudyInProgressList()");
 
+        if(session.getAttribute("loginUser") == null){
+            return "redirect:/member/sign_in";
+        }
+
         // 세션 연결
         UserMemberDto loginedUserDto = (UserMemberDto) session.getAttribute("loginUser");
 
@@ -180,6 +206,10 @@ public class StudyController {
     @GetMapping(value = {"/study_application_list"})
     public String showStudyApplicationList(Model model, HttpSession session){
         log.info("[StudyController] showStudyApplicationList()");
+
+        if(session.getAttribute("loginUser") == null){
+            return "redirect:/member/sign_in";
+        }
 
         // 세션 연결
         UserMemberDto loginedUserDto = (UserMemberDto) session.getAttribute("loginUser");

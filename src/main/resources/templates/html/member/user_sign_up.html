@@ -34,7 +34,7 @@
                     <div class="sign-up-box">
                         <p class="sign-up-title">회원가입</p>
                         <form role="form" class="sign-up-form" method="post" action="/member/sign_up_confirm" id="resetPwForm" th:object="${userMemberDto}">
-                            <input th:field="*{id}" class="sign-up-id sign-up-input sign-up form-control" type="email" name="id" placeholder="아이디" th:errorclass="field-error" id="sign-up-id">
+                            <input th:field="*{id}" class="sign-up-id sign-up-input sign-up form-control" type="email" name="id" placeholder="아이디(이메일)" th:errorclass="field-error" id="sign-up-id">
                             <div class="info-msg-box" id="info-msg-box">
                                 <p id="id-check-msg">이미 있는 계정입니다.</p>
                                 <p class="field-error field-error-p field-error-id" th:errors="*{id}"></p>
