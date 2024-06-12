@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>common_main_test</title>
+    <title>공지 : 이비톡</title>
     <link rel="stylesheet" href="/css/common/common_main.css">
     <link rel="stylesheet" href="/css/board/notice_side.css">
     <link rel="stylesheet" href="/css/board/notice_write.css">
@@ -17,7 +17,7 @@
 </header>
 <div>
     <aside>
-        <th:block th:replace="~{html/fragments/common_main_aside :: aside}"></th:block>
+        <th:block th:replace="~{html/fragments/board_aside :: aside_board}"></th:block>
     </aside>
     <div class="background-gray middle-gray">
         <div class="background-white middle-white">
@@ -48,7 +48,7 @@
                         </div>
                         <div class="pagination">
                             <button type="submit" class="write font">등록</button>
-                            <a href="board.html" class="cancel font">취소</a>
+                            <a th:href="@{/notification/notification_board_list}" class="cancel font">취소</a>
                         </div>
                     </div>
                 </div>

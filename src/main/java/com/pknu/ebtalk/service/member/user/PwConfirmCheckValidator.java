@@ -3,6 +3,7 @@ package com.pknu.ebtalk.service.member.user;
 import jakarta.validation.Constraint;
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
+import lombok.extern.log4j.Log4j2;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.server.ResponseStatusException;
@@ -13,7 +14,7 @@ import java.lang.reflect.Field;
 
 import static org.apache.ibatis.ognl.OgnlRuntime.getFieldValue;
 
-@Slf4j
+@Log4j2
 public class PwConfirmCheckValidator implements ConstraintValidator<PwConfirmCheck, Object> {
     private String message;
     private String pw;

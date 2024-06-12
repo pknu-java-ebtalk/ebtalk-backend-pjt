@@ -15,13 +15,13 @@
     </header>
     <div>
         <aside>
-            <th:block th:replace="~{html/fragments/common_main_aside :: aside}"></th:block>
+            <th:block th:replace="~{html/fragments/mypage_aside :: aside-mypage}"></th:block>
         </aside>
         <div class="background-gray middle-gray">
             <div class="background-white middle-white">
                 <div class="contents-box">
                     <p class="msg">회원탈퇴가 완료되었습니다.</p>
-                    <button class="btn font">확인</button>
+                    <button class="btn font" th:onclick="|location.href='@{/member/sign_in}'|">확인</button>
                 </div>
             </div>
         </div>

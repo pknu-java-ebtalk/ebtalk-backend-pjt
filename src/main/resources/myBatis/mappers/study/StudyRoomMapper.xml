@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTO Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.pknu.ebtalk.mappers.study.IStudyRoomMapper">
+    <!--  스터디룸 등록글 리스트 조회  -->
+    <select id="selectStudyRoomAllListByNo" parameterType="Integer" resultType="com.pknu.ebtalk.dto.study.StudyRoomDto">
+        SELECT
+            m.*, u.name as name
+        FROM
+            memoir m
+        JOIN
+                user u
+        ON
+            m.user_id = u.id
+        WHERE
+            study_no = #{study_no}
+    </select>
+
+    <!--  스터디룸 멤버 리스트 조회-->
+    <select id="selectStudyRoomAllListMateNateByNo" parameterType="Integer" resultType="com.pknu.ebtalk.dto.study.StudyRoomDto">
+        SELECT
+            u.name as name
+        FROM
+            study_mate sm
+        JOIN
+            user u
+        ON
+            u.id = sm.user_id
+        WHERE
+            sm.approve_yn = 'Y'
+        and
+            study_no = #{study_no};
+    </select>
+
+    <!--  스터디룸 글 등록  -->
+    <insert id="insertStudyRoomRegistInfo" parameterType="com.pknu.ebtalk.dto.study.StudyRoomDto">
+        insert into
+            memoir(m_category_no, study_no, user_id, content, created_at)
+        values
+            (
+                #{m_category_no},
+                #{study_no},
+                #{user_id},
+                #{content},
+                now()
+            )
+
+    </insert>
+    <!--  스터디룸 글 수정  -->
+    <update id="updateStudyRoomInfo" parameterType="com.pknu.ebtalk.dto.study.StudyRoomDto">
+        UPDATE
+            memoir
+        SET
+            content = #{content}
+        WHERE
+            no = #{no}
+        AND
+            user_id = #{user_id}
+    </update>
+
+    <!--  스터디룸 삭제  -->
+    <delete id="deleteStudyRoomConfirm" parameterType="com.pknu.ebtalk.dto.study.StudyRoomDto" >
+        DELETE FROM
+                   memoir
+        WHERE
+            no = #{no}
+        AND
+            user_id = #{user_id}
+    </delete>
+</mapper>

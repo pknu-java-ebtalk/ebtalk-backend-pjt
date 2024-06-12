@@ -1,4 +1,4 @@
-package com.pknu.ebtalk.dto.chatting.websocket;
+package com.pknu.ebtalk.dto.chatting.websocket.websocket;
 
 public class Util {
         // XSS(Cross-Site Scripting) 공격을 방지하는 메서드

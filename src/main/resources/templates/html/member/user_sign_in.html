@@ -19,15 +19,15 @@
                     <div class="sign-in-box">
                         <p class="sign-in-title">로그인</p>
                         <form class="sign-in-form" method="post" action="/member/sign_in_check" id="signInForm">
-                            <input class="sign-in-id sign-in-input sign-in" type="email" name="id" placeholder="아이디">
+                            <input class="sign-in-id sign-in-input sign-in" type="email" name="id" placeholder="아이디(이메일)">
                             <input class="sign-in-pw sign-in-input sign-in" type="password" name="pw" placeholder="비밀번호">
                             <p class="info-msg">아이디 또는 비밀번호를 잘못 입력하셨습니다.</p>
                             <input class="sign-in-btn sign-in" type="submit" value="로그인">
                         </form>
                         <div class="sign-in-option">
-                            <a href="#">아이디 찾기</a>
-                            <a href="#">비밀번호 재설정</a>
-                            <a href="#">회원가입</a>
+                            <a th:href="@{/member/sign_in_find_id}">아이디 찾기</a>
+                            <a th:href="@{/member/sign_in_reset_pw}">비밀번호 재설정</a>
+                            <a th:href="@{/member/sign_up}">회원가입</a>
                         </div>
                     </div>
                 </div>
@@ -37,8 +37,6 @@
     <footer>
         <th:block th:replace="~{html/fragments/common_main_footer :: footer}"></th:block>
     </footer>
-<!--    <script src="/js/common_member_header.js"></script>-->
-<!--    <script src="/js/common_main_footer.js"></script>-->
     <script>
         $(document).ready(function (){
             $("#signInForm").submit(function (event){
@@ -54,6 +52,12 @@
                             $('.info-msg').css('visibility', 'visible');
                         }else if(data === "y"){
                             window.location.href = "/";
+                        }else if(data === "w"){
+                            alert("승인 대기 중인 아이디입니다. 관리자에게 문의주세요.");
+                        }else if(data === "d"){
+                            alert("탈퇴한 계정입니다.");
+                        }else if(data === "a"){
+                            window.location.href = "/admin/approve_list";
                         }
                     },
                     error: function (){

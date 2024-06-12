@@ -1,7 +1,6 @@
-/* board_list.css */
-
+/* 전체 레이아웃 */
 .back-color {
-    width: 900px;
+    max-width: 900px;
     height: 500px;
     margin: auto;
 }
@@ -20,33 +19,16 @@
     align-items: center;
 }
 
-.pagination {
-    display: flex;
-    align-items: center;
+/* 테이블 및 리스트 스타일 */
+.board_list_wrap {
+    padding: 20px;
 }
 
-#board-write {
-    display: flex;
-    justify-content: flex-end;
-    margin-right: 75px;
+.board_list td, .board_list th {
+    padding: 10px;
 }
 
-.write {
-    padding: 10px 20px;
-    background-color: var(--common_blue);
-    color: white;
-    text-align: center;
-    text-decoration: none;
-    border: none;
-    border-radius: 5px;
-    font-weight: normal;
-    cursor: pointer;
-}
-
-.write:hover {
-    background-color: var(--text_purple);
-}
-
+/* 검색 섹션 */
 .board-search .selectField {
     width: 70px;
     height: 25px;
@@ -71,6 +53,23 @@
     outline: none;
 }
 
+.board-search .btn {
+    background-color: var(--common_blue);
+    color: white;
+    border: none;
+    cursor: pointer;
+    height: 25px;
+    width: 30px;
+    font-size: 10px;
+    border-radius: 0px 5px 5px 0px;
+}
+
+.board-search form {
+    display: flex;
+    align-items: center;
+}
+
+/* 테이블 헤더 스타일 */
 .top-bar {
     margin-top: 10px;
     display: flex;
@@ -101,13 +100,14 @@ dt {
 }
 
 .created {
-    margin-left: 70px;
+    margin-left: 90px;
 }
 
 .hitCount {
-    margin-left: 70px;
+    margin-left: 60px;
 }
 
+/* 페이지네이션 */
 .pagination {
     display: flex;
     justify-content: center;
@@ -117,35 +117,98 @@ dt {
 
 .page-link,
 .page-first,
-.page-last {
-    margin: 0 5px;
+.page-last,
+.page-prev,
+.page-next {
+    margin: 0 10px; /* 각 버튼 사이에 10px의 간격을 추가합니다 */
     padding: 10px 15px;
     text-decoration: none;
+    font-size: 16px; /* 모든 화살표의 크기를 동일하게 설정합니다 */
 }
 
 .page-link:hover,
 .page-first:hover,
-.page-last:hover {
+.page-last:hover,
+.page-prev:hover,
+.page-next:hover {
     text-decoration: underline;
 }
 
-.board-search form {
+.pagination a {
+    text-decoration: none;
+}
+
+.pagination a:first-child {
+    margin-left: 0;
+}
+
+.pagination a:last-child {
+    margin-right: 0;
+}
+/* 페이지네이션 버튼 간격 조정 */
+.pagination a {
+    margin: 0 5px;
+}
+
+.pagination a span {
+    padding: 5px;
+}
+
+/* 전체 테이블 스타일 */
+.board_list th, .board_list td {
+    padding: 8px;
+}
+
+/* 각 열의 너비 설정 */
+.board_list th.number, .board_list td.number {
+    width: 5%;
+}
+
+.board_list th.subject, .board_list td.subject {
+    width: 500px;
+    text-align: center;
+}
+
+.board_list th.name, .board_list td.name {
+    width: 15%;
+}
+
+.board_list th.created, .board_list td.created {
+    width: 20%;
+}
+
+.board_list th.hitCount, .board_list td.hitCount {
+    width: 20px;
+}
+
+/* 버튼 스타일 */
+.board_list .btn {
+    text-decoration: none;
+    color: #000;
+    width: 100%;
+    height: 100%;
+}
+
+/* 글쓰기 버튼 */
+#board-write {
     display: flex;
-    align-items: center;
+    justify-content: flex-end;
+    margin-right: 75px;
 }
 
-.selectField,
-.textField,
-.btn {
-    padding: 0px 12px;
-    border-radius: 5px;
-}
-
-.board-search .btn {
+.write {
+    padding: 10px 20px;
     background-color: var(--common_blue);
     color: white;
+    text-align: center;
+    text-decoration: none;
     border: none;
+    border-radius: 5px;
+    font-weight: normal;
     cursor: pointer;
-    height: 25px;
-    border-radius: 0px 5px 5px 0px;
+    font-size: 18px;
+}
+
+.write:hover {
+    background-color: var(--text_purple);
 }

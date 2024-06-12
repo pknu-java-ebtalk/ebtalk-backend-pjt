@@ -16,7 +16,7 @@
 </header>
 <div>
     <aside>
-        <th:block th:replace="~{html/fragments/common_main_aside :: aside}"></th:block>
+        <th:block th:replace="~{html/fragments/common_study_aside :: aside}"></th:block>
     </aside>
     <div class="background-gray middle-gray">
         <div class="background-white middle-white">
@@ -60,7 +60,7 @@
                                             </div>
                                             <div class="study-info">
                                                 <div class="study-writer-date">
-                                                    <span class="span-color" th:text="${studyDto.user_id}"></span>
+                                                    <span class="span-color" th:text="${studyDto.name}"></span>
                                                     <span class="span-color">·</span>
                                                     <span class="span-color" th:text="${studyDto.created_at}"></span>
                                                 </div>
@@ -72,7 +72,7 @@
                                                         </li>
                                                         <li class="li-wid">
                                                             <i class="fa-regular fa-eye" style="width: 15px;"></i>
-                                                            <span class="span-color">555</span>
+                                                            <span class="span-color" th:text="${studyDto.views}"></span>
                                                         </li>
                                                         <li class="li-wid">
                                                             <i class="fa-regular fa-comment" style="width: 15px;"></i>

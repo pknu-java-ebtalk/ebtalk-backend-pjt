@@ -11,11 +11,10 @@ public class HomeController {
     public String home(HttpSession session) {
         System.out.println("[HomeController] home()");
 
-        if(session.getAttribute("id") != null){
-            return "/html/home/home";
+        if(session.getAttribute("loginUser") == null){
+            return "redirect:/member/sign_in";
         }
 
-        return "redirect:/member/sign_in";
-
+        return "/html/home/home";
     }
 }

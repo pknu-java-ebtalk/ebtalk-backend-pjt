@@ -18,14 +18,17 @@ public interface IStudyService {
     // 스터디 모집 리스트
     List<StudyDto> selectStudyAllList();
 
-    void deleteStudyConfirm(int no);
+    void deleteStudyConfirm(StudyDto studyDto);
 
     // 스터디 관리 페이지 - 진행중인 스터디 리스트
-    List<StudyDto> selectStudyInProgressByUId(StudyDto studyDto);
+    List<StudyDto> selectStudyInProgressByUId(String user_id);
 
     // 스터디 관리 페이지 - 신청목록
-    List<StudyDto> selectStudyApplicationListById(StudyDto studyDto);
+    List<StudyDto> selectStudyApplicationListById(String user_id);
 
     // 스터디 관리 페이지 - 신청목록 승인처리
     Map<String, Object> updateStudyApplicationListById(StudyDto studyDto);
+
+    // 스터디 모집 신청
+    Map<String, String> insertStudyApproval(StudyDto studyDto);
 }

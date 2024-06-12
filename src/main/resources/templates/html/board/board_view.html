@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>common_main_test</title>
+    <title>공지 : 이비톡</title>
     <link rel="stylesheet" href="/css/common/common_main.css">
     <link rel="stylesheet" href="/css/board/notice_side.css">
     <link rel="stylesheet" href="/css/board/notice_view.css">
@@ -16,26 +16,28 @@
 </header>
 <div>
     <aside>
-        <th:block th:replace="~{html/fragments/common_main_aside :: aside}"></th:block>
+        <th:block th:replace="~{html/fragments/board_aside :: aside_board}"></th:block>
     </aside>
     <div class="background-gray middle-gray">
         <div class="background-white middle-white">
             <div class="contents-box">
-                <div class="board_view font">
-                    <div class="title">
-                        <span id="view-title" th:text="${boardDto.title}"></span>
-                        <span id="view-name" th:text="${boardDto.user_id}"></span>
-                        <span id="view-date" th:text="${boardDto.created_at}"></span>
-                        <span><img class="eyes" src="../../img/board/눈.png">300</span>
+                <form action="" method="get">
+                    <div class="board_view font">
+                        <div class="title">
+                            <P id="view-title" class="font" th:text="${boardDto.title}"></P>
+                            <P id="view-name" class="font" th:text="${boardDto.user_id}"></P>
+                            <P id="view-date" class="font" th:text="${boardDto.created_at}"></P>
+                            <P><img class="eyes" src="../../img/board/눈.png" th:text="${boardDto.views}"></P>
+                        </div>
+                        <div class="cont font">
+                            <P id="view-content" style="white-space: pre" th:text="${boardDto.content}"></P>
+                        </div>
+                        <div class="bt_wrap">
+                            <a th:href="@{/notification/notification_board_list}" class="on">목록</a>
+                            <a th:href="@{/notification/notification_edit_form(no=${boardDto.no})}" class="edit">수정</a>
+                        </div>
                     </div>
-                    <div class="cont font">
-                        <span id="view-content" th:text="${boardDto.content}"></span>
-                    </div>
-                    <div class="bt_wrap">
-                        <a href="board.html" class="on">목록</a>
-                        <a href="board_edit.html" class="edit">수정</a>
-                    </div>
-                </div>
+                </form>
             </div>
         </div>
     </div>

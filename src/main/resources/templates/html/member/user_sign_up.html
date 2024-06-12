@@ -6,11 +6,8 @@
     <title>회원가입 : 이비톡</title>
     <link rel="stylesheet" href="/css/common/common_member.css">
     <link rel="stylesheet" href="/css/member/user_sign_up.css">
-<<<<<<< HEAD
-=======
     <!--  JQuery CDN을 이용한 로드  -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
->>>>>>> origin/dev
 </head>
 </head>
 <style>
@@ -37,9 +34,9 @@
                     <div class="sign-up-box">
                         <p class="sign-up-title">회원가입</p>
                         <form role="form" class="sign-up-form" method="post" action="/member/sign_up_confirm" id="resetPwForm" th:object="${userMemberDto}">
-                            <input th:field="*{id}" class="sign-up-id sign-up-input sign-up form-control" type="email" name="id" placeholder="아이디" th:errorclass="field-error" id="sign-up-id">
+                            <input th:field="*{id}" class="sign-up-id sign-up-input sign-up form-control" type="email" name="id" placeholder="아이디(이메일)" th:errorclass="field-error" id="sign-up-id">
                             <div class="info-msg-box" id="info-msg-box">
-                                <p id="id-check-msg">중복된 아이디입니다.</p>
+                                <p id="id-check-msg">이미 있는 계정입니다.</p>
                                 <p class="field-error field-error-p field-error-id" th:errors="*{id}"></p>
                             </div>
                             <div class="pw-input-box">
@@ -74,9 +71,7 @@
     </footer>
     <script src="/js/common_member_header.js"></script>
     <script src="/js/common_main_footer.js"></script>
-<<<<<<< HEAD
-</body> 
-=======
+</body>
     <script>
         // DOM이 완전히 로드된 후에 코드 실행
         document.addEventListener('DOMContentLoaded', function (){

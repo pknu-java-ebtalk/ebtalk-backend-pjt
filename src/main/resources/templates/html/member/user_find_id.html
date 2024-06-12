@@ -17,9 +17,9 @@
                 <div class="contents-box">
                     <div class="find-id-box">
                         <p class="find-id-title">아이디 찾기</p>
-                        <form class="find-id-form" method="post" action="#" id="findIdForm">
-                            <input class="find-id-name find-id-input find-id" type="text" name="NAME" placeholder="이름">
-                            <input class="find-id-phone find-id-input find-id" type="text" name="PHONE" placeholder="전화번호">
+                        <form class="find-id-form" method="post" action="/member/sign_in_find_id_result" id="findIdForm">
+                            <input class="find-id-name find-id-input find-id" type="text" name="name" placeholder="이름">
+                            <input class="find-id-phone find-id-input find-id" type="text" pattern="010\d{8}" name="phone" placeholder="전화번호">
                             <input class="find-id-btn find-id" type="submit" value="확인">
                         </form>
                     </div>
@@ -30,7 +30,5 @@
     <footer>
         <th:block th:replace="~{html/fragments/common_main_footer :: footer}"></th:block>
     </footer>
-<!--    <script src="/js/common_member_header.js"></script>-->
-<!--    <script src="/js/common_main_footer.js"></script>-->
 </body> 
 </html>

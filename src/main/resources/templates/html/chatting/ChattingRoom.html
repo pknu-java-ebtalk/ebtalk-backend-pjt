@@ -3,103 +3,183 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>common_main_test</title>
+    <title>채팅 : 이비톡</title>
     <link rel="stylesheet" href="/css/common/common_main.css">
     <link rel="stylesheet" href="/css/chatting/ChattingRoom.css">
     <!-- ⭐본인 css 링크 작성⭐ -->
 </head>
 <body>
-    <header>
-        <th:block th:replace="~{html/fragments/common_main_header :: header-main}"></th:block>
-    </header>
-    <div>
-        <aside>
-            <th:block th:replace="~{html/fragments/common_main_aside :: aside}"></th:block>
-        </aside>
-        <div class="background-gray middle-gray">
-            <div class="background-white middle-white">
-                <div class="contents-box">
-                    <div class="chatlist">
-                        <a href="chatroom1.html" class="chatroom">
-                            <img class="profile-picc" src="/img/profile.png"><i class="chat-text"></i>
-                            <p class="pname">이름</p>
-                            <p class="pdate">2024-05-24</p>
-                            <p class="ptext">안녕하세요~</p>
-                        </a>
-                        <a href="chatroom2.html" class="chatroom">
-                            <img class="profile-picc" src="/img/profile.png"><i class="chat-text"></i>
-                            <p class="pname">이름</p>
-                            <p class="pdate">2024-05-24</p>
-                            <p class="ptext">안녕하세요~</p>
-                        </a>
-                        <a href="chatroom3.html" class="chatroom">
-                            <img class="profile-picc" src="/img/profile.png"><i class="chat-text"></i>
-                            <p class="pname">이름</p>
-                            <p class="pdate">2024-05-24</p>
-                            <p class="ptext">안녕하세요~</p>
-                        </a>
-                        <a href="chatroom4.html" class="chatroom">
-                            <img class="profile-picc" src="/img/profile.png"><i class="chat-text"></i>
-                            <p class="pname">이름</p>
-                            <p class="pdate">2024-05-24</p>
-                            <p class="ptext">안녕하세요~</p>
-                        </a>
-                        <a href="chatroom5.html" class="chatroom">
-                            <img class="profile-picc" src="/img/profile.png"><i class="chat-text"></i>
-                            <p class="pname">이름</p>
-                            <p class="pdate">2024-05-24</p>
-                            <p class="ptext">안녕하세요~</p>
-                        </a>
-                        <a href="chatroom6.html" class="chatroom">
-                            <img class="profile-picc" src="/img/profile.png"><i class="chat-text"></i>
-                            <p class="pname">이름</p>
-                            <p class="pdate">2024-05-24</p>
-                            <p class="ptext">안녕하세요~</p>
-                        </a>
-                        <a href="chatroom7.html" class="chatroom">
-                            <img class="profile-picc" src="/img/profile.png"><i class="chat-text"></i>
-                            <p class="pname">이름</p>
-                            <p class="pdate">2024-05-24</p>
-                            <p class="ptext">안녕하세요~</p>
-                        </a>
-                        <a href="chatroom1.html" class="chatroom">
-                            <img class="profile-picc" src="/img/profile.png"><i class="chat-text"></i>
-                            <p class="pname">이름</p>
-                            <p class="pdate">2024-05-24</p>
-                            <p class="ptext">안녕하세요~</p>
-                        </a>
+<header>
+    <th:block th:replace="~{html/fragments/common_main_header :: header-main}"></th:block>
+</header>
+<div>
+    <aside>
+        <th:block th:replace="~{html/fragments/common_main_aside :: aside}"></th:block>
+    </aside>
+    <div class="background-gray middle-gray">
+        <div class="background-white middle-white">
+            <div class="contents-box">
+                <!-- ⭐여기에 코드 작성⭐ -->
+                <!-- 전체 박스 -->
+                <div class="chatbox">
+                    <!-- 일인 채팅 전체보기 -->
+                    <div class="chatbox1 chatlist">
+                        <!-- 일인 채팅 미리보기 -->
+                        <div class="chatpeople">
+                            <div class="chatinfo">
+                                <div class="chat-pimg"><img class="profile-pi" src="/img/profile.png"/></div>
+                                <div class="chat-bot chat-upinfo">
+                                    <div class="pname">윤찬우</div>
+                                    <div class="chat-bot pmessage">안녕하세요
+                                    </div>
+                                </div>
+                                <div class="chat-bot chat-downinfo">
+                                    <div class="pdate">2024-05-25</div>
+                                    <div class="pdate-btn">1</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="chatpeople">
+                            <div class="chatinfo">
+                                <div class="chat-pimg"><img class="profile-pi" src="/img/profile.png"/></div>
+                                <div class="chat-bot chat-upinfo">
+                                    <div class="pname">윤찬우</div>
+                                    <div class="chat-bot pmessage">안녕하세요</div>
+                                </div>
+                                <div class="chat-bot chat-downinfo">
+                                    <div class="pdate">2024-05-25</div>
+                                    <div class="pdate-btn">1</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="chatpeople">
+                            <div class="chatinfo">
+                                <div class="chat-pimg"><img class="profile-pi" src="/img/profile.png"/></div>
+                                <div class="chat-bot chat-upinfo">
+                                    <div class="pname">윤찬우</div>
+                                    <div class="chat-bot pmessage">안녕하세요</div>
+                                </div>
+                                <div class="chat-bot chat-downinfo">
+                                    <div class="pdate">2024-05-25</div>
+                                    <div class="pdate-btn">1</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="chatpeople">
+                            <div class="chatinfo">
+                                <div class="chat-pimg"><img class="profile-pi" src="/img/profile.png"/></div>
+                                <div class="chat-bot chat-upinfo">
+                                    <div class="pname">윤찬우</div>
+                                    <div class="chat-bot pmessage">안녕하세요</div>
+                                </div>
+                                <div class="chat-bot chat-downinfo">
+                                    <div class="pdate">2024-05-25</div>
+                                    <div class="pdate-btn">1</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="chatpeople">
+                            <div class="chatinfo">
+                                <div class="chat-pimg"><img class="profile-pi" src="/img/profile.png"/></div>
+                                <div class="chat-bot chat-upinfo">
+                                    <div class="pname">윤찬우</div>
+                                    <div class="chat-bot pmessage">안녕하세요</div>
+                                </div>
+                                <div class="chat-bot chat-downinfo">
+                                    <div class="pdate">2024-05-25</div>
+                                    <div class="pdate-btn">1</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="chatpeople">
+                            <div class="chatinfo">
+                                <div class="chat-pimg"><img class="profile-pi" src="/img/profile.png"/></div>
+                                <div class="chat-bot chat-upinfo">
+                                    <div class="pname">윤찬우</div>
+                                    <div class="chat-bot pmessage">안녕하세요</div>
+                                </div>
+                                <div class="chat-bot chat-downinfo">
+                                    <div class="pdate">2024-05-25</div>
+                                    <div class="pdate-btn">1</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="chatpeople">
+                            <div class="chatinfo">
+                                <div class="chat-pimg"><img class="profile-pi" src="/img/profile.png"/></div>
+                                <div class="chat-bot chat-upinfo">
+                                    <div class="pname">윤찬우</div>
+                                    <div class="chat-bot pmessage">안녕하세요</div>
+                                </div>
+                                <div class="chat-bot chat-downinfo">
+                                    <div class="pdate">2024-05-25</div>
+                                    <div class="pdate-btn">1</div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="wrap">
-                        <div class="chat ch1">
-                            <img class="profile-picc" src="/img/profile.png"><i class="chat-text"></i>
-                            <div class="textbox">오늘 한미락 메뉴 뭐야?</div>
+
+
+
+                    <!-- 채팅창 -->
+                    <!---->
+                    <div class="chatbox1 chatroom">
+                        <div class="chat12">
+                            <div class="chat1">
+                                <div class="chat ch1">
+                                    <img class="profile-pi" src="/img/profile.png"/>
+                                    <div class="textbox1">
+                                        안녕하세요~
+                                    </div>
+                                </div>
+                                <div class="chat ch1">
+                                    <img class="profile-pi" src="/img/profile.png">
+                                    <div class="textbox1 textbox1-1">잘가요~</div>
+                                </div>
+                            </div>
+
+                            <div class="chat2">
+                                <div class="chat ch2">
+                                    <div class="textbox2">
+                                        반갑습니다~
+                                        반갑습니다~
+                                        반갑습니다~
+                                        반갑습니다~
+                                        반갑습니다~
+                                        반갑습니다~
+                                        반갑습니다~
+                                        반갑습니다~
+                                        반갑습니다~
+                                        반갑습니다~
+                                        반갑습니다~
+                                        반갑습니다~
+                                        반갑습니다~
+                                        반갑습니다~
+                                        반갑습니다~
+                                    </div>
+                                </div>
+                                <div class="chat ch2">
+                                    <div class="textbox2">네 들어가세요~
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <div class="chat ch2">
-                            <i class="chat-text"></i>
-                            <div class="textbox">편의점 ㄱㄱ</div>
-                        </div>
-                        <div class="chat ch1">
-                            <img class="profile-picc" src="/img/profile.png"><i class="chat-text"></i>
-                            <div class="textbox">편의점 별론데...</div>
-                        </div>
-                        <div class="chat ch2">
-                            <i class="chat-text"></i>
-                            <div class="textbox">그럼 중국집 가자</div>
+                        <div class="chat3">
+                            <div class="messagebox">
+                                <div class="ppimg"><a href=""><img class="img-btn" src="/img/사진추가.png"><i class="img-btn"></i><a></div>
+                                <div class="messagebb"><input type="text" class="message-text" placeholder="채팅을 입력하세요"></div>
+                                <div class="sendbtn"><a href=""><img class="mes-btn" src="/img/메시지전송.png"><i class="chat-text"></i></a></div>
+                            </div>
                         </div>
                     </div>
-                    <input type="text" class="messagetext" placeholder="채팅을 입력하세요">
-                    <img class="img_btn" src="/img/사진추가.png"><i class="img_btn"></i>
-                    <img class="mes_btn" src="/img/메시지전송.png"><i class="chat-text"></i>
                 </div>
             </div>
         </div>
     </div>
-    <footer>
-        <th:block th:replace="~{html/fragments/common_main_footer :: footer}"></th:block>
-    </footer>
-<!--    <script src="/js/common_main_header.js"></script>-->
-<!--    <script src="/js/common_main_aside.js"></script>-->
-<!--    <script src="/js/common_main_footer.js"></script>-->
-    <!-- ⭐aside에 내용 추가 시 여기에 js 파일 추가⭐ -->
+</div>
+<footer>
+    <th:block th:replace="~{html/fragments/common_main_footer :: footer}"></th:block>
+</footer>
+<!-- ⭐aside에 내용 추가 시 여기에 js 파일 추가⭐ -->
 </body>
 </html>

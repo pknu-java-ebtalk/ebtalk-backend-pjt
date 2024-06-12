@@ -22,9 +22,13 @@
      */
     function set_limit_finished_date(){
         console.log("set_limit_finished_date() CALLED!!");
+        let date = new Date();
+        let curDate = date.getFullYear() + "-" + ('0'+ (date.getMonth()+1)).slice(-2) + "-" + ('0'+date.getDate()).slice(-2);
+        let startDate = $('.study-regist-start').val();
+        console.log(startDate);
         document.getElementById('started_at').addEventListener('change', function() {
-            var startDate = this.value;
-            var endDateInput = document.getElementById('finished_at');
+            document.getElementById('started_at').min=curDate;
+            let endDateInput = document.getElementById('finished_at');
             endDateInput.min = startDate;
 
         });
@@ -39,6 +43,7 @@
     function check_input_box_by_null(){
         // study_register form name을 form 변수에 담기
         var form = document.study_modify_form;
+        let count = form.count.value;
         if(form.title.value == '') {
             alert('제목을 입력해주세요.')
             form.title.focus();
@@ -49,9 +54,13 @@
             alert('마감일을 지정해주세요.')
             form.finished_at.focus();
         } else if(form.count.value == '') {
-            alert('모집인원 수를 지정해주세요.')
-            form.finished_at.focus();
-        } else if(form.content.value == '') {
+            alert('모집인원 수를 지정해주세요.');
+            form.count.focus();
+        } else if(count < 2) {
+            alert('2명 이상 지정해주세요.');
+            form.count.focus();
+        }
+        else if(form.content.value == '') {
             alert('내용을 입력해주세요.')
             form.finished_at.focus();
         } else {
@@ -62,4 +71,5 @@
     /*
      * check_input_box_by_null() END
      */
+
 </script>

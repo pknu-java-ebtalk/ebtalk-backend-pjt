@@ -15,7 +15,7 @@
     </header>
     <div>
         <aside>
-          <th:block th:replace="~{html/fragments/common_main_aside :: aside}"></th:block>
+            <th:block th:replace="~{html/fragments/common_study_aside :: aside}"></th:block>
         </aside>
         <div class="background-gray middle-gray">
             <div class="background-white middle-white">
@@ -23,13 +23,13 @@
                     <!-- ⭐여기에 코드 작성⭐ -->
                     <div id="wrap">
                       <div class="study-management-filter">
-                        <span class="study-filter-span"><a href="#">진행중</a></span>
-                        <span class="study-filter-span"><a href="#">신청목록</a></span>
+                          <span class="study-filter-span"><a th:href="@{/study/study_in_progress_list}">진행중</a></span>
+                          <span class="study-filter-span"><a th:href="@{/study/study_application_list}">신청목록</a></span>
                       </div>
                       <div class="study-room-box">
                         <th:block th:each="studyDto : ${studyDtos}">
                         <div class="study-in-progress-box">
-                          <a class="study-room-a" href="#" >
+                          <a class="study-room-a" th:href="@{/studyroom(no=${studyDto.no})}" >
                           <div class="title study-box">
                             <p class="title-p" th:text="${studyDto.title}"></p>
                           </div>
@@ -73,6 +73,5 @@
 <!--    <script src="/js/common_main_header.js"></script>-->
 <!--    <script src="/js/common_main_aside.js"></script>-->
 <!--    <script src="/js/common_main_footer.js"></script>-->
-    <script src="/js/study/study_aside.js"></script>
 </body>
 </html>

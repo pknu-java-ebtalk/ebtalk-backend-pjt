@@ -3,124 +3,100 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>common_main_test</title>
-   <!-- <link rel="stylesheet" href="../../css/common/common_main.css">-->
-    <link rel="stylesheet" href="../../css/chatting/ChattingResearch.css">
-    <link rel="stylesheet" href="../../../../resources/static/css/common/common_main.css">
-    <link rel="stylesheet" href="/css/common/common_main.css">
-    <link rel="stylesheet" href="/css/chatting/ChattingResearch.css">
+    <title>채팅 : 이비톡</title>
     <link rel="stylesheet" href="/css/common/common_main.css">
     <link rel="stylesheet" href="/css/chatting/ChattingResearch.css">
     <!-- ⭐본인 css 링크 작성⭐ -->
 </head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <body>
-    <header>
-        <th:block th:replace="~{html/fragments/common_main_header :: header-main}"></th:block>
-    </header>
-    <div>
-        <aside>
-            <th:block th:replace="~{html/fragments/common_main_aside :: aside}"></th:block>
-        </aside>
-        <div class="background-gray middle-gray">
-            <div class="background-white middle-white">
-                <div class="contents-box">
-                    <!-- ⭐여기에 코드 작성⭐ -->
+<header>
+    <th:block th:replace="~{html/fragments/common_main_header :: header-main}"></th:block>
+</header>
+<div>
+    <aside>
+        <th:block th:replace="~{html/fragments/common_main_aside :: aside}"></th:block>
+    </aside>
+    <div class="background-gray middle-gray">
+        <div class="background-white middle-white">
+            <div class="contents-box">
+                <!-- ⭐여기에 코드 작성⭐ -->
+                <form action="/chat/ChattingResearch" method="get">
                     <div class="search-container">
-                        <input type="search" placeholder="채팅할 사람의 이름을 입력하세요." class="research-text">
-                        <input type="button" class="search-button">
+                        <input type="search" id="name" name="name" placeholder="채팅할 사람의 이름을 입력하세요." class="research-text font">
+                        <button type="button" class="search-button" onclick="searchChatRoomUsers()"></button>
                     </div>
+                </form>
 
-                    <div class="search-namebox">
+                <div class="search-namebox" id="search-results">
+                    <!-- Thymeleaf를 이용해 서버에서 동적으로 데이터를 받아와서 반복적으로 출력. -->
+                    <th:block th:each="user : ${chatRoomUserDtoList}">
                         <div class="search-username">
-                            <p class="nameid">
-                                윤찬우(abc123)
-                            </p>
+                            <p data-user-id="${user.id}" class="user-result" th:text="${user.name} + '(' + ${user.id} + ')'"></p>
                         </div>
-
-                        <div class="search-username">
-                            <p>
-                                윤찬우(abc123)
-                            </p>
-                        </div>
-
-                        <div class="search-username">
-                            <p>
-                                윤찬우(abc123)
-                            </p>
-                        </div>
-
-                        <div class="search-username">
-                            <p>
-                                윤찬우(abc123)
-                            </p>
-                        </div>
-
-                        <div class="search-username">
-                            <p>
-                                윤찬우(abc123)
-                            </p>
-                        </div>
-
-                        <div class="search-username">
-                            <p>
-                                윤찬우(abc123)
-                            </p>
-                        </div>
-
-                        <!-- <div class="search-username">
-                            <p>
-                                윤찬우(abc123)
-                            </p>
-                        </div>
-
-                        <div class="search-username">
-                            <p>
-                                윤찬우(abc123)
-                            </p>
-                        </div>
-
-                        <div class="search-username">
-                            <p>
-                                윤찬우(abc123)
-                            </p>
-                        </div>
-
-                        <div class="search-username">
-                            <p>
-                                윤찬우(abc123)
-                            </p>
-                        </div>
-
-                        <div class="search-username">
-                            <p>
-                                윤찬우(abc123)
-                            </p>
-                        </div>
-
-                        <div class="search-username">
-                            <p>
-                                윤찬우(abc123)
-                            </p>
-                        </div>
-
-                        <div class="search-username">
-                            <p>
-                                윤찬우(abc123)
-                            </p>
-                        </div> -->
-                        
-                    </div>
-                    <button class="chatbtn" type="submit">채팅하기</button>
+                    </th:block>
                 </div>
+                <button class="chatbtn" type="button" id="start-chat" style="display:none;">채팅하기</button>
             </div>
         </div>
     </div>
-    <footer>
-        <th:block th:replace="~{html/fragments/common_main_footer :: footer}"></th:block>
-    </footer>
-<!--    <script src="/js/common_main_header.js"></script>-->
-<!--    <script src="/js/common_main_aside.js"></script>-->
-<!--    <script src="/js/common_main_footer.js"></script>-->
-    <!-- ⭐aside에 내용 추가 시 여기에 js 파일 추가⭐ -->
+</div>
+<footer>
+    <th:block th:replace="~{html/fragments/common_main_footer :: footer}"></th:block>
+</footer>
+<!-- ⭐aside에 내용 추가 시 여기에 js 파일 추가⭐ -->
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+    function searchChatRoomUsers() {
+        var searchName = $('#name').val(); // 검색할 이름 입력
+        console.log("Searching for:", searchName); // 디버깅 메시지 추가
+
+        $.ajax({
+            url: '/chat/ChattingResearchPost', // 채팅 대상자 조회 엔드포인트
+            method: 'POST',
+            contentType: 'application/json', // JSON 형식으로 데이터 전송
+            data: JSON.stringify({ name: searchName }), // 요청 본문에 데이터 포함
+            success: function(response) {
+                // 성공적으로 응답을 받았을 때 처리할 로직
+                console.log("Search results:", response); // 응답 데이터 확인
+
+                // 사용자 목록 업데이트
+                $('#search-results').empty();
+                if (response.users && response.users.length > 0) {
+                    response.users.forEach(function(user) {
+                        console.log("Appending user:", user); // 각 사용자 정보 디버깅 메시지 추가
+                        $('#search-results').append('<div class="search-username"><p data-user-id="' + user.id + '" class="user-result">' + user.name + '(' + user.id + ')</p></div>');
+                    });
+                    attachClickEvent(); // 이벤트 첨부 함수 호출 추가
+                } else {
+                    $('#search-results').append('<div class="search-username"><p>No users found</p></div>');
+                }
+            },
+            error: function(xhr, status, error) {
+                // 오류 발생 시 처리할 로직
+                console.error("Error occurred:", error); // 오류 메시지 출력
+                alert("Error occurred: " + error); // 오류 메시지 alert 추가
+            }
+        });
+    }
+
+    function attachClickEvent() {
+        $('.user-result').on('click', function() {
+            var userId = $(this).data('user-id');
+            var userName = $(this).text();
+            console.log("Selected user:", userId, userName); // 선택된 사용자 정보 디버깅 메시지 추가
+            $('#start-chat').data('user-id', userId).data('user-name', userName).show();
+        });
+
+        $('#start-chat').on('click', function() {
+            var userId = $(this).data('user-id');
+            var userName = $(this).data('user-name');
+            // 채팅 시작 로직 추가
+            alert("Starting chat with user: " + userId + ", " + userName); // 디버깅용 alert 추가
+            console.log("Starting chat with user:", userId, userName); // 채팅 시작 디버깅 메시지 추가
+        });
+    }
+</script>
 </body>
 </html>

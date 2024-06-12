@@ -8,6 +8,11 @@
     <!-- ⭐본인 css 링크 작성⭐ -->
     <link rel="stylesheet" href="/css/study/study_room.css">
     <link rel="stylesheet" href="/css/study/study_room_aside.css">
+    <script crossOrigin="anonymous"
+            integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM=" src="https://code.jquery.com/jquery-3.7.0.js"></script>
+    <script src="https://kit.fontawesome.com/011513753c.js" crossorigin="anonymous"></script>
+    <script th:replace="~{/html/study/study_room_js.html::js}"></script>
+
 </head>
 <body>
     <header>
@@ -15,41 +20,32 @@
     </header>
     <div>
         <aside>
-            <th:block th:replace="~{html/fragments/common_main_aside :: aside}"></th:block>
+            <th:block th:replace="~{html/fragments/common_studyroom_aside :: aside}"></th:block>
         </aside>
         <div class="background-gray middle-gray">
             <div class="background-white middle-white">
                 <div class="contents-box">
                     <!-- ⭐여기에 코드 작성⭐ -->
-                    <div id="wrap">
+                    <div id="wrap" th:study_no="${study_no}">
                         <div class="study-room-logo">
-                            <span class="study-filter-span">STUDY ROOM</span>
+                            <div>
+                                <p class="study-filter-span">STUDY ROOM</p>
+                            </div>
+                            <div class="study-room-a">
+                                <a th:href="@{/study/study_in_progress_list}"><i class="fa-solid fa-door-open fa-xl"></i></a>
+                            </div>
+
                         </div>
-                        <div class="study-room-box">
+                        <div class="study-room-box" >
                             <div class="study-room-category">
                                 <span>|</span>
                                 <span>Went Well</span>
                             </div>
-                            <div class="study-room-document">
-                                <div class="study-room-doc-1">
-                                    <div class="name"><span class="doc-span doc-font">이은지</span></div>
-                                    <div class="date">
-                                        <p class="doc-font">2024-05-15</p>
-                                    </div>
-                                    
-                                </div>
-                                <div class="study-room-doc-2">
-                                    <p>프로젝트 관리 - 일정관리 작업 분배가 효과적으로 이루어졌다.프로젝트 관리 - 일정관리 작업 분배가 효과적으로 이루어졌다.프로젝트 관리 - 일정관리 작업 분배가 효과적으로 이루어졌다.프로젝트 관리 - 일정관리 작업 분배가 효과적으로 이루어졌다.프로젝트 관리 - 일정관리 작업 분배가 효과적으로 이루어졌다.프로젝트 관리 - 일정관리 작업 분배가 효과적으로 이루어졌다.프로젝트 관리 - 일정관리 작업 분배가 효과적으로 이루어졌다.프로젝트 관리 - 일정관리 작업 분배가 효과적으로 이루어졌다.</p>
-                                </div>
-                                <div class="study-room-doc-3">
-                                    <div class="study-room-doc-btn">
-                                        <span class="doc-span"><a class="doc-font" href="#">수정</a></span>
-                                        <span class="doc-span"><a class="doc-font" href="#">삭제</a></span>
-                                    </div>
-                                </div>
-                            </div> 
-                            <div class="add-btn">
-                                <button>+</button>
+                            <div class="study-room-container">
+
+                            </div>
+                            <div class="add-btn" id="plus_btn">
+                                <button id="well_btn" class="hidden-btn" data-m_category_no="1">+</button>
                             </div>
                         </div>
 
@@ -57,28 +53,13 @@
                         <div class="study-room-box">
                             <div class="study-room-category">
                                 <span>|</span>
-                                <span>Went Well</span>
+                                <span>To Improve</span>
                             </div>
-                            <div class="study-room-document">
-                                <div class="study-room-doc-1">
-                                    <div class="name"><span class="doc-span doc-font">이은지</span></div>
-                                    <div class="date">
-                                        <p class="doc-font">2024-05-15</p>
-                                    </div>
-                                    
-                                </div>
-                                <div class="study-room-doc-2">
-                                    <p>프로젝트 관리 - 일정관리 작업 분배가 효과적으로 이루어졌다.프로젝트 관리 - 일정관리 작업 분배가 효과적으로 이루어졌다.프로젝트 관리 - 일정관리 작업 분배가 효과적으로 이루어졌다.프로젝트 관리 - 일정관리 작업 분배가 효과적으로 이루어졌다.프로젝트 관리 - 일정관리 작업 분배가 효과적으로 이루어졌다.프로젝트 관리 - 일정관리 작업 분배가 효과적으로 이루어졌다.프로젝트 관리 - 일정관리 작업 분배가 효과적으로 이루어졌다.프로젝트 관리 - 일정관리 작업 분배가 효과적으로 이루어졌다.</p>
-                                </div>
-                                <div class="study-room-doc-3">
-                                    <div class="study-room-doc-btn">
-                                        <span class="doc-span"><a class="doc-font" href="#">수정</a></span>
-                                        <span class="doc-span"><a class="doc-font" href="#">삭제</a></span>
-                                    </div>
-                                </div>
-                            </div> 
-                            <div class="add-btn">
-                                <button>+</button>
+                            <div class="study-room-container-improve">
+
+                            </div>
+                            <div class="add-btn add-btn-improve" id="improve_plus_btn">
+                                <button id="improve_btn" class="hidden-btn" data-m_category_no="2">+</button>
                             </div>
                         </div>
 
@@ -86,28 +67,16 @@
                         <div class="study-room-box">
                             <div class="study-room-category">
                                 <span>|</span>
-                                <span>Went Well</span>
+                                <span>To Do List</span>
                             </div>
-                            <div class="study-room-document">
-                                <div class="study-room-doc-1">
-                                    <div class="name"><span class="doc-span doc-font">이은지</span></div>
-                                    <div class="date">
-                                        <p class="doc-font">2024-05-15</p>
-                                    </div>
-                                    
-                                </div>
-                                <div class="study-room-doc-2">
-                                    <p>프로젝트 관리 - 일정관리 작업 분배가 효과적으로 이루어졌다.프로젝트 관리 - 일정관리 작업 분배가 효과적으로 이루어졌다.프로젝트 관리 - 일정관리 작업 분배가 효과적으로 이루어졌다.프로젝트 관리 - 일정관리 작업 분배가 효과적으로 이루어졌다.프로젝트 관리 - 일정관리 작업 분배가 효과적으로 이루어졌다.프로젝트 관리 - 일정관리 작업 분배가 효과적으로 이루어졌다.프로젝트 관리 - 일정관리 작업 분배가 효과적으로 이루어졌다.프로젝트 관리 - 일정관리 작업 분배가 효과적으로 이루어졌다.</p>
-                                </div>
-                                <div class="study-room-doc-3">
-                                    <div class="study-room-doc-btn">
-                                        <span class="doc-span"><a class="doc-font" href="#">수정</a></span>
-                                        <span class="doc-span"><a class="doc-font" href="#">삭제</a></span>
-                                    </div>
-                                </div>
-                            </div> 
-                            <div class="add-btn">
-                                <button>+</button>
+<!--                            <div class="study-room-document" id="to_do_list">-->
+
+<!--                            </div>-->
+                            <div class="study-room-container-todo">
+
+                            </div>
+                            <div class="add-btn add-btn-todo" id="todo_plus_btn">
+                                <button id="todo_btn" data-m_category_no="3">+</button>
                             </div>
                         </div>
 

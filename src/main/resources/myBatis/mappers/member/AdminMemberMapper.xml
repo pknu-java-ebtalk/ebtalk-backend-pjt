@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTO Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.pknu.ebtalk.mappers.member.admin.IAdminMemberMapper">
+    <!-- 승인 대기 명수 -->
+    <select id="selectUserApproveWattingCount" resultType="int">
+        select
+            count(*)
+        from
+            user
+        where
+            approve_yn = 'n'
+    </select>
+
+    <!-- 승인 대기 정보 -->
+    <select id="selectUserApproveWatting" resultType="com.pknu.ebtalk.dto.member.UserMemberDto">
+        select
+            name, id, phone, edu_no
+        from
+            user
+        where
+            approve_yn = 'n'
+        order by
+            created_at
+    </select>
+
+    <!-- 회원 요청 승인 -->
+    <update id="updateApproveYnToY" parameterType="String">
+        update
+            user
+        set
+            approve_yn = 'y'
+        where
+            id = #{id}
+    </update>
+
+    <!-- 회원 요청 반려 -->
+    <delete id="deleteUser" parameterType="String">
+        delete
+        from
+            user
+        where
+            id = #{id}
+    </delete>
+</mapper>

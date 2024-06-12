@@ -18,7 +18,7 @@
     </header>
     <div>
         <aside>
-            <th:block th:replace="~{html/fragments/common_main_aside :: aside}"></th:block>
+            <th:block th:replace="~{html/fragments/common_study_aside :: aside}"></th:block>
         </aside>
     <div class="background-gray middle-gray">
         <div class="background-white middle-white">
@@ -26,8 +26,8 @@
                 <!-- ⭐여기에 코드 작성⭐ -->
                 <div id="wrap">
                     <div class="study-management-filter">
-                        <span class="study-filter-span"><a href="#">진행중</a></span>
-                        <span class="study-filter-span"><a href="#">신청목록</a></span>
+                        <span class="study-filter-span"><a th:href="@{/study/study_in_progress_list}">진행중</a></span>
+                        <span class="study-filter-span"><a th:href="@{/study/study_application_list}">신청목록</a></span>
                     </div>
                     <div class="board-list">
                         <!-- 말머리 -->
@@ -40,7 +40,9 @@
                         <!-- 출력되는 부분 -->
                         <div class="bottom-box">
                             <th:block th:each="studyDto : ${studyDtos}">
-                                <div class="bottom" th:id="${studyDto.user_id}" th:data-no="${studyDto.user_id}">
+                                <div th:id="${studyDto.user_id}" th:class="'bottom ' + ${studyDto.no}" th:data-no="${studyDto.user_id}">
+<!--                                    <div class="bottom">-->
+                                    <!--                                    <input class="hidden-no" type="hidden" th:value="${studyDto.no}">-->
                                     <a th:href="@{/study/study_detail(no=${studyDto.no})}"><div class="title title-bottom" th:text="${studyDto.title}"></div></a>
                                     <div class="writer writer-bottom" th:text="${studyDto.name}"></div>
                                     <div class="class class-bottom" >
@@ -51,7 +53,7 @@
                                             AI
                                         </th:block>
                                         <th:block th:if="${studyDto.edu_no}==3">
-                                            IOT
+                                            IoT
                                         </th:block>
                                         <th:block th:if="${studyDto.edu_no}==0">
                                             선택안함
@@ -63,7 +65,8 @@
                                     <div class="approve-yn approve-yn-bottom approve-yn-y" th:if="${studyDto.approve_yn == 'Y'}">
                                         <a class="approval" href="#">승인완료</a>
                                     </div>
-                                </div>
+                                    </div>
+<!--                                </div>-->
                             </th:block>
                         </div>
                     </div>
@@ -78,6 +81,5 @@
     <!--    <script src="/js/common_main_header.js"></script>-->
     <!--    <script src="/js/common_main_aside.js"></script>-->
     <!--    <script src="/js/common_main_footer.js"></script>-->
-    <script src="/js/study/study_aside.js"></script>
 </body>
 </html>

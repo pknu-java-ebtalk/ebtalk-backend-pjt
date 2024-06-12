@@ -15,18 +15,19 @@
     </header>
     <div>
         <aside>
-            <th:block th:replace="~{html/fragments/common_main_aside :: aside}"></th:block>
+            <th:block th:replace="~{html/fragments/mypage_aside :: aside-mypage}"></th:block>
         </aside>
         <div class="background-gray middle-gray">
             <div class="background-white middle-white">
                 <div class="contents-box">
-                    <form class="pw-input-form" method="post" action="#" id="infoPwCheckForm">
+                    <form class="pw-input-form" method="post" action="/member/mypage_account_del_pw_check" id="infoPwCheckForm">
                         <div class="pw-input-box">
                             <div class="warning-msg-box">
                                 <div class="warning-sign">⚠️</div>
                                 <div class="warning-msg">회원탈퇴를 원하시면<br><span>비밀번호</span>를 입력해주세요.</div>
                             </div>
-                            <input class="pw-input font" type="password" name="PW" placeholder="비밀번호">
+                            <input class="pw-input font" type="password" name="pw" placeholder="비밀번호">
+                            <p class="info-msg" th:style="${error} ? 'visibility: visible' : 'visibility: hidden'">올바른 비밀번호가 아닙니다.</p>
                         </div>
                         <input class="btn font" type="submit" value="확인">
                     </form>
@@ -37,9 +38,6 @@
     <footer>
         <th:block th:replace="~{html/fragments/common_main_footer :: footer}"></th:block>
     </footer>
-<!--    <script src="/js/common_main_header.js"></script>-->
-<!--    <script src="/js/common_main_aside.js"></script>-->
-<!--    <script src="/js/common_main_footer.js"></script>-->
     <script src="/js/member/user_mypage_aside.js"></script>
 </body>
 </html>

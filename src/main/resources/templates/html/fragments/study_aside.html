@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+    <ul class="study-info-aside" th:fragment="aside">
+        <li class="study-menu study-reg">
+            <img class="aside-icon" src="/img/study/study.png">
+            <a class="aside-text study-info-text font" th:href="@{/study/study_list}">스터디 모집</a></li>
+        <li class="study-menu study-mypost">
+            <img class="aside-icon" src="/img/study/study.png">
+            <a class="aside-text study-mypost-text font" th:href="@{/study/study_application_list}">스터디 관리</a></li>
+        <li class="study-menu study-heart">
+            <img class="aside-icon" src="/img/study/study.png">
+            <a class="aside-text study-heart-text font" th:href="@{/study/study_in_progress_list}">스터디룸</a></li>
+    </ul>
