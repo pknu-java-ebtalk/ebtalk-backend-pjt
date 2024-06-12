@@ -2,7 +2,7 @@
 
 모두(Every)가 활기차게(Energy) 즐길 수 있는(Enjoy)!! <br>
 교육 정보와 교육생들 간의 친목을 도모하는 서비스를 제공하는 커뮤니티 플랫폼 "**EBTalk**" 입니다.
-* ⏳ Period : 2024-05-27 ~ 2024-06-11
+* ⏳ Period : 2024-05-27 ~ 진행중
 * 📑 SLACK : https://app.slack.com/client/T073SMSUXC5/C073F3WCER5
   <br><br>
 ## 작업 파일
@@ -15,11 +15,21 @@
 
 ## 📢 1. 팀원 소개
 
-|장경호|윤찬우|이은지| 한성지                                                                                                                                              |
-|---|---|---|--------------------------------------------------------------------------------------------------------------------------------------------------|
-|![장경호]()|![윤찬우]()|<span><img src="https://i.pinimg.com/564x/03/9a/9b/039a9bb60e29f1b93fd0cde1f4865219.jpg" width="100" height="100"/></span>| <span><img src="https://img.hankyung.com/photo/202307/AKR20230719120700017_02_i_P4.jpg" width="100" height="100"/></span> |
-|[@GyeongHo](https://github.com/GangGnagGnag)|테스트|[@iieunji023](https://github.com/iieunji023)| [@hyanyul](https://github.com/hyanyul)                                                                                                           |
-
+|                                                            이은지                                                             |                                                                                            한성지                                                                                            |                      장경호                      |    윤찬우     |
+|:--------------------------------------------------------------------------------------------------------------------------:|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------:|:---------------------------------------------:|:----------:|
+ | <span><img src="https://i.pinimg.com/564x/03/9a/9b/039a9bb60e29f1b93fd0cde1f4865219.jpg" width="150" height="150"/></span> | <span><img src="https://github.com/pknu-java-ebtalk/ebtalk-backend-pjt/blob/dev/src/main/resources/static/img/%EC%9E%A0%EB%A7%8C%EB%B3%B4.jpg?raw=true" width="150" height="150"/></span> |                   ![장경호]()                    |  ![윤찬우]()  |
+|                                        [@iieunji023](https://github.com/iieunji023)                                        |                                                                          [@hyanyul](https://github.com/hyanyul)                                                                           | [@GyeongHo](https://github.com/GangGnagGnag)  |    테스트     |
+|                                                             팀장                                                             |                                                                                            팀원                                                                                             |                      팀원                       |     팀원     |
+|                                                            스터디                                                             |                                                                                            멤버                                                                                             |                      게시판                      |     채팅     |
+|                                                           폴더구조설계                                                           |                                                                                        프론트 중복코드 작성                                                                                        |                                               |            |
+|                                                       백엔드 서버 구축 및 세팅                                                       |                                                                                      resource 파일 세팅                                                                                       |                                               |            |
+|                                                       프론트엔드 기획 및 디자인                                                       |                                                                                        로그인 및 로그아웃                                                                                         |                                               |            |
+|                                                       ERD 설계 및 쿼리 작성                                                       |                                                                                           회원가입                                                                                            |                                               |            |
+|                                                        스터디 모집 CRUD                                                         |                                                                                          아이디 찾기                                                                                           |                                               |            |
+|                                                         스터디 신청 리스트                                                         |                                                                                         비밀번호 재설정                                                                                          |                                               |            |
+|                                                       진행 중인 스터디 리스트                                                        |                                                                                   마이페이지 정보 <br/>열람 및 수정                                                                                   |                                               |            |
+|                                                         스터디룸 CRUD                                                          |                                                                                           회원 탈퇴                                                                                           |                                               |            |
+|                                                                                                                            |                                                                                          관리자 페이지                                                                                          |                                               |            |
 ## 메인 기능
 
 ## ERD
