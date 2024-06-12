@@ -23,19 +23,17 @@
 |                                                            스터디                                                             |                                                                                            멤버                                                                                             |                      게시판                      |     채팅     |
 |                                                           폴더구조설계                                                           |                                                                                        프론트 중복코드 작성                                                                                        |                                               |            |
 |                                                       백엔드 서버 구축 및 세팅                                                       |                                                                                      resource 파일 세팅                                                                                       |                                               |            |
-|                                                       프론트엔드 기획 및 디자인                                                       |                                                                                        로그인 및 로그아웃                                                                                         |                                               |            |
+|                                                       프론트엔드 <br/>기획 및 디자인                                                       |                                                                                        로그인 및 로그아웃                                                                                         |                                               |            |
 |                                                       ERD 설계 및 쿼리 작성                                                       |                                                                                           회원가입                                                                                            |                                               |            |
 |                                                        스터디 모집 CRUD                                                         |                                                                                          아이디 찾기                                                                                           |                                               |            |
 |                                                         스터디 신청 리스트                                                         |                                                                                         비밀번호 재설정                                                                                          |                                               |            |
 |                                                       진행 중인 스터디 리스트                                                        |                                                                                   마이페이지 정보 <br/>열람 및 수정                                                                                   |                                               |            |
 |                                                         스터디룸 CRUD                                                          |                                                                                           회원 탈퇴                                                                                           |                                               |            |
 |                                                                                                                            |                                                                                          관리자 페이지                                                                                          |                                               |            |
-## 메인 기능
+
 
 ## ERD
 <img src="https://raw.githubusercontent.com/pknu-java-ebtalk/ebtalk-backend-pjt/dev/src/main/resources/static/img/erd.png" width="730">
-
-## 화면설계
 
 ## 기술 스택
 ### FrontEnd
@@ -52,3 +50,5 @@
 ### Tools
 <span><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e9/Notion-logo.svg/100px-Notion-logo.svg.png" width="50" height="50"/></span>&nbsp;
 <span><img src="https://avatars.githubusercontent.com/u/6911160?s=200&v=4" width="50" height="50"/></span>&nbsp;
+
+## 메인 기능
