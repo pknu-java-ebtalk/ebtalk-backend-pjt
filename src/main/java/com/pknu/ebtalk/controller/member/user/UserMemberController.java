@@ -1,19 +1,16 @@
 package com.pknu.ebtalk.controller.member.user;
 
 import com.pknu.ebtalk.dto.member.UserMemberDto;
-import com.pknu.ebtalk.service.member.user.IUserMemberService;
 import com.pknu.ebtalk.service.member.user.UserMemberService;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Controller;
-import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.Duration;
 import java.util.HashMap;
 
 @Log4j2
@@ -37,7 +34,7 @@ public class UserMemberController {
     // 아이디 중복 체크
     @PostMapping("/checking_sign_up_id")
     public @ResponseBody int userSignUpIdConfirm(@RequestParam("id") String id){
-        // 1 이상이면 중복 아이디 존재
+        // 1 이상이면 중복 아이디 존재i
         return userMemberService.selectUserSignInIdConfirm(id);
     }
 
@@ -67,12 +64,14 @@ public class UserMemberController {
 
     // 로그인 정보 체크
     @PostMapping("/sign_in_check")
-    public @ResponseBody String userSignInCheck(HttpSession session, UserMemberDto userMemberDto, @RequestParam("id") String id) {
+    public @ResponseBody String userSignInCheck(HttpSession session, UserMemberDto userMemberDto) {
         log.info("[UserMemberController] userSignInCheck()");
 
         if(!userMemberService.selectUserSignIn(userMemberDto)){
             return "n";
         }
+
+        String id = userMemberDto.getId();
 
         UserMemberDto loginUser = userMemberService.selectUserSession(id);
 
@@ -82,7 +81,7 @@ public class UserMemberController {
     }
 
     // 로그인 - 아이디 찾기 페이지 이동
-    @GetMapping("sign_in_find_id")
+    @GetMapping("/sign_in_find_id")
     public String signInFindId() {
         log.info("[UserMemberController] signInFindId()");
 
@@ -112,7 +111,7 @@ public class UserMemberController {
     }
 
     // 로그인 - 비밀번호 재설정 페이지 이동
-    @GetMapping("sign_in_reset_pw")
+    @GetMapping("/sign_in_reset_pw")
     public String signInChangePw(){
         log.info("[UserMemberController] signInResetPw()");
 
@@ -120,7 +119,7 @@ public class UserMemberController {
     }
 
     // 로그인 - 비밀번호 재설정 - 정보 확인
-    @PostMapping("sign_in_reset_pw_check")
+    @PostMapping("/sign_in_reset_pw_check")
     public String signInResetPwCheck(@ModelAttribute UserMemberDto userMemberDto, HttpSession session) {
         log.info("[UserMemberController] signInResetPwCheck()");
 
@@ -170,7 +169,7 @@ public class UserMemberController {
     }
 
     // 로그인 - 비밀번호 재설정(최종 단계)
-    @PostMapping("sign_in_change_pw")
+    @PostMapping("/sign_in_change_pw")
     public String userChangePw(HttpSession session, @RequestParam("pw") String pw, @RequestParam("pw_check") String pw_check, Model model){
         log.info("[UserMemberController] signInChangePw()");
 
@@ -257,7 +256,7 @@ public class UserMemberController {
 
     // 마이페이지 - 내 정보 수정 제출
     @PostMapping("/mypage_info_change_submit")
-    public String userMyPageChangeSubmit(Model model, HttpSession session, @ModelAttribute UserMemberDto userMemberDto) {
+    public String userMyPageChangeSubmit(HttpSession session, @ModelAttribute UserMemberDto userMemberDto) {
         log.info("[UserMemberController] userMyPageChangeSubmit()");
 
         if(session.getAttribute("loginUser") == null){

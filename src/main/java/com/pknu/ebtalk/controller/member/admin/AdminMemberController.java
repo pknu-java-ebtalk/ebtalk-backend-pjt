@@ -2,7 +2,6 @@ package com.pknu.ebtalk.controller.member.admin;
 
 import com.pknu.ebtalk.dto.member.UserMemberDto;
 import com.pknu.ebtalk.service.member.admin.AdminMemberService;
-import com.pknu.ebtalk.service.member.user.UserMemberService;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
