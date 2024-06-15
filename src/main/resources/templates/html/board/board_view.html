@@ -30,7 +30,7 @@
                             <P><img class="eyes" src="../../img/board/눈.png" th:text="${boardDto.views}"></P>
                         </div>
                         <div class="cont font">
-                            <P id="view-content" style="white-space: pre" th:text="${boardDto.content}"></P>
+                            <P id="view-content" th:text="${boardDto.content}"></P>
                         </div>
                         <div class="bt_wrap">
                             <a th:href="@{/notification/notification_board_list}" class="on">목록</a>
@@ -51,5 +51,4 @@
 <script src="/js/board/board_side.js"></script>
 <!-- ⭐aside에 내용 추가 시 여기에 js 파일 추가⭐ -->
 </body>
-
 </html>

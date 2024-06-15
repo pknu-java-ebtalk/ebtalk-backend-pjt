@@ -3,14 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>공지 : 이비톡</title>
+    <title>게시글 작성</title>
     <link rel="stylesheet" href="/css/common/common_main.css">
     <link rel="stylesheet" href="/css/board/notice_side.css">
     <link rel="stylesheet" href="/css/board/notice_write.css">
-
-    <!-- ⭐본인 css 링크 작성⭐ -->
 </head>
-
 <body>
 <header>
     <th:block th:replace="~{html/fragments/common_main_header :: header-main}"></th:block>
@@ -24,13 +21,13 @@
             <form th:action="@{/notification/notification_write_confirm}" method="POST" enctype="multipart/form-data">
                 <div class="contents-box">
                     <div class="title-top">
-                        <p class="title-write ">게시판 등록</p>
+                        <p class="title-write">게시판 등록</p>
                         <div class="write-s-open-id">
-                            <select name="searchKey" class="write-select font">
-                                <option value="Announcement">전체 공지</option>
-                                <option value="java-Announcement">JAVA 공지</option>
-                                <option value="ai-Announcement">AI 공지</option>
-                                <option value="iot-Announcement">IOT 게시판</option>
+                            <select name="b_category_no" class="write-select font"> <!-- 카테고리 선택 추가 -->
+                                <option value="1">전체 공지</option>
+                                <option value="2">JAVA 공지</option>
+                                <option value="3">AI 공지</option>
+                                <option value="4">IOT 공지</option>
                             </select>
                         </div>
                     </div>
@@ -59,11 +56,6 @@
 <footer>
     <th:block th:replace="~{html/fragments/common_main_footer :: footer}"></th:block>
 </footer>
-<!--    <script src="/js/common_main_header.js"></script>-->
-<!--    <script src="/js/common_main_aside.js"></script>-->
-<!--    <script src="/js/common_main_footer.js"></script>-->
-    <script src="/js/board/board_side.js"></script>
-    <!-- ⭐aside에 내용 추가 시 여기에 js 파일 추가⭐ -->
+<script src="/js/board/board_side.js"></script>
 </body>
-
 </html>

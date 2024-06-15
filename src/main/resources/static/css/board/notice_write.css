@@ -61,14 +61,14 @@
     text-align: left;
     border: 3px solid rgba(184, 184, 184, 0.212);
     font-size: 15px;
-    resize: none;
-    text-align: left;
     line-height: normal;
     width: 100%;
     max-width: 800px;
     height: 200px;
     border-radius: 10px;
     font-weight: 500;
+    word-wrap: break-word;
+    overflow: auto;
 }
 
 .write-content-textBox::-webkit-scrollbar{
