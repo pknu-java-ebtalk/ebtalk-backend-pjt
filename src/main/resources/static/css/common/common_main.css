@@ -245,6 +245,8 @@ aside{
 /* profile 사진 */
 .profile-pic{
   width: 120px;
+  height: 120px;
+  border-radius: 120px;
 
   margin: 0 auto;
   margin-top: 35px;

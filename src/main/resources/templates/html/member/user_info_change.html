@@ -24,7 +24,7 @@
                 <div class="contents-box">
                     <div class="info-box">
                         <div class="info-title">회원정보</div>
-                        <form class="info-change-form" method="post" action="/member/mypage_info_change_submit">
+                        <form class="info-change-form" method="post" action="/member/mypage_info_change_submit" enctype="multipart/form-data">
                             <div class="info-detail-box">
                                 <div class="info-detail info-profile-pic info-change-profile-pic">
                                     <div class="info-detail-text profile-pic-text">프로필 사진</div>
@@ -32,7 +32,7 @@
                                         <div class="add-img" id="image-show">
                                             <!-- 이미지 들어갈 부분 -->
                                         </div>
-                                        <input class="add-img-btn" type="file" accept="image/*" onchange="" name="profile_img">
+                                        <input class="add-img-btn" type="file" accept="image/*" onchange="setThumbnail(event);" name="profile_img_upload">
                                     </div>
                                 </div>
                                 <div class="info-detail profile-id">
@@ -79,8 +79,56 @@
     </footer>
     <script src="/js/member/user_mypage_aside.js"></script>
     <script>
+
+        const MAX_WIDTH = 150;
+        const MAX_HEIGHT =150;
+
+        function setThumbnail(event){
+            let reader = new FileReader();
+
+            reader.onload = function (event){
+                let img = document.createElement("img");
+
+                img.onload = function (){
+                    let canvas = document.createElement("canvas");
+                    let ctx = canvas.getContext("2d");
+
+                    let width = img.width;
+                    let height = img.height;
+
+                    if(width > height){
+                        if(width > MAX_WIDTH){
+                            height *= MAX_WIDTH / width;
+                            width = MAX_WIDTH;
+                        }
+                    } else{
+                        if (height > MAX_HEIGHT){
+                            width *= MAX_HEIGHT / height;
+                            height = MAX_HEIGHT;
+                        }
+                    }
+                    canvas.width = width;
+                    canvas.height = height;
+
+                    ctx.drawImage(img, 0, 0, width, height);
+
+                    let dataurl = canvas.toDataURL("image/png");
+
+                    let imageShowDiv = document.querySelector("#image-show");
+                    imageShowDiv.innerHTML = "";  // Clear previous image
+                    let resizedImg = document.createElement("img");
+                    resizedImg.setAttribute("src", dataurl);
+                    imageShowDiv.appendChild(resizedImg);
+                }
+                img.src = event.target.result;
+            };
+
+            reader.readAsDataURL(event.target.files[0]);
+        }
+
         // DOM이 완전히 로드된 후에 코드 실행
         document.addEventListener('DOMContentLoaded', function () {
+
             // 비밀번호와 비밀번호 확인 입력란 선택
             const pw = document.getElementById('pw');
             const pw_check = document.getElementById('pw_check');
