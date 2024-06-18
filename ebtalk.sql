@@ -22,6 +22,15 @@ CREATE TABLE `EDU_COURSE` (
                         `FINISHED_AT` DATETIME
 );
 
+INSERT INTO EDU_COURSE(`NO`, `TYPE`, `STARTED_AT`, `FINISHED_AT`)
+VALUES(1, '빅데이터를 활용한 JAVA 개발자', '2024-01-29', '2024-07-25');
+
+INSERT INTO EDU_COURSE(`NO`, `TYPE`, `STARTED_AT`, `FINISHED_AT`)
+VALUES(2, '빅데이터 기반 AI 전문가', '2024-01-29', '2024-07-25');
+
+INSERT INTO EDU_COURSE(`NO`, `TYPE`, `STARTED_AT`, `FINISHED_AT`)
+VALUES(3, '윈도우 플랫폼 기반 IoT 시스템 개발자', '2024-01-29', '2024-09-06');
+
 -- 스터디 모집 테이블
 create table study(
                       `NO` int auto_increment primary key comment '스터디 번호',

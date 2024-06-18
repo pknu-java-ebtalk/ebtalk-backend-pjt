@@ -266,7 +266,7 @@ public class UserMemberController {
 
     // 마이페이지 - 프로필 사진
     @PostMapping("/upload")
-    public UserMemberDto fileUpload(MultipartFile file, UserMemberDto userMemberDto) throws IOException {
+    public UserMemberDto fileUpload(MultipartFile file, UserMemberDto userMemberDto, HttpSession session) throws IOException {
         log.info("[UserMemberController] fileUpload()");
 
         String savedFileName ="";
@@ -296,6 +296,8 @@ public class UserMemberController {
         userMemberDto.setProfile_img(originalFileName);
         userMemberDto.setProfile_img_path(savedFileName);
 
+        ((UserMemberDto) session.getAttribute("loginUser")).setProfile_img_path(savedFileName);
+
         return userMemberDto;
     }
 
@@ -319,9 +321,8 @@ public class UserMemberController {
         }
 
         if (!file.isEmpty()) {
-            userMemberDto = fileUpload(file, userMemberDto);
+            userMemberDto = fileUpload(file, userMemberDto, session);
             System.out.println(userMemberService.updateUserInfoProfileImg(userMemberDto));
-            ((UserMemberDto) session.getAttribute("loginUser")).setProfile_img_path(userMemberDto.getProfile_img_path());
         }
 
         return "redirect:/member/mypage";
