@@ -3,7 +3,7 @@ package com.pknu.ebtalk.controller.board;
 import com.pknu.ebtalk.dto.board.BoardDto;
 import com.pknu.ebtalk.dto.member.UserMemberDto;
 import com.pknu.ebtalk.service.board.NotificationService;
-import com.pknu.ebtalk.vo.PaginationVo;
+import com.pknu.ebtalk.dto.board.PaginationVo;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;

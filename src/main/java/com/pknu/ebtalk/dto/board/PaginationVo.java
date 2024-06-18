@@ -1,4 +1,4 @@
-package com.pknu.ebtalk.vo;
+package com.pknu.ebtalk.dto.board;
 
 import lombok.Data;
 

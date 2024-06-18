@@ -52,7 +52,7 @@
     </select>
 
     <!-- 페이징을 위한 게시글 리스트 조회 -->
-    <select id="getListPage" parameterType="com.pknu.ebtalk.vo.PaginationVo" resultType="com.pknu.ebtalk.dto.board.BoardDto">
+    <select id="getListPage" parameterType="com.pknu.ebtalk.dto.board.PaginationVo" resultType="com.pknu.ebtalk.dto.board.BoardDto">
         SELECT *
         FROM board
         ORDER BY no DESC
