@@ -27,4 +27,8 @@ public interface INotificationService {
     int countSearchNotifications(String searchKey, String keyword);
 
     List<BoardDto> searchNotifications(String searchKey, String keyword, com.pknu.ebtalk.vo.PaginationVo paginationVo);
+
+    int countNotificationsByCategory(int categoryNo);
+
+    List<BoardDto> selectNotificationListByCategoryPaged(int categoryNo, com.pknu.ebtalk.vo.PaginationVo paginationVo);
 }
