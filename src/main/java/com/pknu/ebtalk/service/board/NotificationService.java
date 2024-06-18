@@ -1,6 +1,6 @@
 package com.pknu.ebtalk.service.board;
 
-import com.pknu.ebtalk.vo.PaginationVo;
+import com.pknu.ebtalk.dto.board.PaginationVo;
 import com.pknu.ebtalk.dto.board.BoardDto;
 import com.pknu.ebtalk.mappers.board.INotificationMapper;
 import lombok.RequiredArgsConstructor;
