@@ -2,16 +2,25 @@ package com.pknu.ebtalk.controller.member.user;
 
 import com.pknu.ebtalk.dto.member.UserMemberDto;
 import com.pknu.ebtalk.service.member.user.UserMemberService;
+import jakarta.servlet.ServletContext;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.HashMap;
+import java.util.UUID;
 
 @Log4j2
 @Controller
@@ -20,6 +29,7 @@ import java.util.HashMap;
 public class UserMemberController {
 
     private final UserMemberService userMemberService;
+    private final ServletContext servletContext;
 
     // 회원가입 페이지
     @GetMapping(value={"/sign_up"})
@@ -254,9 +264,44 @@ public class UserMemberController {
         return "/html/member/user_info_change";
     }
 
+    // 마이페이지 - 프로필 사진
+    @PostMapping("/upload")
+    public UserMemberDto fileUpload(MultipartFile file, UserMemberDto userMemberDto) throws IOException {
+        log.info("[UserMemberController] fileUpload()");
+
+        String savedFileName ="";
+
+        String uploadPath = System.getProperty("user.dir") + "\\src\\main\\resources\\static\\userImg";
+
+        try {
+            Files.createDirectories(Path.of(uploadPath));
+        } catch (IOException e){
+            e.printStackTrace();
+        }
+
+        File uploadDir = new File(String.valueOf(uploadPath));
+        if(!uploadDir.exists()){
+            uploadDir.mkdirs();
+        }
+
+        String originalFileName = file.getOriginalFilename();
+
+        UUID uuid = UUID.randomUUID();
+        savedFileName = uuid + "_" + originalFileName;
+
+        File file1 = new File(uploadPath, savedFileName);
+
+        file.transferTo(file1);
+
+        userMemberDto.setProfile_img(originalFileName);
+        userMemberDto.setProfile_img_path(savedFileName);
+
+        return userMemberDto;
+    }
+
     // 마이페이지 - 내 정보 수정 제출
     @PostMapping("/mypage_info_change_submit")
-    public String userMyPageChangeSubmit(HttpSession session, @ModelAttribute UserMemberDto userMemberDto) {
+    public String userMyPageChangeSubmit(HttpSession session, @ModelAttribute UserMemberDto userMemberDto, @RequestParam("profile_img_upload") MultipartFile file) throws IOException{
         log.info("[UserMemberController] userMyPageChangeSubmit()");
 
         if(session.getAttribute("loginUser") == null){
@@ -265,16 +310,18 @@ public class UserMemberController {
 
         userMemberDto.setId(((UserMemberDto)session.getAttribute("loginUser")).getId());
 
-        if (!userMemberDto.getProfile_img().isEmpty()) {
-            System.out.println(userMemberService.updateUserInfoProfileImg(userMemberDto));
-        }
-
         if (!userMemberDto.getPw().isEmpty() && userMemberService.insertUserSignUpPwConfirm(userMemberDto)) {
             System.out.println(userMemberService.updateUserInfoPw(userMemberDto));
         }
 
         if (!userMemberDto.getPhone().isEmpty()) {
             System.out.println(userMemberService.updateUserInfoPhone(userMemberDto));
+        }
+
+        if (!file.isEmpty()) {
+            userMemberDto = fileUpload(file, userMemberDto);
+            System.out.println(userMemberService.updateUserInfoProfileImg(userMemberDto));
+            ((UserMemberDto) session.getAttribute("loginUser")).setProfile_img_path(userMemberDto.getProfile_img_path());
         }
 
         return "redirect:/member/mypage";

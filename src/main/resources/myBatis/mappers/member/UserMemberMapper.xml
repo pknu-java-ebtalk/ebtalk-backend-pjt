@@ -50,7 +50,7 @@
     <!-- 로그인 - 세션 셋팅 -->
     <select id="selectUserSession" parameterType="String" resultType="com.pknu.ebtalk.dto.member.UserMemberDto">
         select
-            id, edu_no, name
+            id, edu_no, name, profile_img_path
         from
             user
         where
@@ -106,7 +106,7 @@
         update
             user
         set
-            profile_img = #{profile_img}
+            profile_img = #{profile_img}, profile_img_path = #{profile_img_path}
         where
             id = #{id}
     </update>

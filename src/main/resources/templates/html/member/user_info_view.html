@@ -25,7 +25,7 @@
                         <div class="info-detail-box">
                             <div class="info-detail info-profile-pic">
                                 <div class="info-detail-text profile-pic-text">프로필 사진</div>
-                                <div class="profile-pic-input-box"><img class="info-detail-input profile-pic-input" th:src="${ userMemberDto.getProfile_img() == null ? '/img/profile.png' : userMemberDto.getProfile_img()}"></img></div>
+                                <div class="profile-pic-input-box"><img class="info-detail-input profile-pic-input" th:src="${session.loginUser.profile_img_path == null ? '/img/profile.png' : '/userImg/' + session.loginUser.profile_img_path}"></img></div>
                             </div>
                             <div class="info-detail profile-id">
                                 <div class="info-detail-text id-text">아이디</div>
