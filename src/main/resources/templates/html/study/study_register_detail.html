@@ -11,7 +11,7 @@
     <script crossOrigin="anonymous"
             integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM=" src="https://code.jquery.com/jquery-3.7.0.js"></script>
     <script src="https://kit.fontawesome.com/011513753c.js" crossorigin="anonymous"></script>
-    <script th:replace="~{/html/study/study_register_detail_js.html::js}"></script>
+<!--    <script th:replace="~{/html/study/study_register_detail_js.html::js}"></script>-->
     <script th:replace="~{/html/study/study_approve_js.html::js}"></script>
 </head>
 <body>
@@ -33,6 +33,22 @@
                             <div class="study-text-div">
                                 <p class="study-text-p">스터디 모집</p>
                             </div>
+                                <th:block th:if="${studyDto.user_id != session.loginUser.id}">
+                                    <input id="fav_count" type="hidden" th:value="${favDto.fav_count}">
+                                    <div th:id="${session.loginUser.id}" th:class="${studyDto.no}">
+                                        <div class="study-fav-icon1" th:if="${favDto.fav_count == 0}" >
+                                            <a class="none-fav-btn fav" href="#">
+                                                <i id="unlike-icon" class="fa-regular fa-star" style="color: #DADADA;"></i>
+                                            </a>
+                                        </div>
+                                        <div class="study-fav-icon1" th:if="${favDto.fav_count > 0}">
+                                            <a class="fav-btn fav" id="favorite_btn" href="#">
+<!--                                                <i id="like-icon" class="fa-solid fa-star"></i>-->
+                                                <i id="like-icon" class="fa-solid fa-star" style="color: #FFD43B;"></i>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </th:block>
                                 <th:block th:if="${studyDto.user_id == session.loginUser.id}">
                                     <div class="study-cancel-icon">
                                         <a th:href="@{/study/study_delete_confirm(no=${studyDto.no})}" onclick="return confirm('정말 삭제하시겠습니까?');">
@@ -70,7 +86,6 @@
                             </div>
                           </div>
                             <div class="study-btn-box">
-<!--                                <th:block th:if="${studyDto.user_id == loginedUserDto.id}">-->
                                 <th:block th:if="${studyDto.user_id == session.loginUser.id}">
                                     <div class="study-btn-box">
                                         <a class="study-regist-btn study-regist-input study-btn" th:dto="${studyDto}" th:href="@{/study/study_modify_form(no=${studyDto.no})}">수정</a>
@@ -84,13 +99,6 @@
                                     </div>
                                 </th:block>
                             </div>
-<!--                                <a class="study-regist-btn study-regist-input study-btn" th:dto="${studyDto}" th:href="@{/study/study_modify_form(no=${studyDto.no})}">수정</a>-->
-<!--                                <a id="appr_btn" class="study-regist-btn study-regist-input study-btn" th:no="${studyDto.no}"  th:onclick="check_approval(this.getAttribute('no'))">신청</a>-->
-<!--                                <a class="study-cancel-btn study-regist-input study-btn" th:href="@{/study/study_list}">목록</a>-->
-
-
-
-
                         </form>
                       </div>
                 </div>
@@ -100,8 +108,5 @@
     <footer>
         <th:block th:replace="~{html/fragments/common_main_footer :: footer}"></th:block>
     </footer>
-<!--    <script src="/js/common_main_header.js"></script>-->
-<!--    <script src="/js/common_main_aside.js"></script>-->
-<!--    <script src="/js/common_main_footer.js"></script>-->
 </body>
 </html>

@@ -25,4 +25,7 @@ public class StudyDto {
 
     private String name;
     private int edu_no;
+
+    private int fav_no;
+    private int fav_count;
 }

@@ -1,5 +1,6 @@
 package com.pknu.ebtalk.service.study;
 
+import com.pknu.ebtalk.dto.study.FavDto;
 import com.pknu.ebtalk.dto.study.StudyDto;
 
 import java.util.List;
@@ -31,4 +32,13 @@ public interface IStudyService {
 
     // 스터디 모집 신청
     Map<String, String> insertStudyApproval(StudyDto studyDto);
+
+    // 스터디 즐겨찾기 - 등록
+    Map<String, Object> favStudy(FavDto studyDto);
+
+    // 스터디 즐겨찾기 조회
+    FavDto selectFavStudy(FavDto favDto);
+
+    // 스터디 즐겨찾기 - 취소
+    Map<String, Object> cancelStudy(FavDto favDto);
 }

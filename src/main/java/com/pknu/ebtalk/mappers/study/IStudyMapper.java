@@ -1,5 +1,6 @@
 package com.pknu.ebtalk.mappers.study;
 
+import com.pknu.ebtalk.dto.study.FavDto;
 import com.pknu.ebtalk.dto.study.StudyDto;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -56,4 +57,11 @@ public interface IStudyMapper {
     int insertStudyApproval(StudyDto studyDto);
     StudyDto selectStudyCount(int no);
     int selectStudyMateUserId(StudyDto studyDto);
+
+    /*
+     * 스터디 즐겨찾기
+     */
+    FavDto selectFavCount(FavDto studyDto);  // 유효성 검사
+    int insertFav(FavDto studyDto);  // 즐겨찾기 추가
+    int deleteFav(FavDto studyDto);  // 즐겨찾기 삭제
 }

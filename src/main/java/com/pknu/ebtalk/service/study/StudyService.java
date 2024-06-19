@@ -1,13 +1,10 @@
 package com.pknu.ebtalk.service.study;
 
-import com.pknu.ebtalk.dto.member.UserMemberDto;
+import com.pknu.ebtalk.dto.study.FavDto;
 import com.pknu.ebtalk.dto.study.StudyDto;
 import com.pknu.ebtalk.mappers.study.IStudyMapper;
-import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
-import org.springframework.boot.autoconfigure.web.ServerProperties;
-import org.springframework.boot.web.servlet.server.Session;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
@@ -95,6 +92,77 @@ public class StudyService implements IStudyService{
     }
 
     /*
+     * 스터디 즐겨찾기 조회
+     */
+    @Override
+    public FavDto selectFavStudy(FavDto favDto) {
+        log.info("[StudyService] selectFavStudy()");
+
+        favDto = iStudyMapper.selectFavCount(favDto);
+        if(favDto != null) {
+            return favDto;
+        } else {
+            return null;
+        }
+
+    }
+
+    /*
+     * 스터디 즐겨찾기 - 등록
+     */
+    @Override
+    public Map<String, Object> favStudy(FavDto favDto) {
+        log.info("[StudyService] favStudy()");
+
+        Map<String, Object> map = new HashMap<>();
+
+        FavDto favCount = iStudyMapper.selectFavCount(favDto);
+
+        if(favCount == null || favCount.getFav_count() < 1) {
+            int result = iStudyMapper.insertFav(favDto);
+
+            if(result > 0) {
+                log.info("성공");
+                map.put("favCount", result);
+                return map;
+
+            } else {
+                log.info("실패");
+                map.put("favCount", "즐겨찾기 없음");
+                return map;
+
+            }
+        }
+        map.put("favCount", "즐겨찾기 없음");
+        return map;
+    }
+
+    /*
+     * 스터디 즐겨찾기 - 취소
+     */
+    @Override
+    public Map<String, Object> cancelStudy(FavDto favDto) {
+        log.info("[StudyService] cancelStudy()");
+
+        Map<String, Object> map = new HashMap<>();
+
+        int result = iStudyMapper.deleteFav(favDto);
+        if(result > 0) {
+            log.info("성공");
+            map.put("favCount", result);
+            return map;
+
+        } else {
+            log.info("실패");
+            map.put("favCount", "즐겨찾기 없음");
+            return map;
+
+        }
+
+    }
+
+
+    /*
      * 스터디 모집글 삭제
      */
     @Override
@@ -159,6 +227,8 @@ public class StudyService implements IStudyService{
 
     }
 
+
+
     /*
      * 스터디 관리 페이지 - 진행중인 스터디 리스트
      */
@@ -194,9 +264,6 @@ public class StudyService implements IStudyService{
         log.info("[StudyService] updateStudyApplicationListById()");
 
         Map<String, Object> map = new HashMap<>();
-
-//        String user_id = studyDto.getUser_id();
-//        String approve_yn = studyDto.getApprove_yn();
 
         // approve_yn 값 업데이트 하기 위한 mapper
         int result = iStudyMapper.updateStudyApplicationListById(studyDto);
