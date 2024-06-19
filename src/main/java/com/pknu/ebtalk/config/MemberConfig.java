@@ -57,6 +57,6 @@ public class MemberConfig implements WebMvcConfigurer {
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/userImg/**")
-                .addResourceLocations("file:///C:/Users/tjdwl/OneDrive/바탕 화면/userImg/");
+                .addResourceLocations("file:///C:/userImg/");
     }
 }

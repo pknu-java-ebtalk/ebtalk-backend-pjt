@@ -264,19 +264,32 @@ public class UserMemberController {
         return "/html/member/user_info_change";
     }
 
-    // 마이페이지 - 프로필 사진
+    // 마이페이지 - 프로필 사진 수정
     @PostMapping("/upload")
     public UserMemberDto fileUpload(MultipartFile file, UserMemberDto userMemberDto, HttpSession session) throws IOException {
         log.info("[UserMemberController] fileUpload()");
 
         String savedFileName ="";
 
-        String uploadPath = "C:\\Users\\tjdwl\\OneDrive\\바탕 화면\\userImg";
+        String uploadPath = "C:\\userImg";
 
         try {
             Files.createDirectories(Path.of(uploadPath));
         } catch (IOException e){
             e.printStackTrace();
+        }
+
+        // 기존에 있던 파일 삭제
+        File del_file = new File(uploadPath + "\\" + ((UserMemberDto)(session.getAttribute("loginUser"))).getProfile_img_path());
+
+        if(del_file.exists()){
+            if(del_file.delete()){
+                log.info("[UserMemberController] file deleted successfully");
+            } else{
+                log.info("[UserMemberController] file failed to delete");
+            }
+        } else{
+            log.info("[UserMemberController] file does not exist");
         }
 
         File uploadDir = new File(String.valueOf(uploadPath));
