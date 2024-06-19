@@ -1,8 +1,9 @@
 package com.pknu.ebtalk.mappers.board;
 
-import com.pknu.ebtalk.vo.PaginationVo;
+import com.pknu.ebtalk.dto.board.PaginationVo;
 import com.pknu.ebtalk.dto.board.BoardDto;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -28,7 +29,10 @@ public interface INotificationMapper {
 
     List<BoardDto> getListPage(PaginationVo paginationVo);
 
-    List<BoardDto> searchNotifications(String searchKey, String keyword, com.pknu.ebtalk.vo.PaginationVo paginationVo);
+    List<BoardDto> searchNotifications(String searchKey, String keyword, PaginationVo paginationVo);
 
     int countSearchNotifications(String searchKey, String keyword);
+    int getCountByCategory(int categoryNo);
+
+    List<BoardDto> getListPageByCategory(@Param("categoryNo") int categoryNo, @Param("paginationVo") PaginationVo paginationVo);
 }

@@ -66,6 +66,12 @@
     margin-top: 5px;
     margin-left: 35px;
     margin-bottom: 10px;
+
+    overflow: hidden;
+
+    display: flex;
+    justify-content: center;
+    align-content: center;
 }
 
 .add-img-btn{

@@ -1,6 +1,6 @@
 package com.pknu.ebtalk.service.board;
 
-import com.pknu.ebtalk.vo.PaginationVo;
+import com.pknu.ebtalk.dto.board.PaginationVo;
 import com.pknu.ebtalk.dto.board.BoardDto;
 
 import java.util.List;
@@ -26,5 +26,9 @@ public interface INotificationService {
 
     int countSearchNotifications(String searchKey, String keyword);
 
-    List<BoardDto> searchNotifications(String searchKey, String keyword, com.pknu.ebtalk.vo.PaginationVo paginationVo);
+    List<BoardDto> searchNotifications(String searchKey, String keyword, PaginationVo paginationVo);
+
+    int countNotificationsByCategory(int categoryNo);
+
+    List<BoardDto> selectNotificationListByCategoryPaged(int categoryNo, PaginationVo paginationVo);
 }

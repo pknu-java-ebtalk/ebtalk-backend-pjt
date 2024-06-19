@@ -8,16 +8,16 @@
     <insert id="insertNotificationInfo" parameterType="com.pknu.ebtalk.dto.board.BoardDto"
             useGeneratedKeys="true" keyProperty="no">
         INSERT INTO
-            board(user_id, b_category_no, title, content, views, created_at)
+        board(user_id, b_category_no, title, content, views, created_at)
         VALUES
-            (
-                #{user_id},
-                1,
-                #{title},
-                #{content},
-                #{views},
-                now()
-            )
+        (
+        #{user_id},
+        #{b_category_no},  <!-- 카테고리 번호 추가 -->
+        #{title},
+        #{content},
+        #{views},
+        now()
+        )
     </insert>
 
     <select id="selectNotificationInfoByNo" parameterType="Integer" resultType="com.pknu.ebtalk.dto.board.BoardDto">
@@ -28,32 +28,31 @@
     <update id="updateNotificationInfo" parameterType="com.pknu.ebtalk.dto.board.BoardDto">
         UPDATE board
         SET
-            title = #{title},
-            content = #{content}
+        b_category_no = #{b_category_no},  <!-- 카테고리 번호 추가 -->
+        title = #{title},
+        content = #{content}
         WHERE
-            no = #{no}
+        no = #{no}
     </update>
 
     <delete id="deleteNotificationInfoByNo" parameterType="Integer">
-        DELETE FROM
-            board
-        WHERE
-            no = #{no}
+        DELETE FROM board
+        WHERE no = #{no}
     </delete>
 
-    <!-- 게시글 리스트 관련 쿼리들 -->
+    <!-- 전체 게시글 리스트 조회 -->
     <select id="selectBoardAllList" resultType="com.pknu.ebtalk.dto.board.BoardDto">
         SELECT * FROM board;
     </select>
 
-    <!-- 게시물 총 개수 구하기 -->
+    <!-- 전체 게시글 수 조회 -->
     <select id="getCount" resultType="int">
         SELECT count(*) as listCnt
         FROM board
     </select>
 
-    <!-- 페이징을 위한 게시글 리스트 -->
-    <select id="getListPage" parameterType="com.pknu.ebtalk.vo.PaginationVo" resultType="com.pknu.ebtalk.dto.board.BoardDto">
+    <!-- 페이징을 위한 게시글 리스트 조회 -->
+    <select id="getListPage" parameterType="com.pknu.ebtalk.dto.board.PaginationVo" resultType="com.pknu.ebtalk.dto.board.BoardDto">
         SELECT *
         FROM board
         ORDER BY no DESC
@@ -65,7 +64,7 @@
         UPDATE board SET views = views + 1 WHERE no = #{no}
     </update>
 
-    <!-- 검색 쿼리 -->
+    <!-- 검색을 위한 게시글 리스트 조회 -->
     <select id="searchNotifications" parameterType="map" resultType="com.pknu.ebtalk.dto.board.BoardDto">
         SELECT * FROM board
         WHERE
@@ -82,7 +81,7 @@
         OFFSET #{paginationVo.offset}
     </select>
 
-    <!-- 검색 결과의 총 개수 구하기 -->
+    <!-- 검색 결과의 총 개수 조회 -->
     <select id="countSearchNotifications" parameterType="map" resultType="int">
         SELECT count(*) FROM board
         WHERE
@@ -94,5 +93,22 @@
                 user_id LIKE CONCAT('%', #{keyword}, '%')
             </when>
         </choose>
+    </select>
+
+    <!-- 카테고리별 게시글 총 개수 조회 -->
+    <select id="getCountByCategory" parameterType="int" resultType="int">
+        SELECT count(*) as listCnt
+        FROM board
+        WHERE b_category_no = #{categoryNo}
+    </select>
+
+    <!-- 카테고리별 페이징을 위한 게시글 리스트 조회 -->
+    <select id="getListPageByCategory" parameterType="map" resultType="com.pknu.ebtalk.dto.board.BoardDto">
+        SELECT *
+        FROM board
+        WHERE b_category_no = #{categoryNo}
+        ORDER BY no DESC
+            LIMIT #{paginationVo.rowCount}
+        OFFSET #{paginationVo.offset}
     </select>
 </mapper>
