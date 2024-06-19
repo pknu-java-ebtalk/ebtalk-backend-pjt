@@ -3,15 +3,19 @@ package com.pknu.ebtalk.mappers.member.user;
 import com.pknu.ebtalk.dto.member.UserMemberDto;
 import org.apache.ibatis.annotations.Mapper;
 import java.util.HashMap;
+import java.util.List;
 
 
 @Mapper
 public interface IUserMemberMapper {
-    // 아이디 중복 체크
-    int selectMemberSignUpIdCheck(String id);
-
     // 회원가입
     int insertMemberSignUp(UserMemberDto userMemberDto);
+
+    // 회원가입 - 아이디 중복 체크
+    int selectMemberSignUpIdCheck(String id);
+
+    // 회원가입 - 교육과정 가져오기
+    List<String> selectEduType();
 
     // 로그인 - id 동일한 db에서 pw 가져옴
     String selectMemberSignIn(String id);

@@ -15,12 +15,16 @@
     <!-- 승인 대기 정보 -->
     <select id="selectUserApproveWatting" resultType="com.pknu.ebtalk.dto.member.UserMemberDto">
         select
-            name, id, phone, edu_no
-        from
-            user
-        where
+            u.name, u.id, u.phone, e.type
+          from
+            user as u
+          join
+            edu_course as e
+            on
+            u.edu_no = e.no
+         where
             approve_yn = 'n'
-        order by
+         order by
             created_at
     </select>
 

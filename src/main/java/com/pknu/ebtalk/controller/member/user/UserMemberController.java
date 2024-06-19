@@ -20,6 +20,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.HashMap;
+import java.util.List;
 import java.util.UUID;
 
 @Log4j2
@@ -38,13 +39,17 @@ public class UserMemberController {
 
         model.addAttribute("userMemberDto", new UserMemberDto());
 
+        List<String> edu_type_list = userMemberService.selectEduType();
+
+        model.addAttribute("edu_type_list", edu_type_list);
+
         return "/html/member/user_sign_up";
     }
 
-    // 아이디 중복 체크
+    // 회원가입 - 아이디 중복 체크
     @PostMapping("/checking_sign_up_id")
     public @ResponseBody int userSignUpIdConfirm(@RequestParam("id") String id){
-        // 1 이상이면 중복 아이디 존재i
+        // 1 이상이면 중복 아이디 존재
         return userMemberService.selectUserSignInIdConfirm(id);
     }
 
@@ -216,6 +221,8 @@ public class UserMemberController {
 
         if(session.getAttribute("loginUser") == null){
             return "redirect:/member/sign_in";
+        } else if(((UserMemberDto)session.getAttribute("loginUser")).getAdmin_yn().equals("y")){
+            return "redirect:/admin/approve_list";
         }
 
         return "/html/member/user_info_pw_check";
