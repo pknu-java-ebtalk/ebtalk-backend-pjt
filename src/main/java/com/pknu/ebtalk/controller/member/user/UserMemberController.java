@@ -271,7 +271,7 @@ public class UserMemberController {
 
         String savedFileName ="";
 
-        String uploadPath = System.getProperty("user.dir") + "\\src\\main\\resources\\static\\userImg";
+        String uploadPath = "C:\\Users\\tjdwl\\OneDrive\\바탕 화면\\userImg";
 
         try {
             Files.createDirectories(Path.of(uploadPath));
@@ -295,8 +295,6 @@ public class UserMemberController {
 
         userMemberDto.setProfile_img(originalFileName);
         userMemberDto.setProfile_img_path(savedFileName);
-
-        ((UserMemberDto) session.getAttribute("loginUser")).setProfile_img_path(savedFileName);
 
         return userMemberDto;
     }
@@ -323,6 +321,9 @@ public class UserMemberController {
         if (!file.isEmpty()) {
             userMemberDto = fileUpload(file, userMemberDto, session);
             System.out.println(userMemberService.updateUserInfoProfileImg(userMemberDto));
+            userMemberDto = userMemberService.selectUserSession(((UserMemberDto)session.getAttribute("loginUser")).getId());
+            session.setAttribute("loginUser", userMemberDto);
+            session.getAttribute("loginUser");
         }
 
         return "redirect:/member/mypage";

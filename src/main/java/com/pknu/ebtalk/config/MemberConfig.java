@@ -8,11 +8,13 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import java.util.Properties;
 
 @Configuration
-public class MemberConfig {
+public class MemberConfig implements WebMvcConfigurer {
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
@@ -49,5 +51,12 @@ public class MemberConfig {
         mailSender.setJavaMailProperties(javaMailProperties);
 
         return mailSender;
+    }
+
+    // 타임리프에서 /userImg/로 요청한 것은 프로젝트 내 경로가 아닌 내가 설정한 경로에 요청함 
+    @Override
+    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+        registry.addResourceHandler("/userImg/**")
+                .addResourceLocations("file:///C:/Users/tjdwl/OneDrive/바탕 화면/userImg/");
     }
 }
