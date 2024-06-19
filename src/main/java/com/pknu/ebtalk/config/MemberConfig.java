@@ -34,8 +34,8 @@ public class MemberConfig {
         JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
         mailSender.setHost("smtp.naver.com");
         mailSender.setPort(587);
-        mailSender.setUsername("qo3op3");   // 네이버 아이디
-        mailSender.setPassword("test1234");   // 네이버 비밀번호
+        mailSender.setUsername("아이디");   // 네이버 아이디
+        mailSender.setPassword("비밀번호");   // 네이버 비밀번호
 
         Properties javaMailProperties = mailSender.getJavaMailProperties();
         javaMailProperties.put("mail.transport.protocol", "smtp");

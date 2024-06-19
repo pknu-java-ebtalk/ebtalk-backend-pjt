@@ -36,6 +36,10 @@ input {
   justify-content: space-between;
 }
 
+.fa-star{
+  font-size: 1.5em;
+}
+
 .fa-solid{
   font-size: 1.5em;
   color: var(--line_gray);
