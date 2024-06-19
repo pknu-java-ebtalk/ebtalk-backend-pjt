@@ -31,6 +31,55 @@
     }
 
     /*
+    * check_approval() START
+    */
+    function check_approval(no){
+        console.log("check_approval() CALLED!!");
+
+        ajax_alert_approval(no);
+
+    }
+    /*
+     * check_approval() END
+     */
+
+    /*
+     * ajax_alert_approval() START
+     */
+    function ajax_alert_approval(no) {
+        console.log("ajax_alert_approval() CALLED!!");
+
+        // let formData = new FormData();
+        // formData.append("no", no);
+
+        $.ajax({
+            url: `/study/study_approval?no=${no}`,
+            method: 'GET',
+            processData: false,
+            contentType: false,
+            success: function (data) {
+                console.log('ajax_alert_approval');
+                console.log(data);
+
+                if(data.result === "1") {
+                    alert(data.msg);
+
+                } else {
+                    alert(data.msg);
+                }
+
+            },
+            error: function () {
+                console.log('AJAX ERROR - ajax_alert_approval()');
+                alert('문제가 발생했습니다. 다시 시도해주세요.');
+            }
+        });
+    }
+    /*
+     * ajax_alert_approval() END
+     */
+
+    /*
      * fav_btn_confirm() START
      */
     function fav_btn_confirm(user_id, b_no, fav_count){
