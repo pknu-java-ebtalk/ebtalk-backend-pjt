@@ -1,6 +1,7 @@
 package com.pknu.ebtalk.controller.study;
 
 import com.pknu.ebtalk.dto.member.UserMemberDto;
+import com.pknu.ebtalk.dto.study.FavDto;
 import com.pknu.ebtalk.dto.study.StudyDto;
 import com.pknu.ebtalk.service.study.StudyService;
 import jakarta.servlet.http.HttpSession;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -127,16 +129,77 @@ public class StudyController {
      * 스터디 모집글 상세 페이지
      */
     @GetMapping(value = {"/study_detail"})
-    public String showStudyDetail(@RequestParam int no,Model model, HttpSession session){
+    public String showStudyDetail(@RequestParam int no, Model model, HttpSession session){
         log.info("[StudyController] showStudyDetail()");
 
         if(session.getAttribute("loginUser") == null){
             return "redirect:/member/sign_in";
         }
+        UserMemberDto userMemberDto = (UserMemberDto) session.getAttribute("loginUser");
+
+        FavDto favDto = new FavDto();
+        favDto.setB_no(no);
+        favDto.setUser_id(userMemberDto.getId());
+
+        favDto = studyService.selectFavStudy(favDto);
+
+//        log.info("favvvvvv: " + favDto.getFav_count());
+
 
         model.addAttribute("studyDto", studyService.selectStudyInfoByNo(no));
+        if(favDto == null){
+            favDto = new FavDto();
+        }
+        model.addAttribute("favDto", favDto);
 
         return "/html/study/study_register_detail";
+
+    }
+
+    /*
+     * 스터디 즐겨찾기
+     */
+    @ResponseBody
+    @PostMapping(value = {"/study_detail_fav_confirm"})
+    public Map<String, Object> studyDetailFavConfirm(@RequestParam String user_id, @RequestParam int b_no){
+        log.info("[StudyController] studyDetailFavConfirm()");
+
+        Map<String, Object> map = new HashMap<>();
+
+        FavDto favDto = new FavDto();
+        favDto.setB_no(b_no);
+        favDto.setUser_id(user_id);
+
+        map.put("fav_like", studyService.favStudy(favDto));
+
+        FavDto result = studyService.selectFavStudy(favDto);
+        map.put("fav_count", result.getFav_count());
+
+        return map;
+
+    }
+
+    @ResponseBody
+    @PostMapping(value = {"/study_detail_cancel_confirm"})
+    public Map<String, Object> studyDetailCancelConfirm(@RequestParam String user_id, @RequestParam int b_no){
+        log.info("[StudyController] studyDetailCancelConfirm()");
+
+        Map<String, Object> map = new HashMap<>();
+
+        FavDto favDto = new FavDto();
+        favDto.setB_no(b_no);
+        favDto.setUser_id(user_id);
+
+        map.put("fav_cancel", studyService.cancelStudy(favDto));
+
+        FavDto result = studyService.selectFavStudy(favDto);
+        if(result == null) {
+            result = new FavDto();
+            result.setFav_count(0);
+        }
+        map.put("fav_count", result.getFav_count());
+
+        return map;
 
     }
 

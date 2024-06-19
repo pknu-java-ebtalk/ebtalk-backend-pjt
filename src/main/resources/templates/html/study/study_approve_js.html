@@ -1,11 +1,10 @@
 <script th:fragment="js" th:inline="javascript" type="text/javascript">
     $(document).ready(function () {
-        console.log("DOCUMENT WILL BE RAEDY TO EBTALK");
+        console.log("DOCUMENT WILL BE READY TO TALK");
 
         // 이벤트 핸들러 초기화
         init_events();
-
-    })
+    });
 
     /*
      * init_events() START
@@ -13,55 +12,81 @@
     function init_events() {
         console.log("init_events() CALLED!!");
 
+        // 즐겨찾기
+        $(document).on('click', '.study-fav-icon1', function (e) {
+            console.log("btn_fav CLICK HANDLER");
+
+            let user_id = $(this).parent().attr('id');
+            let b_no = $(this).parent().attr('class').split(' ')[0];
+
+            console.log("id==>" + user_id);
+            console.log("b_no==>" + b_no);
+
+            // `fav_count`를 매번 클릭할 때마다 새로 가져옵니다.
+            let fav_count = $(this).find('a').hasClass('none-fav-btn') ? 0 : 1;
+            console.log("fav_count::::" + fav_count);
+
+            fav_btn_confirm(user_id, b_no, fav_count);
+        });
     }
 
     /*
-     * check_approval() START
+     * fav_btn_confirm() START
      */
-    function check_approval(no){
-        console.log("check_approval() CALLED!!");
+    function fav_btn_confirm(user_id, b_no, fav_count){
+        console.log('fav_btn_confirm() CALLED!!');
 
-        ajax_alert_approval(no);
+        b_no = Number(b_no);
 
-    }
-    /*
-     * check_approval() END
-     */
+        // 특수 문자를 이스케이프 처리하는 함수
+        function escapeSelector(selector) {
+            return selector.replace(/([ #;?%&,.+*~':"!^$[\]()=>|\/@])/g, '\\$1');
+        }
 
-    /*
-     * ajax_alert_approval() START
-     */
-    function ajax_alert_approval(no) {
-        console.log("ajax_alert_approval() CALLED!!");
+        let escaped_User_id = escapeSelector(user_id);
 
-        // let formData = new FormData();
-        // formData.append("no", no);
+        let fav_url;
+        // if(fav_count === 0) {
+        //     fav_url = `/study/study_detail_fav_confirm?user_id=${user_id}&b_no=${b_no}`;
+        // } else {
+        //     fav_url = `/study/study_detail_cancel_confirm?user_id=${user_id}&b_no=${b_no}`;
+        // }
+        let likeIcon = $("#" + escaped_User_id + "." + b_no + ' div.study-fav-icon1 a.fav i');
+        if(likeIcon.hasClass('fa-regular fa-star')) {
+            fav_url = `/study/study_detail_fav_confirm?user_id=${user_id}&b_no=${b_no}`;
+        } else {
+            fav_url = `/study/study_detail_cancel_confirm?user_id=${user_id}&b_no=${b_no}`;
+        }
 
         $.ajax({
-            url: `/study/study_approval?no=${no}`,
-            method: 'GET',
+            url: fav_url,
+            method: 'POST',
             processData: false,
             contentType: false,
             success: function (data) {
-                console.log('ajax_alert_approval');
+                console.log('AJAX SUCCESS - fav_btn_confirm()');
                 console.log(data);
 
-                if(data.result === "1") {
-                    alert(data.msg);
-
+                if (data.fav_count === 0) {
+                    $("#" + escaped_User_id + "." + b_no + ' div.study-fav-icon1 a.fav i')
+                        .removeClass('fa-solid fa-star')
+                        .addClass('fa-regular fa-star')
+                        .css("color", "#DADADA");
                 } else {
-                    alert(data.msg);
-                }
+                    $("#" + escaped_User_id + "." + b_no + ' div.study-fav-icon1 a.fav i')
+                        .removeClass('fa-regular fa-star')
+                        .addClass('fa-solid fa-star')
+                        .css("color","#FFD43B");
 
+                }
             },
-            error: function () {
-                console.log('AJAX ERROR - ajax_alert_approval()');
+            error: function (data) {
+                console.log('AJAX ERROR - fav_btn_confirm()');
                 alert('문제가 발생했습니다. 다시 시도해주세요.');
             }
         });
     }
     /*
-     * ajax_alert_approval() END
+     * fav_btn_confirm() END
      */
-
 </script>
