@@ -7,7 +7,6 @@ import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -18,7 +17,6 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.List;
 import java.util.UUID;
@@ -30,7 +28,6 @@ import java.util.UUID;
 public class UserMemberController {
 
     private final UserMemberService userMemberService;
-    private final ServletContext servletContext;
 
     // 회원가입 페이지
     @GetMapping(value={"/sign_up"})
@@ -63,7 +60,6 @@ public class UserMemberController {
             model.addAttribute("edu_type_list", edu_type_list);
 
             return "/html/member/user_sign_up";
-//            return "redirect:/member/sign_up";
         }
 
         userMemberService.insertUserSignUpConfirm(userMemberDto);
