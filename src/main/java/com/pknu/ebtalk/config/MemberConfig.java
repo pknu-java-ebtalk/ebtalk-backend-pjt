@@ -1,5 +1,6 @@
 package com.pknu.ebtalk.config;
 
+import com.pknu.ebtalk.utils.MemberUtil;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -58,5 +59,10 @@ public class MemberConfig implements WebMvcConfigurer {
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/userImg/**")
                 .addResourceLocations("file:///C:/userImg/");
+    }
+
+    @Bean
+    public MemberUtil memberUtil(){
+        return new MemberUtil();
     }
 }

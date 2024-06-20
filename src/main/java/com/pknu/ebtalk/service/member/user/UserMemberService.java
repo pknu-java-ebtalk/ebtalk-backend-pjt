@@ -20,6 +20,7 @@ import java.time.Duration;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Random;
 
 // 제대로 데이터 들어갔는지 결과 확인
@@ -35,18 +36,29 @@ public class UserMemberService implements IUserMemberService {
     // 회원가입 - 아이디 중복 체크
     @Override
     public int selectUserSignInIdConfirm(String id){
+        log.info("[UserMemberService] selectUserSignInIdConfirm()");
         return  iUserMemberMapper.selectMemberSignUpIdCheck(id);
+    }
+
+    // 회원가입 - 교육과정 가져오기
+    @Override
+    public List<String> selectEduType(){
+        log.info("[UserMemberService] selectEduType()");
+        return  iUserMemberMapper.selectEduType();
     }
 
     // 회원가입 - 비밀번호 확인
     @Override
     public boolean insertUserSignUpPwConfirm(UserMemberDto userMemberDto){
+        log.info("[UserMemberService] insertUserSignUpPwConfirm()");
+
         return userMemberDto.getPw().equals(userMemberDto.getPw_check());
     }
 
     // 비밀번호 암호화
     @Override
     public String encodingPw(String pw){
+        log.info("[UserMemberService] encodingPw()");
         return memberConfig.passwordEncoder().encode(pw);
     }
 
