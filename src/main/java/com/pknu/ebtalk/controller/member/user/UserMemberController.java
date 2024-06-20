@@ -55,11 +55,15 @@ public class UserMemberController {
 
     // 회원가입 정보 받음
     @PostMapping("/sign_up_confirm")
-    public String userSignUpConfirm(@Valid @ModelAttribute UserMemberDto userMemberDto, BindingResult result) {
+    public String userSignUpConfirm(@Valid @ModelAttribute UserMemberDto userMemberDto, BindingResult result, Model model) {
         log.info("[UserMemberController] userSignUpConfirm()");
 
         if (result.hasErrors() || !userMemberService.insertUserSignUpPwConfirm(userMemberDto)){
+            List<String> edu_type_list = userMemberService.selectEduType();
+            model.addAttribute("edu_type_list", edu_type_list);
+
             return "/html/member/user_sign_up";
+//            return "redirect:/member/sign_up";
         }
 
         userMemberService.insertUserSignUpConfirm(userMemberDto);
