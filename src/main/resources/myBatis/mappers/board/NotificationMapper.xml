@@ -51,15 +51,16 @@
         WHERE no = #{no}
     </update>
 
-    <delete id="deleteNotificationInfoByNo" parameterType="Integer">
-        DELETE FROM board
-        WHERE no = #{no}
+    <!-- 게시글 삭제 -->
+    <delete id="deleteNotificationInfoByNo" parameterType="int">
+        DELETE FROM board WHERE no = #{no}
     </delete>
 
     <!-- 번호 재정렬 -->
-    <update id="reorderPostNumbers">
-        SET @rank := 0;
-        UPDATE board SET no = (@rank := @rank + 1) WHERE no >= #{no} ORDER BY no;
+    <update id="reorderPostNumbers" parameterType="int">
+        UPDATE board
+        SET no = no - 1
+        WHERE no > #{no};
     </update>
 
     <!-- 전체 게시글 수 조회 -->

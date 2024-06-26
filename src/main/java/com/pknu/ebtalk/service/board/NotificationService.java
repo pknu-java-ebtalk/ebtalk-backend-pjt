@@ -66,11 +66,12 @@ public class NotificationService implements INotificationService {
         if (result > 0) {
             log.info("삭제 성공");
             // 번호 재정렬
-            notificationMappers.reorderPostNumbers(no);
+            notificationMappers.reorderPostNumbers(no); // 번호 재정렬
         } else {
             log.info("삭제 실패");
         }
     }
+
 
     // 게시글 번호로 게시글 조회 및 조회수 업데이트
     @Override
