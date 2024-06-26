@@ -48,21 +48,32 @@ public class  NotificationController {
         return notificationWritePage; // 프론트로 주소를 보내준다.
     }
 
-    // write html에서 등록 버튼을 눌리게 된다면 실행
     @PostMapping(value = {"/notification_write_confirm"})
     public String notificationWriteConfirm(Model model, BoardDto boardDto, HttpSession session) {
         if (session.getAttribute("loginUser") == null) {
             return "redirect:/member/sign_in";
         }
 
-        String name = ((UserMemberDto) session.getAttribute("loginUser")).getName();
+        String title = boardDto.getTitle().trim();
+        String content = boardDto.getContent().trim();
 
-        boardDto.setUser_id(name);
-        boardDto = notificationService.insertNotificationInfo(boardDto);
-        if (boardDto.getNo() != 0) {
-            model.addAttribute("boardDto", boardDto);
-            return "/html/board/board_view";
+        if (title.isEmpty()) {
+            model.addAttribute("titleError", "제목을 입력해 주세요.");
         }
+
+        if (content.isEmpty()) {
+            model.addAttribute("contentError", "내용을 입력해 주세요.");
+        }
+
+        if (!title.isEmpty() && !content.isEmpty()) {
+            boardDto.setUser_id(((UserMemberDto) session.getAttribute("loginUser")).getId());
+            boardDto = notificationService.insertNotificationInfo(boardDto);
+            if (boardDto.getNo() != 0) {
+                model.addAttribute("boardDto", boardDto);
+                return "/html/board/board_view";
+            }
+        }
+
         return "/html/board/board_write";
     }
 
@@ -93,18 +104,35 @@ public class  NotificationController {
     }
 
     @PutMapping(value = {"/notification_edit_confirm"})
-    public String notificationEditConfirm(Model model, BoardDto boardDto, HttpSession session) {
+    public String notificationEditConfirm(Model model, BoardDto boardDto, HttpSession session, @RequestParam int no ) {
         log.info("[NotificationController] notificationEditConfirm()");
         log.info(boardDto.getNo());
+
+        System.out.println(boardDto);
 
         if (session.getAttribute("loginUser") == null) {
             return "redirect:/member/sign_in";
         }
 
-        boardDto = notificationService.updateBoardInfo(boardDto);
+        String title = boardDto.getTitle().trim();
+        String content = boardDto.getContent().trim();
 
-        model.addAttribute("boardDto", boardDto);
-        return "/html/board/board_view";
+        if (title.isEmpty()) {
+            model.addAttribute("titleError", "제목을 입력해 주세요.");
+        }
+
+        if (content.isEmpty()) {
+            model.addAttribute("contentError", "내용을 입력해 주세요.");
+        }
+
+        if (!title.isEmpty() && !content.isEmpty()) {
+            boardDto = notificationService.updateBoardInfo(boardDto);
+            model.addAttribute("boardDto", boardDto);
+            return "/html/board/board_view";
+        }
+
+        model.addAttribute("boardDto", notificationService.findBoardByNo(no));
+        return "/html/board/board_edit";
     }
 
     // 게시글 삭제

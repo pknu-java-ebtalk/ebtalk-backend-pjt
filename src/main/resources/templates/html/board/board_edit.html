@@ -27,22 +27,27 @@
                     <input type="hidden" name="no" id="no" th:value="${boardDto.no}">
                 <div class="board_view">
                     <div class="title">
-                        <input class="font" type="text" id="view-title" name="title" value="제목을 입력하세요"
-                        th:value="${boardDto.title}">
-                        <span id="view-name" class="font" th:text="${boardDto.user_id}"></span>
+                        <div class="input-wrapper">
+                            <input class="font" type="text" id="view-title" name="title" value="제목을 입력하세요"
+                                   th:value="${boardDto.title}" required>
+                            <p th:if="${titleError}" th:text="${titleError}" class="error-messages"></p>
+                        </div>
+                        <span id="view-name" class="font" th:text="${boardDto.name}"></span>
                         <span id="view-date" class="font" th:text="${boardDto.created_at}"></span>
                         <span><img class="eyes" src="../../img/board/눈.png" th:text="${boardDto.views}"></span>
                     </div>
+
                     <div class="cont">
                         <!-- 글 내용을 입력할 곳 -->
                         <textarea class="edit-content font" name="content" rows="10" cols="50"
-                        placeholder="내용을 입력하세요" th:text="${boardDto.content}">
+                        placeholder="내용을 입력하세요" th:text="${boardDto.content}" required>
                         </textarea>
+                        <p th:if="${contentError}" th:text="${contentError}" class="error-messages"></p>
                     </div>
                     <div class="bt_wrap font">
                         <input class="on font" type="submit" value="저장">
-                        <a class="on" th:href="@{/notification/notification_board_list}">취소</a>
-                        <a class="on" th:href="@{/notification/notification_delete_confirm(no=${boardDto.no})}"
+                        <a class="on2" th:href="@{/notification/notification_board_list}">취소</a>
+                        <a class="on3" th:href="@{/notification/notification_delete_confirm(no=${boardDto.no})}"
                         onclick="return confirm('삭제 하시겠습니까?');">삭제</a>
                     </div>
                 </div>

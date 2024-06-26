@@ -19,6 +19,11 @@ public class NotificationService implements INotificationService {
     // 게시글 등록
     @Override
     public BoardDto insertNotificationInfo(BoardDto boardDto) {
+        // 최대 번호 조회
+        int maxNo = notificationMappers.getMaxPostNumber();
+        // 새로운 게시글 번호 할당
+        boardDto.setNo(maxNo + 1);
+
         int result = notificationMappers.insertNotificationInfo(boardDto); // DB에 게시글 정보 저장
         // 값이 DB에 insert가 되면 1 이상의 값이 반환됨
 
@@ -60,16 +65,11 @@ public class NotificationService implements INotificationService {
         int result = notificationMappers.deleteNotificationInfoByNo(no);
         if (result > 0) {
             log.info("삭제 성공");
+            // 번호 재정렬
+            notificationMappers.reorderPostNumbers(no);
         } else {
             log.info("삭제 실패");
         }
-    }
-
-    // 전체 게시글 조회
-    @Override
-    public List<BoardDto> selectNotificationAllLits() {
-        log.info("[NotificationService] selectNotificationAllLits");
-        return notificationMappers.selectBoardAllList();
     }
 
     // 게시글 번호로 게시글 조회 및 조회수 업데이트
@@ -88,7 +88,7 @@ public class NotificationService implements INotificationService {
         return this.notificationMappers.getCount();
     }
 
-    // 페이징 처리를 위한 게시글 리스트 조회
+    // 페이징을 위한 게시글 리스트 조회
     @Override
     public List<BoardDto> selectNotificationListPaged(PaginationVo paginationVo) {
         return this.notificationMappers.getListPage(paginationVo);

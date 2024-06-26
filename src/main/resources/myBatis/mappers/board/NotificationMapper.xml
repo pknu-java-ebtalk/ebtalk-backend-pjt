@@ -5,34 +5,50 @@
 
 <mapper namespace="com.pknu.ebtalk.mappers.board.INotificationMapper">
 
-    <insert id="insertNotificationInfo" parameterType="com.pknu.ebtalk.dto.board.BoardDto"
-            useGeneratedKeys="true" keyProperty="no">
+    <!-- 최대 번호 조회 -->
+    <select id="getMaxPostNumber" resultType="int">
+        SELECT COALESCE(MAX(no), 0) FROM board
+    </select>
+
+    <!-- 게시글 추가 (번호를 수동 할당) -->
+    <insert id="insertNotificationInfo" parameterType="com.pknu.ebtalk.dto.board.BoardDto">
         INSERT INTO
-        board(user_id, b_category_no, title, content, views, created_at)
+            board(no, user_id, b_category_no, title, content, views, created_at)
         VALUES
-        (
-        #{user_id},
-        #{b_category_no},  <!-- 카테고리 번호 추가 -->
-        #{title},
-        #{content},
-        #{views},
-        now()
-        )
+            (
+                #{no},
+                #{user_id},
+                #{b_category_no},
+                #{title},
+                #{content},
+                #{views},
+                now()
+            )
     </insert>
 
     <select id="selectNotificationInfoByNo" parameterType="Integer" resultType="com.pknu.ebtalk.dto.board.BoardDto">
-        SELECT * FROM board
-        WHERE no = #{no};
+        SELECT
+            b.no,
+            b.user_id,
+            b.b_category_no,
+            b.title,
+            b.content,
+            b.views,
+            b.modified_at,
+            b.created_at,
+            u.name
+        FROM board AS b
+        JOIN user AS u ON b.user_id = u.id
+        WHERE b.no = #{no}
     </select>
 
     <update id="updateNotificationInfo" parameterType="com.pknu.ebtalk.dto.board.BoardDto">
         UPDATE board
         SET
-        b_category_no = #{b_category_no},  <!-- 카테고리 번호 추가 -->
-        title = #{title},
-        content = #{content}
-        WHERE
-        no = #{no}
+            b_category_no = #{b_category_no},
+            title = #{title},
+            content = #{content}
+        WHERE no = #{no}
     </update>
 
     <delete id="deleteNotificationInfoByNo" parameterType="Integer">
@@ -40,24 +56,34 @@
         WHERE no = #{no}
     </delete>
 
-    <!-- 전체 게시글 리스트 조회 -->
-    <select id="selectBoardAllList" resultType="com.pknu.ebtalk.dto.board.BoardDto">
-        SELECT * FROM board;
-    </select>
+    <!-- 번호 재정렬 -->
+    <update id="reorderPostNumbers">
+        SET @rank := 0;
+        UPDATE board SET no = (@rank := @rank + 1) WHERE no >= #{no} ORDER BY no;
+    </update>
 
     <!-- 전체 게시글 수 조회 -->
     <select id="getCount" resultType="int">
-        SELECT count(*) as listCnt
-        FROM board
+        SELECT count(*) AS listCnt FROM board
     </select>
 
     <!-- 페이징을 위한 게시글 리스트 조회 -->
     <select id="getListPage" parameterType="com.pknu.ebtalk.dto.board.PaginationVo" resultType="com.pknu.ebtalk.dto.board.BoardDto">
-        SELECT *
-        FROM board
-        ORDER BY no DESC
-            LIMIT #{rowCount}
-        OFFSET #{offset}
+        SELECT
+            b.no,
+            b.user_id,
+            b.b_category_no,
+            b.title,
+            b.content,
+            b.views,
+            b.modified_at,
+            b.created_at,
+            u.name
+        FROM board AS b
+        JOIN user AS u ON b.user_id = u.id
+        ORDER BY no ASC
+        LIMIT #{rowCount}
+            OFFSET #{offset}
     </select>
 
     <update id="updateHits" parameterType="Integer">
@@ -76,7 +102,7 @@
                 user_id LIKE CONCAT('%', #{keyword}, '%')
             </when>
         </choose>
-        ORDER BY no DESC
+        ORDER BY no ASC
         LIMIT #{paginationVo.rowCount}
         OFFSET #{paginationVo.offset}
     </select>
@@ -97,9 +123,7 @@
 
     <!-- 카테고리별 게시글 총 개수 조회 -->
     <select id="getCountByCategory" parameterType="int" resultType="int">
-        SELECT count(*) as listCnt
-        FROM board
-        WHERE b_category_no = #{categoryNo}
+        SELECT count(*) AS listCnt FROM board WHERE b_category_no = #{categoryNo}
     </select>
 
     <!-- 카테고리별 페이징을 위한 게시글 리스트 조회 -->
@@ -107,8 +131,9 @@
         SELECT *
         FROM board
         WHERE b_category_no = #{categoryNo}
-        ORDER BY no DESC
+        ORDER BY no ASC
             LIMIT #{paginationVo.rowCount}
         OFFSET #{paginationVo.offset}
     </select>
+
 </mapper>
