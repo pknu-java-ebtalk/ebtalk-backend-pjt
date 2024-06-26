@@ -16,7 +16,6 @@ public interface INotificationService {
     // 게시글 리스트
     void deleteBoardConfirm(int no);
 
-    List<BoardDto> selectNotificationAllLits();
 
     BoardDto findBoardByNo(int no);
 
