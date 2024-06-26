@@ -8,6 +8,8 @@ import org.hibernate.validator.constraints.Range;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.javamail.JavaMailSender;
 
+import java.util.List;
+
 @Getter
 @Setter
 @NoArgsConstructor
@@ -17,7 +19,7 @@ public class UserMemberDto {
     private String id;          // 사용자 아이디(사용자)
 
     @NotNull
-    @Range(min=1, max=3, message = "교육과정을 선택해주세요.")
+    @Range(min=1, message = "교육과정을 선택해주세요.")
     private int edu_no;         // 교육과정 번호(사용자)
     private int no;             // 교육과정 번호(교육훈련과정)
     private String type;        // 과목명(교육훈련과정)

@@ -44,11 +44,7 @@
                                         <td class="table-data table-id" th:text="${user.id}"></td>
                                         <td class="table-data table-phone" th:text="${user.phone}"></td>
                                         <td class="table-data table-edu-type">
-                                            <span th:switch="${user.edu_no}">
-                                                <span th:case="1">JAVA</span>
-                                                <span th:case="2">AI</span>
-                                                <span th:case="3">IoT</span>
-                                            </span>
+                                            <span th:text="${@memberUtil.extractEnglish(user.type)}"></span>
                                         </td>
                                         <td class="table-data table-approve-status">
                                             <form th:action="@{/admin/approve_list_approve}" method="post" style="display:inline;">

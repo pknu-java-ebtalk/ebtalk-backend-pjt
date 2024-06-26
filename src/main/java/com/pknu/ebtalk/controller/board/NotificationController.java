@@ -17,7 +17,7 @@ import java.util.List;
 @Controller
 @RequiredArgsConstructor
 @RequestMapping("/notification") // 공지사항 게시판 form
-public class NotificationController {
+public class  NotificationController {
     private final NotificationService notificationService;
 
     // 게시글 리스트
