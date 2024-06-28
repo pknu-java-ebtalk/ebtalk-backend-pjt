@@ -1,5 +1,6 @@
 package com.pknu.ebtalk.config;
 
+import com.pknu.ebtalk.utils.MemberUtil;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -8,11 +9,15 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.header.writers.frameoptions.XFrameOptionsHeaderWriter;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import java.util.Properties;
 
 @Configuration
-public class MemberConfig {
+public class MemberConfig implements WebMvcConfigurer {
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
@@ -21,9 +26,13 @@ public class MemberConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-                .authorizeHttpRequests(authorize -> authorize
-                        .requestMatchers("/**").permitAll() // 모든 요청을 인증 없이 허용
-                ) .csrf(csrf -> csrf.disable()); // CSRF 보호 비활성화 .csrf(csrf -> csrf.disable()); // CSRF 보호 비활성화
+                .authorizeHttpRequests((atr) -> atr.requestMatchers(new AntPathRequestMatcher("/**"))
+                        .permitAll())
+                .csrf((csrf) -> csrf.ignoringRequestMatchers(new AntPathRequestMatcher("/**")))
+                .headers((headers) -> headers
+                        .addHeaderWriter(new XFrameOptionsHeaderWriter(
+                                XFrameOptionsHeaderWriter.XFrameOptionsMode.SAMEORIGIN
+                        )));
 
         return http.build();
     }
@@ -49,5 +58,17 @@ public class MemberConfig {
         mailSender.setJavaMailProperties(javaMailProperties);
 
         return mailSender;
+    }
+
+    // 타임리프에서 /userImg/로 요청한 것은 프로젝트 내 경로가 아닌 내가 설정한 경로에 요청함 
+    @Override
+    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+        registry.addResourceHandler("/userImg/**")
+                .addResourceLocations("file:///C:/userImg/");
+    }
+
+    @Bean
+    public MemberUtil memberUtil(){
+        return new MemberUtil();
     }
 }

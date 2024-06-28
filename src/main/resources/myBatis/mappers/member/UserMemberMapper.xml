@@ -27,6 +27,14 @@
             id = #{id}
     </select>
 
+    <!-- 회원가입 - 교육과정 가져오기 -->
+    <select id="selectEduType" resultType="String">
+        select
+            type
+        from
+            edu_course
+    </select>
+
     <!-- 로그인 - 계정 비교 -->
     <select id="selectMemberSignIn" parameterType="String" resultType="String">
         select
@@ -50,7 +58,7 @@
     <!-- 로그인 - 세션 셋팅 -->
     <select id="selectUserSession" parameterType="String" resultType="com.pknu.ebtalk.dto.member.UserMemberDto">
         select
-            id, edu_no, name, profile_img_path
+            id, edu_no, name, profile_img_path, admin_yn
         from
             user
         where

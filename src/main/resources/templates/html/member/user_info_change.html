@@ -29,7 +29,7 @@
                                 <div class="info-detail info-profile-pic info-change-profile-pic">
                                     <div class="info-detail-text profile-pic-text">프로필 사진</div>
                                     <div class="profile-pic-input-box">
-                                        <div class="add-img" id="image-show">
+                                        <div class="add-img" id="image-show" th:style="'background-image: url(\'/userImg/' + ${session.loginUser.profile_img_path} + '\'); background-size: 120px 120px;'">
                                             <!-- 이미지 들어갈 부분 -->
                                         </div>
                                         <input class="add-img-btn" type="file" accept="image/*" onchange="setThumbnail(event);" name="profile_img_upload">
@@ -80,8 +80,8 @@
     <script src="/js/member/user_mypage_aside.js"></script>
     <script>
 
-        const MAX_WIDTH = 150;
-        const MAX_HEIGHT =150;
+        const MAX_WIDTH = 120;
+        const MAX_HEIGHT =120;
 
         function setThumbnail(event){
             let reader = new FileReader();

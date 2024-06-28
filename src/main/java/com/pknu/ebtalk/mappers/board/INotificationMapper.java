@@ -20,19 +20,34 @@ public interface INotificationMapper {
     // 게시글 삭제
     int deleteNotificationInfoByNo(int no);
 
-    // 게시글 리스트
-    List<BoardDto> selectBoardAllList();
-
+    // 조회수 업데이트
     void updateHits(int no);
 
+    // 전체 게시글 수 조회
     int getCount();
 
+    // 페이징을 위한 게시글 리스트 조회
     List<BoardDto> getListPage(PaginationVo paginationVo);
 
-    List<BoardDto> searchNotifications(String searchKey, String keyword, PaginationVo paginationVo);
+    // 검색을 위한 게시글 리스트 조회
+    List<BoardDto> searchNotifications(@Param("searchKey") String searchKey,
+                                       @Param("keyword") String keyword,
+                                       @Param("paginationVo") PaginationVo paginationVo);
 
-    int countSearchNotifications(String searchKey, String keyword);
+    // 검색된 게시글 수 조회
+    int countSearchNotifications(@Param("searchKey") String searchKey,
+                                 @Param("keyword") String keyword);
+
+    // 카테고리별 게시글 수 조회
     int getCountByCategory(int categoryNo);
 
-    List<BoardDto> getListPageByCategory(@Param("categoryNo") int categoryNo, @Param("paginationVo") PaginationVo paginationVo);
+    // 카테고리별 페이징을 위한 게시글 리스트 조회
+    List<BoardDto> getListPageByCategory(@Param("categoryNo") int categoryNo,
+                                         @Param("paginationVo") PaginationVo paginationVo);
+
+    // 최대 게시글 번호 조회
+    int getMaxPostNumber();
+
+    // 게시글 번호 재정렬
+    void reorderPostNumbers(@Param("no") int no);
 }

@@ -23,7 +23,7 @@
                     <div class="title-top">
                         <p class="title-write">게시판 등록</p>
                         <div class="write-s-open-id">
-                            <select name="b_category_no" class="write-select font"> <!-- 카테고리 선택 추가 -->
+                            <select name="b_category_no" class="write-select font">
                                 <option value="1">전체 공지</option>
                                 <option value="2">JAVA 공지</option>
                                 <option value="3">AI 공지</option>
@@ -34,11 +34,16 @@
                     <div class="back-color">
                         <div class="title">
                             <p class="write-title">제목</p>
-                            <input name="title" class="write-title-box font" type="text" placeholder="제목을 입력하세요">
+                            <input name="title" class="write-title-box font" type="text" placeholder="제목을 입력하세요" required>
+                            <p th:if="${titleError}" th:text="${titleError}" class="error-message"></p>
                         </div>
-                        <div class="write-content-textTitle">내용</div>
+                        <div class="write-content-textTitle"></div>
+                            <p class="board-content">내용</p>
                         <div class="write-content">
-                            <textarea name="content" class="write-content-textBox font" placeholder="내용을 입력하여 주세요."></textarea>
+                            <textarea name="content" class="write-content-textBox font" placeholder="내용을 입력하여 주세요." required></textarea>
+                        </div>
+                        <div>
+                            <p th:if="${contentError}" th:text="${contentError}" class="error-messages"></p>
                         </div>
                         <div class="attached-file">
                             <input type="file" name="file" id="file" class="font">

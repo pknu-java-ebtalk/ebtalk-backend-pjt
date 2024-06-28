@@ -8,14 +8,18 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 import java.time.Duration;
 import java.util.HashMap;
+import java.util.List;
 
 public interface IUserMemberService {
 
-    // 회원가입 - 아이디 중복 체크
-    int selectUserSignInIdConfirm(String id);
-
     // 회원가입
     void insertUserSignUpConfirm(UserMemberDto userMemberDto);
+
+    // 회원가입 - 아이디 중복 체크
+    int selectUserSignInIdConfirm(String id);
+    
+    // 회원가입 - 교육과정 가져오기
+    List<String> selectEduType();
 
     // 회원가입 - 비밀번호 확인
     boolean insertUserSignUpPwConfirm(UserMemberDto userMemberDto);

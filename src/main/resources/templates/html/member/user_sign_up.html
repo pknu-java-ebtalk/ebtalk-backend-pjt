@@ -54,9 +54,7 @@
                             <p class="field-error field-error-p" th:errors="*{phone}"></p>
                             <select th:field="*{edu_no}" class="edu-type-box form-control" name="edu_no" th:errorclass="field-error">
                                 <option class="edu-type" value="0">교육과정 선택</option>
-                                <option class="edu-type" value="1">빅데이터를 활용한 JAVA 개발자</option>
-                                <option class="edu-type" value="2">빅데이터 기반 AI 전문가</option>
-                                <option class="edu-type" value="3">윈도우 플랫폼 기반 IoT 시스템 개발자</option>
+                                <option th:each="type, loop : ${edu_type_list}" th:value="${loop.count}" th:text="${type}"></option>
                             </select>
                             <p class="field-error field-error-p" th:errors="*{edu_no}"></p>
                             <input class="sign-up-btn sign-up" type="submit" value="확인">
@@ -144,5 +142,4 @@
         });
     </script>
 </body>
->>>>>>> origin/dev
 </html>

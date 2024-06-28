@@ -7,7 +7,6 @@ import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -18,8 +17,8 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.HashMap;
+import java.util.List;
 import java.util.UUID;
 
 @Log4j2
@@ -29,7 +28,6 @@ import java.util.UUID;
 public class UserMemberController {
 
     private final UserMemberService userMemberService;
-    private final ServletContext servletContext;
 
     // 회원가입 페이지
     @GetMapping(value={"/sign_up"})
@@ -38,22 +36,29 @@ public class UserMemberController {
 
         model.addAttribute("userMemberDto", new UserMemberDto());
 
+        List<String> edu_type_list = userMemberService.selectEduType();
+
+        model.addAttribute("edu_type_list", edu_type_list);
+
         return "/html/member/user_sign_up";
     }
 
-    // 아이디 중복 체크
+    // 회원가입 - 아이디 중복 체크
     @PostMapping("/checking_sign_up_id")
     public @ResponseBody int userSignUpIdConfirm(@RequestParam("id") String id){
-        // 1 이상이면 중복 아이디 존재i
+        // 1 이상이면 중복 아이디 존재
         return userMemberService.selectUserSignInIdConfirm(id);
     }
 
     // 회원가입 정보 받음
     @PostMapping("/sign_up_confirm")
-    public String userSignUpConfirm(@Valid @ModelAttribute UserMemberDto userMemberDto, BindingResult result) {
+    public String userSignUpConfirm(@Valid @ModelAttribute UserMemberDto userMemberDto, BindingResult result, Model model) {
         log.info("[UserMemberController] userSignUpConfirm()");
 
         if (result.hasErrors() || !userMemberService.insertUserSignUpPwConfirm(userMemberDto)){
+            List<String> edu_type_list = userMemberService.selectEduType();
+            model.addAttribute("edu_type_list", edu_type_list);
+
             return "/html/member/user_sign_up";
         }
 
@@ -216,6 +221,8 @@ public class UserMemberController {
 
         if(session.getAttribute("loginUser") == null){
             return "redirect:/member/sign_in";
+        } else if(((UserMemberDto)session.getAttribute("loginUser")).getAdmin_yn().equals("y")){
+            return "redirect:/admin/approve_list";
         }
 
         return "/html/member/user_info_pw_check";
@@ -264,19 +271,32 @@ public class UserMemberController {
         return "/html/member/user_info_change";
     }
 
-    // 마이페이지 - 프로필 사진
+    // 마이페이지 - 프로필 사진 수정
     @PostMapping("/upload")
     public UserMemberDto fileUpload(MultipartFile file, UserMemberDto userMemberDto, HttpSession session) throws IOException {
         log.info("[UserMemberController] fileUpload()");
 
         String savedFileName ="";
 
-        String uploadPath = System.getProperty("user.dir") + "\\src\\main\\resources\\static\\userImg";
+        String uploadPath = "C:\\userImg";
 
         try {
             Files.createDirectories(Path.of(uploadPath));
         } catch (IOException e){
             e.printStackTrace();
+        }
+
+        // 기존에 있던 파일 삭제
+        File del_file = new File(uploadPath + "\\" + ((UserMemberDto)(session.getAttribute("loginUser"))).getProfile_img_path());
+
+        if(del_file.exists()){
+            if(del_file.delete()){
+                log.info("[UserMemberController] file deleted successfully");
+            } else{
+                log.info("[UserMemberController] file failed to delete");
+            }
+        } else{
+            log.info("[UserMemberController] file does not exist");
         }
 
         File uploadDir = new File(String.valueOf(uploadPath));
@@ -295,8 +315,6 @@ public class UserMemberController {
 
         userMemberDto.setProfile_img(originalFileName);
         userMemberDto.setProfile_img_path(savedFileName);
-
-        ((UserMemberDto) session.getAttribute("loginUser")).setProfile_img_path(savedFileName);
 
         return userMemberDto;
     }
@@ -323,6 +341,9 @@ public class UserMemberController {
         if (!file.isEmpty()) {
             userMemberDto = fileUpload(file, userMemberDto, session);
             System.out.println(userMemberService.updateUserInfoProfileImg(userMemberDto));
+            userMemberDto = userMemberService.selectUserSession(((UserMemberDto)session.getAttribute("loginUser")).getId());
+            session.setAttribute("loginUser", userMemberDto);
+            session.getAttribute("loginUser");
         }
 
         return "redirect:/member/mypage";

@@ -44,7 +44,24 @@
     border-radius: 10px;
 }
 
+/* 에러 메시지 부분*/
+.error-message{
+    color: red;
+    font-size: 10px;
+}
+.error-messages{
+     color: red;
+    font-size: 10px;
+    margin-left: 47px;
+
+}
+
+
 /* 내용 입력란 */
+.board-content{
+    margin-left: 47px;
+}
+
 .write-content-textTitle {
     font-size: 20px;
     margin-left: 50px;

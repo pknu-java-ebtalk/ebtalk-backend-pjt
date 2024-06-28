@@ -5,7 +5,7 @@
         <!-- 프로필 부분 -->
         <div class="profile">
             <!-- 프로필 사진 -->
-            <img class="profile-pic" src="../../img/profile.png">
+            <img class="profile-pic" th:src="${session.loginUser.profile_img_path == null ? '/img/profile.png' : '/userImg/' + session.loginUser.profile_img_path}">
             <!-- 프로필 이름 -->
             <p class="profile-name" th:text="${session.loginUser.name}"></p>
         </div>
