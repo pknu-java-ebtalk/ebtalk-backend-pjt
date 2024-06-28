@@ -9,6 +9,9 @@
     <link rel="stylesheet" href="/css/study/study_register_list.css" >
     <link rel="stylesheet" href="/css/study/study_aside.css">
     <script src="https://kit.fontawesome.com/011513753c.js" crossorigin="anonymous"></script>
+    <script crossOrigin="anonymous"
+            integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM=" src="https://code.jquery.com/jquery-3.7.0.js"></script>
+    <script th:replace="~{/html/study/study_list_filter_js.html::js}"></script>
 </head>
 <body>
 <header>
@@ -29,31 +32,28 @@
                     <div class="study-filter">
                         <div class="study-filter-li">
                             <ul class="study-ul">
-                                <li class="study-li"><a href="#">최신순</a></li>
-                                <li class="study-li"><a href="#">좋아요순</a></li>
+                                <li class="study-li"><a th:href="@{/study/study_list}">최신순</a></li>
+                                <li class="study-li"><a th:href="@{/study/sutdy_filter_list}">좋아요순</a></li>
                             </ul>
                         </div>
                         <div class="study-filter-select">
-                            <select>
-                                <option>전체</option>
-                                <option>모집중</option>
-                                <option>종료</option>
-                            </select>
+<!--                            <form method="get" th:action="@{/study/study_list}">-->
+                                <select id="filterSelect" name="category_no">
+                                    <option value="0" th:selected="${category_no == 0}">전체</option>
+                                    <option value="1" th:selected="${category_no == 1}">모집중</option>
+                                    <option value="2" th:selected="${category_no == 2}">종료</option>
+                                </select>
+<!--                            </form>-->
                         </div>
                     </div>
-                        <div class="list-box">
+                        <div class="list-box" id="list">
                             <ul class="study-content-ul">
                                 <th:block th:each="studyDto : ${studyDtos}">
                                     <a th:href="@{/study/study_detail(no=${studyDto.no})}">
                                         <li class="study-content-li first">
-                                            <div class="study-title">
-                                                <th:block th:if="${studyDto.finished_at} < ${studyDto.cur_date} or ${studyDto.count} <= ${studyDto.count_member}">
-                                                    <span class="study-status finish">종료</span>
-                                                </th:block>
-                                                <th:block th:if="${studyDto.finished_at} >= ${studyDto.cur_date} and ${studyDto.count} > ${studyDto.count_member}">
-                                                    <span class="study-status">모집중</span>
-                                                </th:block>
-                                                <span th:text="${studyDto.title}"></span>
+                                            <div class="study-title" >
+                                                <span th:classappend="${studyDto.type == '종료'} ? ' finish' : ''" th:text="${studyDto.type}" class="study-status"></span>
+                                                <span class="s-title" th:text="${studyDto.title}"></span>
                                             </div>
                                             <div class="study-content">
                                                 <p  th:text="${studyDto.content}"></p>
@@ -67,16 +67,12 @@
                                                 <div class="study-like">
                                                     <ul>
                                                         <li class="li-wid">
-                                                            <i class="fa-regular fa-heart" style="width: 15px;"></i>
-                                                            <span class="span-color">555</span>
+                                                            <i class="fa-regular fa-star" style="width: 15px;"></i>
+                                                            <span th:text="${studyDto.fav_count}" class="span-color"></span>
                                                         </li>
                                                         <li class="li-wid">
                                                             <i class="fa-regular fa-eye" style="width: 15px;"></i>
                                                             <span class="span-color" th:text="${studyDto.views}"></span>
-                                                        </li>
-                                                        <li class="li-wid">
-                                                            <i class="fa-regular fa-comment" style="width: 15px;"></i>
-                                                            <span class="span-color">555</span>
                                                         </li>
                                                     </ul>
                                                 </div>

@@ -1,0 +1,91 @@
+<script th:fragment="js" th:inline="javascript" type="text/javascript">
+    $(document).ready(function () {
+        console.log("DOCUMENT WILL BE RAEDY TO EBTALK");
+
+        // 이벤트 핸들러 초기화
+        init_events();
+
+    })
+
+    /*
+     * init_events() START
+     */
+    function init_events() {
+        console.log("init_events() CALLED!!");
+
+        document.getElementById('filterSelect').addEventListener('change', function () {
+            const category_no = this.value;
+
+            $.ajax({
+                url: `/study/filter`,
+                type: 'GET',
+                data: {category_no: category_no},
+                dataType: `json`,
+                success: function (data) {
+                    console.log("data:" + data);
+                    updateStudyList(data);
+                },
+                error: function (error) {
+                    console.error('Error: ' + error);
+                }
+            })
+
+        })
+    }
+    /*
+     * init_events() END
+     */
+
+    /*
+     * updateStudyList() START
+     */
+    function updateStudyList(data) {
+        const listBox = document.getElementById('list');
+        listBox.innerHTML = '';
+
+        let appendTag = '<ul class="study-content-ul">';
+        for(let i = 0; i < data.length; i++) {
+            appendTag += '<a href="/study/study_detail?no=' + data[i].no + '">';
+            appendTag += '<li class="study-content-li first">';
+            appendTag += '<div class="study-title">';
+            appendTag += '<span class="study-status' + (data[i].type === '종료' ? ' finish' : '') + '">' + data[i].type + '</span>';
+            appendTag += '<span class="span">' + data[i].title + '</span>';
+            appendTag += '</div>';
+            appendTag += '<div class="study-content">';
+            appendTag += '<p>' + data[i].content + '</p>';
+            appendTag += '</div>';
+            appendTag += '<div class="study-info">';
+            appendTag += '<div class="study-writer-date">';
+            appendTag += '<span class="span-color">' + data[i].name + '</span>';
+            appendTag += '<span class="span-color">·</span>';
+            appendTag += '<span class="span-color">' + data[i].created_at + '</span>';
+            appendTag += '</div>';
+            appendTag += '<div class="study-like">';
+            appendTag += '<ul>';
+            appendTag += '<li class="li-wid">';
+            appendTag += '<i class="fa-regular fa-star" style="width: 15px;"></i>';
+            appendTag += '<span class="span-color span">' + data[i].fav_count + '</span>';
+            appendTag += '</li>';
+            appendTag += '<li class="li-wid">';
+            appendTag += '<i class="fa-regular fa-eye" style="width: 15px;"></i>';
+            appendTag += '<span class="span-color span">' + data[i].views + '</span>';
+            appendTag += '</li>';
+            appendTag += '</ul>';
+            appendTag += '</div>';
+            appendTag += '</div>';
+            appendTag += '</li>';
+            appendTag += '</a>';
+        }
+        appendTag += '</ul>';
+
+        $("#list").append(appendTag);
+
+        $(".span").css({
+            "margin-left":"5px"
+        })
+
+    }
+    /*
+     * updateStudyList() END
+     */
+</script>

@@ -8,6 +8,9 @@ import java.util.Map;
 
 
 public interface IStudyService {
+    // 스터디 카테고리 조회
+    List<StudyDto> selectStudyType();
+
     // 스터디 모집 등록
     StudyDto insertStudyConfirm(StudyDto studyDto);
 
@@ -41,4 +44,13 @@ public interface IStudyService {
 
     // 스터디 즐겨찾기 - 취소
     Map<String, Object> cancelStudy(FavDto favDto);
+
+    // 스터디 리스트 - 최신순
+    List<StudyDto> selectStudyListOrderByfavCount();
+
+    // 스터디 리스트 - 필터
+    List<StudyDto> selectStudyListByCategoryNo(int categoryNo);
+
+    // 즐겨찾기 목록 리스트
+    List<StudyDto> selectStudyListByFav(String id);
 }

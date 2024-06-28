@@ -114,6 +114,10 @@ select:focus{
   line-height: 30px;
 }
 
+.s-title{
+  margin-left: 5px;
+}
+
 .study-content > p {
   width: 600px;
   white-space:nowrap;
@@ -157,7 +161,7 @@ select:focus{
 }
 
 .study-like{
-  min-width: 220px;
+  min-width: 150px;
 }
 
 .study-like > ul > li{

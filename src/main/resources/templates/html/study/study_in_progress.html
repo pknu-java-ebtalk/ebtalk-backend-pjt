@@ -25,6 +25,7 @@
                       <div class="study-management-filter">
                           <span class="study-filter-span"><a th:href="@{/study/study_in_progress_list}">진행중</a></span>
                           <span class="study-filter-span"><a th:href="@{/study/study_application_list}">신청목록</a></span>
+                          <span class="study-filter-span"><a th:href="@{/study/study_fav_list}">즐겨찾기</a></span>
                       </div>
                       <div class="study-room-box">
                         <th:block th:each="studyDto : ${studyDtos}">

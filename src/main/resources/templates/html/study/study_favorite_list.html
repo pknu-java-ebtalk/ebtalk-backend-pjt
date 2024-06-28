@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>스터디 관리 : 이비톡</title>
+    <link rel="stylesheet" href="/css/common/common_main.css">
+    <!-- ⭐본인 css 링크 작성⭐ -->
+    <link rel="stylesheet" href="/css/study/study_favorite_list.css">
+    <link rel="stylesheet" href="/css/study/study_aside.css">
+    <script crossOrigin="anonymous"
+            integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM=" src="https://code.jquery.com/jquery-3.7.0.js"></script>
+    <script src="https://kit.fontawesome.com/011513753c.js" crossorigin="anonymous"></script>
+    <script th:replace="~{/html/study/study_approve_js.html::js}"></script>
+</head>
+<body>
+<header>
+    <th:block th:replace="~{html/fragments/common_main_header :: header-main}"></th:block>
+</header>
+<div>
+    <aside>
+        <th:block th:replace="~{html/fragments/common_study_aside :: aside}"></th:block>
+    </aside>
+    <div class="background-gray middle-gray">
+        <div class="background-white middle-white">
+            <div class="contents-box">
+                <!-- ⭐여기에 코드 작성⭐ -->
+                <div id="wrap">
+                    <div class="study-management-filter">
+                        <span class="study-filter-span"><a th:href="@{/study/study_in_progress_list}" style="color:#d9d9d9 !important;">진행중</a></span>
+                        <span class="study-filter-span"><a th:href="@{/study/study_application_list}" style="color:#d9d9d9 !important;">신청목록</a></span>
+                        <span class="study-filter-span"><a th:href="@{/study/study_fav_list}" style="color:#000 !important;">즐겨찾기</a></span>
+                    </div>
+                    <div class="study-room-box">
+                        <th:block th:each="studyDto : ${studyDtos}">
+                            <input id="fav_count" type="hidden" th:value="${studyDto.fav_count}">
+                            <div class="study-in-progress-box">
+                                <a class="study-room-a" th:href="@{/study/study_detail(no=${studyDto.no})}" >
+                                    <div th:id="${session.loginUser.id}" th:class="${studyDto.no} + ' top-box'">
+                                        <div class="title study-box">
+                                            <p class="title-p" th:text="${studyDto.title}"></p>
+                                        </div>
+                                        <div class="study-fav-icon1" th:if="${studyDto.fav_count == 0}" >
+                                            <a class="none-fav-btn fav" href="#">
+                                                <i id="unlike-icon" class="fa-regular fa-star" style="color: #DADADA;"></i>
+                                            </a>
+                                        </div>
+                                        <div class="study-fav-icon1" th:if="${studyDto.fav_count > 0}">
+                                            <a class="fav-btn fav" id="favorite_btn" href="#">
+                                                <!--                                                <i id="like-icon" class="fa-solid fa-star"></i>-->
+                                                <i id="like-icon" class="fa-solid fa-star" style="color: #FFD43B;"></i>
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="date-box study-box">
+                                        <div class="date-title">
+                                            <span>작성자: </span>
+                                        </div>
+                                        <div class="writer" th:text="${studyDto.user_id}">
+                                            <span></span>
+                                        </div>
+                                    </div>
+                                    <div class="count-box study-box">
+                                        <div class="count-title">
+                                            <span>등록일: </span>
+                                        </div>
+                                        <div class="reg-date" th:text="${studyDto.created_at}">
+                                            <span></span>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                        </th:block>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<footer>
+    <th:block th:replace="~{html/fragments/common_main_footer :: footer}"></th:block>
+</footer>
+<!--    <script src="/js/common_main_header.js"></script>-->
+<!--    <script src="/js/common_main_aside.js"></script>-->
+<!--    <script src="/js/common_main_footer.js"></script>-->
+</body>
+</html>

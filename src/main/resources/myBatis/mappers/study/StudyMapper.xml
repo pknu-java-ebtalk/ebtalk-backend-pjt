@@ -2,10 +2,16 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTO Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.pknu.ebtalk.mappers.study.IStudyMapper">
+    <!--  스터디 모집 카테고리 조회  -->
+    <select id="selectStudyType" resultType="com.pknu.ebtalk.dto.study.StudyDto">
+        select *
+        from category
+    </select>
+
     <!--스터디 모집 등록-->
     <insert id="insertStudyRegistInfo" parameterType="com.pknu.ebtalk.dto.study.StudyDto" useGeneratedKeys="true" keyProperty="no">
         INSERT INTO
-            study(user_id, title, started_at, finished_at, count, content, views, created_at)
+            study(user_id, title, started_at, finished_at, count, content, category_no, views, created_at)
         VALUES
             (
                 #{user_id},
@@ -14,6 +20,7 @@
                 #{finished_at},
                 #{count},
                 #{content},
+                #{category_no},
                 #{views},
                 now()
             )
@@ -32,7 +39,7 @@
 
     <select id="selectStudyInfoByNo" parameterType="Integer" resultType="com.pknu.ebtalk.dto.study.StudyDto">
         SELECT
-            `no`, user_id, title, started_at, finished_at, `count`, content, views, created_at
+            `no`, user_id, title, started_at, finished_at, `count`, content, views, category_no, created_at
         FROM
             study
         WHERE
@@ -52,6 +59,7 @@
     <update id="updateStudyInfo" parameterType="com.pknu.ebtalk.dto.study.StudyDto">
         UPDATE study
         SET
+            category_no = #{category_no},
             title = #{title},
             started_at = #{started_at},
             finished_at = #{finished_at},
@@ -66,7 +74,21 @@
     <!--  스터디 모집 리스트  -->
     <select id="selectStudyCountMembers" resultType="com.pknu.ebtalk.dto.study.StudyDto">
         SELECT
-            a.no, u.name, a.title, a.started_at, a.finished_at, a.count, a.content, a.VIEWS, cast(a.CREATED_AT as date) as created_at, count_member, cast(now() as date) as cur_date
+            a.no,
+            u.name,
+            a.title,
+            a.started_at,
+            a.finished_at,
+            a.count,
+            a.content,
+            a.category_no,
+            a.VIEWS,
+            a.CREATED_AT AS crr,
+            c.type AS type,
+            cast(a.CREATED_AT as date) AS created_at,
+            count_member,
+            COALESCE(f.fav_count, 0) AS fav_count,
+            cast(now() as date) AS cur_date
         FROM
             study a
         LEFT JOIN
@@ -77,8 +99,16 @@
                 user u
         ON
             a.user_id = u.id
+        LEFT JOIN
+                (SELECT b_no, count(b_no) AS fav_count FROM favorites GROUP BY b_no) AS f
+        ON
+            f.b_no = a.no
+        LEFT JOIN
+            category c
+        ON
+                c.no = a.category_no
         ORDER BY
-            CREATED_AT DESC
+            crr DESC
     </select>
 
     <!--  스터디 모집글 삭제  -->
@@ -106,7 +136,7 @@
             where
                 study_no = #{no}
             and
-                approve_yn = 'Y')as sm
+                approve_yn = 'Y' as sm
         on
             s.no = sm.study_no;
     </select>
@@ -243,4 +273,116 @@
           and
             user_id = #{user_id}
     </delete>
+
+    <!--  스터디 모집 리스트 - 좋아요순  -->
+    <select id="selectStudyInfoOrderByFav" resultType="com.pknu.ebtalk.dto.study.StudyDto">
+        SELECT
+            a.no,
+            u.name,
+            a.title,
+            a.started_at,
+            a.finished_at,
+            a.count,
+            a.content,
+            a.category_no,
+            a.VIEWS,
+            a.CREATED_AT AS crr,
+            c.type AS type,
+            cast(a.CREATED_AT as date) AS created_at,
+            count_member,
+            COALESCE(f.fav_count, 0) AS fav_count,
+            cast(now() as date) AS cur_date
+        FROM
+            study a
+                LEFT JOIN
+            (SELECT study_no , count(study_no) AS count_member FROM study_mate where approve_yn ='Y' GROUP BY study_no) AS b
+            ON
+                a.no = b.study_no
+                JOIN
+            user u
+            ON
+                a.user_id = u.id
+                LEFT JOIN
+                (SELECT b_no, count(b_no) AS fav_count FROM favorites GROUP BY b_no) AS f
+                ON
+                    f.b_no = a.no
+                LEFT JOIN
+            category c
+            ON
+                c.no = a.category_no
+        ORDER BY
+            fav_count DESC
+    </select>
+
+    <!--  스터디 리스트 - 모집중  -->
+    <select id="selectStudyListByCategoryNo1" resultType="com.pknu.ebtalk.dto.study.StudyDto">
+        SELECT
+            a.no AS no,
+            u.name,
+            a.title,
+            a.started_at,
+            a.finished_at,
+            a.count,
+            a.content,
+            a.category_no,
+            a.VIEWS,
+            a.CREATED_AT AS crr,
+            c.type AS type,
+            cast(a.CREATED_AT as date) AS created_at,
+            count_member,
+            COALESCE(f.fav_count, 0) AS fav_count,
+            cast(now() as date) AS cur_date
+        FROM
+            study a
+        LEFT JOIN
+            (SELECT study_no , count(study_no) AS count_member FROM study_mate where approve_yn ='Y' GROUP BY study_no) AS b
+        ON
+                a.no = b.study_no
+        JOIN
+            user u
+        ON
+                a.user_id = u.id
+        LEFT JOIN
+                (SELECT b_no, count(b_no) AS fav_count FROM favorites GROUP BY b_no) AS f
+        ON
+                    f.b_no = a.no
+        LEFT JOIN
+            category c
+        ON
+                c.no = a.category_no
+        WHERE
+            a.category_no = #{category_no}
+        ORDER BY
+            created_at DESC;
+    </select>
+
+    <!--  즐겨찾기 리스트 목록  -->
+    <select id="selectStudyFavList" resultType="com.pknu.ebtalk.dto.study.StudyDto">
+        SELECT
+            s.no,
+            s.title,
+            cast(s.CREATED_AT as date) AS created_at,
+            s.user_id,
+            fav_count,
+            f.*
+        FROM
+            study s
+        JOIN
+            (select b_no,count(*) as fav_count from favorites where user_id= #{user_id} group by b_no) c
+        ON
+            s.no = c.b_no
+        JOIN
+            favorites f
+        ON
+            s.no = f.b_no
+        JOIN
+                user u
+        ON
+            u.id = f.user_id
+        WHERE
+            f.no is not null
+        AND
+            f.user_id = #{user_id}
+    </select>
+
 </mapper>

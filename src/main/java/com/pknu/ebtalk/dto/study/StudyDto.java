@@ -15,6 +15,8 @@ public class StudyDto {
     private String finished_at;
     private int count;
     private String content;
+    private int category_no;
+    private String type;
     private int views;
     private String created_at;
 

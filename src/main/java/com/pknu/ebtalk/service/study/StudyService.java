@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 @Log4j2
 @Service
@@ -17,6 +18,18 @@ import java.util.Map;
 public class StudyService implements IStudyService{
 
     private final IStudyMapper iStudyMapper;
+
+    /*
+     * 스터디 모집 카테고리 조회
+     */
+    @Override
+    public List<StudyDto> selectStudyType() {
+        List<StudyDto> list = iStudyMapper.selectStudyType();
+
+        log.info("list.no:::" + list.get(0));
+
+        return list;
+    }
 
     /*
      * 스터디 모집 등록
@@ -162,6 +175,8 @@ public class StudyService implements IStudyService{
     }
 
 
+
+
     /*
      * 스터디 모집글 삭제
      */
@@ -279,6 +294,39 @@ public class StudyService implements IStudyService{
 
         }
         return null;
+
+    }
+
+    /*
+     * 스터디 리스트 - 좋아요순
+     */
+    @Override
+    public List<StudyDto> selectStudyListOrderByfavCount() {
+        log.info("[StudyService] selectStudyListOrderByLatest()");
+
+        return iStudyMapper.selectStudyInfoOrderByFav();
+
+    }
+
+    /*
+     * 스터디 리스트 - 필터
+     */
+    @Override
+    public List<StudyDto> selectStudyListByCategoryNo(int category_no) {
+        log.info("[StudyService] selectStudyListByCategoryNo()");
+//        if(category_no == 1){       // 모집중일때
+            return iStudyMapper.selectStudyListByCategoryNo1(category_no);
+//        }
+
+//        return List.of();
+    }
+
+    // 즐겨찾기 목록 리스트
+    @Override
+    public List<StudyDto> selectStudyListByFav(String user_id) {
+        log.info("[StudyService] selectStudyListByFav()");
+
+        return iStudyMapper.selectStudyFavList(user_id);
 
     }
 

@@ -70,6 +70,10 @@ create table MEMOIR_CATEGORY(
                         `TYPE` varchar(30) not null comment '종류'
 );
 
+insert into MEMOIR_CATEGORY(`type`) values('Went_Well');
+insert into MEMOIR_CATEGORY(`type`) values('To_Improve');
+insert into MEMOIR_CATEGORY(`type`) values('To_Do_List');
+
 -- 게시판 테이블
 create table BOARD(
                       `NO` int auto_increment primary key comment '게시판 번호',
@@ -87,6 +91,9 @@ create table CATEGORY(
                         `NO` int auto_increment primary key comment '카테고리 번호',
                         `TYPE` varchar(50) not null comment '종류'
 );
+
+insert into CATEGORY(`type`) values ('모집중');
+insert into CATEGORY(`type`) values ('종료');
 
 -- 게시판 카테고리(세부)
 create table CATEGORYOFLOWER(
@@ -106,6 +113,7 @@ create table COMMENT(
 
 -- 좋아요 테이블
 create table FAVORITES(
+                        `NO` int auto_increment primary key comment '좋아요 번호',
                         `USER_ID` varchar(30) not null comment '댓글 작성자',
                         `B_NO` int not null comment '게시물 번호'
 );
