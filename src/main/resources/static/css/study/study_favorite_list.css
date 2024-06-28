@@ -54,7 +54,7 @@
 /* 진행중인 각각의 스터디룸 */
 .study-in-progress-box{
   display: inline-block;
-  border: 1px solid #dadada;
+  /*border: 1px solid #dadada;*/
   border-radius: 10px;
   padding: 10px;
   width: 350px;
@@ -77,10 +77,19 @@
 
 .title-p {
   max-height: 25px;
-  width: 330px;
+  width: 250px;
   white-space:nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  font-size: 1.1em;
+}
+
+.writer, .reg-date{
+  margin-left: 5px;
+}
+
+.span-color{
+  color:#d9d9d9;
 }
 
 .date-box, 
@@ -115,5 +124,5 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-
+  align-items: center;
 }

@@ -5,9 +5,15 @@ import com.pknu.ebtalk.dto.study.StudyDto;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
+import java.util.Optional;
 
 @Mapper
 public interface IStudyMapper {
+    /*
+     * 스터디 모집 카테고리 조회
+     */
+    List<StudyDto> selectStudyType();
+
     /*
      * 스터디 모집 등록
      */
@@ -64,4 +70,19 @@ public interface IStudyMapper {
     FavDto selectFavCount(FavDto studyDto);  // 유효성 검사
     int insertFav(FavDto studyDto);  // 즐겨찾기 추가
     int deleteFav(FavDto studyDto);  // 즐겨찾기 삭제
+
+    /*
+     * 스터디 리스트 - 최신순
+     */
+    List<StudyDto> selectStudyInfoOrderByFav();
+
+    /*
+     * 스터디 리스트 - 모집중
+     */
+    List<StudyDto> selectStudyListByCategoryNo1(int categoryNo);
+
+    /*
+     * 즐겨찾기 리스트 조회
+     */
+    List<StudyDto> selectStudyFavList(String userId);
 }

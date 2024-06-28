@@ -31,6 +31,10 @@
                         <form method="post" th:action="@{/study/study_modify_confirm}" name="study_modify_form">
                             <input type="hidden" name="_method" value="PUT">
                             <input type="hidden" name="no" id="no" th:value="${studyDto.no}">
+                            <select name="category_no">
+                                <option value=1>모집중</option>
+                                <option value=2>종료</option>
+                            </select>
                             <table>
                             <tr>
                               <td><span class="title">제목: </span></td>

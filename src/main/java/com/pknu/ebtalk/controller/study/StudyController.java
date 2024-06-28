@@ -27,8 +27,10 @@ public class StudyController {
      *  스터디 모집 등록
      */
     @GetMapping(value={ "/study_register_form"})
-    public String studyRegisterForm(HttpSession session) {
+    public String studyRegisterForm(Model model, HttpSession session) {
         log.info("[StudyController] studyRegister()");
+
+        model.addAttribute("categoryDtos",studyService.selectStudyType());
 
         if(session.getAttribute("loginUser") == null){
             return "redirect:/member/sign_in";
@@ -113,16 +115,51 @@ public class StudyController {
      * 스터디 모집글 리스트
      */
     @GetMapping(value = {"/study_list"})
-    public String showStudyAllList(Model model, HttpSession session){
+    public String showStudyAllList(@RequestParam(required = false) Integer category_no, Model model, HttpSession session){
         log.info("[StudyController] showStudyAllList()");
 
         if(session.getAttribute("loginUser") == null){
             return "redirect:/member/sign_in";
         }
 
-        model.addAttribute("studyDtos", studyService.selectStudyAllList());
+        List<StudyDto> studyDtos;
+
+        if(category_no != null && category_no != 0) {
+            studyDtos = studyService.selectStudyListByCategoryNo(category_no);
+
+        } else {
+            studyDtos = studyService.selectStudyAllList();
+        }
+
+        model.addAttribute("studyDtos", studyDtos);
 
         return "/html/study/study_register_list";
+    }
+
+    /*
+     * 스터디 모집글 리스트 - 필텨
+     */
+    @ResponseBody
+    @GetMapping(value = {"/filter"})
+    public List<StudyDto> showStudyAllListByFilter(@RequestParam(required = false) Integer category_no, Model model, HttpSession session){
+        log.info("[StudyController] showStudyAllList()");
+
+//        if(session.getAttribute("loginUser") == null){
+//            return "redirect:/member/sign_in";
+//        }
+
+        List<StudyDto> studyDtos;
+
+        if(category_no != null && category_no != 0) {
+            return studyService.selectStudyListByCategoryNo(category_no);
+
+        } else {
+            return studyService.selectStudyAllList();
+        }
+
+//        model.addAttribute("studyDtos", studyDtos);
+
+//        return "/html/study/study_register_list";
     }
 
     /*
@@ -142,9 +179,6 @@ public class StudyController {
         favDto.setUser_id(userMemberDto.getId());
 
         favDto = studyService.selectFavStudy(favDto);
-
-//        log.info("favvvvvv: " + favDto.getFav_count());
-
 
         model.addAttribute("studyDto", studyService.selectStudyInfoByNo(no));
         if(favDto == null){
@@ -243,7 +277,7 @@ public class StudyController {
         return studyService.insertStudyApproval(studyDto);
 
     }
-    
+
     /*
      * 스터디 관리 페이지 - 진행중인 스터디 리스트
      */
@@ -302,5 +336,43 @@ public class StudyController {
 
         return map;
 
+    }
+
+    /*
+     * 최신순/좋아요순 필터 기능
+     */
+    @GetMapping(value = {"/sutdy_filter_list"})
+    public String studyFilterList(Model model, HttpSession session){
+        log.info("[StudyController] studyFilterList()");
+
+        if(session.getAttribute("loginUser") == null){
+            return "redirect:/member/sign_in";
+        }
+
+        model.addAttribute("studyDtos", studyService.selectStudyListOrderByfavCount());
+
+
+        return "/html/study/study_register_list";
+
+    }
+
+    /*
+     * 즐겨찾기 리스트 조회
+     */
+    @GetMapping(value = {"/study_fav_list"})
+    public String studyFavList(Model model, HttpSession session){
+        log.info("[StudyController] studyFavList()");
+
+        if(session.getAttribute("loginUser") == null){
+            return "redirect:/member/sign_in";
+        }
+
+        UserMemberDto loginedUserDto = (UserMemberDto) session.getAttribute("loginUser");
+
+        model.addAttribute("studyDtos", studyService.selectStudyListByFav(loginedUserDto.getId()));
+
+
+
+        return "/html/study/study_favorite_list";
     }
 }
