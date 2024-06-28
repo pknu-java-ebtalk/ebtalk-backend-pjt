@@ -368,7 +368,7 @@
         FROM
             study s
         JOIN
-            (select b_no,count(*) as fav_count from favorites where user_id='user1@gmail.com' group by b_no) c
+            (select b_no,count(*) as fav_count from favorites where user_id= #{user_id} group by b_no) c
         ON
             s.no = c.b_no
         JOIN
